@@ -2,7 +2,7 @@
 
 Backend JSON configurations and auto-update manifest for the **DWTS Voting** iOS Shortcut.
 
-📥 **[Install Shortcut (v1.1 iCloud Link)](https://www.icloud.com/shortcuts/1a48dbb4c74f4a1fb0d5b45a3d1bc462)**
+📥 **[Install Shortcut (v1.2 iCloud Link)](https://www.icloud.com/shortcuts/fcd5b15aeb2d431391732c18b5667681)**
 
 ---
 
