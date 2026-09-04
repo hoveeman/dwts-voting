@@ -2,7 +2,7 @@
 
 Backend JSON configurations and auto-update manifest for the **DWTS Voting** iOS Shortcut.
 
-📥 **[Install Shortcut (v1.3 iCloud Link)](https://www.icloud.com/shortcuts/feaf314c69064aa5aac5b33577b7e01e)**
+📥 **[Install Shortcut (v1.4 iCloud Link)](https://www.icloud.com/shortcuts/6788cf4f1a00420380fa306c0bc5b4e3)**
 
 ---
 
@@ -21,10 +21,10 @@ Backend JSON configurations and auto-update manifest for the **DWTS Voting** iOS
 
 ## ⚙️ Shortcut Architecture
 
-### 1. Auto-Update Checker (Top of Shortcut with "Vote First" Option)
+### 1. Auto-Update Checker (Top of Shortcut with Release Notes & "Vote First")
 
 ```text
-[# Number] ➔ 1.3
+[# Number] ➔ 1.4
 [Set Variable] "CurrentVersion" to [# Number]
 [URL] ➔ https://raw.githubusercontent.com/hoveeman/dwts-voting/main/version.json
 [Get Contents of URL]
@@ -33,7 +33,13 @@ Backend JSON configurations and auto-update manifest for the **DWTS Voting** iOS
 │   [Get Dictionary from Contents of URL]
 │   [Get Value for "version" in Dictionary]
 │   [If Dictionary Value is greater than CurrentVersion]
-│   │   [Choose from Menu "Update is available!"]
+│   │   [Get Value for "notes" in Contents of URL]
+│   │   [Set Variable "ReleaseNotes" to Dictionary Value]
+│   │   [Text] "Update is available!
+
+What's New:
+[ReleaseNotes]"
+│   │   [Choose from Menu Text]
 │   │   ├── ⬇️ Update Now
 │   │   │   [Get Value for "url" in Contents of URL]
 │   │   │   [Open URL Dictionary Value]
@@ -45,7 +51,7 @@ Backend JSON configurations and auto-update manifest for the **DWTS Voting** iOS
 [End If]
 ```
 
-### 2. Dynamic Dancers List & Voting (With Offline Fallback)
+### 2. Dynamic Dancers List & Multi-Dancer Voting (With Offline Fallback)
 
 ```text
 [URL] ➔ https://raw.githubusercontent.com/hoveeman/dwts-voting/main/dancers.json
@@ -60,10 +66,12 @@ Backend JSON configurations and auto-update manifest for the **DWTS Voting** iOS
 │   [Set Variable "VotingList" to List]
 [End If]
 
-[Choose from List "VotingList"]
+[Choose from List "VotingList" (Select Multiple: ON)]
 
-[Repeat 10 times]
-│   [Send Message "Selected Item" to "Dancing With The Stars" (215-23)]
+[Repeat with each item in Chosen Item]
+│   [Repeat 10 times]
+│   │   [Send Message "Repeat Item" to "Dancing With The Stars" (215-23)]
+│   [End Repeat]
 [End Repeat]
 ```
 
