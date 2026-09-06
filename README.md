@@ -2,7 +2,7 @@
 
 Backend JSON configurations and auto-update manifest for the **DWTS Voting** iOS Shortcut.
 
-📥 **[Install Shortcut (v1.4 iCloud Link)](https://www.icloud.com/shortcuts/6788cf4f1a00420380fa306c0bc5b4e3)**
+📥 **[Install Shortcut (v1.5 iCloud Link)](https://www.icloud.com/shortcuts/adb52f4b74424194a18caa038fad8b73)**
 
 ---
 
@@ -24,7 +24,7 @@ Backend JSON configurations and auto-update manifest for the **DWTS Voting** iOS
 ### 1. Auto-Update Checker (Top of Shortcut with Release Notes & "Vote First")
 
 ```text
-[# Number] ➔ 1.4
+[# Number] ➔ 1.5
 [Set Variable] "CurrentVersion" to [# Number]
 [URL] ➔ https://raw.githubusercontent.com/hoveeman/dwts-voting/main/version.json
 [Get Contents of URL]
@@ -51,7 +51,7 @@ What's New:
 [End If]
 ```
 
-### 2. Dynamic Dancers List & Multi-Dancer Voting (With Offline Fallback)
+### 2. Dynamic Dancers List & Multi-Dancer Voting (With Notifications)
 
 ```text
 [URL] ➔ https://raw.githubusercontent.com/hoveeman/dwts-voting/main/dancers.json
@@ -68,11 +68,19 @@ What's New:
 
 [Choose from List "VotingList" (Select Multiple: ON)]
 
+[Show Notification "💃🕺 Casting votes now... This may take a minute!"]
+
 [Repeat with each item in Chosen Item]
+│   [Split Text "Repeat Item" by Custom " & "]
+│   [Get First Item from List]
+│   [Set Variable "VoteCode" to Item from List]
+│   │
 │   [Repeat 10 times]
-│   │   [Send Message "Repeat Item" to "Dancing With The Stars" (215-23)]
+│   │   [Send Message "VoteCode" to "Dancing With The Stars" (215-23)]
 │   [End Repeat]
 [End Repeat]
+
+[Show Notification "🪩 All votes have been cast!"]
 ```
 
 ---
