@@ -116,37 +116,62 @@ What's New:
 
 ### 2. The 50/50 Percentage Formula
 
-1. **Judges' Share (%):**
-   $$\text{Judges' Share (\%)} = \left( \frac{\text{Couple's Judges' Score}}{\text{Total Judges' Points Awarded to All Couples}} \right) \times 100$$
+```text
+                     Couple's Judges' Score
+Judges' Share (%) = ──────────────────────────── × 100
+                     Night's Total Judge Points
 
-2. **Viewer Vote Share (%):**
-   $$\text{Viewer Share (\%)} = \left( \frac{\text{Couple's Total Public Votes (Online + SMS)}}{\text{Total Public Votes Cast Across All Couples}} \right) \times 100$$
+                    Couple's Received Public Votes
+Public Share (%)  = ────────────────────────────── × 100
+                      Night's Total Public Votes
 
-3. **Combined Final Score (%):**
-   $$\text{Combined Total (\%)} = \text{Judges' Share (\%)} + \text{Viewer Share (\%)} $$
+Combined Score    = Judges' Share (%) + Public Share (%)
+```
 
 The couple with the **lowest combined percentage** is placed in jeopardy and eliminated.
 
 ### 3. Example Scenario
 
-Suppose **5 couples** remain on a night where 4 judges give scores out of 40. The judges award a total of **150 points** across the night, and viewers cast a combined total of **1,000,000 votes** (SMS + Online):
+Suppose **5 couples** remain on a night with **3 judges** (each awarding up to 10 points, for a maximum score of **30** per couple). 
 
-| Couple | Judges' Score (out of 40) | Judges' Share Calculation | Judges' Share (%) | Public Votes (SMS + Online) | Public Share Calculation | Public Share (%) | Combined Total Calculation | Combined Total (%) | Result |
-| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| **Couple A** | 36 | `(36 / 150) × 100` | **24.0%** | 150,000 | `(150,000 / 1,000,000) × 100` | **15.0%** | `24.0% + 15.0%` | **39.0%** | Safe |
-| **Couple B** | 24 | `(24 / 150) × 100` | **16.0%** | 350,000 | `(350,000 / 1,000,000) × 100` | **35.0%** | `16.0% + 35.0%` | **51.0%** | Safe |
-| **Couple C** | 30 | `(30 / 150) × 100` | **20.0%** | 80,000 | `(80,000 / 1,000,000) × 100` | **8.0%** | `20.0% + 8.0%` | **28.0%** | **Eliminated** |
-| **Couple D** | 33 | `(33 / 150) × 100` | **22.0%** | 220,000 | `(220,000 / 1,000,000) × 100` | **22.0%** | `22.0% + 22.0%` | **44.0%** | Safe |
-| **Couple E** | 27 | `(27 / 150) × 100` | **18.0%** | 200,000 | `(200,000 / 1,000,000) × 100` | **20.0%** | `18.0% + 20.0%` | **38.0%** | Safe |
-| **Total** | **150** | `(150 / 150) × 100` | **100.0%** | **1,000,000** | `(1,000,000 / 1,000,000) × 100` | **100.0%** | `100.0% + 100.0%` | **200.0%** | — |
+The judges award a combined total of **120 points** across all routines, and viewers cast **1,000,000 total votes** (SMS + Online):
 
-#### How Each Metric Is Calculated:
-- **Judges' Share (%):** Take the couple's score, divide by the night's total judge points awarded (`150`), and multiply by 100.  
-  *Example (Couple A):* `(36 / 150) × 100 = 24.0%`
-- **Public Share (%):** Take the couple's total received votes (SMS + Online), divide by the total public votes cast (`1,000,000`), and multiply by 100.  
-  *Example (Couple A):* `(150,000 / 1,000,000) × 100 = 15.0%`
-- **Combined Total (%):** Add the couple's Judges' Share to their Public Share.  
-  *Example (Couple A):* `24.0% + 15.0% = 39.0%`
+| Couple | Judges' Score (Max 30) | Judges' Share (%) | Public Votes (SMS + Web) | Public Share (%) | Combined Total (%) | Result |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: |
+| **Couple A** | 27 | **22.5%** | 150,000 | **15.0%** | **37.5%** | Safe |
+| **Couple B** | 18 | **15.0%** | 350,000 | **35.0%** | **50.0%** | Safe |
+| **Couple C** | 24 | **20.0%** | 80,000 | **8.0%** | **28.0%** | **Eliminated** |
+| **Couple D** | 21 | **17.5%** | 170,000 | **17.0%** | **34.5%** | Safe |
+| **Couple E** | 30 | **25.0%** | 250,000 | **25.0%** | **50.0%** | Safe |
+| **Total** | **120** | **100.0%** | **1,000,000** | **100.0%** | **200.0%** | — |
 
-> **💡 Why Fan Votes Can Dominate:** Judges' scores are typically tightly clustered (e.g., scores of 7, 8, and 9 only differ by a few percentage points of the total score pool). By contrast, viewer voting percentages can fluctuate dramatically (e.g., Couple B's 35% vs. Couple C's 8%). A dedicated fanbase casting votes via both SMS and online can readily propel a couple with lower technical scores safely past elimination.
+#### 📱 Step-by-Step Calculation Breakdown
 
+To easily follow the exact math on any screen size:
+
+* **Couple A:**
+  * **Judges' Share:** `(27 / 120) × 100 = 22.5%`
+  * **Public Share:** `(150,000 / 1,000,000) × 100 = 15.0%`
+  * **Combined Total:** `22.5% + 15.0% = 37.5%` *(Safe)*
+
+* **Couple B:** *(Low judges' score, massive fan vote)*
+  * **Judges' Share:** `(18 / 120) × 100 = 15.0%`
+  * **Public Share:** `(350,000 / 1,000,000) × 100 = 35.0%`
+  * **Combined Total:** `15.0% + 35.0% = 50.0%` *(Safe)*
+
+* **Couple C:** *(Decent judges' score, lowest fan vote)*
+  * **Judges' Share:** `(24 / 120) × 100 = 20.0%`
+  * **Public Share:** `(80,000 / 1,000,000) × 100 = 8.0%`
+  * **Combined Total:** `20.0% + 8.0% = 28.0%` *(Eliminated)*
+
+* **Couple D:**
+  * **Judges' Share:** `(21 / 120) × 100 = 17.5%`
+  * **Public Share:** `(170,000 / 1,000,000) × 100 = 17.0%`
+  * **Combined Total:** `17.5% + 17.0% = 34.5%` *(Safe)*
+
+* **Couple E:** *(Perfect 30 score + high fan vote)*
+  * **Judges' Share:** `(30 / 120) × 100 = 25.0%`
+  * **Public Share:** `(250,000 / 1,000,000) × 100 = 25.0%`
+  * **Combined Total:** `25.0% + 25.0% = 50.0%` *(Safe)*
+
+> **💡 Why Fan Votes Can Dominate:** Judges' scores usually stay within a narrow range (e.g., scores of 6, 7, 8, 9 only vary by a few percentage points of the total score pool). By contrast, viewer voting percentages can fluctuate dramatically (e.g., Couple B's 35% vs. Couple C's 8%). A dedicated fanbase casting votes via both SMS and online can readily propel a couple with lower technical scores safely past elimination.
