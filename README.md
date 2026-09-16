@@ -129,12 +129,24 @@ The couple with the **lowest combined percentage** is placed in jeopardy and eli
 
 ### 3. Example Scenario
 
-Suppose 5 couples remain on a night where the judges award a total of **150 points**, and viewers cast **1,000,000 total votes**:
+Suppose **5 couples** remain on a night where 4 judges give scores out of 40. The judges award a total of **150 points** across the night, and viewers cast a combined total of **1,000,000 votes** (SMS + Online):
 
-| Couple | Judges' Score | Judges' Share (%) | Public Votes | Public Share (%) | Combined Total (%) | Result |
-| :--- | :---: | :---: | :---: | :---: | :---: | :---: |
-| **Couple A** | 30 / 30 | $30 / 150 = \mathbf{20.0\%}$ | 120,000 | $120\text{k} / 1\text{M} = \mathbf{12.0\%}$ | **32.0%** | Safe |
-| **Couple B** | 21 / 30 | $21 / 150 = \mathbf{14.0\%}$ | 260,000 | $260\text{k} / 1\text{M} = \mathbf{26.0\%}$ | **40.0%** | Safe |
-| **Couple C** | 24 / 30 | $24 / 150 = \mathbf{16.0\%}$ | 80,000 | $80\text{k} / 1\text{M} = \mathbf{8.0\%}$ | **24.0%** | **Eliminated** |
+| Couple | Judges' Score (out of 40) | Judges' Share Calculation | Judges' Share (%) | Public Votes (SMS + Online) | Public Share Calculation | Public Share (%) | Combined Total Calculation | Combined Total (%) | Result |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| **Couple A** | 36 | `(36 / 150) × 100` | **24.0%** | 150,000 | `(150,000 / 1,000,000) × 100` | **15.0%** | `24.0% + 15.0%` | **39.0%** | Safe |
+| **Couple B** | 24 | `(24 / 150) × 100` | **16.0%** | 350,000 | `(350,000 / 1,000,000) × 100` | **35.0%** | `16.0% + 35.0%` | **51.0%** | Safe |
+| **Couple C** | 30 | `(30 / 150) × 100` | **20.0%** | 80,000 | `(80,000 / 1,000,000) × 100` | **8.0%** | `20.0% + 8.0%` | **28.0%** | **Eliminated** |
+| **Couple D** | 33 | `(33 / 150) × 100` | **22.0%** | 220,000 | `(220,000 / 1,000,000) × 100` | **22.0%** | `22.0% + 22.0%` | **44.0%** | Safe |
+| **Couple E** | 27 | `(27 / 150) × 100` | **18.0%** | 200,000 | `(200,000 / 1,000,000) × 100` | **20.0%** | `18.0% + 20.0%` | **38.0%** | Safe |
+| **Total** | **150** | `(150 / 150) × 100` | **100.0%** | **1,000,000** | `(1,000,000 / 1,000,000) × 100` | **100.0%** | `100.0% + 100.0%` | **200.0%** | — |
 
-> **💡 Why Fan Votes Can Dominate:** Judges' scores are typically tightly clustered (e.g., scores of 7, 8, and 9 only differ by a few percentage points of the total score pool). By contrast, viewer voting percentages can fluctuate dramatically (e.g., 26% vs. 8%). A dedicated fanbase casting votes via both SMS and online can readily propel a couple with lower technical scores safely past elimination.
+#### How Each Metric Is Calculated:
+- **Judges' Share (%):** Take the couple's score, divide by the night's total judge points awarded (`150`), and multiply by 100.  
+  *Example (Couple A):* `(36 / 150) × 100 = 24.0%`
+- **Public Share (%):** Take the couple's total received votes (SMS + Online), divide by the total public votes cast (`1,000,000`), and multiply by 100.  
+  *Example (Couple A):* `(150,000 / 1,000,000) × 100 = 15.0%`
+- **Combined Total (%):** Add the couple's Judges' Share to their Public Share.  
+  *Example (Couple A):* `24.0% + 15.0% = 39.0%`
+
+> **💡 Why Fan Votes Can Dominate:** Judges' scores are typically tightly clustered (e.g., scores of 7, 8, and 9 only differ by a few percentage points of the total score pool). By contrast, viewer voting percentages can fluctuate dramatically (e.g., Couple B's 35% vs. Couple C's 8%). A dedicated fanbase casting votes via both SMS and online can readily propel a couple with lower technical scores safely past elimination.
+
