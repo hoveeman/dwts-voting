@@ -2,7 +2,7 @@
 
 Backend JSON configurations and auto-update manifest for the **DWTS Voting** iOS Shortcut.
 
-📥 **[Install Shortcut (v1.5 iCloud Link)](https://www.icloud.com/shortcuts/adb52f4b74424194a18caa038fad8b73)**
+📥 **[Install Shortcut (v1.6 iCloud Link)](https://www.icloud.com/shortcuts/3e951e5ba20b49dc82f5abded923b179)**
 
 ---
 
@@ -24,7 +24,7 @@ Backend JSON configurations and auto-update manifest for the **DWTS Voting** iOS
 ### 1. Auto-Update Checker (Top of Shortcut with Release Notes & "Vote First")
 
 ```text
-[# Number] ➔ 1.5
+[# Number] ➔ 1.6
 [Set Variable] "CurrentVersion" to [# Number]
 [URL] ➔ https://raw.githubusercontent.com/hoveeman/dwts-voting/main/version.json
 [Get Contents of URL]
