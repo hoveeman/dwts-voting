@@ -51,19 +51,22 @@ What's New:
 [End If]
 ```
 
-### 2. Dynamic Dancers List & Multi-Dancer Voting (With Notifications)
+### 2. Dynamic Dancers List & Multi-Dancer Voting (v1.6+ Full Names Architecture)
 
 ```text
 [URL] ➔ https://raw.githubusercontent.com/hoveeman/dwts-voting/main/dancers.json
 [Get Contents of URL]
 
-[If Contents of URL contains "dancers"]
-│   [Get Value for "dancers" in Contents of URL]
-│   [Set Variable "VotingList" to Dictionary Value]
+[If Contents of URL contains "dancers_v2"]
+│   [Get Dictionary from Contents of URL]
+│   [Get Value for "dancers_v2" in Dictionary]
+│   [Set Variable "DancersDict" to Dictionary Value]
+│   [Get Dictionary Keys from DancersDict]
+│   [Set Variable "VotingList" to Dictionary Keys]
 [Otherwise]
-│   <!-- Offline or 404 backup -->
-│   [List of active dancers]
-│   [Set Variable "VotingList" to List]
+│   <!-- Fallback for legacy v1.5 or offline -->
+│   [Get Value for "dancers" in Dictionary]
+│   [Set Variable "VotingList" to Dictionary Value]
 [End If]
 
 [Choose from List "VotingList" (Select Multiple: ON)]
@@ -71,9 +74,9 @@ What's New:
 [Show Notification "💃🕺 Casting votes now... This may take a minute!"]
 
 [Repeat with each item in Chosen Item]
-│   [Split Text "Repeat Item" by Custom " & "]
-│   [Get First Item from List]
-│   [Set Variable "VoteCode" to Item from List]
+│   <!-- Look up exact SMS keyword from the dictionary -->
+│   [Get Value for "Repeat Item" in DancersDict]
+│   [Set Variable "VoteCode" to Dictionary Value]
 │   │
 │   [Repeat 10 times]
 │   │   [Send Message "VoteCode" to "Dancing With The Stars" (215-23)]
@@ -82,6 +85,8 @@ What's New:
 
 [Show Notification "🪩 All votes have been cast!"]
 ```
+
+> **Note for v1.5 Backward Compatibility:** `dancers.json` retains the legacy `"dancers"` array so older shortcuts won't fail if a user skips or delays the update.
 
 ---
 
