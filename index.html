@@ -104,12 +104,12 @@
     .market{display:flex;align-items:center;justify-content:center;padding:44px;background:linear-gradient(145deg,#8b1725,#4f1018);text-align:center}
     .market strong{font-family:"Bodoni Moda",serif;font-size:clamp(5rem,11vw,9rem);line-height:.75;color:#f7d889;display:block}
     .market span{display:block;margin-top:20px;font-size:.78rem;text-transform:uppercase;letter-spacing:.12em}
-    .sleeper-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+    .sleeper-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
     .sleeper-card{background:var(--paper);border-top:4px solid var(--green);padding:20px;min-height:210px}
     .sleeper-card .pick{color:var(--green);font-size:.71rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em}
-    .sleeper-card h3,.theme-card h3,.story h3{font-family:"Bodoni Moda",serif;font-size:1.42rem;line-height:1.05;margin:8px 0}
-    .sleeper-card p,.theme-card p,.story p{font-size:.86rem;color:var(--muted);margin:0}
-    .theme-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:28px}
+    .sleeper-card h3,.theme-card h3{font-family:"Bodoni Moda",serif;font-size:1.42rem;line-height:1.05;margin:8px 0}
+    .sleeper-card p,.theme-card p{font-size:.86rem;color:var(--muted);margin:0}
+    .theme-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:28px}
     .theme-card{background:var(--paper);border:1px solid var(--line);padding:20px}
     .theme-date{font-size:.72rem;font-weight:700;color:var(--red);text-transform:uppercase;letter-spacing:.08em}
     .edge{margin-top:13px!important;padding-top:11px;border-top:1px solid var(--line);color:var(--ink)!important}
@@ -129,9 +129,6 @@
     .cal-row b{font-size:.78rem}.cal-row time{font-size:.82rem;color:var(--muted)}.cal-row span{font-family:"Bodoni Moda",serif;font-size:1.15rem;font-weight:700}
     .cal-row.current{background:var(--gold-soft);padding-inline:12px}
     .cal-row .tba{font-family:"IBM Plex Sans",sans-serif;font-size:.73rem;color:var(--muted);margin-left:8px;font-weight:500}
-    .pulse{margin:84px 0 0;display:grid;grid-template-columns:1fr 1fr;gap:12px}
-    .story{background:var(--paper);border:1px solid var(--line);padding:20px}
-    .story.no{font-size:2rem;font-family:"Bodoni Moda",serif;color:var(--gold)}
     .vote{margin-top:72px;display:grid;grid-template-columns:1.25fr .75fr;background:var(--red);color:#fff}
     .vote-main{padding:clamp(26px,5vw,54px)}
     .vote h2{color:white}.vote p{color:#f0d8dc;max-width:700px}
@@ -149,7 +146,7 @@
     footer{max-width:1240px;margin:0 auto;padding:0 clamp(18px,4vw,54px) 56px;color:var(--muted);font-size:.72rem}
     @media(max-width:900px){
       .hero{grid-template-columns:1fr}.hero-copy{min-height:460px}.hero-image{min-height:330px}.hero-image:after{background:linear-gradient(0deg,rgba(0,0,0,.55),transparent 50%)}
-      .section-head,.lineup-head{grid-template-columns:1fr}.board{grid-template-columns:1fr}.eliminated-card{grid-template-columns:minmax(220px,.8fr) 1.2fr}.sleeper-grid{grid-template-columns:repeat(2,1fr)}.theme-grid{grid-template-columns:repeat(2,1fr)}.spotlight,.vote{grid-template-columns:1fr}.market{min-height:300px}.pulse{grid-template-columns:1fr}.source-grid{grid-template-columns:1fr 1fr}
+      .section-head,.lineup-head{grid-template-columns:1fr}.board{grid-template-columns:1fr}.eliminated-card{grid-template-columns:minmax(220px,.8fr) 1.2fr}.sleeper-grid{grid-template-columns:repeat(2,1fr)}.theme-grid{grid-template-columns:repeat(2,1fr)}.spotlight,.vote{grid-template-columns:1fr}.market{min-height:300px}.source-grid{grid-template-columns:1fr 1fr}
     }
     @media(max-width:560px){
       h1{font-size:3.3rem}.hero-copy{padding:46px 22px;min-height:430px}.hero-image{min-height:250px}.tabs{justify-content:center;flex-wrap:wrap;overflow:visible}.tabs a{padding:7px 9px;font-size:.74rem}
@@ -179,7 +176,7 @@
   </header>
 
   <nav class="tabs" aria-label="Cheat sheet sections">
-    <a href="#board">Power board</a><a href="#voted-off">Voted off</a><a href="#sleepers">Sleepers</a><a href="#themes">Theme edges</a><a href="#pulse">Storylines</a><a href="#voting">Voting</a>
+    <a href="#board">Power board</a><a href="#voted-off">Voted off</a><a href="#sleepers">Sleepers</a><a href="#themes">Theme edges</a><a href="#voting">Voting</a>
   </nav>
 
   <main>
@@ -241,7 +238,7 @@
       </div>
     </section>
 
-                <aside class="spotlight" aria-label="Market spotlight">
+                    <aside class="spotlight" aria-label="Market spotlight">
       <div class="spot-copy">
         <p class="kicker">Live Kalshi market favorite</p>
         <h2>Ezra Frech surged to 33% to win it all.</h2>
@@ -256,31 +253,33 @@
 
     <section id="sleepers">
       <div class="section-head">
-        <div><p class="kicker">Value picks</p><h2>Three sleepers worth reaching for</h2></div>
-        <p>These are the names most likely to beat their Week 1 rank because their audience, adaptability, or story can compound as the field narrows.</p>
+        <div><p class="kicker">Value picks</p><h2>Three sleepers worth drafting</h2></div>
+        <p>High-upside contenders whose current rank or market price underestimates their ceiling. As the bottom clears, their technical trajectory, partner pedigree, and voting coalitions make them top fantasy plays.</p>
       </div>
       <div class="sleeper-grid">
-        <article class="sleeper-card"><span class="pick">Best all-around sleeper</span><h3>Julia Stiles</h3><p>An 18/30 start, deep 90s/00s nostalgia, and a live storyline after Andy Cohen’s apology. “Dance-lite” screen experience is useful without the full ringer backlash.</p></article>
-        <article class="sleeper-card"><span class="pick">Social sleeper</span><h3>Jackson Olson</h3><p>The 15/30 debut leaves room to grow. His 3M+ TikTok/Instagram following and Banana Ball energy could matter most on Viral Hits Night.</p></article>
-        <article class="sleeper-card"><span class="pick">Fandom sleeper</span><h3>Tyler Cameron</h3><p>A solid 17/30 with an athletic base, Bachelor Nation reach, and Sharna Burgess returning after five years. The ingredients are stronger than the premiere placement.</p></article>
+        <article class="sleeper-card"><span class="pick">Athletic breakout</span><h3>Amber Glenn</h3><p>Surged into the top 5 with a standout 21/30 Tango (+3 WoW). Her Olympic figure-skating foundation delivers elite rotational velocity, frame discipline, and musicality. Paired with Pasha Pashkov, she commands an 11% Kalshi market share and significant fantasy headroom.</p></article>
+        <article class="sleeper-card"><span class="pick">Social titan</span><h3>Jackson Olson</h3><p>Jumped from 15 to 18/30 on Foxtrot (+3 WoW), demonstrating real coachability under champion Emma Slater. With 3M+ TikTok and Instagram followers and Savannah Bananas entertainment instincts, his public voting cushion will protect him deep into themed weeks.</p></article>
+        <article class="sleeper-card"><span class="pick">Momentum riser</span><h3>Tatyana Ali</h3><p>Delivered the biggest Week 2 leap in the entire cast (+6 WoW, 12 → 18/30 Foxtrot) alongside Jan Ravnik. Cross-generational <i>Fresh Prince</i> nostalgia, natural stage charisma, and the sentimental Alfonso Ribeiro hosting connection make her a potent dark horse.</p></article>
       </div>
     </section>
 
     <section id="themes" style="margin-top:84px">
       <div class="section-head">
         <div><p class="kicker">Theme-night edges</p><h2>Where the board could swing</h2></div>
-        <p>Week 3’s dances and songs are confirmed for Yacht Rock Night. Later-week edges remain editorial matchup reads; Week 5 is still officially TBA.</p>
+        <p>Confirmed themes across Season 35 and where specific skillsets, music genres, and staging styles create matchup advantages for the remaining 13 couples.</p>
       </div>
       <div class="theme-grid">
-        <article class="theme-card"><div class="theme-date">Sept. 22 · Week 2</div><h3>Viral Hits Night</h3><p>Social-native personalities get the cleanest runway.</p><p class="edge"><b>Edge:</b> Jackson Olson (3M+ followers), Connor Wood (1.3M), and Maura Higgins’ reality-TV momentum.</p></article>
-        <article class="theme-card"><div class="theme-date">Sept. 29 · Week 3 · Current</div><h3>Yacht Rock Night</h3><p>Thirteen couples take on soft-rock staples, with Foxtrot leading the night at five routines.</p><p class="edge"><b>Watch:</b> Taylor Hanson’s musician instincts; Julia Stiles and Tatyana Ali for cross-generational nostalgia.</p></article>
-        <article class="theme-card"><div class="theme-date">Oct. 6 · Week 4</div><h3>Mariah Carey Night</h3><p>The most obvious specialist matchup on the calendar.</p><p class="edge"><b>Edge:</b> Harry Shum Jr.—a former backup dancer for Mariah Carey—plus professional dance experience.</p></article>
-        <article class="theme-card"><div class="theme-date">Oct. 20 · Week 6</div><h3>Dedication Night</h3><p>Story and emotional connection often matter as much as technique.</p><p class="edge"><b>Watch:</b> Ezra Frech and Amber Glenn have elite-sport journeys; Guillermo has already shown strong survival appeal.</p></article>
-        <article class="theme-card"><div class="theme-date">Oct. 27 · Week 7</div><h3>Horror Movie Night</h3><p>Character work, precision, and theatrical commitment are the likely differentiators.</p><p class="edge"><b>Edge:</b> Harry Shum Jr. and Jenna Dewan for dancer-actor versatility; Tatyana Ali for performance experience.</p></article>
-        <article class="theme-card"><div class="theme-date">Nov. 3 + Nov. 10</div><h3>Disney → Grammy</h3><p>Two late-season tests of character, musicality, and broad audience connection.</p><p class="edge"><b>Edge:</b> Taylor Hanson on Grammy Night; Harry, Jenna, Julia, and Tatyana across the performance-heavy stretch.</p></article>
+        <article class="theme-card"><div class="theme-date" style="color:var(--green)">Sept. 29 · Week 3 · Current</div><h3>Yacht Rock Night</h3><p>Thirteen couples take on breezy soft-rock classics, with Foxtrot leading the slate at five routines.</p><p class="edge"><b>Edge:</b> Taylor Hanson’s innate musician timing; Jenna Dewan &amp; Val’s samba bounce to “Africa”; Ezra Frech &amp; Daniella mastering smooth ballroom hold.</p></article>
+        <article class="theme-card"><div class="theme-date">Oct. 6 · Week 4</div><h3>Mariah Carey Night</h3><p>Iconic pop and R&amp;B vocal anthems requiring dramatic performance quality and syncopated groove.</p><p class="edge"><b>Edge:</b> Harry Shum Jr.—a former backup dancer for Mariah Carey on tour; Maura Higgins &amp; Mark Ballas in theatrical glam; Amber Glenn’s lyrical flow.</p></article>
+        <article class="theme-card"><div class="theme-date">Oct. 13 · Week 5</div><h3>Midseason Pivot (TBA)</h3><p>Production’s unannounced specialty theme (fan buzz centers on 90s nostalgia or country) marking the first double-elimination pressure point.</p><p class="edge"><b>Edge:</b> High-floor technicians Jenna Dewan and Harry Shum Jr. hold ground, while loyal fanbases (Tyler Cameron, Jackson Olson) avoid shock elimination.</p></article>
+        <article class="theme-card"><div class="theme-date">Oct. 20 · Week 6</div><h3>Dedication Night</h3><p>Contemporary and Viennese waltzes honoring personal heroes, resilience, and emotional life chapters.</p><p class="edge"><b>Edge:</b> Narrative authenticity sways public voting. Ezra Frech’s dual-gold Paralympic triumph, Amber Glenn’s Olympic perseverance, and Julia Stiles’ comeback arc.</p></article>
+        <article class="theme-card"><div class="theme-date">Oct. 27 · Week 7</div><h3>Horror Movie Night</h3><p>High-concept Halloween theatricality, Paso Dobles, and Argentine Tangos under dramatic cinema lighting.</p><p class="edge"><b>Edge:</b> Choreography masters Daniella Karagach and Mark Ballas excel in dark concepts; actor-dancers Harry Shum Jr. and Jenna Dewan bring crucial dramatic commitment.</p></article>
+        <article class="theme-card"><div class="theme-date">Nov. 3 · Week 8</div><h3>Disney Night</h3><p>The ballroom’s annual family-viewing showcase celebrating animated and live-action musical classics.</p><p class="edge"><b>Edge:</b> Broad family affection and joyful charisma. Tatyana Ali’s generational warmth, Jackson Olson’s entertainer flair, and Connor Wood’s relatable comedy.</p></article>
+        <article class="theme-card"><div class="theme-date">Nov. 10 · Week 9</div><h3>Grammy Night</h3><p>Fast-paced Latin and intricate ballroom set to award-winning chart-toppers across decades.</p><p class="edge"><b>Edge:</b> Multi-instrumentalist Taylor Hanson’s syncopation; Harry Shum Jr. and Jenna Dewan with 3-time champion Val Chmerkovskiy navigating complex polyrhythms.</p></article>
+        <article class="theme-card"><div class="theme-date">Nov. 17 &amp; 24 · Weeks 10–11</div><h3>Semi-Finals &amp; Finale</h3><p>Double-dance pressure, redemption routines, and the uninhibited, trophy-deciding Freestyle round.</p><p class="edge"><b>Edge:</b> Championship pro pedigree reigns supreme: Val Chmerkovskiy (3 titles), Mark Ballas (3 titles), and Jenna Johnson (2 titles) vs. Daniella Karagach’s freestyle wizardry.</p></article>
       </div>
 
-                                                                  <div class="week-lineup" aria-labelledby="week-lineup-title">
+            <div class="week-lineup" aria-labelledby="week-lineup-title">
         <div class="lineup-head">
           <div><p class="kicker" style="color:#efce82">Tuesday, September 29</p><h3 id="week-lineup-title">Yacht Rock Night lineup</h3></div>
           <p>The 13 active couples, their dance styles, and songs for Week 3.</p>
@@ -314,18 +313,6 @@
         <div class="cal-row"><b>Week 9</b><time>Nov 10</time><span>Grammy Night</span></div>
         <div class="cal-row"><b>Week 10</b><time>Nov 17</time><span>Semi-Finals</span></div>
         <div class="cal-row"><b>Week 11</b><time>Nov 24</time><span>Finale</span></div>
-      </div>
-    </section>
-
-    <section id="pulse" style="margin-top:84px">
-      <div class="section-head"><div><p class="kicker">Ballroom pulse</p><h2>Storylines that move votes</h2></div><p>Separate signal from noise. These are the early-season developments most likely to shape fantasy value.</p></div>
-      <div class="pulse">
-        <article class="story"><div class="no">01</div><h3>The scoring reset is real</h3><p>Derek Hough said the lower starting scores leave room for growth. Guillermo’s 10/30 was the second-lowest score in show history, yet he survived. Don’t compare these totals too literally with prior seasons.</p></article>
-        <article class="story"><div class="no">02</div><h3>Votes beat the scoreboard</h3><p>Night 1 online voting went down, leaving text votes to determine the elimination. Conner Leavitt went home; Guillermo survived both nights despite the lowest score.</p></article>
-        <article class="story"><div class="no">03</div><h3>Julia has a clean revenge arc</h3><p>Her “prove Andy Cohen wrong” package landed, Derek told Cohen to “eat it,” and Cohen publicly apologized. It’s a memorable, easy-to-root-for story.</p></article>
-        <article class="story"><div class="no">04</div><h3>Witney brings a rare challenge</h3><p>The reigning champion is competing while in her second trimester. Guillermo’s partnership brings warmth and a built-in conversation driver.</p></article>
-        <article class="story"><div class="no">05</div><h3>Two ringers, two different risks</h3><p>Harry Shum Jr. and Jenna Dewan have the clearest professional dance backgrounds. That raises the technical floor—and the chance of a “too experienced” backlash.</p></article>
-        <article class="story"><div class="no">06</div><h3>Giada exits on the judges’ bottom</h3><p>Giada De Laurentiis and Alan Bersten were eliminated September 22 after receiving the night’s lowest judges’ score. Thirteen couples advance to Yacht Rock Night.</p></article>
       </div>
     </section>
 
@@ -370,16 +357,16 @@
   <script>
     const dancers = [
       {rank:1,name:'Ezra Frech',age:21,proName:'Daniella Karagach',mirrorballs:1,photo:'ezra-frech-daniella-karagach.jpg',weeks:[{'dance': 'Tango', 'score': 20}, {'dance': 'Cha-cha-cha', 'score': 21}],total:41,powerIndex:76.7,marketProb:33,cats:['anchor', 'athlete', 'social'],tags:['Anchor', '33% Market', '20+ avg', 'Paralympic champion'],case:'Ranks #1 on the composite Power Board (76.7/100) with a 20.5/30 scoring average and 33% market win odds. Paired with Daniella Karagach (1 Mirrorball), Elite athletic body awareness combined with a pro renowned for unlocking dynamic, unconventional choreography.'},
-      {rank:2,name:'Jenna Dewan',age:45,proName:'Val Chmerkovskiy',mirrorballs:3,photo:'jenna-dewan-val-chmerkovskiy.jpg',weeks:[{'dance': 'Tango', 'score': 19}, {'dance': 'Jive', 'score': 21}],total:40,powerIndex:72.7,marketProb:15,cats:['anchor', 'dance', 'social'],tags:['Anchor', '15% Market', 'Riser (+2)', 'Pro dance background'],case:'Fantasy anchor averaging 20.0/30 through 2 completed weeks (72.7/100 Power Index). Paired with Val Chmerkovskiy (3 Mirrorballs), A true professional dancer paired with a three-time champion. Her high scoring floor makes her an elite anchor.'},
-      {rank:3,name:'Harry Shum Jr.',age:44,proName:'Jenna Johnson',mirrorballs:2,photo:'harry-shum-jr-jenna-johnson.jpg',weeks:[{'dance': 'Cha-cha-cha', 'score': 21}, {'dance': 'Viennese waltz', 'score': 18}],total:39,powerIndex:66.0,marketProb:16,cats:['anchor', 'dance', 'social'],tags:['Anchor', '16% Market', 'Dip (-3)', 'Pro dance background'],case:'Overcame a temporary scoring dip (-3 WoW), bolstered by a 66.0/100 Power Index. Paired with Jenna Johnson (2 Mirrorballs), Possesses the highest technical ceiling in the cast; the only obvious challenge is overcoming ringer perception.'},
-      {rank:4,name:'Maura Higgins',age:35,proName:'Mark Ballas',mirrorballs:3,photo:'maura-higgins-mark-ballas.jpg',weeks:[{'dance': 'Foxtrot', 'score': 21}, {'dance': 'Cha-cha-cha', 'score': 19}],total:40,powerIndex:65.5,marketProb:12,cats:['anchor', 'social'],tags:['Anchor', '12% Market', '20+ avg', 'No dance experience'],case:'Fantasy anchor averaging 20.0/30 through 2 completed weeks (65.5/100 Power Index). Paired with Mark Ballas (3 Mirrorballs), Mark’s three Mirrorballs and their immense reality fandom make the partnership built for a deep finale run.'},
+      {rank:2,name:'Jenna Dewan',age:45,proName:'Val Chmerkovskiy',mirrorballs:3,photo:'jenna-dewan-val-chmerkovskiy.jpg',weeks:[{'dance': 'Tango', 'score': 19}, {'dance': 'Jive', 'score': 21}],total:40,powerIndex:72.0,marketProb:14,cats:['anchor', 'dance', 'social'],tags:['Anchor', '14% Market', 'Riser (+2)', 'Pro dance background'],case:'Fantasy anchor averaging 20.0/30 through 2 completed weeks (72.0/100 Power Index). Paired with Val Chmerkovskiy (3 Mirrorballs), A true professional dancer paired with a three-time champion. Her high scoring floor makes her an elite anchor.'},
+      {rank:3,name:'Maura Higgins',age:35,proName:'Mark Ballas',mirrorballs:3,photo:'maura-higgins-mark-ballas.jpg',weeks:[{'dance': 'Foxtrot', 'score': 21}, {'dance': 'Cha-cha-cha', 'score': 19}],total:40,powerIndex:66.2,marketProb:13,cats:['anchor', 'social'],tags:['Anchor', '13% Market', '20+ avg', 'No dance experience'],case:'Fantasy anchor averaging 20.0/30 through 2 completed weeks (66.2/100 Power Index). Paired with Mark Ballas (3 Mirrorballs), Mark’s three Mirrorballs and their immense reality fandom make the partnership built for a deep finale run.'},
+      {rank:4,name:'Harry Shum Jr.',age:44,proName:'Jenna Johnson',mirrorballs:2,photo:'harry-shum-jr-jenna-johnson.jpg',weeks:[{'dance': 'Cha-cha-cha', 'score': 21}, {'dance': 'Viennese waltz', 'score': 18}],total:39,powerIndex:66.0,marketProb:16,cats:['anchor', 'dance', 'social'],tags:['Anchor', '16% Market', 'Dip (-3)', 'Pro dance background'],case:'Overcame a temporary scoring dip (-3 WoW), bolstered by a 66.0/100 Power Index. Paired with Jenna Johnson (2 Mirrorballs), Possesses the highest technical ceiling in the cast; the only obvious challenge is overcoming ringer perception.'},
       {rank:5,name:'Amber Glenn',age:26,proName:'Pasha Pashkov',mirrorballs:0,photo:'amber-glenn-pasha-pashkov.jpg',weeks:[{'dance': 'Cha-cha-cha', 'score': 18}, {'dance': 'Tango', 'score': 21}],total:39,powerIndex:60.6,marketProb:11,cats:['sleeper', 'athlete', 'social'],tags:['Sleeper', '11% Market', 'Riser (+3)', 'U.S. figure skater'],case:'Surged +3 points in the latest round (21/30 Tango) with a 60.6/100 Power Index. Paired with Pasha Pashkov (0 Mirrorballs), Figure-skating musicality, rotational speed, and Olympic visibility provide a reliable fantasy scoring floor.'},
-      {rank:6,name:'Jackson Olson',age:28,proName:'Emma Slater',mirrorballs:1,photo:'jackson-olson-emma-slater.jpg',weeks:[{'dance': 'Cha-cha-cha', 'score': 15}, {'dance': 'Foxtrot', 'score': 18}],total:33,powerIndex:51.9,marketProb:4,cats:['sleeper', 'athlete', 'social'],tags:['Sleeper', '4% Market', 'Riser (+3)', '3M+ social reach'],case:'Surged +3 points in the latest round (18/30 Foxtrot) with a 51.9/100 Power Index. Paired with Emma Slater (1 Mirrorball), Elite social reach and Banana Ball entertainment value give him an exceptional public voting cushion.'},
+      {rank:6,name:'Jackson Olson',age:28,proName:'Emma Slater',mirrorballs:1,photo:'jackson-olson-emma-slater.jpg',weeks:[{'dance': 'Cha-cha-cha', 'score': 15}, {'dance': 'Foxtrot', 'score': 18}],total:33,powerIndex:51.1,marketProb:3,cats:['sleeper', 'athlete', 'social'],tags:['Sleeper', '3% Market', 'Riser (+3)', '3M+ social reach'],case:'Surged +3 points in the latest round (18/30 Foxtrot) with a 51.1/100 Power Index. Paired with Emma Slater (1 Mirrorball), Elite social reach and Banana Ball entertainment value give him an exceptional public voting cushion.'},
       {rank:7,name:'Tyler Cameron',age:33,proName:'Sharna Burgess',mirrorballs:1,photo:'tyler-cameron-sharna-burgess.jpg',weeks:[{'dance': 'Tango', 'score': 17}, {'dance': 'Salsa', 'score': 16}],total:33,powerIndex:47.6,marketProb:2,cats:['sleeper', 'athlete', 'social'],tags:['Sleeper', '2% Market', 'Steady', 'Bachelor Nation'],case:'Holding steady with a 16.5/30 scoring average and 2% market win probability. Paired with Sharna Burgess (1 Mirrorball), Athletic frame, broad reality fanbase, and a returning champion pro give him higher upside than middle-pack scores suggest.'},
       {rank:8,name:'Tatyana Ali',age:47,proName:'Jan Ravnik',mirrorballs:0,photo:'tatyana-ali-jan-ravnik.jpg',weeks:[{'dance': 'Jive', 'score': 12}, {'dance': 'Foxtrot', 'score': 18}],total:30,powerIndex:44.3,marketProb:1,cats:['sleeper', 'social'],tags:['Sleeper', '1% Market', 'Surging (+6)', 'Fresh Prince icon'],case:'Surged +6 points in the latest round (18/30 Foxtrot) with a 44.3/100 Power Index. Paired with Jan Ravnik (0 Mirrorballs), The Alfonso Ribeiro reunion and cross-generational warmth generate huge audience affection and voting momentum.'},
       {rank:9,name:'Ciara Miller',age:30,proName:'Brandon Armstrong',mirrorballs:0,photo:'ciara-miller-brandon-armstrong.jpg',weeks:[{'dance': 'Foxtrot', 'score': 15}, {'dance': 'Tango', 'score': 18}],total:33,powerIndex:44.0,marketProb:1,cats:['social'],tags:['Contender', '1% Market', 'Riser (+3)', 'Bravo fandom'],case:'Surged +3 points in the latest round (18/30 Tango) with a 44.0/100 Power Index. Paired with Brandon Armstrong (0 Mirrorballs), Bravo and Traitors viewers are notoriously reliable voters; steady technical growth can push her deep into the bracket.'},
       {rank:10,name:'Julia Stiles',age:45,proName:'Ezra Sosa',mirrorballs:0,photo:'julia-stiles-ezra-sosa.jpg',weeks:[{'dance': 'Quickstep', 'score': 18}, {'dance': 'Tango', 'score': 16}],total:34,powerIndex:43.4,marketProb:2,cats:['dance', 'social'],tags:['Contender', '2% Market', 'Steady', 'Nostalgia icon'],case:'Holding steady with a 17.0/30 scoring average and 2% market win probability. Paired with Ezra Sosa (0 Mirrorballs), Deep cross-generational nostalgia, screen dance memory, and the season’s cleanest motivational storyline.'},
-      {rank:11,name:'Connor Wood',age:31,proName:'Rylee Arnold',mirrorballs:0,photo:'connor-wood-rylee-arnold.jpg',weeks:[{'dance': 'Cha-cha-cha', 'score': 16}, {'dance': 'Tango', 'score': 15}],total:31,powerIndex:42.1,marketProb:4,cats:['social'],tags:['Contender', '4% Market', 'Steady', 'Comedy podcast'],case:'Holding steady with a 15.5/30 scoring average and 4% market win probability. Paired with Rylee Arnold (0 Mirrorballs), Rapidly growing digital following and podcast listener loyalty keep him safe while his technique develops.'},
+      {rank:11,name:'Connor Wood',age:31,proName:'Rylee Arnold',mirrorballs:0,photo:'connor-wood-rylee-arnold.jpg',weeks:[{'dance': 'Cha-cha-cha', 'score': 16}, {'dance': 'Tango', 'score': 15}],total:31,powerIndex:41.3,marketProb:3,cats:['social'],tags:['Risk', '3% Market', 'Steady', 'Comedy podcast'],case:'Holding steady with a 15.5/30 scoring average and 3% market win probability. Paired with Rylee Arnold (0 Mirrorballs), Rapidly growing digital following and podcast listener loyalty keep him safe while his technique develops.'},
       {rank:12,name:'Guillermo Rodriguez',age:55,proName:'Witney Carson',mirrorballs:2,photo:'guillermo-rodriguez-witney-carson.jpg',weeks:[{'dance': 'Cha-cha-cha', 'score': 10}, {'dance': 'Paso doble', 'score': 12}],total:22,powerIndex:39.3,marketProb:2,cats:[],tags:['Risk', '2% Market', 'Riser (+2)', 'Fan favorite'],case:'Holding steady with a 11.0/30 scoring average and 2% market win probability. Paired with Witney Carson (2 Mirrorballs), Carries the lowest scoring average, but reigning champion Witney Carson and Jimmy Kimmel viewers protect him from the bottom.'},
       {rank:13,name:'Taylor Hanson',age:43,proName:'Britt Stewart',mirrorballs:0,photo:'taylor-hanson-britt-stewart.jpg',weeks:[{'dance': 'Quickstep', 'score': 16}, {'dance': 'Cha-cha-cha', 'score': 15}],total:31,powerIndex:38.0,marketProb:1,cats:[],tags:['Risk', '1% Market', 'Steady', 'Musician timing'],case:'Holding steady with a 15.5/30 scoring average and 1% market win probability. Paired with Britt Stewart (0 Mirrorballs), Natural musical rhythm and a dedicated multi-decade fan community provide durability into themed music weeks.'}
     ];
