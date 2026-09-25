@@ -51,7 +51,7 @@
     .card{background:var(--paper);border:1px solid var(--line);display:grid;grid-template-columns:58px minmax(0,1fr);min-width:0;box-shadow:0 2px 0 rgba(0,0,0,.02);overflow:hidden}
     .card.hidden{display:none}
     .rank{grid-row:1 / 3;background:var(--nav);color:white;display:flex;align-items:flex-start;justify-content:center;padding-top:18px;font-family:"Bodoni Moda",serif;font-size:2.15rem;font-weight:900}
-    .couple-photo{grid-column:2;width:100%;height:auto;aspect-ratio:3/2;object-fit:contain;object-position:center;display:block;background:#07183d}
+    .couple-photo{grid-column:2;width:100%;height:auto;aspect-ratio:3/2;object-fit:cover;object-position:center top;display:block;background:#07183d}
     .card-body{grid-column:2;padding:16px 17px 15px;min-width:0}
     .card-top{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
     .name{font-family:"Bodoni Moda",serif;font-size:1.45rem;line-height:1;margin:0 0 5px}
@@ -76,7 +76,7 @@
     .eliminated .section-head{margin-bottom:22px}
     .eliminated-list{display:grid;gap:14px}
     .eliminated-card{display:grid;grid-template-columns:minmax(260px,380px) minmax(0,1fr);background:var(--paper);border:1px solid var(--line);overflow:hidden}
-    .eliminated-card img{width:100%;height:100%;min-height:255px;object-fit:contain;background:#07183d;display:block}
+    .eliminated-card img{width:100%;height:100%;min-height:255px;object-fit:cover;object-position:center top;background:#07183d;display:block}
     .eliminated-copy{padding:clamp(24px,4vw,42px);align-self:center}
     .eliminated-date{display:inline-block;margin:0 0 13px;padding:5px 8px;background:var(--red);color:#fff;font-size:.7rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase}
     .eliminated-copy h3{font-family:"Bodoni Moda",serif;font-size:clamp(1.8rem,3.5vw,3rem);line-height:1;margin:0 0 8px}
@@ -264,7 +264,7 @@
         <article class="theme-card"><div class="theme-date">Nov. 3 + Nov. 10</div><h3>Disney → Grammy</h3><p>Two late-season tests of character, musicality, and broad audience connection.</p><p class="edge"><b>Edge:</b> Taylor Hanson on Grammy Night; Harry, Jenna, Julia, and Tatyana across the performance-heavy stretch.</p></article>
       </div>
 
-            <div class="week-lineup" aria-labelledby="week-lineup-title">
+                  <div class="week-lineup" aria-labelledby="week-lineup-title">
         <div class="lineup-head">
           <div><p class="kicker" style="color:#efce82">Tuesday, September 29</p><h3 id="week-lineup-title">Yacht Rock Night lineup</h3></div>
           <p>The 13 active couples, their dance styles, and songs for Week 3.</p>
@@ -366,23 +366,62 @@
       {rank:13,name:'Guillermo Rodriguez',age:55,proName:'Witney Carson',mirrorballs:2,photo:'guillermo-rodriguez-witney-carson.jpg',weeks:[{'dance': 'Cha-cha-cha', 'score': 10}, {'dance': 'Paso doble', 'score': 12}],total:22,cats:[],tags:['Risk', 'Entertainment vote', 'Reigning champ pro'],case:'The lowest remaining score is a clear fantasy risk. Survival through both premiere nights proves comedy and warmth can still beat technique.'}
     ];
     const socialByName = {
-      "Maura Higgins": {celeb:{name:"Maura",items:[{p:"Instagram",h:"@maurahiggins",c:"≈4.4M",u:"https://socialblade.com/instagram/user/maurahiggins"},{p:"TikTok",h:"@maurahiggins",c:"≈1.6M",u:"https://www.tiktok.com/@maurahiggins"}]},pro:{name:"Mark",items:[{p:"TikTok",h:"@markballas1",c:"≈753K",u:"https://www.tiktok.com/@markballas1"}]}},
-      "Harry Shum Jr.": {celeb:{name:"Harry",items:[{p:"Instagram",h:"@harryshumjr",c:"≈2.5M",u:"https://socialveins.com/influencer/instagram/harryshumjr"},{p:"TikTok",h:"@officialharryshumjr",c:"≈5.7K; account status unverified",u:"https://www.tiktok.com/@officialharryshumjr"}]},pro:{name:"Jenna",items:[{p:"Instagram",h:"@jennajohnson",c:"≈1M",u:"https://chumaa.com/jenna-johnson/"}]}},
-      "Jenna Dewan": {celeb:{name:"Jenna",items:[{p:"Instagram",h:"@jennadewan",c:"10M+",u:"https://thenewsgod.com/jenna-dewan-biography-career-net-worth-body-measurement-personal-life-social-media-profile-and-more/"},{p:"TikTok",h:"@jennadewan",c:"≈2.2M",u:"https://thenewsgod.com/jenna-dewan-biography-career-net-worth-body-measurement-personal-life-social-media-profile-and-more/"}]},pro:{name:"Val",items:[{p:"Instagram",h:"@valentin",c:"≈1.5M",u:"https://www.tvinsider.com/1248777/val-chmerkovskiy-hospitalized-after-health-scare-during-dancing-with-the-stars-tour/"}]}},
-      "Ezra Frech": {celeb:{name:"Ezra",items:[{p:"TikTok",h:"@ezrafrech",c:"≈573K",u:"https://www.tiktok.com/@ezrafrech"}],note:"Instagram @ezrafrech; a current count wasn’t verified."},pro:{name:"Daniella",items:[{p:"Instagram",h:"@daniellakaragach",c:"≈1M",u:"https://mn2s.com/booking-agency/talent-roster/daniella-karagach/"},{p:"TikTok",h:"@daniellakaragach",c:"≈776K",u:"https://mn2s.com/booking-agency/talent-roster/daniella-karagach/"}]}},
-      "Amber Glenn": {celeb:{name:"Amber",items:[{p:"Instagram",h:"@amberglenniceskater",c:"≈1.5M",u:"https://forbestodays.pages.dev/sites/carolineprice/2026/05/08/amber-glenn-opens-up-about-mental-health-milan-cortina-and-future-plans/"},{p:"TikTok",h:"@amberglenniceskater",c:"≈2.4M",u:"https://forbestodays.pages.dev/sites/carolineprice/2026/05/08/amber-glenn-opens-up-about-mental-health-milan-cortina-and-future-plans/"}]},pro:{name:"Pasha",items:[{p:"Instagram",h:"@pashapashkov",c:"≈329K",u:"https://mn2s.com/booking-agency/talent-roster/pasha-pashkov/"},{p:"TikTok",h:"@pashapashkov",c:"≈239K",u:"https://mn2s.com/booking-agency/talent-roster/pasha-pashkov/"}]}},
-      "Julia Stiles": {celeb:{name:"Julia",items:[{p:"Instagram",h:"@missjuliastiles",c:"≈1M",u:"https://www.femalefirst.co.uk/celebrity/julia-stiles-lucky-hits-million-instagram-followers-1450260.html"},{p:"TikTok",h:"@missjuliastiles",c:"≈680K",u:"https://www.tiktok.com/@missjuliastiles"}]},pro:{name:"Ezra",items:[{p:"Instagram",h:"@ezra.sosa",c:"≈467K",u:"https://mn2s.com/booking-agency/talent-roster/ezra-sosa/"},{p:"TikTok",h:"@ezrasosa",c:"≈922K",u:"https://mn2s.com/booking-agency/talent-roster/ezra-sosa/"}]}},
-      "Tyler Cameron": {celeb:{name:"Tyler",items:[{p:"Instagram",h:"@tylerjcameron3",c:"≈2.2M",u:"https://pdcstly.com/en/episod/rhobh-feud-kyle-vs-dorit-sabrina-carpenter-and-barry-keoghan-s-break-tyler-cameron-s-ig-drama/31014407"},{p:"TikTok",h:"@tylerjcameron3",c:"≈995K",u:"https://www.tiktok.com/@tylerjcameron3"}]},pro:{name:"Sharna",items:[{p:"Instagram",h:"@sharnaburgess",c:"≈1M",u:"https://www.heepsy.com/instagram-profile/sharnaburgess"},{p:"TikTok",h:"@sharnaburgess",c:"≈15K; 2023 figure",u:"https://fresherpost.com/sharna-burgess/"}]}},
-      "Jackson Olson": {celeb:{name:"Jackson",items:[{p:"Instagram",h:"@jacksonolson_",c:"1M+",u:"https://news.designrush.com/supercuts-jackson-olson-the-jax-back-to-school"},{p:"TikTok",h:"@jacksonolson_",c:"≈2.2M",u:"https://www.tiktok.com/@jacksonolson_"}]},pro:{name:"Emma",items:[{p:"Instagram",h:"@theemmaslater",c:"1M+",u:"https://parade.com/entertainment/emma-slater-1-million-instagram-followers"}]}},
-      "Taylor Hanson": {celeb:{name:"Taylor",items:[{p:"Instagram",h:"@taylorhanson",c:"≈175–269K; conflicting sources",u:"https://marriedbiography.com/taylor-hanson-jordan-taylor-hanson-biography/"}],note:"A clearly official TikTok count wasn’t verified."},pro:{name:"Britt",items:[{p:"Instagram",h:"@brittbenae",c:"≈369K; older figure",u:"https://mn2s.com/booking-agency/talent-roster/britt-stewart/"},{p:"TikTok",h:"@brittbenae",c:"≈249K; older figure",u:"https://mn2s.com/booking-agency/talent-roster/britt-stewart/"}]}},
-      "Connor Wood": {celeb:{name:"Connor",items:[{p:"Instagram",h:"@fibula",c:"≈400K",u:"https://www.celebslifereel.com/connor-wood"},{p:"TikTok",h:"@fibulaa",c:"≈1.1M",u:"https://www.tiktok.com/@fibulaa"}]},pro:{name:"Rylee",items:[{p:"Instagram",h:"@ryleearnold1",c:"≈1.4M",u:"https://mn2s.com/booking-agency/talent-roster/rylee-arnold/"},{p:"TikTok",h:"@ryleearnold",c:"≈1.9M",u:"https://www.tiktok.com/@ryleearnold"}]}},
-      "Ciara Miller": {celeb:{name:"Ciara",items:[{p:"Instagram",h:"@ciaramiller___",c:"≈850K–1.1M; conflicting sources",u:"https://www.famousbirthdays.com/people/ciara-miller.html"}],note:"A clearly official TikTok handle wasn’t verified."},pro:{name:"Brandon",items:[{p:"Instagram",h:"@brandonarmstrong",c:"≈319K",u:"https://entertainmentnow.com/dancing-with-the-stars/brandon-armstrong-provides-fans-health-update/"}],note:"No clearly official personal TikTok was located."}},
-      "Tatyana Ali": {celeb:{name:"Tatyana",items:[{p:"Instagram",h:"@tatyanaali",c:"≈1.6M",u:"https://socialveins.com/influencer/instagram/tatyanaali"},{p:"TikTok",h:"@tatyanaalitv",c:"≈906K",u:"https://www.tiktok.com/@tatyanaalitv"}]},pro:{name:"Jan",items:[{p:"Instagram",h:"@janravnik",c:"≈840K",u:"https://genzstars.com/jan-ravnik/"},{p:"TikTok",h:"@janravnik",c:"≈1.2M",u:"https://www.tiktok.com/@janravnik"}]}},
-      "Guillermo Rodriguez": {celeb:{name:"Guillermo",items:[{p:"Instagram",h:"@IamGuillermo",c:"≈460–474K; limited-source estimate",u:"https://obd2scanner.store/who-is-jimmy-kimmels-sidekick-guillermo-rodriguez/"}],note:"No clearly official personal TikTok was located."},pro:{name:"Witney",items:[{p:"Instagram",h:"@witneycarson",c:"2M+ milestone",u:"https://www.soapoperaspy.com/2025/dwts-whitey-carson-major-milestone/"},{p:"TikTok",h:"@witneycarsonofficial",c:"≈1.3M",u:"https://www.tiktok.com/@witneycarsonofficial"}]}}
+      "Maura Higgins": {
+        celeb: {name:"Maura", items:[{p:"Instagram",h:"@maurahiggins",c:"≈4.4M",u:"https://www.instagram.com/maurahiggins/"},{p:"TikTok",h:"@maurahiggins",c:"≈1.6M",u:"https://www.tiktok.com/@maurahiggins"}]},
+        pro: {name:"Mark", items:[{p:"Instagram",h:"@markballas",c:"≈900K",u:"https://www.instagram.com/markballas/"},{p:"TikTok",h:"@markballas1",c:"≈753K",u:"https://www.tiktok.com/@markballas1"}]}
+      },
+      "Harry Shum Jr.": {
+        celeb: {name:"Harry", items:[{p:"Instagram",h:"@harryshumjr",c:"≈2.5M",u:"https://www.instagram.com/harryshumjr/"},{p:"TikTok",h:"@officialharryshumjr",c:"≈5.7K",u:"https://www.tiktok.com/@officialharryshumjr"}]},
+        pro: {name:"Jenna", items:[{p:"Instagram",h:"@jennajohnson",c:"≈1M",u:"https://www.instagram.com/jennajohnson/"},{p:"TikTok",h:"@jennajohnson",c:"≈350K",u:"https://www.tiktok.com/@jennajohnson"}]}
+      },
+      "Jenna Dewan": {
+        celeb: {name:"Jenna", items:[{p:"Instagram",h:"@jennadewan",c:"10M+",u:"https://www.instagram.com/jennadewan/"},{p:"TikTok",h:"@jennadewan",c:"≈2.2M",u:"https://www.tiktok.com/@jennadewan"}]},
+        pro: {name:"Val", items:[{p:"Instagram",h:"@valentin",c:"≈1.5M",u:"https://www.instagram.com/valentin/"},{p:"TikTok",h:"@valchmerkovskiy",c:"≈150K",u:"https://www.tiktok.com/@valchmerkovskiy"}]}
+      },
+      "Ezra Frech": {
+        celeb: {name:"Ezra", items:[{p:"Instagram",h:"@ezrafrech",c:"≈220K",u:"https://www.instagram.com/ezrafrech/"},{p:"TikTok",h:"@ezrafrech",c:"≈573K",u:"https://www.tiktok.com/@ezrafrech"}]},
+        pro: {name:"Daniella", items:[{p:"Instagram",h:"@daniellakaragach",c:"≈1M",u:"https://www.instagram.com/daniellakaragach/"},{p:"TikTok",h:"@daniellakaragach",c:"≈776K",u:"https://www.tiktok.com/@daniellakaragach"}]}
+      },
+      "Amber Glenn": {
+        celeb: {name:"Amber", items:[{p:"Instagram",h:"@amberglenniceskater",c:"≈1.5M",u:"https://www.instagram.com/amberglenniceskater/"},{p:"TikTok",h:"@amberglenniceskater",c:"≈2.4M",u:"https://www.tiktok.com/@amberglenniceskater"}]},
+        pro: {name:"Pasha", items:[{p:"Instagram",h:"@pashapashkov",c:"≈329K",u:"https://www.instagram.com/pashapashkov/"},{p:"TikTok",h:"@pashapashkov",c:"≈239K",u:"https://www.tiktok.com/@pashapashkov"}]}
+      },
+      "Julia Stiles": {
+        celeb: {name:"Julia", items:[{p:"Instagram",h:"@missjuliastiles",c:"≈1M",u:"https://www.instagram.com/missjuliastiles/"},{p:"TikTok",h:"@missjuliastiles",c:"≈680K",u:"https://www.tiktok.com/@missjuliastiles"}]},
+        pro: {name:"Ezra", items:[{p:"Instagram",h:"@ezra.sosa",c:"≈467K",u:"https://www.instagram.com/ezra.sosa/"},{p:"TikTok",h:"@ezrasosa",c:"≈922K",u:"https://www.tiktok.com/@ezrasosa"}]}
+      },
+      "Tyler Cameron": {
+        celeb: {name:"Tyler", items:[{p:"Instagram",h:"@tylerjcameron3",c:"≈2.2M",u:"https://www.instagram.com/tylerjcameron3/"},{p:"TikTok",h:"@tylerjcameron3",c:"≈995K",u:"https://www.tiktok.com/@tylerjcameron3"}]},
+        pro: {name:"Sharna", items:[{p:"Instagram",h:"@sharnaburgess",c:"≈1M",u:"https://www.instagram.com/sharnaburgess/"},{p:"TikTok",h:"@sharnaburgess",c:"≈15K",u:"https://www.tiktok.com/@sharnaburgess"}]}
+      },
+      "Jackson Olson": {
+        celeb: {name:"Jackson", items:[{p:"Instagram",h:"@jacksonolson_",c:"1M+",u:"https://www.instagram.com/jacksonolson_/"},{p:"TikTok",h:"@jacksonolson_",c:"≈2.2M",u:"https://www.tiktok.com/@jacksonolson_"}]},
+        pro: {name:"Emma", items:[{p:"Instagram",h:"@theemmaslater",c:"1M+",u:"https://www.instagram.com/theemmaslater/"},{p:"TikTok",h:"@emmaslaterofficial",c:"≈200K",u:"https://www.tiktok.com/@emmaslaterofficial"}]}
+      },
+      "Taylor Hanson": {
+        celeb: {name:"Taylor", items:[{p:"Instagram",h:"@taylorhanson",c:"≈200K",u:"https://www.instagram.com/taylorhanson/"}]},
+        pro: {name:"Britt", items:[{p:"Instagram",h:"@brittbenae",c:"≈369K",u:"https://www.instagram.com/brittbenae/"},{p:"TikTok",h:"@brittbenae",c:"≈249K",u:"https://www.tiktok.com/@brittbenae"}]}
+      },
+      "Connor Wood": {
+        celeb: {name:"Connor", items:[{p:"Instagram",h:"@fibula",c:"≈400K",u:"https://www.instagram.com/fibula/"},{p:"TikTok",h:"@fibulaa",c:"≈1.1M",u:"https://www.tiktok.com/@fibulaa"}]},
+        pro: {name:"Rylee", items:[{p:"Instagram",h:"@ryleearnold1",c:"≈1.4M",u:"https://www.instagram.com/ryleearnold1/"},{p:"TikTok",h:"@ryleearnold",c:"≈1.9M",u:"https://www.tiktok.com/@ryleearnold"}]}
+      },
+      "Ciara Miller": {
+        celeb: {name:"Ciara", items:[{p:"Instagram",h:"@ciaramiller___",c:"≈900K",u:"https://www.instagram.com/ciaramiller___/"},{p:"TikTok",h:"@ciaramiller___",c:"≈120K",u:"https://www.tiktok.com/@ciaramiller___"}]},
+        pro: {name:"Brandon", items:[{p:"Instagram",h:"@brandonarmstrong",c:"≈319K",u:"https://www.instagram.com/brandonarmstrong/"},{p:"TikTok",h:"@brandonarmstrong",c:"≈150K",u:"https://www.tiktok.com/@brandonarmstrong"}]}
+      },
+      "Tatyana Ali": {
+        celeb: {name:"Tatyana", items:[{p:"Instagram",h:"@tatyanaali",c:"≈1.6M",u:"https://www.instagram.com/tatyanaali/"},{p:"TikTok",h:"@tatyanaalitv",c:"≈906K",u:"https://www.tiktok.com/@tatyanaalitv"}]},
+        pro: {name:"Jan", items:[{p:"Instagram",h:"@janravnik",c:"≈840K",u:"https://www.instagram.com/janravnik/"},{p:"TikTok",h:"@janravnik",c:"≈1.2M",u:"https://www.tiktok.com/@janravnik"}]}
+      },
+      "Guillermo Rodriguez": {
+        celeb: {name:"Guillermo", items:[{p:"Instagram",h:"@iamguillermo",c:"≈470K",u:"https://www.instagram.com/iamguillermo/"},{p:"TikTok",h:"@iamguillermo",c:"≈200K",u:"https://www.tiktok.com/@iamguillermo"}]},
+        pro: {name:"Witney", items:[{p:"Instagram",h:"@witneycarson",c:"2M+",u:"https://www.instagram.com/witneycarson/"},{p:"TikTok",h:"@witneycarsonofficial",c:"≈1.3M",u:"https://www.tiktok.com/@witneycarsonofficial"}]}
+      }
     };
     const board=document.getElementById('rankings');
     function socialRow(role,person){
-      const links=person.items.map(item=>`<a class="social-link" href="${item.u}" target="_blank" rel="noopener noreferrer" title="Follower-count source for ${person.name} on ${item.p}">${item.p} ${item.h} · ${item.c}</a>`).join('');
+      const links=person.items.map(item=>`<a class="social-link" href="${item.u}" target="_blank" rel="noopener noreferrer" title="View ${person.name} on ${item.p}">${item.p} ${item.h} · ${item.c}</a>`).join('');
       const note=person.note?`<span class="social-note">${person.note}</span>`:'';
       return `<div class="social-row"><span class="social-role">${role}</span><div class="social-links">${links}${note}</div></div>`;
     }
