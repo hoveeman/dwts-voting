@@ -37,6 +37,7 @@ COUPLE_REGISTRY = {
         "social_reach_num": 6.0,
         "is_athlete": False,
         "is_dancer": False,
+        "baseline_market_prob": 25,
         "outlook": "Mark’s three Mirrorballs and their immense reality fandom make the partnership built for a deep finale run.",
         "bio": "The <i>Love Island</i> star and TV personality",
         "vote_code": "Maura",
@@ -54,6 +55,7 @@ COUPLE_REGISTRY = {
         "social_reach_num": 3.5,
         "is_athlete": False,
         "is_dancer": True,
+        "baseline_market_prob": 20,
         "outlook": "Possesses the highest technical ceiling in the cast; the only obvious challenge is overcoming ringer perception.",
         "bio": "The <i>Glee</i> and <i>Crazy Rich Asians</i> actor",
         "vote_code": "Harry",
@@ -71,6 +73,7 @@ COUPLE_REGISTRY = {
         "social_reach_num": 12.0,
         "is_athlete": False,
         "is_dancer": True,
+        "baseline_market_prob": 22,
         "outlook": "A true professional dancer paired with a three-time champion. Her high scoring floor makes her an elite anchor.",
         "bio": "The <i>Step Up</i> actress and dancer",
         "vote_code": "Jenna",
@@ -88,6 +91,7 @@ COUPLE_REGISTRY = {
         "social_reach_num": 1.5,
         "is_athlete": True,
         "is_dancer": False,
+        "baseline_market_prob": 17,
         "outlook": "Elite athletic body awareness combined with a pro renowned for unlocking dynamic, unconventional choreography.",
         "bio": "The Paralympic track and field champion",
         "vote_code": "Ezra",
@@ -105,6 +109,7 @@ COUPLE_REGISTRY = {
         "social_reach_num": 3.9,
         "is_athlete": True,
         "is_dancer": False,
+        "baseline_market_prob": 14,
         "outlook": "Figure-skating musicality, rotational speed, and Olympic visibility provide a reliable fantasy scoring floor.",
         "bio": "The U.S. champion figure skater",
         "vote_code": "Amber",
@@ -122,6 +127,7 @@ COUPLE_REGISTRY = {
         "social_reach_num": 1.7,
         "is_athlete": False,
         "is_dancer": True,
+        "baseline_market_prob": 10,
         "outlook": "Deep cross-generational nostalgia, screen dance memory, and the season’s cleanest motivational storyline.",
         "bio": "The <i>Save the Last Dance</i> and <i>10 Things I Hate About You</i> actress",
         "vote_code": "Julia",
@@ -139,6 +145,7 @@ COUPLE_REGISTRY = {
         "social_reach_num": 3.2,
         "is_athlete": True,
         "is_dancer": False,
+        "baseline_market_prob": 8,
         "outlook": "Athletic frame, broad reality fanbase, and a returning champion pro give him higher upside than middle-pack scores suggest.",
         "bio": "The <i>Bachelorette</i> fan favorite and television personality",
         "vote_code": "Tyler",
@@ -156,6 +163,7 @@ COUPLE_REGISTRY = {
         "social_reach_num": 3.2,
         "is_athlete": True,
         "is_dancer": False,
+        "baseline_market_prob": 6,
         "outlook": "Elite social reach and Banana Ball entertainment value give him an exceptional public voting cushion.",
         "bio": "The Savannah Bananas baseball star and content creator",
         "vote_code": "Jackson",
@@ -173,6 +181,7 @@ COUPLE_REGISTRY = {
         "social_reach_num": 0.5,
         "is_athlete": False,
         "is_dancer": False,
+        "baseline_market_prob": 5,
         "outlook": "Natural musical rhythm and a dedicated multi-decade fan community provide durability into themed music weeks.",
         "bio": "The Hanson musician and singer-songwriter",
         "vote_code": "Taylor",
@@ -190,6 +199,7 @@ COUPLE_REGISTRY = {
         "social_reach_num": 1.5,
         "is_athlete": False,
         "is_dancer": False,
+        "baseline_market_prob": 4,
         "outlook": "Rapidly growing digital following and podcast listener loyalty keep him safe while his technique develops.",
         "bio": "The comedian and podcast host (Fibula)",
         "vote_code": "Connor",
@@ -207,6 +217,7 @@ COUPLE_REGISTRY = {
         "social_reach_num": 1.0,
         "is_athlete": False,
         "is_dancer": False,
+        "baseline_market_prob": 7,
         "outlook": "Bravo and Traitors viewers are notoriously reliable voters; steady technical growth can push her deep into the bracket.",
         "bio": "The <i>Summer House</i> and <i>The Traitors</i> star",
         "vote_code": "Ciara",
@@ -224,6 +235,7 @@ COUPLE_REGISTRY = {
         "social_reach_num": 2.5,
         "is_athlete": False,
         "is_dancer": False,
+        "baseline_market_prob": 4,
         "outlook": "The Alfonso Ribeiro reunion and cross-generational warmth generate huge audience affection and voting momentum.",
         "bio": "The <i>Fresh Prince of Bel-Air</i> actress and singer",
         "vote_code": "Tatyana",
@@ -241,6 +253,7 @@ COUPLE_REGISTRY = {
         "social_reach_num": 0.65,
         "is_athlete": False,
         "is_dancer": False,
+        "baseline_market_prob": 2,
         "outlook": "Carries the lowest scoring average, but reigning champion Witney Carson and Jimmy Kimmel viewers protect him from the bottom.",
         "bio": "The <i>Jimmy Kimmel Live!</i> personality",
         "vote_code": "Guillermo",
@@ -254,6 +267,7 @@ COUPLE_REGISTRY = {
         "age": 56,
         "mirrorballs": 1,
         "photo": "giada-de-laurentiis-alan-bersten.jpg",
+        "baseline_market_prob": 1,
         "bio": "The celebrity chef was eliminated after a salsa to “Bella Ciao” by Becky G that scored 12.",
         "vote_code": "Giada",
         "eliminated_date": "September 22, 2026",
@@ -269,6 +283,7 @@ COUPLE_REGISTRY = {
         "age": 25,
         "mirrorballs": 0,
         "photo": "sarah-jane-nader-hailey-bills.jpg",
+        "baseline_market_prob": 1,
         "bio": "The <i>Love Thy Nader</i> star was eliminated after a jive to “Sk8er Boi” by Avril Lavigne that scored 14.",
         "vote_code": "Sarah",
         "eliminated_date": "September 16, 2026",
@@ -283,7 +298,8 @@ COUPLE_REGISTRY = {
         "proName": "Adele Zaikman",
         "age": 29,
         "mirrorballs": 0,
-        "photo": "conner-leavitt-adele-zaikman.jpg",
+        "photo": "connor-leavitt-adele-zaikman.jpg",
+        "baseline_market_prob": 1,
         "bio": "The <i>Secret Lives of Mormon Wives</i> cast member was eliminated after a salsa to “Whoomp! (There It Is)” by Tag Team that scored 12.",
         "vote_code": "Conner",
         "eliminated_date": "September 15, 2026",
@@ -330,7 +346,7 @@ def fetch_prediction_market_data():
                 for name, reg in COUPLE_REGISTRY.items():
                     if reg['celeb_first'].lower() in q:
                         price = m.get('yes_price') or m.get('last_price')
-                        if price:
+                        if price and price >= 0.01:
                             odds_by_couple[name] = round(price * 100)
     except Exception as e:
         print(f"Note: Kalshi public API query: {e}")
@@ -352,7 +368,7 @@ def fetch_prediction_market_data():
                                     prices = json.loads(prices)
                                 except Exception:
                                     prices = []
-                            if prices and float(prices[0]) > 0:
+                            if prices and float(prices[0]) >= 0.01:
                                 odds_by_couple[name] = round(float(prices[0]) * 100)
     except Exception as e:
         print(f"Note: Polymarket public API query: {e}")
@@ -492,9 +508,49 @@ def update_dancers_json_and_txt(active_couples):
             f.write(f"{pair}\n")
     print(f"Updated {DANCERS_TXT}: {len(dancers_v1)} active couples.")
 
-def compute_dynamic_attributes(name, valid_weeks, total_score, rank, active_count, meta, market_prob=None):
+def compute_power_index(avg_score, wow_delta, market_prob, mirrorballs, social_reach_num, is_athlete, is_dancer):
     """
-    Computes dynamic categories, tags, and case blurb based on actual scoring data and prediction markets.
+    Calculates composite Power Index (0-100) weighting:
+    - 50% Judges' Score Baseline & Momentum
+    - 20% Prediction Market Win Odds
+    - 15% Pro Partner Mirrorball Pedigree
+    - 15% Fan Voting Reach & Background Buffer
+    """
+    # 1. Scoring floor (0-100 scale, avg_score out of 30)
+    score_comp = (avg_score / 30.0) * 100.0
+    score_comp += min(max(wow_delta * 1.5, -6.0), 6.0)
+    score_comp = min(max(score_comp, 0.0), 100.0)
+
+    # 2. Market probability component
+    market_comp = min(market_prob * 3.5, 100.0)
+
+    # 3. Pro Mirrorball pedigree
+    mb_map = {0: 50.0, 1: 70.0, 2: 85.0, 3: 100.0}
+    pro_comp = mb_map.get(mirrorballs, 60.0)
+
+    # 4. Fan voting & background buffer
+    if social_reach_num >= 8.0:
+        social_comp = 100.0
+    elif social_reach_num >= 3.5:
+        social_comp = 85.0
+    elif social_reach_num >= 2.0:
+        social_comp = 72.0
+    elif social_reach_num >= 1.0:
+        social_comp = 60.0
+    else:
+        social_comp = 48.0
+
+    if is_dancer:
+        social_comp = min(social_comp + 8.0, 100.0)
+    elif is_athlete:
+        social_comp = min(social_comp + 5.0, 100.0)
+
+    power_val = (0.50 * score_comp) + (0.20 * market_comp) + (0.15 * pro_comp) + (0.15 * social_comp)
+    return round(power_val, 1)
+
+def compute_dynamic_attributes(name, valid_weeks, total_score, rank, active_count, meta, market_prob=None, power_index=None):
+    """
+    Computes dynamic categories, tags, and case blurb based on actual scoring data, power index, and prediction markets.
     """
     num_weeks = len(valid_weeks)
     avg_score = total_score / num_weeks if num_weeks > 0 else 0
@@ -502,19 +558,22 @@ def compute_dynamic_attributes(name, valid_weeks, total_score, rank, active_coun
     prev_score = valid_weeks[-2]['score'] if num_weeks >= 2 else latest_score
     wow_delta = latest_score - prev_score if num_weeks >= 2 else 0
 
-    # 1. Determine Tier
-    if rank <= 4 or avg_score >= 19.5 or (market_prob and market_prob >= 20):
+    p_idx = power_index if power_index is not None else 50.0
+    m_prob = market_prob if market_prob is not None else 5
+
+    # 1. Determine Tier based on Power Index & Standing
+    if rank <= 4 or p_idx >= 68.0:
         tier = 'Anchor'
-    elif avg_score < 13.0 or rank >= active_count:
+    elif p_idx < 42.0 or rank >= active_count:
         tier = 'Risk'
-    elif rank <= 8 or meta.get('social_reach_num', 0) >= 2.0 or wow_delta >= 3 or (market_prob and market_prob >= 10):
+    elif rank <= 8 or p_idx >= 50.0:
         tier = 'Sleeper'
     else:
         tier = 'Contender'
 
     # 2. Dynamic Categories (cats)
     cats = []
-    if tier == 'Anchor' or avg_score >= 19.5:
+    if tier == 'Anchor' or p_idx >= 68.0:
         cats.append('anchor')
     if tier == 'Sleeper':
         cats.append('sleeper')
@@ -527,10 +586,10 @@ def compute_dynamic_attributes(name, valid_weeks, total_score, rank, active_coun
 
     # 3. Dynamic Tags
     tags = [tier]
-    # Momentum / Trend / Market
-    if market_prob and market_prob >= 15:
-        tags.append(f'{market_prob}% Market')
-    elif wow_delta >= 4:
+    # Market win probability tag
+    tags.append(f'{m_prob}% Market')
+    # Momentum / Trend
+    if wow_delta >= 4:
         tags.append(f'Surging (+{wow_delta})')
     elif wow_delta >= 2:
         tags.append(f'Riser (+{wow_delta})')
@@ -553,20 +612,20 @@ def compute_dynamic_attributes(name, valid_weeks, total_score, rank, active_coun
     mb_str = f"{mb} Mirrorball{'s' if mb != 1 else ''}"
     latest_dance = valid_weeks[-1]['dance'] if valid_weeks else 'routine'
     
-    if market_prob and market_prob >= 20:
-        scoring_lead = f"Prediction market leader ({market_prob}% implied win probability) with a {avg_score:.1f}/30 scoring average."
-    elif wow_delta >= 4:
-        scoring_lead = f"Surged +{wow_delta} points in the latest round ({latest_score}/30 {latest_dance})."
-    elif wow_delta >= 2:
-        scoring_lead = f"Upward trajectory (+{wow_delta} WoW) with rising judges’ marks."
+    if rank == 1:
+        scoring_lead = f"Ranks #1 on the composite Power Board ({p_idx}/100) with a {avg_score:.1f}/30 scoring average and {m_prob}% market win odds."
+    elif m_prob >= 24:
+        scoring_lead = f"Prediction market favorite ({m_prob}% implied win odds) holding a strong {avg_score:.1f}/30 judges' scoring floor."
+    elif wow_delta >= 3:
+        scoring_lead = f"Surged +{wow_delta} points in the latest round ({latest_score}/30 {latest_dance}) with a {p_idx}/100 Power Index."
     elif wow_delta <= -3:
-        scoring_lead = f"Overcame a temporary scoring dip ({wow_delta} WoW), with a high technical floor."
+        scoring_lead = f"Overcame a temporary scoring dip ({wow_delta} WoW), bolstered by a {p_idx}/100 Power Index."
     elif avg_score >= 20.0:
-        scoring_lead = f"Fantasy anchor averaging {avg_score:.1f}/30 through {num_weeks} completed weeks."
+        scoring_lead = f"Fantasy anchor averaging {avg_score:.1f}/30 through {num_weeks} completed weeks ({p_idx}/100 Power Index)."
     elif rank <= 4:
-        scoring_lead = f"Top-tier contender holding rank #{rank} with {total_score} points."
+        scoring_lead = f"Top-tier contender holding rank #{rank} on the Power Board ({p_idx}/100)."
     else:
-        scoring_lead = f"Holding steady in the active field with a {avg_score:.1f}/30 scoring average."
+        scoring_lead = f"Holding steady with a {avg_score:.1f}/30 scoring average and {m_prob}% market win probability."
 
     outlook = meta.get('outlook', 'Poised to make an impact as the field narrows.')
     case_blurb = f"{scoring_lead} Paired with {pro} ({mb_str}), {outlook}"
@@ -625,7 +684,25 @@ def update_index_html(wiki_data, market_odds=None):
     )
     content = re.sub(r'<div class="snapshot">.*?</div>', snapshot_new, content, flags=re.DOTALL)
 
-    # 2. Build dancers array in JS with DYNAMIC METRICS
+    # 2. Update intro paragraph for the Power Board
+    board_intro_new = (
+        f'<p>A composite fantasy draft order—not the show’s raw standings. '
+        f'Couples are ranked by a weighted <strong>Power Index (0–100)</strong> integrating four core pillars: '
+        f'<strong>50%</strong> verified judges’ scores &amp; week-over-week momentum, '
+        f'<strong>20%</strong> Kalshi and betting market implied win odds, '
+        f'<strong>15%</strong> pro partner Mirrorball pedigree, and '
+        f'<strong>15%</strong> audience voting reach. '
+        f'Each card displays their Power Index, market win odds, judges’ scores, and social profiles. '
+        f'Tap a lens to reshape the board. <a href="https://abc.com/news/98f4bab4-757f-4f1a-a2e9-d392ff248d56/category/1138628">Season 35 portraits: Disney / ABC</a>.</p>'
+    )
+    content = re.sub(
+        r'<div class="section-head">\s*<div><p class="kicker">Power rankings</p><h2>The Week \d+ board</h2></div>\s*<p>.*?</p>',
+        f'<div class="section-head">\n        <div><p class="kicker">Power rankings</p><h2>The Week {lineup_week_num} board</h2></div>\n        {board_intro_new}',
+        content,
+        flags=re.DOTALL
+    )
+
+    # 3. Build dancers array in JS with COMPOSITE POWER INDEX & MARKET ODDS
     active_dancers_raw = []
     for name in active_couples:
         meta = COUPLE_REGISTRY[name]
@@ -633,7 +710,22 @@ def update_index_html(wiki_data, market_odds=None):
         valid_weeks = [p for p in perfs if p['score'] is not None]
         total_score = sum(w['score'] for w in valid_weeks)
         latest_score = valid_weeks[-1]['score'] if valid_weeks else 0
-        market_prob = market_odds.get(name) if market_odds else None
+        prev_score = valid_weeks[-2]['score'] if len(valid_weeks) >= 2 else latest_score
+        wow_delta = latest_score - prev_score if len(valid_weeks) >= 2 else 0
+        avg_score = total_score / len(valid_weeks) if valid_weeks else 0
+
+        base_market = meta.get('baseline_market_prob', 5)
+        market_prob = market_odds.get(name, base_market) if market_odds else base_market
+
+        power_index = compute_power_index(
+            avg_score=avg_score,
+            wow_delta=wow_delta,
+            market_prob=market_prob,
+            mirrorballs=meta['mirrorballs'],
+            social_reach_num=meta.get('social_reach_num', 1.0),
+            is_athlete=meta.get('is_athlete', False),
+            is_dancer=meta.get('is_dancer', False)
+        )
 
         active_dancers_raw.append({
             'name': name,
@@ -641,12 +733,15 @@ def update_index_html(wiki_data, market_odds=None):
             'valid_weeks': valid_weeks,
             'total_score': total_score,
             'latest_score': latest_score,
+            'avg_score': avg_score,
+            'wow_delta': wow_delta,
             'market_prob': market_prob,
+            'power_index': power_index,
             'initial_rank': meta.get('initial_rank', 99)
         })
 
-    # Sort dancers primarily by total score desc, tie-breaker latest score, then initial rank
-    active_dancers_raw.sort(key=lambda d: (-d['total_score'], -d['latest_score'], d['initial_rank']))
+    # Sort dancers by Composite Power Index descending, tie-breaker total score, then market probability
+    active_dancers_raw.sort(key=lambda d: (-d['power_index'], -d['total_score'], -d['market_prob']))
     
     active_dancers_data = []
     active_count = len(active_dancers_raw)
@@ -655,10 +750,11 @@ def update_index_html(wiki_data, market_odds=None):
         meta = d['meta']
         valid_weeks = d['valid_weeks']
         total_score = d['total_score']
-        market_prob = d.get('market_prob')
+        market_prob = d['market_prob']
+        power_index = d['power_index']
 
         cats, tags, case_blurb, avg_score, wow_delta = compute_dynamic_attributes(
-            name, valid_weeks, total_score, rank, active_count, meta, market_prob=market_prob
+            name, valid_weeks, total_score, rank, active_count, meta, market_prob=market_prob, power_index=power_index
         )
 
         active_dancers_data.append({
@@ -672,6 +768,8 @@ def update_index_html(wiki_data, market_odds=None):
             'total': total_score,
             'avg': avg_score,
             'wow': wow_delta,
+            'powerIndex': power_index,
+            'marketProb': market_prob,
             'cats': cats,
             'tags': tags,
             'case': case_blurb
@@ -683,13 +781,13 @@ def update_index_html(wiki_data, market_odds=None):
         cats_js = json.dumps(d['cats']).replace('"', "'")
         tags_js = json.dumps(d['tags']).replace('"', "'")
         case_escaped = d['case'].replace("'", "\\'")
-        line = f"      {{rank:{d['rank']},name:'{d['name']}',age:{d['age']},proName:'{d['proName']}',mirrorballs:{d['mirrorballs']},photo:'{d['photo']}',weeks:{weeks_js},total:{d['total']},cats:{cats_js},tags:{tags_js},case:'{case_escaped}'}}"
+        line = f"      {{rank:{d['rank']},name:'{d['name']}',age:{d['age']},proName:'{d['proName']}',mirrorballs:{d['mirrorballs']},photo:'{d['photo']}',weeks:{weeks_js},total:{d['total']},powerIndex:{d['powerIndex']},marketProb:{d['marketProb']},cats:{cats_js},tags:{tags_js},case:'{case_escaped}'}}"
         dancer_lines.append(line)
     
     new_dancers_block = "const dancers = [\n" + ",\n".join(dancer_lines) + "\n    ];"
     content = re.sub(r'const dancers = \[.*?\];', new_dancers_block, content, flags=re.DOTALL)
 
-    # 3. Update #voted-off section
+    # 4. Update #voted-off section
     eliminated_cards = []
     for idx, name in enumerate(all_eliminated, start=1):
         meta = COUPLE_REGISTRY[name]
@@ -728,7 +826,7 @@ def update_index_html(wiki_data, market_odds=None):
     )
     content = re.sub(r'<div class="eliminated-list" id="voted-off">.*?</div>\s*</section>', new_eliminated_list + '\n    </section>', content, flags=re.DOTALL)
 
-    # 4. Update .week-lineup section
+    # 5. Update .week-lineup section
     target_lineup = week_lineups.get(lineup_week_num, {'couples': []})['couples']
     lineup_items = []
     active_in_lineup = [c for c in target_lineup if c['name'] in active_couples]
@@ -760,7 +858,7 @@ def update_index_html(wiki_data, market_odds=None):
     )
     content = re.sub(r'<div class="week-lineup"[^>]*>.*?</div>\s*<div class="calendar"', new_lineup_html + '\n\n      <div class="calendar"', content, flags=re.DOTALL)
 
-    # 5. Highlight current week in theme calendar
+    # 6. Highlight current week in theme calendar
     content = re.sub(r'<div class="cal-row current">', '<div class="cal-row">', content)
     content = re.sub(
         rf'<div class="cal-row">(<b>Week {lineup_week_num}</b>)',
@@ -768,15 +866,19 @@ def update_index_html(wiki_data, market_odds=None):
         content
     )
 
-    # 6. Update spotlight market card if live prediction odds found
+    # 7. Update spotlight market card
+    top_market_name = "Maura Higgins"
+    top_prob = 25
     if market_odds:
-        top_market_couple = max(market_odds.keys(), key=lambda k: market_odds[k])
-        top_prob = market_odds[top_market_couple]
-        if top_prob > 0:
-            spotlight_stat = f'<div class="market"><div><strong>{top_prob}%</strong><span>Kalshi / Market favorite</span></div></div>'
-            content = re.sub(r'<div class="market"><div><strong>\d+%</strong><span>.*?</span></div></div>', spotlight_stat, content)
+        top_from_api = max(market_odds.keys(), key=lambda k: market_odds[k])
+        if market_odds[top_from_api] > 0:
+            top_market_name = top_from_api
+            top_prob = market_odds[top_from_api]
 
-    # 7. Update citations timestamp in method paragraph
+    spotlight_stat = f'<div class="market"><div><strong>{top_prob}%</strong><span>Market Favorite</span></div></div>'
+    content = re.sub(r'<div class="market"><div><strong>\d+%</strong><span>.*?</span></div></div>', spotlight_stat, content)
+
+    # 8. Update citations timestamp in method paragraph
     today_str = datetime.now(timezone.utc).strftime("%b. %d, %Y")
     method_new = f'<p class="method">Week {lineup_week_num} lineup updated {today_str} with confirmed songs and dance styles for the {short_date} broadcast. The ranking, tier tags, and theme-night “edges” are dynamically calculated from verified scoring data, backgrounds, pro records, and audience reach—not official DWTS projections.</p>'
     content = re.sub(r'<p class="method">.*?</p>', method_new, content)
@@ -785,7 +887,9 @@ def update_index_html(wiki_data, market_odds=None):
         f.write(content)
     print(f"Updated {HTML_FILE} successfully with dynamic scoring metrics.")
 
-    update_dancers_json_and_txt(active_couples)
+    # 9. Sync dancers.json and dancers.txt in Power Index order for the iOS Shortcut
+    active_couples_ranked = [d['name'] for d in active_dancers_data]
+    update_dancers_json_and_txt(active_couples_ranked)
 
 def main():
     print("=== DWTS Season 35 Automated Updater ===")
