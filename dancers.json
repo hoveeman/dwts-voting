@@ -1,32 +1,32 @@
 {
   "dancers": [
-    "Jenna & Val",
-    "Maura & Mark",
-    "Harry & Jenna",
     "Ezra & Daniella",
+    "Jenna & Val",
+    "Harry & Jenna",
+    "Maura & Mark",
     "Amber & Pasha",
     "Jackson & Emma",
     "Tyler & Sharna",
-    "Julia & Ezra",
-    "Ciara & Brandon",
     "Tatyana & Jan",
+    "Ciara & Brandon",
+    "Julia & Ezra",
     "Connor & Rylee",
-    "Taylor & Britt",
-    "Guillermo & Witney"
+    "Guillermo & Witney",
+    "Taylor & Britt"
   ],
   "dancers_v2": {
-    "Jenna Dewan & Val Chmerkovskiy": "Jenna",
-    "Maura Higgins & Mark Ballas": "Maura",
-    "Harry Shum Jr. & Jenna Johnson": "Harry",
     "Ezra Frech & Daniella Karagach": "Ezra",
+    "Jenna Dewan & Val Chmerkovskiy": "Jenna",
+    "Harry Shum Jr. & Jenna Johnson": "Harry",
+    "Maura Higgins & Mark Ballas": "Maura",
     "Amber Glenn & Pasha Pashkov": "Amber",
     "Jackson Olson & Emma Slater": "Jackson",
     "Tyler Cameron & Sharna Burgess": "Tyler",
-    "Julia Stiles & Ezra Sosa": "Julia",
-    "Ciara Miller & Brandon Armstrong": "Ciara",
     "Tatyana Ali & Jan Ravnik": "Tatyana",
+    "Ciara Miller & Brandon Armstrong": "Ciara",
+    "Julia Stiles & Ezra Sosa": "Julia",
     "Connor Wood & Rylee Arnold": "Connor",
-    "Taylor Hanson & Britt Stewart": "Taylor",
-    "Guillermo Rodriguez & Witney Carson": "Guillermo"
+    "Guillermo Rodriguez & Witney Carson": "Guillermo",
+    "Taylor Hanson & Britt Stewart": "Taylor"
   }
 }

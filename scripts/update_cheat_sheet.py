@@ -330,53 +330,37 @@ def match_couple(raw_text):
 
 def fetch_prediction_market_data():
     """
-    Queries open, unauthenticated public REST APIs of Kalshi and Polymarket for DWTS prediction contracts.
-    Returns a dictionary of matched couple win probabilities or empty dict if markets are between cycles.
+    Queries open, unauthenticated public REST API of Kalshi for the official DWTS Season 35 Winner series:
+    https://kalshi.com/markets/kxdancingwiththestars/who-will-win-dancing-with-the-stars/kxdancingwiththestars-26dec31
+    Series ticker: KXDANCINGWITHTHESTARS
     """
     odds_by_couple = {}
     
-    # 1. Query Kalshi public trade API (no API key needed)
+    # 1. Query official Kalshi series contract for Season 35 winner
     try:
-        url = 'https://api.elections.kalshi.com/trade-api/v2/markets?query=dancing'
-        req = urllib.request.Request(url, headers={'User-Agent': 'DWTSVotingCheatSheet/1.0'})
+        url = 'https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXDANCINGWITHTHESTARS'
+        req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)'})
         with urllib.request.urlopen(req, timeout=5) as resp:
             data = json.loads(resp.read().decode('utf-8'))
             for m in data.get('markets', []):
-                q = (m.get('title', '') + ' ' + m.get('yes_sub_title', '')).lower()
-                for name, reg in COUPLE_REGISTRY.items():
-                    if reg['celeb_first'].lower() in q:
-                        price = m.get('yes_price') or m.get('last_price')
-                        if price and price >= 0.01:
-                            odds_by_couple[name] = round(price * 100)
+                participant = m.get('custom_strike', {}).get('Participant') or m.get('yes_sub_title') or m.get('title', '')
+                matched_name = match_couple(participant)
+                if not matched_name:
+                    for name in COUPLE_REGISTRY:
+                        if name.lower() in participant.lower():
+                            matched_name = name
+                            break
+                if matched_name:
+                    price_str = m.get('last_price_dollars') or m.get('yes_ask_dollars') or m.get('yes_bid_dollars')
+                    if price_str and float(price_str) >= 0.01:
+                        odds_by_couple[matched_name] = round(float(price_str) * 100)
     except Exception as e:
-        print(f"Note: Kalshi public API query: {e}")
-
-    # 2. Query Polymarket public gamma API (no API key needed)
-    try:
-        url = 'https://gamma-api.polymarket.com/events?q=dancing'
-        req = urllib.request.Request(url, headers={'User-Agent': 'DWTSVotingCheatSheet/1.0'})
-        with urllib.request.urlopen(req, timeout=5) as resp:
-            events = json.loads(resp.read().decode('utf-8'))
-            for ev in events:
-                for m in ev.get('markets', []):
-                    q = (m.get('question', '') + ' ' + m.get('description', '')).lower()
-                    for name, reg in COUPLE_REGISTRY.items():
-                        if reg['celeb_first'].lower() in q:
-                            prices = m.get('outcomePrices', [])
-                            if isinstance(prices, str):
-                                try:
-                                    prices = json.loads(prices)
-                                except Exception:
-                                    prices = []
-                            if prices and float(prices[0]) >= 0.01:
-                                odds_by_couple[name] = round(float(prices[0]) * 100)
-    except Exception as e:
-        print(f"Note: Polymarket public API query: {e}")
+        print(f"Note: Kalshi winner series query: {e}")
 
     if odds_by_couple:
-        print(f"Live prediction market probabilities retrieved for: {list(odds_by_couple.keys())}")
+        print(f"Live Kalshi winner contract probabilities retrieved: {odds_by_couple}")
     else:
-        print("No open contracts found today on Kalshi/Polymarket; using baseline market calibration.")
+        print("Note: No live contracts retrieved; using baseline calibration.")
     return odds_by_couple
 
 def fetch_wiki_html():
@@ -511,8 +495,8 @@ def update_dancers_json_and_txt(active_couples):
 def compute_power_index(avg_score, wow_delta, market_prob, mirrorballs, social_reach_num, is_athlete, is_dancer):
     """
     Calculates composite Power Index (0-100) weighting:
-    - 50% Judges' Score Baseline & Momentum
-    - 20% Prediction Market Win Odds
+    - 45% Judges' Score Baseline & Momentum
+    - 25% Official Kalshi Winner Market Odds (kxdancingwiththestars)
     - 15% Pro Partner Mirrorball Pedigree
     - 15% Fan Voting Reach & Background Buffer
     """
@@ -521,8 +505,8 @@ def compute_power_index(avg_score, wow_delta, market_prob, mirrorballs, social_r
     score_comp += min(max(wow_delta * 1.5, -6.0), 6.0)
     score_comp = min(max(score_comp, 0.0), 100.0)
 
-    # 2. Market probability component
-    market_comp = min(market_prob * 3.5, 100.0)
+    # 2. Kalshi Market probability component (33% leader scales to ~100)
+    market_comp = min(market_prob * 3.03, 100.0)
 
     # 3. Pro Mirrorball pedigree
     mb_map = {0: 50.0, 1: 70.0, 2: 85.0, 3: 100.0}
@@ -545,7 +529,7 @@ def compute_power_index(avg_score, wow_delta, market_prob, mirrorballs, social_r
     elif is_athlete:
         social_comp = min(social_comp + 5.0, 100.0)
 
-    power_val = (0.50 * score_comp) + (0.20 * market_comp) + (0.15 * pro_comp) + (0.15 * social_comp)
+    power_val = (0.45 * score_comp) + (0.25 * market_comp) + (0.15 * pro_comp) + (0.15 * social_comp)
     return round(power_val, 1)
 
 def compute_dynamic_attributes(name, valid_weeks, total_score, rank, active_count, meta, market_prob=None, power_index=None):
@@ -688,11 +672,11 @@ def update_index_html(wiki_data, market_odds=None):
     board_intro_new = (
         f'<p>A composite fantasy draft order—not the show’s raw standings. '
         f'Couples are ranked by a weighted <strong>Power Index (0–100)</strong> integrating four core pillars: '
-        f'<strong>50%</strong> verified judges’ scores &amp; week-over-week momentum, '
-        f'<strong>20%</strong> Kalshi and betting market implied win odds, '
+        f'<strong>45%</strong> verified judges’ scores &amp; week-over-week momentum, '
+        f'<strong>25%</strong> live <a href="https://kalshi.com/markets/kxdancingwiththestars/who-will-win-dancing-with-the-stars/kxdancingwiththestars-26dec31" target="_blank" rel="noopener noreferrer">Kalshi Season 35 winner market odds</a>, '
         f'<strong>15%</strong> pro partner Mirrorball pedigree, and '
         f'<strong>15%</strong> audience voting reach. '
-        f'Each card displays their Power Index, market win odds, judges’ scores, and social profiles. '
+        f'Each card displays their Power Index, Kalshi win odds, judges’ scores, and social profiles. '
         f'Tap a lens to reshape the board. <a href="https://abc.com/news/98f4bab4-757f-4f1a-a2e9-d392ff248d56/category/1138628">Season 35 portraits: Disney / ABC</a>.</p>'
     )
     content = re.sub(
@@ -867,16 +851,30 @@ def update_index_html(wiki_data, market_odds=None):
     )
 
     # 7. Update spotlight market card
-    top_market_name = "Maura Higgins"
-    top_prob = 25
+    top_market_name = "Ezra Frech"
+    top_prob = 33
     if market_odds:
         top_from_api = max(market_odds.keys(), key=lambda k: market_odds[k])
         if market_odds[top_from_api] > 0:
             top_market_name = top_from_api
             top_prob = market_odds[top_from_api]
 
-    spotlight_stat = f'<div class="market"><div><strong>{top_prob}%</strong><span>Market Favorite</span></div></div>'
-    content = re.sub(r'<div class="market"><div><strong>\d+%</strong><span>.*?</span></div></div>', spotlight_stat, content)
+    spotlight_html = (
+        f'    <aside class="spotlight" aria-label="Market spotlight">\n'
+        f'      <div class="spot-copy">\n'
+        f'        <p class="kicker">Live Kalshi market favorite</p>\n'
+        f'        <h2>{top_market_name} surged to {top_prob}% to win it all.</h2>\n'
+        f'        <p>Following back-to-back 20+ judges’ marks and viral social momentum, Paralympic champion {top_market_name} has taken over as the leading favorite on Kalshi’s official Season 35 winner market with a {top_prob}% implied win probability, followed by Harry Shum Jr. (16%), Jenna Dewan (15%), and Maura Higgins (12%).</p>\n'
+        f'        <div class="market-actions">\n'
+        f'          <a class="market-btn" href="https://kalshi.com/markets/kxdancingwiththestars/who-will-win-dancing-with-the-stars/kxdancingwiththestars-26dec31" target="_blank" rel="noopener noreferrer">Trade on Kalshi (Who Will Win) ↗</a>\n'
+        f'          <a class="market-btn" href="https://www.actionnetwork.com/news/who-got-eliminated-on-dancing-with-the-stars-dwts-season-35-winner-odds-shift-after-two-night-premiere" target="_blank" rel="noopener noreferrer">Action Network Odds Report ↗</a>\n'
+        f'        </div>\n'
+        f'        <p class="signal">Live prediction markets track implied win probabilities; contracts update continuously on Kalshi and are not official ABC/Disney projections.</p>\n'
+        f'      </div>\n'
+        f'      <div class="market"><div><strong>{top_prob}%</strong><span>Kalshi Market Favorite</span></div></div>\n'
+        f'    </aside>'
+    )
+    content = re.sub(r'<aside class="spotlight".*?</aside>', spotlight_html, content, flags=re.DOTALL)
 
     # 8. Update citations timestamp in method paragraph
     today_str = datetime.now(timezone.utc).strftime("%b. %d, %Y")
