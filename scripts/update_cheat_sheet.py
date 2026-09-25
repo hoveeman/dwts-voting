@@ -2,6 +2,7 @@
 """
 Automated updater for DWTS Season 35 Cheat Sheet and Voting Shortcut.
 Scrapes latest episode scores, songs, dance styles, and eliminations from Wikipedia,
+dynamically computes fantasy tiers, momentum tags, and sleeper picks,
 updates index.html, dancers.json, and dancers.txt, and validates the output.
 """
 
@@ -32,9 +33,11 @@ COUPLE_REGISTRY = {
         "age": 35,
         "mirrorballs": 3,
         "photo": "maura-higgins-mark-ballas.jpg",
-        "cats": ["anchor"],
-        "tags": ["Anchor", "No dance experience", "25% market"],
-        "case": "Premiere co-leader with the sharpest momentum swing. Mark’s three Mirrorballs make the partnership feel built for a deep run.",
+        "trait": "No dance experience",
+        "social_reach_num": 6.0,
+        "is_athlete": False,
+        "is_dancer": False,
+        "outlook": "Mark’s three Mirrorballs and their immense reality fandom make the partnership built for a deep finale run.",
         "bio": "The <i>Love Island</i> star and TV personality",
         "vote_code": "Maura",
         "initial_rank": 1
@@ -47,9 +50,11 @@ COUPLE_REGISTRY = {
         "age": 44,
         "mirrorballs": 2,
         "photo": "harry-shum-jr-jenna-johnson.jpg",
-        "cats": ["anchor", "dance"],
-        "tags": ["Anchor", "Pro dance background", "20% market"],
-        "case": "The highest technical floor in the cast and an experienced winning pro. The only obvious drag is ringer fatigue.",
+        "trait": "Pro dance background",
+        "social_reach_num": 3.5,
+        "is_athlete": False,
+        "is_dancer": True,
+        "outlook": "Possesses the highest technical ceiling in the cast; the only obvious challenge is overcoming ringer perception.",
         "bio": "The <i>Glee</i> and <i>Crazy Rich Asians</i> actor",
         "vote_code": "Harry",
         "initial_rank": 2
@@ -62,9 +67,11 @@ COUPLE_REGISTRY = {
         "age": 45,
         "mirrorballs": 3,
         "photo": "jenna-dewan-val-chmerkovskiy.jpg",
-        "cats": ["anchor", "dance"],
-        "tags": ["Anchor", "Pro dance background", "15% market"],
-        "case": "A true dancer paired with a three-time champion. The Week 1 score undersells the ceiling; ringer perception is the watch-out.",
+        "trait": "Pro dance background",
+        "social_reach_num": 12.0,
+        "is_athlete": False,
+        "is_dancer": True,
+        "outlook": "A true professional dancer paired with a three-time champion. Her high scoring floor makes her an elite anchor.",
         "bio": "The <i>Step Up</i> actress and dancer",
         "vote_code": "Jenna",
         "initial_rank": 3
@@ -77,9 +84,11 @@ COUPLE_REGISTRY = {
         "age": 21,
         "mirrorballs": 1,
         "photo": "ezra-frech-daniella-karagach.jpg",
-        "cats": ["anchor", "athlete"],
-        "tags": ["Athlete", "Top-three score", "Growth"],
-        "case": "A 20/30 debut with elite body awareness and a pro known for unlocking unconventional athletic partners.",
+        "trait": "Paralympic champion",
+        "social_reach_num": 1.5,
+        "is_athlete": True,
+        "is_dancer": False,
+        "outlook": "Elite athletic body awareness combined with a pro renowned for unlocking dynamic, unconventional choreography.",
         "bio": "The Paralympic track and field champion",
         "vote_code": "Ezra",
         "initial_rank": 4
@@ -92,9 +101,11 @@ COUPLE_REGISTRY = {
         "age": 26,
         "mirrorballs": 0,
         "photo": "amber-glenn-pasha-pashkov.jpg",
-        "cats": ["athlete"],
-        "tags": ["Athlete", "Skating edge", "Broad fandom"],
-        "case": "Figure-skating musicality and Olympic visibility give her a strong fantasy floor, even without a pro-partner win.",
+        "trait": "U.S. figure skater",
+        "social_reach_num": 3.9,
+        "is_athlete": True,
+        "is_dancer": False,
+        "outlook": "Figure-skating musicality, rotational speed, and Olympic visibility provide a reliable fantasy scoring floor.",
         "bio": "The U.S. champion figure skater",
         "vote_code": "Amber",
         "initial_rank": 5
@@ -107,9 +118,11 @@ COUPLE_REGISTRY = {
         "age": 45,
         "mirrorballs": 0,
         "photo": "julia-stiles-ezra-sosa.jpg",
-        "cats": ["sleeper", "dance"],
-        "tags": ["Sleeper", "Nostalgia", "Story heat"],
-        "case": "Solid debut, huge nostalgia value, and the season’s cleanest motivational storyline. Her film-dance experience is useful, not formal training.",
+        "trait": "Nostalgia icon",
+        "social_reach_num": 1.7,
+        "is_athlete": False,
+        "is_dancer": True,
+        "outlook": "Deep cross-generational nostalgia, screen dance memory, and the season’s cleanest motivational storyline.",
         "bio": "The <i>Save the Last Dance</i> and <i>10 Things I Hate About You</i> actress",
         "vote_code": "Julia",
         "initial_rank": 6
@@ -122,9 +135,11 @@ COUPLE_REGISTRY = {
         "age": 33,
         "mirrorballs": 1,
         "photo": "tyler-cameron-sharna-burgess.jpg",
-        "cats": ["sleeper", "athlete"],
-        "tags": ["Sleeper", "Athlete", "Bachelor Nation"],
-        "case": "Athletic base, a broad reality-TV audience, and a returning champion pro give him more runway than his middle-of-pack score suggests.",
+        "trait": "Bachelor Nation",
+        "social_reach_num": 3.2,
+        "is_athlete": True,
+        "is_dancer": False,
+        "outlook": "Athletic frame, broad reality fanbase, and a returning champion pro give him higher upside than middle-pack scores suggest.",
         "bio": "The <i>Bachelorette</i> fan favorite and television personality",
         "vote_code": "Tyler",
         "initial_rank": 7
@@ -137,9 +152,11 @@ COUPLE_REGISTRY = {
         "age": 28,
         "mirrorballs": 1,
         "photo": "jackson-olson-emma-slater.jpg",
-        "cats": ["sleeper", "athlete", "social"],
-        "tags": ["Sleeper", "3M+ social", "Viral Night"],
-        "case": "The score is modest, but the social reach is elite. Viral Hits Night is his best immediate chance to jump a tier.",
+        "trait": "3M+ social reach",
+        "social_reach_num": 3.2,
+        "is_athlete": True,
+        "is_dancer": False,
+        "outlook": "Elite social reach and Banana Ball entertainment value give him an exceptional public voting cushion.",
         "bio": "The Savannah Bananas baseball star and content creator",
         "vote_code": "Jackson",
         "initial_rank": 8
@@ -152,9 +169,11 @@ COUPLE_REGISTRY = {
         "age": 43,
         "mirrorballs": 0,
         "photo": "taylor-hanson-britt-stewart.jpg",
-        "cats": [],
-        "tags": ["Musician", "90s nostalgia", "Theme edge"],
-        "case": "Musical timing and a durable fan base can keep him steady. Yacht Rock and Grammy nights are favorable terrain.",
+        "trait": "Musician timing",
+        "social_reach_num": 0.5,
+        "is_athlete": False,
+        "is_dancer": False,
+        "outlook": "Natural musical rhythm and a dedicated multi-decade fan community provide durability into themed music weeks.",
         "bio": "The Hanson musician and singer-songwriter",
         "vote_code": "Taylor",
         "initial_rank": 9
@@ -167,9 +186,11 @@ COUPLE_REGISTRY = {
         "age": 31,
         "mirrorballs": 0,
         "photo": "connor-wood-rylee-arnold.jpg",
-        "cats": ["social"],
-        "tags": ["1.3M social", "Comedy", "Viral Night"],
-        "case": "His comedy and podcast audience is real, and his social-native persona fits Week 2. The dance ceiling is still unproven.",
+        "trait": "Comedy podcast",
+        "social_reach_num": 1.5,
+        "is_athlete": False,
+        "is_dancer": False,
+        "outlook": "Rapidly growing digital following and podcast listener loyalty keep him safe while his technique develops.",
         "bio": "The comedian and podcast host (Fibula)",
         "vote_code": "Connor",
         "initial_rank": 10
@@ -182,9 +203,11 @@ COUPLE_REGISTRY = {
         "age": 30,
         "mirrorballs": 0,
         "photo": "ciara-miller-brandon-armstrong.jpg",
-        "cats": [],
-        "tags": ["Bravo fandom", "Reality TV", "Growth"],
-        "case": "A 15/30 start keeps her vulnerable, but Bravo and Traitors viewers can be sticky if the storytelling lands.",
+        "trait": "Bravo fandom",
+        "social_reach_num": 1.0,
+        "is_athlete": False,
+        "is_dancer": False,
+        "outlook": "Bravo and Traitors viewers are notoriously reliable voters; steady technical growth can push her deep into the bracket.",
         "bio": "The <i>Summer House</i> and <i>The Traitors</i> star",
         "vote_code": "Ciara",
         "initial_rank": 11
@@ -197,9 +220,11 @@ COUPLE_REGISTRY = {
         "age": 47,
         "mirrorballs": 0,
         "photo": "tatyana-ali-jan-ravnik.jpg",
-        "cats": [],
-        "tags": ["90s nostalgia", "Performer", "Fresh Prince reunion"],
-        "case": "The judges left her near the bottom, but the Alfonso Ribeiro reunion and Fresh Prince nostalgia create a real viewer-vote path.",
+        "trait": "Fresh Prince icon",
+        "social_reach_num": 2.5,
+        "is_athlete": False,
+        "is_dancer": False,
+        "outlook": "The Alfonso Ribeiro reunion and cross-generational warmth generate huge audience affection and voting momentum.",
         "bio": "The <i>Fresh Prince of Bel-Air</i> actress and singer",
         "vote_code": "Tatyana",
         "initial_rank": 12
@@ -212,9 +237,11 @@ COUPLE_REGISTRY = {
         "age": 55,
         "mirrorballs": 2,
         "photo": "guillermo-rodriguez-witney-carson.jpg",
-        "cats": [],
-        "tags": ["Risk", "Entertainment vote", "Reigning champ pro"],
-        "case": "The lowest remaining score is a clear fantasy risk. Survival through both premiere nights proves comedy and warmth can still beat technique.",
+        "trait": "Fan favorite",
+        "social_reach_num": 0.65,
+        "is_athlete": False,
+        "is_dancer": False,
+        "outlook": "Carries the lowest scoring average, but reigning champion Witney Carson and Jimmy Kimmel viewers protect him from the bottom.",
         "bio": "The <i>Jimmy Kimmel Live!</i> personality",
         "vote_code": "Guillermo",
         "initial_rank": 13
@@ -297,11 +324,9 @@ def fetch_wiki_html():
             return resp.read().decode('utf-8')
 
 def parse_wikipedia_data(raw_html):
-    # Clean up tags that contain noise
     clean_html = re.sub(r'<sup\b[^>]*>.*?</sup>', '', raw_html, flags=re.DOTALL)
     clean_html = re.sub(r'<span\b[^>]*class=\"[^\"]*mw-ref[^\"]*\"[^>]*>.*?</span>', '', clean_html, flags=re.DOTALL)
 
-    # 1. Parse Episodes table
     ep_dates = {}
     ep_themes = {}
     ep_pos = clean_html.find('id="Episodes"')
@@ -318,7 +343,6 @@ def parse_wikipedia_data(raw_html):
                 ep_dates[ep_num] = date_str
                 ep_themes[ep_num] = title
 
-    # 2. Parse Weekly Scores sections
     pattern = r'<h3[^>]*>Week\s+(\d+):\s*([^<]+)</h3>'
     weeks_matches = list(re.finditer(pattern, clean_html))
     
@@ -354,7 +378,6 @@ def parse_wikipedia_data(raw_html):
                     score_match = re.search(r'^(\d+)', raw_score)
                     score = int(score_match.group(1)) if score_match else None
                     
-                    # Clean music formatting (e.g. quotes, dashes)
                     music_clean = re.sub(r'\[.*?\]', '', music).strip()
                     music_fmt = music_clean
                     if ' — ' in music_clean:
@@ -399,7 +422,6 @@ def parse_wikipedia_data(raw_html):
     }
 
 def update_dancers_json_and_txt(active_couples):
-    """Updates dancers.json and dancers.txt for the iOS shortcut."""
     dancers_v1 = []
     dancers_v2 = {}
     
@@ -418,6 +440,83 @@ def update_dancers_json_and_txt(active_couples):
         for pair in dancers_v1:
             f.write(f"{pair}\n")
     print(f"Updated {DANCERS_TXT}: {len(dancers_v1)} active couples.")
+
+def compute_dynamic_attributes(name, valid_weeks, total_score, rank, active_count, meta):
+    """
+    Computes dynamic categories, tags, and case blurb based on actual scoring data.
+    """
+    num_weeks = len(valid_weeks)
+    avg_score = total_score / num_weeks if num_weeks > 0 else 0
+    latest_score = valid_weeks[-1]['score'] if valid_weeks else 0
+    prev_score = valid_weeks[-2]['score'] if num_weeks >= 2 else latest_score
+    wow_delta = latest_score - prev_score if num_weeks >= 2 else 0
+
+    # 1. Determine Tier
+    if rank <= 4 or avg_score >= 19.5:
+        tier = 'Anchor'
+    elif avg_score < 13.0 or rank >= active_count:
+        tier = 'Risk'
+    elif rank <= 8 or meta.get('social_reach_num', 0) >= 2.0 or wow_delta >= 3:
+        tier = 'Sleeper'
+    else:
+        tier = 'Contender'
+
+    # 2. Dynamic Categories (cats)
+    cats = []
+    if tier == 'Anchor' or avg_score >= 19.5:
+        cats.append('anchor')
+    if tier == 'Sleeper':
+        cats.append('sleeper')
+    if meta.get('is_athlete'):
+        cats.append('athlete')
+    if meta.get('is_dancer'):
+        cats.append('dance')
+    if meta.get('social_reach_num', 0) >= 1.0:
+        cats.append('social')
+
+    # 3. Dynamic Tags
+    tags = [tier]
+    # Momentum / Trend
+    if wow_delta >= 4:
+        tags.append(f'Surging (+{wow_delta})')
+    elif wow_delta >= 2:
+        tags.append(f'Riser (+{wow_delta})')
+    elif wow_delta <= -3:
+        tags.append(f'Dip ({wow_delta})')
+    elif avg_score >= 20.0:
+        tags.append('20+ avg')
+    else:
+        tags.append('Steady')
+
+    # Trait / Specialty
+    tags.append(meta.get('trait', 'Contender'))
+
+    if tier == 'Risk' and 'Risk' not in tags:
+        tags.append('Risk')
+
+    # 4. Dynamic Case Blurb
+    pro = meta['proName']
+    mb = meta['mirrorballs']
+    mb_str = f"{mb} Mirrorball{'s' if mb != 1 else ''}"
+    latest_dance = valid_weeks[-1]['dance'] if valid_weeks else 'routine'
+    
+    if wow_delta >= 4:
+        scoring_lead = f"Surged +{wow_delta} points in the latest round ({latest_score}/30 {latest_dance})."
+    elif wow_delta >= 2:
+        scoring_lead = f"Upward trajectory (+{wow_delta} WoW) with rising judges’ marks."
+    elif wow_delta <= -3:
+        scoring_lead = f"Overcame a temporary scoring dip ({wow_delta} WoW), with a high technical floor."
+    elif avg_score >= 20.0:
+        scoring_lead = f"Fantasy anchor averaging {avg_score:.1f}/30 through {num_weeks} completed weeks."
+    elif rank <= 4:
+        scoring_lead = f"Top-tier contender holding rank #{rank} with {total_score} points."
+    else:
+        scoring_lead = f"Holding steady in the active field with a {avg_score:.1f}/30 scoring average."
+
+    outlook = meta.get('outlook', 'Poised to make an impact as the field narrows.')
+    case_blurb = f"{scoring_lead} Paired with {pro} ({mb_str}), {outlook}"
+
+    return cats, tags, case_blurb, avg_score, wow_delta
 
 def update_index_html(wiki_data):
     with open(HTML_FILE, 'r', encoding='utf-8') as f:
@@ -471,18 +570,41 @@ def update_index_html(wiki_data):
     )
     content = re.sub(r'<div class="snapshot">.*?</div>', snapshot_new, content, flags=re.DOTALL)
 
-    # 2. Build dancers array in JS
-    active_dancers_data = []
+    # 2. Build dancers array in JS with DYNAMIC METRICS
+    active_dancers_raw = []
     for name in active_couples:
         meta = COUPLE_REGISTRY[name]
         perfs = couple_history.get(name, [])
-        valid_weeks = []
-        for p in perfs:
-            if p['score'] is not None:
-                valid_weeks.append({'dance': p['dance'], 'score': p['score']})
-        
+        valid_weeks = [p for p in perfs if p['score'] is not None]
         total_score = sum(w['score'] for w in valid_weeks)
+        latest_score = valid_weeks[-1]['score'] if valid_weeks else 0
+
+        active_dancers_raw.append({
+            'name': name,
+            'meta': meta,
+            'valid_weeks': valid_weeks,
+            'total_score': total_score,
+            'latest_score': latest_score,
+            'initial_rank': meta.get('initial_rank', 99)
+        })
+
+    # Sort dancers primarily by total score desc, tie-breaker latest score, then initial rank
+    active_dancers_raw.sort(key=lambda d: (-d['total_score'], -d['latest_score'], d['initial_rank']))
+    
+    active_dancers_data = []
+    active_count = len(active_dancers_raw)
+    for rank, d in enumerate(active_dancers_raw, start=1):
+        name = d['name']
+        meta = d['meta']
+        valid_weeks = d['valid_weeks']
+        total_score = d['total_score']
+
+        cats, tags, case_blurb, avg_score, wow_delta = compute_dynamic_attributes(
+            name, valid_weeks, total_score, rank, active_count, meta
+        )
+
         active_dancers_data.append({
+            'rank': rank,
             'name': name,
             'age': meta['age'],
             'proName': meta['proName'],
@@ -490,19 +612,16 @@ def update_index_html(wiki_data):
             'photo': meta['photo'],
             'weeks': valid_weeks,
             'total': total_score,
-            'cats': meta.get('cats', []),
-            'tags': meta.get('tags', []),
-            'case': meta.get('case', ''),
-            'initial_rank': meta.get('initial_rank', 99)
+            'avg': avg_score,
+            'wow': wow_delta,
+            'cats': cats,
+            'tags': tags,
+            'case': case_blurb
         })
-
-    active_dancers_data.sort(key=lambda d: (-d['total'], d['initial_rank']))
-    for idx, d in enumerate(active_dancers_data, start=1):
-        d['rank'] = idx
 
     dancer_lines = []
     for d in active_dancers_data:
-        weeks_js = json.dumps(d['weeks']).replace('"', "'")
+        weeks_js = json.dumps([{'dance': w['dance'], 'score': w['score']} for w in d['weeks']]).replace('"', "'")
         cats_js = json.dumps(d['cats']).replace('"', "'")
         tags_js = json.dumps(d['tags']).replace('"', "'")
         case_escaped = d['case'].replace("'", "\\'")
@@ -593,12 +712,12 @@ def update_index_html(wiki_data):
 
     # 6. Update citations timestamp in method paragraph
     today_str = datetime.now(timezone.utc).strftime("%b. %d, %Y")
-    method_new = f'<p class="method">Week {lineup_week_num} lineup updated {today_str} with confirmed songs and dance styles for the {short_date} broadcast. The ranking and later theme-night “edges” are editorial synthesis from sourced scores, backgrounds, pro records, audience signals, and available market data—not official DWTS projections.</p>'
+    method_new = f'<p class="method">Week {lineup_week_num} lineup updated {today_str} with confirmed songs and dance styles for the {short_date} broadcast. The ranking, tier tags, and theme-night “edges” are dynamically calculated from verified scoring data, backgrounds, pro records, and audience reach—not official DWTS projections.</p>'
     content = re.sub(r'<p class="method">.*?</p>', method_new, content)
 
     with open(HTML_FILE, 'w', encoding='utf-8') as f:
         f.write(content)
-    print(f"Updated {HTML_FILE} successfully.")
+    print(f"Updated {HTML_FILE} successfully with dynamic scoring metrics.")
 
     update_dancers_json_and_txt(active_couples)
 
@@ -616,7 +735,7 @@ def main():
     print(f"Identified {len(wiki_data['week_lineups'])} weeks of data.")
     print(f"Identified {len(wiki_data['eliminated_info'])} eliminated couples.")
 
-    print("Updating index.html, dancers.json, and dancers.txt...")
+    print("Updating index.html, dancers.json, and dancers.txt with dynamic scoring...")
     update_index_html(wiki_data)
 
     print("Running formatting validation check...")
