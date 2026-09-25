@@ -312,6 +312,57 @@ def match_couple(raw_text):
             return name
     return None
 
+def fetch_prediction_market_data():
+    """
+    Queries open, unauthenticated public REST APIs of Kalshi and Polymarket for DWTS prediction contracts.
+    Returns a dictionary of matched couple win probabilities or empty dict if markets are between cycles.
+    """
+    odds_by_couple = {}
+    
+    # 1. Query Kalshi public trade API (no API key needed)
+    try:
+        url = 'https://api.elections.kalshi.com/trade-api/v2/markets?query=dancing'
+        req = urllib.request.Request(url, headers={'User-Agent': 'DWTSVotingCheatSheet/1.0'})
+        with urllib.request.urlopen(req, timeout=5) as resp:
+            data = json.loads(resp.read().decode('utf-8'))
+            for m in data.get('markets', []):
+                q = (m.get('title', '') + ' ' + m.get('yes_sub_title', '')).lower()
+                for name, reg in COUPLE_REGISTRY.items():
+                    if reg['celeb_first'].lower() in q:
+                        price = m.get('yes_price') or m.get('last_price')
+                        if price:
+                            odds_by_couple[name] = round(price * 100)
+    except Exception as e:
+        print(f"Note: Kalshi public API query: {e}")
+
+    # 2. Query Polymarket public gamma API (no API key needed)
+    try:
+        url = 'https://gamma-api.polymarket.com/events?q=dancing'
+        req = urllib.request.Request(url, headers={'User-Agent': 'DWTSVotingCheatSheet/1.0'})
+        with urllib.request.urlopen(req, timeout=5) as resp:
+            events = json.loads(resp.read().decode('utf-8'))
+            for ev in events:
+                for m in ev.get('markets', []):
+                    q = (m.get('question', '') + ' ' + m.get('description', '')).lower()
+                    for name, reg in COUPLE_REGISTRY.items():
+                        if reg['celeb_first'].lower() in q:
+                            prices = m.get('outcomePrices', [])
+                            if isinstance(prices, str):
+                                try:
+                                    prices = json.loads(prices)
+                                except Exception:
+                                    prices = []
+                            if prices and float(prices[0]) > 0:
+                                odds_by_couple[name] = round(float(prices[0]) * 100)
+    except Exception as e:
+        print(f"Note: Polymarket public API query: {e}")
+
+    if odds_by_couple:
+        print(f"Live prediction market probabilities retrieved for: {list(odds_by_couple.keys())}")
+    else:
+        print("No open contracts found today on Kalshi/Polymarket; using baseline market calibration.")
+    return odds_by_couple
+
 def fetch_wiki_html():
     req = urllib.request.Request(WIKI_URL, headers={'User-Agent': 'DWTSVotingCheatSheet/1.0 (contact: admin@example.com)'})
     try:
@@ -441,9 +492,9 @@ def update_dancers_json_and_txt(active_couples):
             f.write(f"{pair}\n")
     print(f"Updated {DANCERS_TXT}: {len(dancers_v1)} active couples.")
 
-def compute_dynamic_attributes(name, valid_weeks, total_score, rank, active_count, meta):
+def compute_dynamic_attributes(name, valid_weeks, total_score, rank, active_count, meta, market_prob=None):
     """
-    Computes dynamic categories, tags, and case blurb based on actual scoring data.
+    Computes dynamic categories, tags, and case blurb based on actual scoring data and prediction markets.
     """
     num_weeks = len(valid_weeks)
     avg_score = total_score / num_weeks if num_weeks > 0 else 0
@@ -452,11 +503,11 @@ def compute_dynamic_attributes(name, valid_weeks, total_score, rank, active_coun
     wow_delta = latest_score - prev_score if num_weeks >= 2 else 0
 
     # 1. Determine Tier
-    if rank <= 4 or avg_score >= 19.5:
+    if rank <= 4 or avg_score >= 19.5 or (market_prob and market_prob >= 20):
         tier = 'Anchor'
     elif avg_score < 13.0 or rank >= active_count:
         tier = 'Risk'
-    elif rank <= 8 or meta.get('social_reach_num', 0) >= 2.0 or wow_delta >= 3:
+    elif rank <= 8 or meta.get('social_reach_num', 0) >= 2.0 or wow_delta >= 3 or (market_prob and market_prob >= 10):
         tier = 'Sleeper'
     else:
         tier = 'Contender'
@@ -476,8 +527,10 @@ def compute_dynamic_attributes(name, valid_weeks, total_score, rank, active_coun
 
     # 3. Dynamic Tags
     tags = [tier]
-    # Momentum / Trend
-    if wow_delta >= 4:
+    # Momentum / Trend / Market
+    if market_prob and market_prob >= 15:
+        tags.append(f'{market_prob}% Market')
+    elif wow_delta >= 4:
         tags.append(f'Surging (+{wow_delta})')
     elif wow_delta >= 2:
         tags.append(f'Riser (+{wow_delta})')
@@ -500,7 +553,9 @@ def compute_dynamic_attributes(name, valid_weeks, total_score, rank, active_coun
     mb_str = f"{mb} Mirrorball{'s' if mb != 1 else ''}"
     latest_dance = valid_weeks[-1]['dance'] if valid_weeks else 'routine'
     
-    if wow_delta >= 4:
+    if market_prob and market_prob >= 20:
+        scoring_lead = f"Prediction market leader ({market_prob}% implied win probability) with a {avg_score:.1f}/30 scoring average."
+    elif wow_delta >= 4:
         scoring_lead = f"Surged +{wow_delta} points in the latest round ({latest_score}/30 {latest_dance})."
     elif wow_delta >= 2:
         scoring_lead = f"Upward trajectory (+{wow_delta} WoW) with rising judges’ marks."
@@ -518,7 +573,7 @@ def compute_dynamic_attributes(name, valid_weeks, total_score, rank, active_coun
 
     return cats, tags, case_blurb, avg_score, wow_delta
 
-def update_index_html(wiki_data):
+def update_index_html(wiki_data, market_odds=None):
     with open(HTML_FILE, 'r', encoding='utf-8') as f:
         content = f.read()
 
@@ -578,6 +633,7 @@ def update_index_html(wiki_data):
         valid_weeks = [p for p in perfs if p['score'] is not None]
         total_score = sum(w['score'] for w in valid_weeks)
         latest_score = valid_weeks[-1]['score'] if valid_weeks else 0
+        market_prob = market_odds.get(name) if market_odds else None
 
         active_dancers_raw.append({
             'name': name,
@@ -585,6 +641,7 @@ def update_index_html(wiki_data):
             'valid_weeks': valid_weeks,
             'total_score': total_score,
             'latest_score': latest_score,
+            'market_prob': market_prob,
             'initial_rank': meta.get('initial_rank', 99)
         })
 
@@ -598,9 +655,10 @@ def update_index_html(wiki_data):
         meta = d['meta']
         valid_weeks = d['valid_weeks']
         total_score = d['total_score']
+        market_prob = d.get('market_prob')
 
         cats, tags, case_blurb, avg_score, wow_delta = compute_dynamic_attributes(
-            name, valid_weeks, total_score, rank, active_count, meta
+            name, valid_weeks, total_score, rank, active_count, meta, market_prob=market_prob
         )
 
         active_dancers_data.append({
@@ -710,7 +768,15 @@ def update_index_html(wiki_data):
         content
     )
 
-    # 6. Update citations timestamp in method paragraph
+    # 6. Update spotlight market card if live prediction odds found
+    if market_odds:
+        top_market_couple = max(market_odds.keys(), key=lambda k: market_odds[k])
+        top_prob = market_odds[top_market_couple]
+        if top_prob > 0:
+            spotlight_stat = f'<div class="market"><div><strong>{top_prob}%</strong><span>Kalshi / Market favorite</span></div></div>'
+            content = re.sub(r'<div class="market"><div><strong>\d+%</strong><span>.*?</span></div></div>', spotlight_stat, content)
+
+    # 7. Update citations timestamp in method paragraph
     today_str = datetime.now(timezone.utc).strftime("%b. %d, %Y")
     method_new = f'<p class="method">Week {lineup_week_num} lineup updated {today_str} with confirmed songs and dance styles for the {short_date} broadcast. The ranking, tier tags, and theme-night “edges” are dynamically calculated from verified scoring data, backgrounds, pro records, and audience reach—not official DWTS projections.</p>'
     content = re.sub(r'<p class="method">.*?</p>', method_new, content)
@@ -735,8 +801,11 @@ def main():
     print(f"Identified {len(wiki_data['week_lineups'])} weeks of data.")
     print(f"Identified {len(wiki_data['eliminated_info'])} eliminated couples.")
 
-    print("Updating index.html, dancers.json, and dancers.txt with dynamic scoring...")
-    update_index_html(wiki_data)
+    print("Fetching prediction market data from Kalshi & Polymarket public APIs...")
+    market_odds = fetch_prediction_market_data()
+
+    print("Updating index.html, dancers.json, and dancers.txt with dynamic scoring & market data...")
+    update_index_html(wiki_data, market_odds)
 
     print("Running formatting validation check...")
     res = os.system(f"python3 {VALIDATE_SCRIPT}")

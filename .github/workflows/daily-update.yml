@@ -1,11 +1,16 @@
-name: DWTS Daily Update
+name: DWTS Daily & Live Show Update
 
 on:
   schedule:
-    # 11:00 PM EDT (03:00 UTC) during Daylight Saving Time
+    # 1. Tuesday Night Live Window: Every 15 minutes between 8:00 PM and 11:59 PM ET
+    # (00:00 UTC to 04:59 UTC Wednesday to support both EDT and EST)
+    - cron: '*/15 0-4 * * 3'
+
+    # 2. Daily Check: Every night at 11:00 PM ET (03:00 UTC / 04:00 UTC)
+    # for songs, theme updates, and market shifts
     - cron: '0 3 * * *'
-    # 11:00 PM EST (04:00 UTC) during Standard Time
     - cron: '0 4 * * *'
+
   workflow_dispatch: # Allows manual trigger from GitHub Actions UI
 
 concurrency:
@@ -27,7 +32,7 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Run DWTS Daily Updater
+      - name: Run DWTS Daily & Market Updater
         run: |
           python3 scripts/update_cheat_sheet.py
 
@@ -43,6 +48,6 @@ jobs:
           if git diff --staged --quiet; then
             echo "No changes detected. Everything is up to date."
           else
-            git commit -m "chore(daily-update): update scores, songs, and eliminations"
+            git commit -m "chore(update): refresh DWTS scores, songs, eliminations & market data"
             git push origin main
           fi
