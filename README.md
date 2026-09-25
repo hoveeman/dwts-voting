@@ -1,8 +1,9 @@
-# DWTS Voting Shortcut Backend
+# DWTS Voting Shortcut Backend & Season 35 Cheat Sheet
 
-Backend JSON configurations and auto-update manifest for the **DWTS Voting** iOS Shortcut.
+Backend JSON configurations, auto-update manifest for the **DWTS Voting** iOS Shortcut, and the live interactive **DWTS Season 35 Fantasy Draft Cheat Sheet**.
 
-📥 **[Install Shortcut (v1.6 iCloud Link)](https://www.icloud.com/shortcuts/3e951e5ba20b49dc82f5abded923b179)**
+🌐 **Live Website**: [https://hoveeman.github.io/dwts-voting/](https://hoveeman.github.io/dwts-voting/)  
+📥 **iOS Shortcut**: [Install Shortcut (v1.6 iCloud Link)](https://www.icloud.com/shortcuts/3e951e5ba20b49dc82f5abded923b179)
 
 ---
 
@@ -180,3 +181,13 @@ To easily follow the exact math on any screen size:
   * **Combined Total:** `25.0% + 25.0% = 50.0%` *(Safe)*
 
 > **💡 Why Fan Votes Can Dominate:** Judges' scores usually stay within a narrow range (e.g., scores of 6, 7, 8, 9 only vary by a few percentage points of the total score pool). By contrast, viewer voting percentages can fluctuate dramatically (e.g., Couple B's 35% vs. Couple C's 8%). A dedicated fanbase casting votes via both SMS and online can readily propel a couple with lower technical scores safely past elimination.
+
+---
+
+## 🪩 Season 35 Cheat Sheet & Daily Worker
+
+The repository includes the full interactive web application for the **DWTS Season 35 Fantasy Draft Cheat Sheet**:
+
+- **Live URL**: [https://hoveeman.github.io/dwts-voting/](https://hoveeman.github.io/dwts-voting/)
+- **Daily Automated Updates**: Powered by a GitHub Actions worker ([`.github/workflows/daily-update.yml`](.github/workflows/daily-update.yml)) running daily at 11:00 PM ET. The worker scrapes live scoring, songs, dance choices, and eliminations from Wikipedia, updating `index.html` and synchronizing the iOS shortcut endpoints (`dancers.json`, `dancers.txt`).
+
