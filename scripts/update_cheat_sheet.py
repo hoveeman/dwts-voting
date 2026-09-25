@@ -842,13 +842,21 @@ def update_index_html(wiki_data, market_odds=None):
     )
     content = re.sub(r'<div class="week-lineup"[^>]*>.*?</div>\s*<div class="calendar"', new_lineup_html + '\n\n      <div class="calendar"', content, flags=re.DOTALL)
 
-    # 6. Highlight current week in theme calendar
+    # 6. Highlight current week in theme calendar & update newly announced themes
     content = re.sub(r'<div class="cal-row current">', '<div class="cal-row">', content)
     content = re.sub(
         rf'<div class="cal-row">(<b>Week {lineup_week_num}</b>)',
         r'<div class="cal-row current">\1',
         content
     )
+    # If Week 5 theme is announced on Wikipedia (Episode 6), update it in the calendar
+    w5_theme = ep_themes.get(6, '')
+    if w5_theme and 'tba' not in w5_theme.lower() and 'to be' not in w5_theme.lower():
+        content = re.sub(
+            r'(<div class="cal-row[^>]*><b>Week 5</b><time>[^<]*</time><span>)TBA.*?(</span></div>)',
+            rf'\g<1>{w5_theme}\g<2>',
+            content
+        )
 
     # 7. Update spotlight market card
     top_market_name = "Ezra Frech"
