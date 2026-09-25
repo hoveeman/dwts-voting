@@ -1,0 +1,413 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="color-scheme" content="light dark" />
+  <link rel="icon" href="data:," />
+  <title>DWTS Season 35 Fantasy Draft Cheat Sheet</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,500;6..96,700;6..96,900&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg:#f3f5f6; --paper:#ffffff; --ink:#151719; --muted:#5d6368; --line:#d8dde0;
+      --red:#9f1e2d; --red-dark:#731521; --gold:#c38b25; --gold-soft:#f3e3bb; --nav:#191a1c;
+      --green:#23634f; --blue:#245d78; --shadow:0 15px 34px rgba(14,18,20,.10);
+    }
+    @media (prefers-color-scheme: dark) {
+      :root { --bg:#111416; --paper:#1a1e21; --ink:#f4f3ee; --muted:#b9bec1; --line:#343a3e; --red:#df5261; --red-dark:#f06a78; --gold:#e8b550; --gold-soft:#483b22; --nav:#090a0b; --green:#65b798; --blue:#6eb3d6; --shadow:0 18px 44px rgba(0,0,0,.28); }
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--bg);color:var(--ink);font-family:"IBM Plex Sans",sans-serif;line-height:1.52}
+    a{color:inherit}
+    button,input{font:inherit}
+    .hero{min-height:560px;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(370px,.95fr);background:var(--nav);color:#fff}
+    .hero-copy{padding:clamp(42px,7vw,104px) clamp(24px,7vw,110px);display:flex;flex-direction:column;justify-content:center}
+    .season-line{display:flex;align-items:center;gap:10px;color:#efce82;font-size:.79rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:18px}
+    .season-line:before{content:"";width:34px;height:2px;background:#efce82}
+    h1{font-family:"Bodoni Moda",serif;font-size:clamp(3.2rem,7.6vw,7.2rem);font-weight:900;line-height:.88;letter-spacing:-.055em;margin:0;max-width:820px}
+    .hero-copy>p{font-size:clamp(1rem,1.6vw,1.28rem);max-width:650px;color:#d3d5d6;margin:25px 0 0}
+    .snapshot{display:flex;flex-wrap:wrap;gap:8px;margin-top:30px}
+    .snapshot span{border:1px solid #56595c;padding:8px 11px;font-size:.79rem;color:#f2f2ee}
+    .hero-image{position:relative;min-height:400px;overflow:hidden}
+    .hero-image img{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(.82) contrast(1.07)}
+    .hero-image:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#191a1c 0,rgba(25,26,28,.18) 30%,transparent 65%),linear-gradient(0deg,rgba(0,0,0,.45),transparent 45%)}
+    .photo-credit{position:absolute;z-index:2;right:14px;bottom:10px;font-size:.68rem;color:#eee;text-decoration:none;background:rgba(0,0,0,.55);padding:4px 7px}
+    .tabs{position:sticky;top:0;z-index:10;background:rgba(25,26,28,.97);border-top:1px solid #34373a;border-bottom:1px solid #34373a;display:flex;justify-content:center;gap:3px;padding:7px 12px;overflow:auto;scrollbar-width:none}
+    .tabs a{color:#e9e9e5;text-decoration:none;padding:10px 14px;font-size:.82rem;font-weight:700;white-space:nowrap}
+    .tabs a:hover,.tabs a:focus{background:#343638;color:#fff;outline:none}
+    main{max-width:1240px;margin:0 auto;padding:clamp(42px,6vw,88px) clamp(18px,4vw,54px) 80px}
+    .section-head{display:grid;grid-template-columns:minmax(0,1fr) minmax(260px,430px);gap:30px;align-items:end;margin-bottom:28px}
+    .kicker{color:var(--red);font-weight:700;font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;margin:0 0 8px}
+    h2{font-family:"Bodoni Moda",serif;font-size:clamp(2.25rem,4.8vw,4.4rem);line-height:.98;letter-spacing:-.035em;margin:0}
+    .section-head>p{color:var(--muted);margin:0;font-size:.95rem}
+    .controls{display:flex;gap:8px;flex-wrap:wrap;margin:22px 0 28px}
+    .filter{border:1px solid var(--line);background:var(--paper);color:var(--ink);padding:9px 13px;border-radius:999px;cursor:pointer;font-size:.82rem;font-weight:700}
+    .filter.active{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+    .board{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+    .card{background:var(--paper);border:1px solid var(--line);display:grid;grid-template-columns:58px minmax(0,1fr);min-width:0;box-shadow:0 2px 0 rgba(0,0,0,.02);overflow:hidden}
+    .card.hidden{display:none}
+    .rank{grid-row:1 / 3;background:var(--nav);color:white;display:flex;align-items:flex-start;justify-content:center;padding-top:18px;font-family:"Bodoni Moda",serif;font-size:2.15rem;font-weight:900}
+    .couple-photo{grid-column:2;width:100%;height:auto;aspect-ratio:3/2;object-fit:contain;object-position:center;display:block;background:#07183d}
+    .card-body{grid-column:2;padding:16px 17px 15px;min-width:0}
+    .card-top{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+    .name{font-family:"Bodoni Moda",serif;font-size:1.45rem;line-height:1;margin:0 0 5px}
+    .partner{color:var(--muted);font-size:.78rem;margin:0}
+    .score{flex:0 0 auto;text-align:center;border:1px solid var(--line);padding:5px 8px;min-width:61px}
+    .score b{font-size:1.03rem;display:block;line-height:1.1}.score small{font-size:.61rem;color:var(--muted);text-transform:uppercase}
+    .score-history{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;margin-top:12px}
+    .score-week{display:flex;align-items:baseline;justify-content:space-between;gap:8px;background:var(--bg);border:1px solid var(--line);padding:7px 9px;font-size:.69rem;color:var(--muted)}
+    .score-week strong{color:var(--ink);font-size:.82rem;white-space:nowrap}
+    .case{margin:12px 0 10px;font-size:.88rem;line-height:1.4}
+    .tags{display:flex;gap:6px;flex-wrap:wrap}
+    .tag{font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;padding:4px 6px;background:var(--bg);border:1px solid var(--line)}
+    .tag.anchor{background:var(--gold-soft);border-color:transparent}.tag.sleeper{color:var(--green)}.tag.risk{color:var(--red)}
+    .signal{font-size:.72rem;color:var(--muted);margin-top:10px;padding-top:9px;border-top:1px solid var(--line)}
+    .social-presence{margin-top:10px;padding-top:9px;border-top:1px solid var(--line);display:grid;gap:7px}
+    .social-row{display:grid;grid-template-columns:46px minmax(0,1fr);gap:8px;align-items:start;font-size:.7rem;line-height:1.35}
+    .social-role{font-weight:700;color:var(--ink)}
+    .social-links{display:flex;flex-wrap:wrap;gap:4px 10px;color:var(--muted)}
+    .social-link{color:var(--blue);text-decoration-thickness:1px;text-underline-offset:2px}
+    .social-note{color:var(--muted);font-style:italic}
+    .eliminated{margin-top:58px;padding-top:34px;border-top:1px solid var(--line)}
+    .eliminated .section-head{margin-bottom:22px}
+    .eliminated-list{display:grid;gap:14px}
+    .eliminated-card{display:grid;grid-template-columns:minmax(260px,380px) minmax(0,1fr);background:var(--paper);border:1px solid var(--line);overflow:hidden}
+    .eliminated-card img{width:100%;height:100%;min-height:255px;object-fit:contain;background:#07183d;display:block}
+    .eliminated-copy{padding:clamp(24px,4vw,42px);align-self:center}
+    .eliminated-date{display:inline-block;margin:0 0 13px;padding:5px 8px;background:var(--red);color:#fff;font-size:.7rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase}
+    .eliminated-copy h3{font-family:"Bodoni Moda",serif;font-size:clamp(1.8rem,3.5vw,3rem);line-height:1;margin:0 0 8px}
+    .eliminated-copy .partner{font-size:.9rem}
+    .final-score{display:flex;flex-wrap:wrap;align-items:center;gap:7px 10px;margin-top:16px;font-size:.75rem;color:var(--muted)}
+    .final-score strong{color:var(--ink);font-size:1rem;border:1px solid var(--line);padding:5px 8px}
+    .eliminated-copy .score-history{max-width:520px;margin-top:10px}
+    .eliminated-copy .exit-note{max-width:680px;margin:16px 0 0;color:var(--muted);font-size:.92rem}
+    .spotlight{margin:84px 0;display:grid;grid-template-columns:.8fr 1.2fr;background:var(--nav);color:white;box-shadow:var(--shadow)}
+    .spot-copy{padding:clamp(30px,5vw,64px)}
+    .spot-copy h2{color:#fff}.spot-copy p{color:#c9cccf}
+    .market{display:flex;align-items:center;justify-content:center;padding:44px;background:linear-gradient(145deg,#8b1725,#4f1018);text-align:center}
+    .market strong{font-family:"Bodoni Moda",serif;font-size:clamp(5rem,11vw,9rem);line-height:.75;color:#f7d889;display:block}
+    .market span{display:block;margin-top:20px;font-size:.78rem;text-transform:uppercase;letter-spacing:.12em}
+    .sleeper-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+    .sleeper-card{background:var(--paper);border-top:4px solid var(--green);padding:20px;min-height:210px}
+    .sleeper-card .pick{color:var(--green);font-size:.71rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em}
+    .sleeper-card h3,.theme-card h3,.story h3{font-family:"Bodoni Moda",serif;font-size:1.42rem;line-height:1.05;margin:8px 0}
+    .sleeper-card p,.theme-card p,.story p{font-size:.86rem;color:var(--muted);margin:0}
+    .theme-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:28px}
+    .theme-card{background:var(--paper);border:1px solid var(--line);padding:20px}
+    .theme-date{font-size:.72rem;font-weight:700;color:var(--red);text-transform:uppercase;letter-spacing:.08em}
+    .edge{margin-top:13px!important;padding-top:11px;border-top:1px solid var(--line);color:var(--ink)!important}
+    .edge b{color:var(--red)}
+    .week-lineup{margin-top:34px;background:var(--nav);color:#fff;padding:clamp(24px,4vw,42px)}
+    .lineup-head{display:grid;grid-template-columns:minmax(0,1fr) minmax(240px,430px);gap:24px;align-items:end;margin-bottom:24px}
+    .lineup-head h3{font-family:"Bodoni Moda",serif;font-size:clamp(2rem,4vw,3.5rem);line-height:1;margin:0}
+    .lineup-head p{margin:0;color:#cfd2d4;font-size:.9rem}
+    .lineup-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:34px}
+    .lineup-item{display:grid;grid-template-columns:30px minmax(0,1fr);gap:12px;padding:13px 0;border-top:1px solid #3b3d40}
+    .lineup-no{font-family:"Bodoni Moda",serif;font-size:1.2rem;color:#efce82;font-weight:700}
+    .lineup-couple{font-weight:700;line-height:1.25}
+    .lineup-dance{display:block;color:#d4d6d8;font-size:.8rem;margin-top:3px}
+    .lineup-song{display:block;color:#fff;font-size:.82rem;margin-top:2px}
+    .calendar{margin:72px 0 0;border-top:1px solid var(--line)}
+    .cal-row{display:grid;grid-template-columns:70px 130px 1fr;gap:15px;padding:12px 4px;border-bottom:1px solid var(--line);align-items:baseline}
+    .cal-row b{font-size:.78rem}.cal-row time{font-size:.82rem;color:var(--muted)}.cal-row span{font-family:"Bodoni Moda",serif;font-size:1.15rem;font-weight:700}
+    .cal-row.current{background:var(--gold-soft);padding-inline:12px}
+    .cal-row .tba{font-family:"IBM Plex Sans",sans-serif;font-size:.73rem;color:var(--muted);margin-left:8px;font-weight:500}
+    .pulse{margin:84px 0 0;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .story{background:var(--paper);border:1px solid var(--line);padding:20px}
+    .story.no{font-size:2rem;font-family:"Bodoni Moda",serif;color:var(--gold)}
+    .vote{margin-top:72px;display:grid;grid-template-columns:1.25fr .75fr;background:var(--red);color:#fff}
+    .vote-main{padding:clamp(26px,5vw,54px)}
+    .vote h2{color:white}.vote p{color:#f0d8dc;max-width:700px}
+    .shortcut-link{display:inline-flex;align-items:center;gap:12px;margin-top:9px;padding:11px 15px;background:#fff;color:#731521;text-decoration:none;font-weight:700;box-shadow:0 3px 0 rgba(0,0,0,.18)}
+    .shortcut-link:hover,.shortcut-link:focus-visible{background:#f7d889;outline:3px solid rgba(255,255,255,.5);outline-offset:3px}
+    .shortcut-link svg{width:21px;height:21px;flex:0 0 auto}
+    .shortcut-link small{display:block;font-size:.69rem;font-weight:500;color:#5e232a;margin-top:1px}
+    .vote-steps{background:rgba(0,0,0,.2);padding:28px;display:flex;flex-direction:column;justify-content:center;gap:13px}
+    .vote-step{display:flex;gap:12px;align-items:center;font-size:.86rem}.vote-step b{font-family:"Bodoni Moda",serif;font-size:1.7rem;color:#f7d889;min-width:26px}
+    .status-note{margin-top:13px;font-size:.75rem!important;color:#f6dce0!important}
+    .sources{margin-top:64px;padding-top:26px;border-top:1px solid var(--line)}
+    .sources h2{font-size:2rem}.source-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:20px}
+    .source-group h3{font-size:.82rem;margin:0 0 8px}.source-group a{display:block;color:var(--muted);font-size:.76rem;margin:6px 0;text-underline-offset:2px}
+    .method{font-size:.76rem;color:var(--muted);margin-top:24px;max-width:850px}
+    footer{max-width:1240px;margin:0 auto;padding:0 clamp(18px,4vw,54px) 56px;color:var(--muted);font-size:.72rem}
+    @media(max-width:900px){
+      .hero{grid-template-columns:1fr}.hero-copy{min-height:460px}.hero-image{min-height:330px}.hero-image:after{background:linear-gradient(0deg,rgba(0,0,0,.55),transparent 50%)}
+      .section-head,.lineup-head{grid-template-columns:1fr}.board{grid-template-columns:1fr}.eliminated-card{grid-template-columns:minmax(220px,.8fr) 1.2fr}.sleeper-grid{grid-template-columns:repeat(2,1fr)}.theme-grid{grid-template-columns:repeat(2,1fr)}.spotlight,.vote{grid-template-columns:1fr}.market{min-height:300px}.pulse{grid-template-columns:1fr}.source-grid{grid-template-columns:1fr 1fr}
+    }
+    @media(max-width:560px){
+      h1{font-size:3.3rem}.hero-copy{padding:46px 22px;min-height:430px}.hero-image{min-height:250px}.tabs{justify-content:center;flex-wrap:wrap;overflow:visible}.tabs a{padding:7px 9px;font-size:.74rem}
+      main{padding-inline:14px}.card{grid-template-columns:50px 1fr}.rank{grid-row:1 / 3;font-size:1.72rem;padding-top:17px}.couple-photo{grid-column:2;height:auto}.card-body{grid-column:2;padding:15px 13px}.name{font-size:1.28rem}.score{min-width:58px;padding-inline:6px}.score-history{grid-template-columns:1fr}.score-week{padding-block:6px}
+      .sleeper-grid,.theme-grid,.source-grid,.lineup-list{grid-template-columns:1fr}.eliminated-card{grid-template-columns:1fr}.eliminated-card img{min-height:0;height:auto;aspect-ratio:3/2}.eliminated-copy{padding:22px 18px 25px}.sleeper-card{min-height:0}.cal-row{grid-template-columns:50px 86px 1fr;gap:8px}.cal-row span{font-size:1rem}.spotlight{margin-inline:-14px}.week-lineup,.vote{margin-inline:-14px}.controls{gap:6px}.filter{padding:8px 11px}
+    }
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="hero-copy">
+      <div class="season-line">Week 3 draft board · Sept. 29, 2026</div>
+      <h1>Draft the ballroom like a pro.</h1>
+      <p>Thirteen couples remain. Rank proven technique against fandom, story, and the one thing fantasy players can’t ignore: theme-night fit.</p>
+      <div class="snapshot">
+        <span>Season 35</span>
+        <span>13 couples active</span>
+        <span>3 eliminated</span>
+        <span>Next live show: Tuesday, 8/7c</span>
+      </div>
+    </div>
+    <div class="hero-image">
+      <img src="assets/dwts-hosts.jpg" alt="Dancing with the Stars hosts Alfonso Ribeiro and Julianne Hough on the ballroom floor">
+      <a class="photo-credit" href="https://parade.com/tv/dancing-with-the-stars-2026-season-35">Photo source: Parade</a>
+    </div>
+  </header>
+
+  <nav class="tabs" aria-label="Cheat sheet sections">
+    <a href="#board">Power board</a><a href="#voted-off">Voted off</a><a href="#sleepers">Sleepers</a><a href="#themes">Theme edges</a><a href="#pulse">Storylines</a><a href="#voting">Voting</a>
+  </nav>
+
+  <main>
+    <section id="board">
+      <div class="section-head">
+        <div><p class="kicker">Power rankings</p><h2>The Week 3 board</h2></div>
+        <p>An editorial draft order—not the show’s standings. It weighs judges’ scores, early-season market signal, dance or athletic background, pro résumé, and audience reach. Each card shows every completed week’s score out of 30 and a running season total, plus the celebrity’s and pro’s public social presence. Counts are approximate snapshots researched Sept. 22–23, 2026; they change continuously, and audiences overlap across platforms. Tap a lens to reshape the board. <a href="https://abc.com/news/98f4bab4-757f-4f1a-a2e9-d392ff248d56/category/1138628">Season 35 portraits: Disney / ABC</a>.</p>
+      </div>
+      <div class="controls" aria-label="Filter contestants">
+        <button class="filter active" data-filter="all">All 13</button>
+        <button class="filter" data-filter="anchor">Anchors</button>
+        <button class="filter" data-filter="sleeper">Sleepers</button>
+        <button class="filter" data-filter="dance">Dance edge</button>
+        <button class="filter" data-filter="athlete">Athletes</button>
+        <button class="filter" data-filter="social">Social reach</button>
+      </div>
+      <div class="board" id="rankings" aria-live="polite"></div>
+    </section>
+
+    <section class="eliminated" id="voted-off">
+      <div class="section-head">
+        <div><p class="kicker">Elimination tracker</p><h2>Voted off</h2></div>
+        <p>Eliminated couples move here while the active power board stays focused on the dancers still in the competition.</p>
+      </div>
+      <div class="eliminated-list">
+        <article class="eliminated-card">
+          <img src="assets/conner-leavitt-adele-zaikman.jpg" alt="Conner Leavitt and professional partner Adele Zaikman in their Season 35 cast portrait">
+          <div class="eliminated-copy">
+            <time class="eliminated-date" datetime="2026-09-15">1st eliminated · September 15, 2026</time>
+            <h3>Conner Leavitt</h3>
+            <p class="partner">with Adele Zaikman · 0 Mirrorballs · Week 1, Premiere Night 1</p>
+            <div class="final-score" aria-label="Final season score: 12 out of 30"><span>Final total</span><strong>12/30</strong></div>
+            <div class="score-history" aria-label="Weekly judges' scores"><div class="score-week"><span>Week 1 · Salsa</span><strong>12/30</strong></div></div>
+            <p class="exit-note">The <i>Secret Lives of Mormon Wives</i> cast member was eliminated after a salsa to “Whoomp! (There It Is)” by Tag Team that scored 12.</p>
+          </div>
+        </article>
+        <article class="eliminated-card">
+          <img src="assets/sarah-jane-nader-hailey-bills.jpg" alt="Sarah Jane Nader and professional partner Hailey Bills in their Season 35 cast portrait">
+          <div class="eliminated-copy">
+            <time class="eliminated-date" datetime="2026-09-16">2nd eliminated · September 16, 2026</time>
+            <h3>Sarah Jane Nader</h3>
+            <p class="partner">with Hailey Bills · 0 Mirrorballs · Week 1, Premiere Night 2</p>
+            <div class="final-score" aria-label="Final season score: 14 out of 30"><span>Final total</span><strong>14/30</strong></div>
+            <div class="score-history" aria-label="Weekly judges' scores"><div class="score-week"><span>Week 1 · Jive</span><strong>14/30</strong></div></div>
+            <p class="exit-note">The <i>Love Thy Nader</i> star was eliminated after a jive to “Sk8er Boi” by Avril Lavigne that scored 14.</p>
+          </div>
+        </article>
+        <article class="eliminated-card">
+          <img src="assets/giada-de-laurentiis-alan-bersten.jpg" alt="Giada De Laurentiis and professional partner Alan Bersten in their Season 35 cast portrait">
+          <div class="eliminated-copy">
+            <time class="eliminated-date" datetime="2026-09-22">3rd eliminated · September 22, 2026</time>
+            <h3>Giada De Laurentiis</h3>
+            <p class="partner">with Alan Bersten · 1 Mirrorball · Week 2, Viral Hits Night</p>
+            <div class="final-score" aria-label="Final season score: 28 out of 60"><span>Final total</span><strong>28/60</strong></div>
+            <div class="score-history" aria-label="Weekly judges' scores"><div class="score-week"><span>Week 1 · Tango</span><strong>16/30</strong></div><div class="score-week"><span>Week 2 · Salsa</span><strong>12/30</strong></div></div>
+            <p class="exit-note">The celebrity chef was eliminated after a salsa to “Bella Ciao” by Becky G that scored 12.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <aside class="spotlight" aria-label="Market spotlight">
+      <div class="spot-copy">
+        <p class="kicker">Fastest riser</p>
+        <h2>Maura flipped the board overnight.</h2>
+        <p>She entered Night 2 as a longshot with no dance experience, then tied for the premiere’s top score. The post-premiere Kalshi market moved her to favorite, ahead of Harry Shum Jr. and Jenna Dewan. That makes her the cleanest first-round blend of judges’ momentum and upside.</p>
+        <p class="signal">Market snapshot sourced to RotoWire and Action Network on Sept. 17; probabilities move and are not a prediction of the result.</p>
+      </div>
+      <div class="market"><div><strong>25%</strong><span>Post-premiere market favorite</span></div></div>
+    </aside>
+
+    <section id="sleepers">
+      <div class="section-head">
+        <div><p class="kicker">Value picks</p><h2>Three sleepers worth reaching for</h2></div>
+        <p>These are the names most likely to beat their Week 1 rank because their audience, adaptability, or story can compound as the field narrows.</p>
+      </div>
+      <div class="sleeper-grid">
+        <article class="sleeper-card"><span class="pick">Best all-around sleeper</span><h3>Julia Stiles</h3><p>An 18/30 start, deep 90s/00s nostalgia, and a live storyline after Andy Cohen’s apology. “Dance-lite” screen experience is useful without the full ringer backlash.</p></article>
+        <article class="sleeper-card"><span class="pick">Social sleeper</span><h3>Jackson Olson</h3><p>The 15/30 debut leaves room to grow. His 3M+ TikTok/Instagram following and Banana Ball energy could matter most on Viral Hits Night.</p></article>
+        <article class="sleeper-card"><span class="pick">Fandom sleeper</span><h3>Tyler Cameron</h3><p>A solid 17/30 with an athletic base, Bachelor Nation reach, and Sharna Burgess returning after five years. The ingredients are stronger than the premiere placement.</p></article>
+      </div>
+    </section>
+
+    <section id="themes" style="margin-top:84px">
+      <div class="section-head">
+        <div><p class="kicker">Theme-night edges</p><h2>Where the board could swing</h2></div>
+        <p>Week 3’s dances and songs are confirmed for Yacht Rock Night. Later-week edges remain editorial matchup reads; Week 5 is still officially TBA.</p>
+      </div>
+      <div class="theme-grid">
+        <article class="theme-card"><div class="theme-date">Sept. 22 · Week 2</div><h3>Viral Hits Night</h3><p>Social-native personalities get the cleanest runway.</p><p class="edge"><b>Edge:</b> Jackson Olson (3M+ followers), Connor Wood (1.3M), and Maura Higgins’ reality-TV momentum.</p></article>
+        <article class="theme-card"><div class="theme-date">Sept. 29 · Week 3 · Current</div><h3>Yacht Rock Night</h3><p>Thirteen couples take on soft-rock staples, with Foxtrot leading the night at five routines.</p><p class="edge"><b>Watch:</b> Taylor Hanson’s musician instincts; Julia Stiles and Tatyana Ali for cross-generational nostalgia.</p></article>
+        <article class="theme-card"><div class="theme-date">Oct. 6 · Week 4</div><h3>Mariah Carey Night</h3><p>The most obvious specialist matchup on the calendar.</p><p class="edge"><b>Edge:</b> Harry Shum Jr.—a former backup dancer for Mariah Carey—plus professional dance experience.</p></article>
+        <article class="theme-card"><div class="theme-date">Oct. 20 · Week 6</div><h3>Dedication Night</h3><p>Story and emotional connection often matter as much as technique.</p><p class="edge"><b>Watch:</b> Ezra Frech and Amber Glenn have elite-sport journeys; Guillermo has already shown strong survival appeal.</p></article>
+        <article class="theme-card"><div class="theme-date">Oct. 27 · Week 7</div><h3>Horror Movie Night</h3><p>Character work, precision, and theatrical commitment are the likely differentiators.</p><p class="edge"><b>Edge:</b> Harry Shum Jr. and Jenna Dewan for dancer-actor versatility; Tatyana Ali for performance experience.</p></article>
+        <article class="theme-card"><div class="theme-date">Nov. 3 + Nov. 10</div><h3>Disney → Grammy</h3><p>Two late-season tests of character, musicality, and broad audience connection.</p><p class="edge"><b>Edge:</b> Taylor Hanson on Grammy Night; Harry, Jenna, Julia, and Tatyana across the performance-heavy stretch.</p></article>
+      </div>
+
+            <div class="week-lineup" aria-labelledby="week-lineup-title">
+        <div class="lineup-head">
+          <div><p class="kicker" style="color:#efce82">Tuesday, September 29</p><h3 id="week-lineup-title">Yacht Rock Night lineup</h3></div>
+          <p>The 13 active couples, their dance styles, and songs for Week 3.</p>
+        </div>
+        <div class="lineup-list">
+          <div class="lineup-item"><span class="lineup-no">01</span><div><span class="lineup-couple">Jenna Dewan &amp; Val Chmerkovskiy</span><span class="lineup-dance">Samba</span><span class="lineup-song">“Africa” · Toto</span></div></div>
+          <div class="lineup-item"><span class="lineup-no">02</span><div><span class="lineup-couple">Ciara Miller &amp; Brandon Armstrong</span><span class="lineup-dance">Cha-cha-cha</span><span class="lineup-song">“Never Too Much” · Luther Vandross</span></div></div>
+          <div class="lineup-item"><span class="lineup-no">03</span><div><span class="lineup-couple">Tyler Cameron &amp; Sharna Burgess</span><span class="lineup-dance">Jive</span><span class="lineup-song">“Still the One” · Orleans</span></div></div>
+          <div class="lineup-item"><span class="lineup-no">04</span><div><span class="lineup-couple">Julia Stiles &amp; Ezra Sosa</span><span class="lineup-dance">Salsa</span><span class="lineup-song">“I Can't Go for That (No Can Do)” · Hall & Oates</span></div></div>
+          <div class="lineup-item"><span class="lineup-no">05</span><div><span class="lineup-couple">Jackson Olson &amp; Emma Slater</span><span class="lineup-dance">Paso doble</span><span class="lineup-song">“Easy Lover” · Phillip Bailey & Phil Collins</span></div></div>
+          <div class="lineup-item"><span class="lineup-no">06</span><div><span class="lineup-couple">Connor Wood &amp; Rylee Arnold</span><span class="lineup-dance">Foxtrot</span><span class="lineup-song">“Everywhere” · Fleetwood Mac</span></div></div>
+          <div class="lineup-item"><span class="lineup-no">07</span><div><span class="lineup-couple">Ezra Frech &amp; Daniella Karagach</span><span class="lineup-dance">Foxtrot</span><span class="lineup-song">“Just the Two of Us” · Grover Washington Jr. feat. Bill Withers</span></div></div>
+          <div class="lineup-item"><span class="lineup-no">08</span><div><span class="lineup-couple">Tatyana Ali &amp; Jan Ravnik</span><span class="lineup-dance">Quickstep</span><span class="lineup-song">“Maneater” · Hall & Oates</span></div></div>
+          <div class="lineup-item"><span class="lineup-no">09</span><div><span class="lineup-couple">Amber Glenn &amp; Pasha Pashkov</span><span class="lineup-dance">Foxtrot</span><span class="lineup-song">“Hold the Line” · Toto</span></div></div>
+          <div class="lineup-item"><span class="lineup-no">10</span><div><span class="lineup-couple">Guillermo Rodriguez &amp; Witney Carson</span><span class="lineup-dance">Foxtrot</span><span class="lineup-song">“Escape (The Piña Colada Song)” · Rupert Holmes</span></div></div>
+          <div class="lineup-item"><span class="lineup-no">11</span><div><span class="lineup-couple">Taylor Hanson &amp; Britt Stewart</span><span class="lineup-dance">Foxtrot</span><span class="lineup-song">“What a Fool Believes” · The Doobie Brothers</span></div></div>
+          <div class="lineup-item"><span class="lineup-no">12</span><div><span class="lineup-couple">Harry Shum Jr. &amp; Jenna Johnson</span><span class="lineup-dance">Jive</span><span class="lineup-song">“You Make My Dreams (Come True)” · Hall & Oates</span></div></div>
+          <div class="lineup-item"><span class="lineup-no">13</span><div><span class="lineup-couple">Maura Higgins &amp; Mark Ballas</span><span class="lineup-dance">Quickstep</span><span class="lineup-song">“Turn Your Love Around” · George Benson</span></div></div>
+        </div>
+      </div>
+
+      <div class="calendar" aria-label="Season 35 theme calendar">
+        <div class="cal-row"><b>Week 1</b><time>Sep 15–16</time><span>Birth-Year #1 Hits</span></div>
+        <div class="cal-row"><b>Week 2</b><time>Sep 22</time><span>Viral Hits Night</span></div>
+        <div class="cal-row current"><b>Week 3</b><time>Sep 29</time><span>Yacht Rock Night</span></div>
+        <div class="cal-row"><b>Week 4</b><time>Oct 6</time><span>Mariah Carey Night</span></div>
+        <div class="cal-row"><b>Week 5</b><time>Oct 13</time><span>TBA <small class="tba">Dolly Parton speculation is unconfirmed</small></span></div>
+        <div class="cal-row"><b>Week 6</b><time>Oct 20</time><span>Dedication Night</span></div>
+        <div class="cal-row"><b>Week 7</b><time>Oct 27</time><span>Horror Movie Night</span></div>
+        <div class="cal-row"><b>Week 8</b><time>Nov 3</time><span>Disney Night</span></div>
+        <div class="cal-row"><b>Week 9</b><time>Nov 10</time><span>Grammy Night</span></div>
+        <div class="cal-row"><b>Week 10</b><time>Nov 17</time><span>Semi-Finals</span></div>
+        <div class="cal-row"><b>Week 11</b><time>Nov 24</time><span>Finale</span></div>
+      </div>
+    </section>
+
+    <section id="pulse" style="margin-top:84px">
+      <div class="section-head"><div><p class="kicker">Ballroom pulse</p><h2>Storylines that move votes</h2></div><p>Separate signal from noise. These are the early-season developments most likely to shape fantasy value.</p></div>
+      <div class="pulse">
+        <article class="story"><div class="no">01</div><h3>The scoring reset is real</h3><p>Derek Hough said the lower starting scores leave room for growth. Guillermo’s 10/30 was the second-lowest score in show history, yet he survived. Don’t compare these totals too literally with prior seasons.</p></article>
+        <article class="story"><div class="no">02</div><h3>Votes beat the scoreboard</h3><p>Night 1 online voting went down, leaving text votes to determine the elimination. Conner Leavitt went home; Guillermo survived both nights despite the lowest score.</p></article>
+        <article class="story"><div class="no">03</div><h3>Julia has a clean revenge arc</h3><p>Her “prove Andy Cohen wrong” package landed, Derek told Cohen to “eat it,” and Cohen publicly apologized. It’s a memorable, easy-to-root-for story.</p></article>
+        <article class="story"><div class="no">04</div><h3>Witney brings a rare challenge</h3><p>The reigning champion is competing while in her second trimester. Guillermo’s partnership brings warmth and a built-in conversation driver.</p></article>
+        <article class="story"><div class="no">05</div><h3>Two ringers, two different risks</h3><p>Harry Shum Jr. and Jenna Dewan have the clearest professional dance backgrounds. That raises the technical floor—and the chance of a “too experienced” backlash.</p></article>
+        <article class="story"><div class="no">06</div><h3>Giada exits on the judges’ bottom</h3><p>Giada De Laurentiis and Alan Bersten were eliminated September 22 after receiving the night’s lowest judges’ score. Thirteen couples advance to Yacht Rock Night.</p></article>
+      </div>
+    </section>
+
+    <section class="vote" id="voting">
+      <div class="vote-main"><p class="kicker" style="color:#f7d889">Draft-day rulebook</p><h2>Bank the votes before the last dance.</h2><p>Voting opens at 8 p.m. ET during the live broadcast and closes shortly after the final competitive dance. Judges’ scores and viewer votes are reported as a 50/50 combination.</p><a class="shortcut-link" href="https://www.icloud.com/shortcuts/3e951e5ba20b49dc82f5abded923b179" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg><span>Download the iOS Shortcut<small>Quick and easy SMS voting</small></span></a><p class="status-note">Night 1’s online crash was a one-off incident, not a permanent rule change.</p></div>
+      <div class="vote-steps">
+        <div class="vote-step"><b>1</b><span>Up to 10 online votes per couple at dwtsvote.abc.com; sign in and save them.</span></div>
+        <div class="vote-step"><b>2</b><span>Up to 10 SMS votes per couple to 21523; text votes can’t be changed.</span></div>
+        <div class="vote-step"><b>3</b><span>Online: U.S., territories, and Canada, age 18+. SMS: U.S. participating carriers only.</span></div>
+      </div>
+    </section>
+
+    <section class="sources" aria-labelledby="sources-title">
+      <h2 id="sources-title">Sources & methodology</h2>
+      <div class="source-grid">
+        <div class="source-group"><h3>Cast, profiles & Week 1</h3>
+          <a href="https://en.wikipedia.org/wiki/Dancing_with_the_Stars_(American_TV_series)_season_35">Season 35 results index</a>
+          <a href="https://990theanswer.com/news/entertainment/meet-the-2026-dancing-with-the-stars-cast/f1d587db5657824343c2b258b0695695">AP cast profiles</a>
+          <a href="https://ew.com/dancing-with-the-stars-season-35-premiere-night-2-recap-12124737">Entertainment Weekly premiere recap</a>
+          <a href="https://www.palmbeachpost.com/story/entertainment/television/2026/09/16/dancing-with-stars-voting-crash-who-eliminated-went-home-when-how-watch-vote-tonight/91788281007/">Palm Beach Post voting-crash report</a>
+        </div>
+        <div class="source-group"><h3>Themes, odds & analysis</h3>
+          <a href="https://parade.com/tv/dancing-with-the-stars-season-35-themes-revealed">Parade theme-night calendar</a>
+          <a href="https://ew.com/dancing-with-the-stars-season-35-week-2-theme-songs-dances-revealed-12126423">Entertainment Weekly Week 2 preview</a>
+          <a href="https://www.rotowire.com/article/dancing-with-the-stars-odds-131116">RotoWire post-premiere odds</a>
+          <a href="https://www.actionnetwork.com/news/who-got-eliminated-on-dancing-with-the-stars-dwts-season-35-winner-odds-shift-after-two-night-premiere">Action Network market movement</a>
+        </div>
+        <div class="source-group"><h3>Voting & storylines</h3>
+          <a href="https://ew.com/dancing-with-the-stars-season-35-week-one-how-to-watch-vote-12121024">Entertainment Weekly voting guide</a>
+          <a href="https://www.primetimer.com/features/dancing-with-the-stars-how-to-vote-for-celebrities-competing-in-season-35-details-explored">Primetimer voting guide</a>
+          <a href="https://www.usatoday.com/story/entertainment/tv-streaming/2026/09/17/andy-cohen-julia-stiles-apology-dancing-with-the-stars/91815226007/">USA Today on Julia Stiles</a>
+          <a href="https://parade.com/tv/dwts-pro-witney-carson-expecting-baby-no-3-returning-for-season-35">Parade on Witney Carson</a>
+        </div>
+      </div>
+      <p class="method">Week 3 lineup updated Sep. 25, 2026 with confirmed songs and dance styles for the Sept. 29, 2026 broadcast. The ranking and later theme-night “edges” are editorial synthesis from sourced scores, backgrounds, pro records, audience signals, and available market data—not official DWTS projections.</p>
+    </section>
+  </main>
+  <footer>Season 35 airs live Tuesdays at 8/7c on ABC and Disney+, hosted by Alfonso Ribeiro and Julianne Hough.</footer>
+
+  <script>
+    const dancers = [
+      {rank:1,name:'Ezra Frech',age:21,proName:'Daniella Karagach',mirrorballs:1,photo:'ezra-frech-daniella-karagach.jpg',weeks:[{'dance': 'Tango', 'score': 20}, {'dance': 'Cha-cha-cha', 'score': 21}],total:41,cats:['anchor', 'athlete'],tags:['Athlete', 'Top-three score', 'Growth'],case:'A 20/30 debut with elite body awareness and a pro known for unlocking unconventional athletic partners.'},
+      {rank:2,name:'Maura Higgins',age:35,proName:'Mark Ballas',mirrorballs:3,photo:'maura-higgins-mark-ballas.jpg',weeks:[{'dance': 'Foxtrot', 'score': 21}, {'dance': 'Cha-cha-cha', 'score': 19}],total:40,cats:['anchor'],tags:['Anchor', 'No dance experience', '25% market'],case:'Premiere co-leader with the sharpest momentum swing. Mark’s three Mirrorballs make the partnership feel built for a deep run.'},
+      {rank:3,name:'Jenna Dewan',age:45,proName:'Val Chmerkovskiy',mirrorballs:3,photo:'jenna-dewan-val-chmerkovskiy.jpg',weeks:[{'dance': 'Tango', 'score': 19}, {'dance': 'Jive', 'score': 21}],total:40,cats:['anchor', 'dance'],tags:['Anchor', 'Pro dance background', '15% market'],case:'A true dancer paired with a three-time champion. The Week 1 score undersells the ceiling; ringer perception is the watch-out.'},
+      {rank:4,name:'Harry Shum Jr.',age:44,proName:'Jenna Johnson',mirrorballs:2,photo:'harry-shum-jr-jenna-johnson.jpg',weeks:[{'dance': 'Cha-cha-cha', 'score': 21}, {'dance': 'Viennese waltz', 'score': 18}],total:39,cats:['anchor', 'dance'],tags:['Anchor', 'Pro dance background', '20% market'],case:'The highest technical floor in the cast and an experienced winning pro. The only obvious drag is ringer fatigue.'},
+      {rank:5,name:'Amber Glenn',age:26,proName:'Pasha Pashkov',mirrorballs:0,photo:'amber-glenn-pasha-pashkov.jpg',weeks:[{'dance': 'Cha-cha-cha', 'score': 18}, {'dance': 'Tango', 'score': 21}],total:39,cats:['athlete'],tags:['Athlete', 'Skating edge', 'Broad fandom'],case:'Figure-skating musicality and Olympic visibility give her a strong fantasy floor, even without a pro-partner win.'},
+      {rank:6,name:'Julia Stiles',age:45,proName:'Ezra Sosa',mirrorballs:0,photo:'julia-stiles-ezra-sosa.jpg',weeks:[{'dance': 'Quickstep', 'score': 18}, {'dance': 'Tango', 'score': 16}],total:34,cats:['sleeper', 'dance'],tags:['Sleeper', 'Nostalgia', 'Story heat'],case:'Solid debut, huge nostalgia value, and the season’s cleanest motivational storyline. Her film-dance experience is useful, not formal training.'},
+      {rank:7,name:'Tyler Cameron',age:33,proName:'Sharna Burgess',mirrorballs:1,photo:'tyler-cameron-sharna-burgess.jpg',weeks:[{'dance': 'Tango', 'score': 17}, {'dance': 'Salsa', 'score': 16}],total:33,cats:['sleeper', 'athlete'],tags:['Sleeper', 'Athlete', 'Bachelor Nation'],case:'Athletic base, a broad reality-TV audience, and a returning champion pro give him more runway than his middle-of-pack score suggests.'},
+      {rank:8,name:'Jackson Olson',age:28,proName:'Emma Slater',mirrorballs:1,photo:'jackson-olson-emma-slater.jpg',weeks:[{'dance': 'Cha-cha-cha', 'score': 15}, {'dance': 'Foxtrot', 'score': 18}],total:33,cats:['sleeper', 'athlete', 'social'],tags:['Sleeper', '3M+ social', 'Viral Night'],case:'The score is modest, but the social reach is elite. Viral Hits Night is his best immediate chance to jump a tier.'},
+      {rank:9,name:'Ciara Miller',age:30,proName:'Brandon Armstrong',mirrorballs:0,photo:'ciara-miller-brandon-armstrong.jpg',weeks:[{'dance': 'Foxtrot', 'score': 15}, {'dance': 'Tango', 'score': 18}],total:33,cats:[],tags:['Bravo fandom', 'Reality TV', 'Growth'],case:'A 15/30 start keeps her vulnerable, but Bravo and Traitors viewers can be sticky if the storytelling lands.'},
+      {rank:10,name:'Taylor Hanson',age:43,proName:'Britt Stewart',mirrorballs:0,photo:'taylor-hanson-britt-stewart.jpg',weeks:[{'dance': 'Quickstep', 'score': 16}, {'dance': 'Cha-cha-cha', 'score': 15}],total:31,cats:[],tags:['Musician', '90s nostalgia', 'Theme edge'],case:'Musical timing and a durable fan base can keep him steady. Yacht Rock and Grammy nights are favorable terrain.'},
+      {rank:11,name:'Connor Wood',age:31,proName:'Rylee Arnold',mirrorballs:0,photo:'connor-wood-rylee-arnold.jpg',weeks:[{'dance': 'Cha-cha-cha', 'score': 16}, {'dance': 'Tango', 'score': 15}],total:31,cats:['social'],tags:['1.3M social', 'Comedy', 'Viral Night'],case:'His comedy and podcast audience is real, and his social-native persona fits Week 2. The dance ceiling is still unproven.'},
+      {rank:12,name:'Tatyana Ali',age:47,proName:'Jan Ravnik',mirrorballs:0,photo:'tatyana-ali-jan-ravnik.jpg',weeks:[{'dance': 'Jive', 'score': 12}, {'dance': 'Foxtrot', 'score': 18}],total:30,cats:[],tags:['90s nostalgia', 'Performer', 'Fresh Prince reunion'],case:'The judges left her near the bottom, but the Alfonso Ribeiro reunion and Fresh Prince nostalgia create a real viewer-vote path.'},
+      {rank:13,name:'Guillermo Rodriguez',age:55,proName:'Witney Carson',mirrorballs:2,photo:'guillermo-rodriguez-witney-carson.jpg',weeks:[{'dance': 'Cha-cha-cha', 'score': 10}, {'dance': 'Paso doble', 'score': 12}],total:22,cats:[],tags:['Risk', 'Entertainment vote', 'Reigning champ pro'],case:'The lowest remaining score is a clear fantasy risk. Survival through both premiere nights proves comedy and warmth can still beat technique.'}
+    ];
+    const socialByName = {
+      "Maura Higgins": {celeb:{name:"Maura",items:[{p:"Instagram",h:"@maurahiggins",c:"≈4.4M",u:"https://socialblade.com/instagram/user/maurahiggins"},{p:"TikTok",h:"@maurahiggins",c:"≈1.6M",u:"https://www.tiktok.com/@maurahiggins"}]},pro:{name:"Mark",items:[{p:"TikTok",h:"@markballas1",c:"≈753K",u:"https://www.tiktok.com/@markballas1"}]}},
+      "Harry Shum Jr.": {celeb:{name:"Harry",items:[{p:"Instagram",h:"@harryshumjr",c:"≈2.5M",u:"https://socialveins.com/influencer/instagram/harryshumjr"},{p:"TikTok",h:"@officialharryshumjr",c:"≈5.7K; account status unverified",u:"https://www.tiktok.com/@officialharryshumjr"}]},pro:{name:"Jenna",items:[{p:"Instagram",h:"@jennajohnson",c:"≈1M",u:"https://chumaa.com/jenna-johnson/"}]}},
+      "Jenna Dewan": {celeb:{name:"Jenna",items:[{p:"Instagram",h:"@jennadewan",c:"10M+",u:"https://thenewsgod.com/jenna-dewan-biography-career-net-worth-body-measurement-personal-life-social-media-profile-and-more/"},{p:"TikTok",h:"@jennadewan",c:"≈2.2M",u:"https://thenewsgod.com/jenna-dewan-biography-career-net-worth-body-measurement-personal-life-social-media-profile-and-more/"}]},pro:{name:"Val",items:[{p:"Instagram",h:"@valentin",c:"≈1.5M",u:"https://www.tvinsider.com/1248777/val-chmerkovskiy-hospitalized-after-health-scare-during-dancing-with-the-stars-tour/"}]}},
+      "Ezra Frech": {celeb:{name:"Ezra",items:[{p:"TikTok",h:"@ezrafrech",c:"≈573K",u:"https://www.tiktok.com/@ezrafrech"}],note:"Instagram @ezrafrech; a current count wasn’t verified."},pro:{name:"Daniella",items:[{p:"Instagram",h:"@daniellakaragach",c:"≈1M",u:"https://mn2s.com/booking-agency/talent-roster/daniella-karagach/"},{p:"TikTok",h:"@daniellakaragach",c:"≈776K",u:"https://mn2s.com/booking-agency/talent-roster/daniella-karagach/"}]}},
+      "Amber Glenn": {celeb:{name:"Amber",items:[{p:"Instagram",h:"@amberglenniceskater",c:"≈1.5M",u:"https://forbestodays.pages.dev/sites/carolineprice/2026/05/08/amber-glenn-opens-up-about-mental-health-milan-cortina-and-future-plans/"},{p:"TikTok",h:"@amberglenniceskater",c:"≈2.4M",u:"https://forbestodays.pages.dev/sites/carolineprice/2026/05/08/amber-glenn-opens-up-about-mental-health-milan-cortina-and-future-plans/"}]},pro:{name:"Pasha",items:[{p:"Instagram",h:"@pashapashkov",c:"≈329K",u:"https://mn2s.com/booking-agency/talent-roster/pasha-pashkov/"},{p:"TikTok",h:"@pashapashkov",c:"≈239K",u:"https://mn2s.com/booking-agency/talent-roster/pasha-pashkov/"}]}},
+      "Julia Stiles": {celeb:{name:"Julia",items:[{p:"Instagram",h:"@missjuliastiles",c:"≈1M",u:"https://www.femalefirst.co.uk/celebrity/julia-stiles-lucky-hits-million-instagram-followers-1450260.html"},{p:"TikTok",h:"@missjuliastiles",c:"≈680K",u:"https://www.tiktok.com/@missjuliastiles"}]},pro:{name:"Ezra",items:[{p:"Instagram",h:"@ezra.sosa",c:"≈467K",u:"https://mn2s.com/booking-agency/talent-roster/ezra-sosa/"},{p:"TikTok",h:"@ezrasosa",c:"≈922K",u:"https://mn2s.com/booking-agency/talent-roster/ezra-sosa/"}]}},
+      "Tyler Cameron": {celeb:{name:"Tyler",items:[{p:"Instagram",h:"@tylerjcameron3",c:"≈2.2M",u:"https://pdcstly.com/en/episod/rhobh-feud-kyle-vs-dorit-sabrina-carpenter-and-barry-keoghan-s-break-tyler-cameron-s-ig-drama/31014407"},{p:"TikTok",h:"@tylerjcameron3",c:"≈995K",u:"https://www.tiktok.com/@tylerjcameron3"}]},pro:{name:"Sharna",items:[{p:"Instagram",h:"@sharnaburgess",c:"≈1M",u:"https://www.heepsy.com/instagram-profile/sharnaburgess"},{p:"TikTok",h:"@sharnaburgess",c:"≈15K; 2023 figure",u:"https://fresherpost.com/sharna-burgess/"}]}},
+      "Jackson Olson": {celeb:{name:"Jackson",items:[{p:"Instagram",h:"@jacksonolson_",c:"1M+",u:"https://news.designrush.com/supercuts-jackson-olson-the-jax-back-to-school"},{p:"TikTok",h:"@jacksonolson_",c:"≈2.2M",u:"https://www.tiktok.com/@jacksonolson_"}]},pro:{name:"Emma",items:[{p:"Instagram",h:"@theemmaslater",c:"1M+",u:"https://parade.com/entertainment/emma-slater-1-million-instagram-followers"}]}},
+      "Taylor Hanson": {celeb:{name:"Taylor",items:[{p:"Instagram",h:"@taylorhanson",c:"≈175–269K; conflicting sources",u:"https://marriedbiography.com/taylor-hanson-jordan-taylor-hanson-biography/"}],note:"A clearly official TikTok count wasn’t verified."},pro:{name:"Britt",items:[{p:"Instagram",h:"@brittbenae",c:"≈369K; older figure",u:"https://mn2s.com/booking-agency/talent-roster/britt-stewart/"},{p:"TikTok",h:"@brittbenae",c:"≈249K; older figure",u:"https://mn2s.com/booking-agency/talent-roster/britt-stewart/"}]}},
+      "Connor Wood": {celeb:{name:"Connor",items:[{p:"Instagram",h:"@fibula",c:"≈400K",u:"https://www.celebslifereel.com/connor-wood"},{p:"TikTok",h:"@fibulaa",c:"≈1.1M",u:"https://www.tiktok.com/@fibulaa"}]},pro:{name:"Rylee",items:[{p:"Instagram",h:"@ryleearnold1",c:"≈1.4M",u:"https://mn2s.com/booking-agency/talent-roster/rylee-arnold/"},{p:"TikTok",h:"@ryleearnold",c:"≈1.9M",u:"https://www.tiktok.com/@ryleearnold"}]}},
+      "Ciara Miller": {celeb:{name:"Ciara",items:[{p:"Instagram",h:"@ciaramiller___",c:"≈850K–1.1M; conflicting sources",u:"https://www.famousbirthdays.com/people/ciara-miller.html"}],note:"A clearly official TikTok handle wasn’t verified."},pro:{name:"Brandon",items:[{p:"Instagram",h:"@brandonarmstrong",c:"≈319K",u:"https://entertainmentnow.com/dancing-with-the-stars/brandon-armstrong-provides-fans-health-update/"}],note:"No clearly official personal TikTok was located."}},
+      "Tatyana Ali": {celeb:{name:"Tatyana",items:[{p:"Instagram",h:"@tatyanaali",c:"≈1.6M",u:"https://socialveins.com/influencer/instagram/tatyanaali"},{p:"TikTok",h:"@tatyanaalitv",c:"≈906K",u:"https://www.tiktok.com/@tatyanaalitv"}]},pro:{name:"Jan",items:[{p:"Instagram",h:"@janravnik",c:"≈840K",u:"https://genzstars.com/jan-ravnik/"},{p:"TikTok",h:"@janravnik",c:"≈1.2M",u:"https://www.tiktok.com/@janravnik"}]}},
+      "Guillermo Rodriguez": {celeb:{name:"Guillermo",items:[{p:"Instagram",h:"@IamGuillermo",c:"≈460–474K; limited-source estimate",u:"https://obd2scanner.store/who-is-jimmy-kimmels-sidekick-guillermo-rodriguez/"}],note:"No clearly official personal TikTok was located."},pro:{name:"Witney",items:[{p:"Instagram",h:"@witneycarson",c:"2M+ milestone",u:"https://www.soapoperaspy.com/2025/dwts-whitey-carson-major-milestone/"},{p:"TikTok",h:"@witneycarsonofficial",c:"≈1.3M",u:"https://www.tiktok.com/@witneycarsonofficial"}]}}
+    };
+    const board=document.getElementById('rankings');
+    function socialRow(role,person){
+      const links=person.items.map(item=>`<a class="social-link" href="${item.u}" target="_blank" rel="noopener noreferrer" title="Follower-count source for ${person.name} on ${item.p}">${item.p} ${item.h} · ${item.c}</a>`).join('');
+      const note=person.note?`<span class="social-note">${person.note}</span>`:'';
+      return `<div class="social-row"><span class="social-role">${role}</span><div class="social-links">${links}${note}</div></div>`;
+    }
+    function socialMarkup(d){
+      const social=socialByName[d.name];
+      return `<div class="social-presence" aria-label="Social media snapshots for ${d.name} and ${social.pro.name}">${socialRow('Celeb',social.celeb)}${socialRow('Pro',social.pro)}</div>`;
+    }
+    function mirrorballLabel(count){
+      return `${count} Mirrorball${count === 1 ? '' : 's'}`;
+    }
+    function render(filter='all'){
+      board.innerHTML='';
+      dancers.filter(d=>filter==='all'||d.cats.includes(filter)).forEach(d=>{
+        const card=document.createElement('article');card.className='card';
+        const maxTotal=d.weeks.length*30;
+        const scoreHistory=d.weeks.map((week,index)=>`<div class="score-week"><span>Week ${index+1} · ${week.dance}</span><strong>${week.score}/30</strong></div>`).join('');
+        card.innerHTML=`<div class="rank">${d.rank}</div><img class="couple-photo" src="assets/${d.photo}" alt="${d.name} and professional partner ${d.proName} in their Season 35 cast portrait"><div class="card-body"><div class="card-top"><div><h3 class="name">${d.name}, ${d.age}</h3><p class="partner">with ${d.proName} · ${mirrorballLabel(d.mirrorballs)}</p></div><div class="score" aria-label="Season total ${d.total} out of ${maxTotal}"><b>${d.total}/${maxTotal}</b><small>Season</small></div></div><div class="score-history" aria-label="Weekly judges' scores">${scoreHistory}</div><p class="case">${d.case}</p><div class="tags">${d.tags.map((t,i)=>`<span class="tag ${i===0&&d.cats.includes('anchor')?'anchor':''} ${i===0&&d.cats.includes('sleeper')?'sleeper':''} ${t==='Risk'?'risk':''}">${t}</span>`).join('')}</div>${socialMarkup(d)}</div>`;
+        board.appendChild(card);
+      });
+    }
+    document.querySelectorAll('.filter').forEach(btn=>btn.addEventListener('click',()=>{
+      document.querySelectorAll('.filter').forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');render(btn.dataset.filter);
+    }));
+    render();
+  </script>
+</body>
+</html>
