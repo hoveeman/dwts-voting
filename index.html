@@ -238,14 +238,13 @@
       </div>
     </section>
 
-            <aside class="spotlight" aria-label="Market spotlight">
+                <aside class="spotlight" aria-label="Market spotlight">
       <div class="spot-copy">
         <p class="kicker">Live Kalshi market favorite</p>
         <h2>Ezra Frech surged to 33% to win it all.</h2>
         <p>Following back-to-back 20+ judges’ marks and viral social momentum, Paralympic champion Ezra Frech has taken over as the leading favorite on Kalshi’s official Season 35 winner market with a 33% implied win probability, followed by Harry Shum Jr. (16%), Jenna Dewan (15%), and Maura Higgins (12%).</p>
         <div class="market-actions">
           <a class="market-btn" href="https://kalshi.com/markets/kxdancingwiththestars/who-will-win-dancing-with-the-stars/kxdancingwiththestars-26dec31" target="_blank" rel="noopener noreferrer">Trade on Kalshi (Who Will Win) ↗</a>
-          <a class="market-btn" href="https://www.actionnetwork.com/news/who-got-eliminated-on-dancing-with-the-stars-dwts-season-35-winner-odds-shift-after-two-night-premiere" target="_blank" rel="noopener noreferrer">Action Network Odds Report ↗</a>
         </div>
         <p class="signal">Live prediction markets track implied win probabilities; contracts update continuously on Kalshi and are not official ABC/Disney projections.</p>
       </div>
@@ -278,7 +277,7 @@
         <article class="theme-card"><div class="theme-date">Nov. 3 + Nov. 10</div><h3>Disney → Grammy</h3><p>Two late-season tests of character, musicality, and broad audience connection.</p><p class="edge"><b>Edge:</b> Taylor Hanson on Grammy Night; Harry, Jenna, Julia, and Tatyana across the performance-heavy stretch.</p></article>
       </div>
 
-                                                            <div class="week-lineup" aria-labelledby="week-lineup-title">
+                                                                  <div class="week-lineup" aria-labelledby="week-lineup-title">
         <div class="lineup-head">
           <div><p class="kicker" style="color:#efce82">Tuesday, September 29</p><h3 id="week-lineup-title">Yacht Rock Night lineup</h3></div>
           <p>The 13 active couples, their dance styles, and songs for Week 3.</p>
@@ -453,9 +452,10 @@
       dancers.filter(d=>filter==='all'||d.cats.includes(filter)).forEach(d=>{
         const card=document.createElement('article');card.className='card';
         const maxTotal=d.weeks.length*30;
+        const scoreHistory=d.weeks.map((week,index)=>`<div class="score-week"><span>Week ${index+1} · ${week.dance}</span><strong>${week.score}/30</strong></div>`).join('');
         const powerIndex = d.powerIndex !== undefined ? d.powerIndex : Math.round((d.total / (maxTotal || 60)) * 100);
         const marketProb = d.marketProb !== undefined ? d.marketProb : 5;
-        card.innerHTML=`<div class="rank">${d.rank}</div><img class="couple-photo" src="assets/${d.photo}" alt="${d.name} and professional partner ${d.proName} in their Season 35 cast portrait"><div class="card-body"><div class="card-top"><div><h3 class="name">${d.name}, ${d.age}</h3><p class="partner">with ${d.proName} · ${mirrorballLabel(d.mirrorballs)}</p></div><div class="metrics" aria-label="Ratings: Power Index ${powerIndex}/100, Market win odds ${marketProb}%, Season score ${d.total}/${maxTotal}"><div class="score power" title="Composite Power Index: 50% Judges' Score & Momentum, 20% Prediction Market Odds, 15% Pro Pedigree, 15% Audience Voting Reach"><b>${powerIndex}</b><small>Power</small></div><div class="score market" title="Implied win probability across prediction and betting markets (Kalshi, Polymarket, Action Network)"><b>${marketProb}%</b><small>Market</small></div><div class="score season" title="Cumulative judges' points out of ${maxTotal}"><b>${d.total}/${maxTotal}</b><small>Season</small></div></div></div><div class="score-history" aria-label="Weekly judges' scores">${scoreHistory}</div><p class="case">${d.case}</p><div class="tags">${d.tags.map((t,i)=>`<span class="tag ${i===0&&d.cats.includes('anchor')?'anchor':''} ${i===0&&d.cats.includes('sleeper')?'sleeper':''} ${t==='Risk'?'risk':''}">${t}</span>`).join('')}</div>${socialMarkup(d)}</div>`;
+        card.innerHTML=`<div class="rank">${d.rank}</div><img class="couple-photo" src="assets/${d.photo}" alt="${d.name} and professional partner ${d.proName} in their Season 35 cast portrait"><div class="card-body"><div class="card-top"><div><h3 class="name">${d.name}, ${d.age}</h3><p class="partner">with ${d.proName} · ${mirrorballLabel(d.mirrorballs)}</p></div><div class="metrics" aria-label="Ratings: Power Index ${powerIndex}/100, Market win odds ${marketProb}%, Season score ${d.total}/${maxTotal}"><div class="score power" title="Composite Power Index: 45% Judges' Score & Momentum, 25% Kalshi Market Odds, 15% Pro Pedigree, 15% Audience Voting Reach"><b>${powerIndex}</b><small>Power</small></div><div class="score market" title="Implied win probability on Kalshi (Who Will Win Season 35)"><b>${marketProb}%</b><small>Market</small></div><div class="score season" title="Cumulative judges' points out of ${maxTotal}"><b>${d.total}/${maxTotal}</b><small>Season</small></div></div></div><div class="score-history" aria-label="Weekly judges' scores">${scoreHistory}</div><p class="case">${d.case}</p><div class="tags">${d.tags.map((t,i)=>`<span class="tag ${i===0&&d.cats.includes('anchor')?'anchor':''} ${i===0&&d.cats.includes('sleeper')?'sleeper':''} ${t==='Risk'?'risk':''}">${t}</span>`).join('')}</div>${socialMarkup(d)}</div>`;
         board.appendChild(card);
       });
     }

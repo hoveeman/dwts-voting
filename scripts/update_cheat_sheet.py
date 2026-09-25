@@ -867,7 +867,6 @@ def update_index_html(wiki_data, market_odds=None):
         f'        <p>Following back-to-back 20+ judges’ marks and viral social momentum, Paralympic champion {top_market_name} has taken over as the leading favorite on Kalshi’s official Season 35 winner market with a {top_prob}% implied win probability, followed by Harry Shum Jr. (16%), Jenna Dewan (15%), and Maura Higgins (12%).</p>\n'
         f'        <div class="market-actions">\n'
         f'          <a class="market-btn" href="https://kalshi.com/markets/kxdancingwiththestars/who-will-win-dancing-with-the-stars/kxdancingwiththestars-26dec31" target="_blank" rel="noopener noreferrer">Trade on Kalshi (Who Will Win) ↗</a>\n'
-        f'          <a class="market-btn" href="https://www.actionnetwork.com/news/who-got-eliminated-on-dancing-with-the-stars-dwts-season-35-winner-odds-shift-after-two-night-premiere" target="_blank" rel="noopener noreferrer">Action Network Odds Report ↗</a>\n'
         f'        </div>\n'
         f'        <p class="signal">Live prediction markets track implied win probabilities; contracts update continuously on Kalshi and are not official ABC/Disney projections.</p>\n'
         f'      </div>\n'
