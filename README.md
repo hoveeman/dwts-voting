@@ -184,10 +184,75 @@ To easily follow the exact math on any screen size:
 
 ---
 
-## 🪩 Season 35 Cheat Sheet & Daily Worker
+## 🪩 Season 35 Cheat Sheet & Automated Worker
 
-The repository includes the full interactive web application for the **DWTS Season 35 Fantasy Draft Cheat Sheet**:
+The repository includes the full interactive web application for the **DWTS Season 35 Fantasy Draft & Voting Cheat Sheet**:
 
-- **Live URL**: [https://hoveeman.github.io/dwts-voting/](https://hoveeman.github.io/dwts-voting/)
-- **Daily Automated Updates**: Powered by a GitHub Actions worker ([`.github/workflows/daily-update.yml`](.github/workflows/daily-update.yml)) running daily at 11:00 PM ET. The worker scrapes live scoring, songs, dance choices, and eliminations from Wikipedia, updating `index.html` and synchronizing the iOS shortcut endpoints (`dancers.json`, `dancers.txt`).
+- 🌐 **Live Website**: [https://hoveeman.github.io/dwts-voting/](https://hoveeman.github.io/dwts-voting/)
+- ⚙️ **Workflow File**: [`.github/workflows/daily-update.yml`](.github/workflows/daily-update.yml)
+- 🐍 **Update Script**: [`scripts/update_cheat_sheet.py`](scripts/update_cheat_sheet.py)
+
+---
+
+### ⏱️ Automated Worker Cadence & Timing
+
+A headless GitHub Actions runner executes [`scripts/update_cheat_sheet.py`](scripts/update_cheat_sheet.py) on the following schedule:
+
+1. **Tuesday Live Show Window (8:00 PM – 11:59 PM ET)**:
+   - Cron: `*/15 0-4 * * 3` UTC
+   - Runs every **15 minutes** during the live broadcast to ingest live judges’ scores, routine styles, and songs as they happen.
+   - Detects when voting closes (~9:50 PM ET) and automatically moves eliminated couples to the `#voted-off` graveyard immediately following the live elimination announcement (~9:57 PM ET).
+2. **Nightly Maintenance (11:00 PM ET)**:
+   - Cron: `0 3 * * *` (EDT) and `0 4 * * *` (EST) UTC
+   - Refreshes upcoming theme lineups, rehearsals, confirmed songs, and off-broadcast prediction market movements.
+3. **Manual Trigger (`workflow_dispatch`)**:
+   - Can be triggered manually at any time directly from the GitHub Actions tab.
+
+---
+
+### 📈 Kalshi Prediction Market Integration
+
+The cheat sheet pulls real-time implied win probabilities directly from **Kalshi’s official Season 35 Winner Market**:
+
+- **Market Name**: *Who will win Dancing with the Stars?*
+- **Series Ticker**: `KXDANCINGWITHTHESTARS`
+- **Contract Identifier**: `kxdancingwiththestars-26dec31`
+- **Live Trading URL**: [https://kalshi.com/markets/kxdancingwiththestars/who-will-win-dancing-with-the-stars/kxdancingwiththestars-26dec31](https://kalshi.com/markets/kxdancingwiththestars/who-will-win-dancing-with-the-stars/kxdancingwiththestars-26dec31)
+- **API Endpoint**: `https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXDANCINGWITHTHESTARS` (open public REST API, zero API keys required).
+
+Contract prices (`last_price_dollars`, `yes_bid_dollars`, `yes_ask_dollars`) are converted directly into whole percentages (e.g. `0.3300` $\rightarrow$ `33%`) and dynamically integrated into the website and card metrics.
+
+---
+
+### 🧮 Composite Power Index (0–100)
+
+Rather than sorting strictly by cumulative judges' points, the draft board calculates a weighted **Power Index (0–100)** to reflect true fantasy and elimination survival probability:
+
+$$\text{Power Index} = (0.45 \times \text{Scores \& Momentum}) + (0.25 \times \text{Kalshi Win Odds}) + (0.15 \times \text{Pro Pedigree}) + (0.15 \times \text{Fan Reach})$$
+
+1. **45% Judges' Scoring Floor & Momentum**:
+   - Average score out of 30 normalized to a 100-point scale.
+   - Week-over-week performance momentum adjustment ($\pm 1.5 \times \Delta$, capped at $\pm 6$ points) awarding badges like `Surging (+6)` or `Riser (+3)`.
+2. **25% Kalshi Market Win Odds**:
+   - Market implied probability from contract `kxdancingwiththestars-26dec31` scaled to 100.
+3. **15% Pro Partner Championship Pedigree**:
+   - Pro title weighting: 3 Mirrorballs = 100 pts, 2 = 85 pts, 1 = 70 pts, 0 = 50 pts (e.g. Mark Ballas 3x, Val Chmerkovskiy 3x, Witney Carson 2x, Jenna Johnson 2x, Daniella Karagach 1x).
+4. **15% Audience Voting Reach & Background Buffer**:
+   - Combined public follower reach across official Instagram and TikTok accounts for both the celebrity and pro.
+   - Athletic discipline and professional dance training bonuses.
+
+---
+
+### 📱 Celebrity Card UI Metrics
+
+Every active contestant card displays three real-time rating pills in the header:
+- **`Power`**: Composite 0–100 Power Index (gold badge).
+- **`Market`**: Real-time implied win percentage from Kalshi (green badge).
+- **`Season`**: Cumulative judges' points out of total possible points (e.g. `41/60`).
+
+---
+
+### 🔄 Automatic Shortcut Synchronization
+
+Whenever the automated updater runs, it re-sorts [`dancers.json`](dancers.json) and [`dancers.txt`](dancers.txt) according to the new Power Index standings and removes eliminated contestants. Apple Shortcuts users automatically receive the updated, highest-leverage roster in their multi-vote menu with zero manual intervention.
 
