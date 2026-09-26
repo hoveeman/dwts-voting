@@ -656,22 +656,23 @@ def update_index_html(wiki_data, market_odds=None):
     theme_title = ep_themes.get(ep_idx, week_lineups.get(lineup_week_num, {}).get('theme', 'Yacht Rock Night'))
     theme_title = theme_title.strip('"').strip()
 
-    # 1. Header season line & snapshot
-    short_date = target_date_str.replace("September", "Sept.").replace("October", "Oct.").replace("November", "Nov.")
-    season_line_new = f'<p class="season-line">Week {lineup_week_num} draft board · {short_date}</p>'
-    content = re.sub(r'<p class="season-line">.*?</p>', season_line_new, content)
-
+    # 1. Update subtle timestamp & quick meta
     now_et = datetime.now(ZoneInfo("America/New_York")).strftime("%b. %-d, %-I:%M %p ET")
-    snapshot_new = (
-        f'<div class="snapshot">\n'
-        f'        <span class="live-pill"><span class="live-dot"></span>Updated {now_et}</span>\n'
-        f'        <span>Season 35</span>\n'
-        f'        <span>{len(active_couples)} couples active</span>\n'
-        f'        <span>{len(all_eliminated)} eliminated</span>\n'
-        f'        <span>Next live show: Tuesday, 8/7c</span>\n'
-        f'      </div>'
+    subtle_update_new = f'<span class="subtle-update"><span class="subtle-dot"></span>Updated {now_et}</span>'
+    content = re.sub(r'<span class="subtle-update">.*?</span>', subtle_update_new, content)
+
+    quick_meta_new = (
+        f'<div class="quick-meta">\n'
+        f'            <span>Season 35</span>\n'
+        f'            <span class="sep">/</span>\n'
+        f'            <span>{len(active_couples)} couples active</span>\n'
+        f'            <span class="sep">/</span>\n'
+        f'            <span>{len(all_eliminated)} eliminated</span>\n'
+        f'            <span class="sep">/</span>\n'
+        f'            <span>Next live show: Tuesday, 8/7c</span>\n'
+        f'          </div>'
     )
-    content = re.sub(r'<div class="snapshot">.*?</div>', snapshot_new, content, flags=re.DOTALL)
+    content = re.sub(r'<div class="quick-meta">.*?</div>', quick_meta_new, content, flags=re.DOTALL)
 
     # 2. Update intro paragraph for the Power Board
     board_intro_new = (
