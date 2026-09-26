@@ -13,6 +13,7 @@ import html
 import json
 import urllib.request
 from datetime import datetime, timezone
+from zoneinfo import ZoneInfo
 
 WORKSPACE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 HTML_FILE = os.path.join(WORKSPACE_DIR, 'index.html')
@@ -428,6 +429,8 @@ def parse_wikipedia_data(raw_html):
                     
                     score_match = re.search(r'^(\d+)', raw_score)
                     score = int(score_match.group(1)) if score_match else None
+                    if score is not None and not (0 <= score <= 40):
+                        score = None
                     
                     music_clean = re.sub(r'\[.*?\]', '', music).strip()
                     music_fmt = music_clean
@@ -658,8 +661,10 @@ def update_index_html(wiki_data, market_odds=None):
     season_line_new = f'<p class="season-line">Week {lineup_week_num} draft board · {short_date}</p>'
     content = re.sub(r'<p class="season-line">.*?</p>', season_line_new, content)
 
+    now_et = datetime.now(ZoneInfo("America/New_York")).strftime("%b. %-d, %-I:%M %p ET")
     snapshot_new = (
         f'<div class="snapshot">\n'
+        f'        <span class="live-pill"><span class="live-dot"></span>Updated {now_et}</span>\n'
         f'        <span>Season 35</span>\n'
         f'        <span>{len(active_couples)} couples active</span>\n'
         f'        <span>{len(all_eliminated)} eliminated</span>\n'
@@ -686,12 +691,34 @@ def update_index_html(wiki_data, market_odds=None):
         flags=re.DOTALL
     )
 
+    # Guardrail 1: Round-Completion Gate for Leaderboard & Composite Power Index
+    # A week is only considered "completed" if all currently active couples have a valid score recorded.
+    # During the Tuesday 8-10 PM ET broadcast, early dancers will have Week N scores recorded on Wikipedia
+    # before late dancers have performed. Gating leaderboard aggregation to completed rounds ensures
+    # the main Power Board remains fair, normalized (e.g. all out of 60), and free of mid-broadcast scoring skew.
+    # Individual live scores for the current in-progress week are displayed directly in the Week Lineup card.
+    completed_weeks = set()
+    all_weeks = set()
+    for perfs in couple_history.values():
+        for p in perfs:
+            all_weeks.add(p['week'])
+
+    for w in all_weeks:
+        scored_active = sum(
+            1 for name in active_couples
+            if any(p['week'] == w and p['score'] is not None for p in couple_history.get(name, []))
+        )
+        if scored_active == len(active_couples):
+            completed_weeks.add(w)
+
+    print(f"Verified completed weeks across all active couples: {sorted(list(completed_weeks))}")
+
     # 3. Build dancers array in JS with COMPOSITE POWER INDEX & MARKET ODDS
     active_dancers_raw = []
     for name in active_couples:
         meta = COUPLE_REGISTRY[name]
         perfs = couple_history.get(name, [])
-        valid_weeks = [p for p in perfs if p['score'] is not None]
+        valid_weeks = [p for p in perfs if p['score'] is not None and p['week'] in completed_weeks]
         total_score = sum(w['score'] for w in valid_weeks)
         latest_score = valid_weeks[-1]['score'] if valid_weeks else 0
         prev_score = valid_weeks[-2]['score'] if len(valid_weeks) >= 2 else latest_score
@@ -825,7 +852,12 @@ def update_index_html(wiki_data, market_odds=None):
             meta = COUPLE_REGISTRY[c['name']]
             dance = c.get('dance', 'TBA')
             song = c.get('song', 'TBA')
-            item = f'          <div class="lineup-item"><span class="lineup-no">{num_str}</span><div><span class="lineup-couple">{c["name"]} &amp; {meta["proName"]}</span><span class="lineup-dance">{dance}</span><span class="lineup-song">{song}</span></div></div>'
+            score = c.get('score')
+            if score is not None:
+                dance_display = f'{dance} · <strong style="color:#efce82">{score}/30</strong>'
+            else:
+                dance_display = dance
+            item = f'          <div class="lineup-item"><span class="lineup-no">{num_str}</span><div><span class="lineup-couple">{c["name"]} &amp; {meta["proName"]}</span><span class="lineup-dance">{dance_display}</span><span class="lineup-song">{song}</span></div></div>'
             lineup_items.append(item)
 
     day_of_week_date = f"Tuesday, {target_date_str.rsplit(',', 1)[0].strip()}" if ',' in target_date_str else f"Tuesday, {target_date_str}"
