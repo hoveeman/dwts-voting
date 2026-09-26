@@ -27,28 +27,21 @@
     body{margin:0;background:var(--bg);color:var(--ink);font-family:"IBM Plex Sans",sans-serif;line-height:1.52}
     a{color:inherit}
     button,input{font:inherit}
-    .hero{min-height:560px;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(370px,.95fr);background:var(--nav);color:#fff}
-    .hero-copy{padding:clamp(42px,7vw,104px) clamp(24px,7vw,110px);display:flex;flex-direction:column;justify-content:center}
-    .season-line{display:flex;align-items:center;gap:10px;color:#efce82;font-size:.79rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:18px}
-    .season-line:before{content:"";width:34px;height:2px;background:#efce82}
-    h1{font-family:"Bodoni Moda",serif;font-size:clamp(3.2rem,7.6vw,7.2rem);font-weight:900;line-height:.88;letter-spacing:-.055em;margin:0;max-width:820px}
-    .hero-copy>p{font-size:clamp(1rem,1.6vw,1.28rem);max-width:650px;color:#d3d5d6;margin:25px 0 0}
-    .snapshot{display:flex;flex-wrap:wrap;gap:8px;margin-top:30px}
-    .snapshot span{border:1px solid #56595c;padding:8px 11px;font-size:.79rem;color:#f2f2ee}
-    .snapshot span.live-pill{border-color:rgba(101,183,152,.6);color:#b3e9d3;display:inline-flex;align-items:center;gap:7px}
-    .live-dot{width:7px;height:7px;border-radius:50%;background:#48c78e;display:inline-block;box-shadow:0 0 6px #48c78e}
-    .hero-image{position:relative;min-height:400px;overflow:hidden}
-    .hero-image img{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(.82) contrast(1.07)}
-    .hero-image:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#191a1c 0,rgba(25,26,28,.18) 30%,transparent 65%),linear-gradient(0deg,rgba(0,0,0,.45),transparent 45%)}
-    .photo-credit{position:absolute;z-index:2;right:14px;bottom:10px;font-size:.68rem;color:#eee;text-decoration:none;background:rgba(0,0,0,.55);padding:4px 7px}
-    .tabs{position:sticky;top:0;z-index:10;background:rgba(25,26,28,.97);border-top:1px solid #34373a;border-bottom:1px solid #34373a;display:flex;justify-content:center;gap:3px;padding:7px 12px;overflow:auto;scrollbar-width:none}
+    .tabs{position:sticky;top:0;z-index:10;background:rgba(25,26,28,.97);border-bottom:1px solid #34373a;display:flex;justify-content:center;gap:3px;padding:7px 12px;overflow:auto;scrollbar-width:none}
     .tabs a{color:#e9e9e5;text-decoration:none;padding:10px 14px;font-size:.82rem;font-weight:700;white-space:nowrap}
     .tabs a:hover,.tabs a:focus{background:#343638;color:#fff;outline:none}
-    main{max-width:1240px;margin:0 auto;padding:clamp(42px,6vw,88px) clamp(18px,4vw,54px) 80px}
-    .section-head{display:grid;grid-template-columns:minmax(0,1fr) minmax(260px,430px);gap:30px;align-items:end;margin-bottom:28px}
-    .kicker{color:var(--red);font-weight:700;font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;margin:0 0 8px}
+    main{max-width:1240px;margin:0 auto;padding:clamp(28px,4vw,56px) clamp(18px,4vw,54px) 80px}
+    .section-head{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(260px,440px);gap:30px;align-items:end;margin-bottom:28px}
+    .kicker-wrap{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:10px}
+    .kicker{color:var(--red);font-weight:700;font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;margin:0}
+    .subtle-update{display:inline-flex;align-items:center;gap:6px;font-size:.74rem;color:var(--muted);font-weight:500}
+    .subtle-dot{width:5px;height:5px;border-radius:50%;background:var(--green);opacity:.85;display:inline-block;flex-shrink:0}
+    h1{font-family:"Bodoni Moda",serif;font-size:clamp(2.5rem,5.6vw,4.6rem);font-weight:900;line-height:.93;letter-spacing:-.045em;margin:0}
+    .hero-sub{color:var(--muted);font-size:clamp(.94rem,1.35vw,1.1rem);line-height:1.45;margin:12px 0 0;max-width:620px}
+    .quick-meta{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:14px;font-size:.78rem;color:var(--muted);font-weight:500}
+    .quick-meta .sep{opacity:.35}
     h2{font-family:"Bodoni Moda",serif;font-size:clamp(2.25rem,4.8vw,4.4rem);line-height:.98;letter-spacing:-.035em;margin:0}
-    .section-head>p{color:var(--muted);margin:0;font-size:.95rem}
+    .section-head>p{color:var(--muted);margin:0;font-size:.92rem;line-height:1.48}
     .controls{display:flex;gap:8px;flex-wrap:wrap;margin:22px 0 28px}
     .filter{border:1px solid var(--line);background:var(--paper);color:var(--ink);padding:9px 13px;border-radius:999px;cursor:pointer;font-size:.82rem;font-weight:700}
     .filter.active{background:var(--ink);color:var(--paper);border-color:var(--ink)}
@@ -144,48 +137,23 @@
     .method{font-size:.76rem;color:var(--muted);margin-top:54px;padding-top:22px;border-top:1px solid var(--line);max-width:850px}
     footer{max-width:1240px;margin:0 auto;padding:0 clamp(18px,4vw,54px) 56px;color:var(--muted);font-size:.72rem}
     @media(max-width:900px){
-      .hero{position:relative;grid-template-columns:1fr;min-height:auto;overflow:hidden;background:#090a0b}
-      .hero-image{position:absolute;inset:0;width:100%;height:100%;min-height:0;z-index:1}
-      .hero-image img{width:100%;height:100%;object-fit:cover;object-position:center 20%;opacity:.34;filter:saturate(.75) contrast(1.1)}
-      .hero-image:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(9,10,11,.52) 0%,rgba(9,10,11,.76) 45%,rgba(9,10,11,.97) 100%)}
-      .hero-copy{position:relative;z-index:2;min-height:auto;padding:clamp(30px,5vw,52px) clamp(16px,4vw,36px)}
-      .photo-credit{position:absolute;z-index:3;right:10px;bottom:8px;font-size:.62rem;opacity:.72;padding:2px 6px}
       .section-head,.lineup-head{grid-template-columns:1fr}.board{grid-template-columns:1fr}.eliminated-card{grid-template-columns:minmax(220px,.8fr) 1.2fr}.sleeper-grid{grid-template-columns:repeat(2,1fr)}.theme-grid{grid-template-columns:repeat(2,1fr)}.spotlight,.vote{grid-template-columns:1fr}.market{min-height:300px}
     }
     @media(max-width:560px){
-      h1{font-size:2.25rem;letter-spacing:-.045em;line-height:.95}
-      .season-line{margin-bottom:10px;font-size:.72rem}
-      .hero-copy{padding:26px 16px 22px;min-height:auto}
-      .hero-copy>p{font-size:.88rem;line-height:1.4;margin:12px 0 0;color:#d5d8da;max-width:520px}
-      .snapshot{margin-top:14px;gap:5px}
-      .snapshot span{padding:5px 8px;font-size:.71rem;background:rgba(18,20,22,.65);backdrop-filter:blur(6px);border-color:rgba(255,255,255,.14)}
+      main{padding:18px 14px 60px}
+      h1{font-size:2.15rem;letter-spacing:-.04em;line-height:.96}
+      .hero-sub{font-size:.88rem;margin-top:8px}
+      .quick-meta{gap:6px;font-size:.73rem;margin-top:10px}
+      .section-head{gap:14px;margin-bottom:18px}
+      .section-head>p{font-size:.84rem;line-height:1.42}
       .tabs{justify-content:center;flex-wrap:wrap;overflow:visible}.tabs a{padding:7px 9px;font-size:.74rem}
-      main{padding-inline:14px}.card{grid-template-columns:50px 1fr}.rank{grid-row:1 / 3;font-size:1.72rem;padding-top:17px}.couple-photo{grid-column:2;height:auto}.card-body{grid-column:2;padding:15px 13px}.name{font-size:1.28rem}.score{min-width:44px;padding:3px 6px}.score-history{grid-template-columns:1fr}.score-week{padding-block:6px}
+      .card{grid-template-columns:50px 1fr}.rank{grid-row:1 / 3;font-size:1.72rem;padding-top:17px}.couple-photo{grid-column:2;height:auto}.card-body{grid-column:2;padding:15px 13px}.name{font-size:1.28rem}.score{min-width:44px;padding:3px 6px}.score-history{grid-template-columns:1fr}.score-week{padding-block:6px}
       .sleeper-grid,.theme-grid,.lineup-list{grid-template-columns:1fr}.eliminated-card{grid-template-columns:1fr}.eliminated-card img{min-height:0;height:auto;aspect-ratio:3/2}.eliminated-copy{padding:22px 18px 25px}.sleeper-card{min-height:0}.cal-row{grid-template-columns:50px 86px 1fr;gap:8px}.cal-row span{font-size:1rem}.spotlight{margin-inline:-14px}.week-lineup,.vote{margin-inline:-14px}.controls{gap:6px}.filter{padding:8px 11px}
     }
     @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
   </style>
 </head>
 <body>
-  <header class="hero">
-    <div class="hero-copy">
-      <div class="season-line">Week 3 draft board · Sept. 29, 2026</div>
-      <h1>Draft the ballroom like a pro.</h1>
-      <p>Thirteen couples remain. Rank proven technique against fandom, story, and the one thing fantasy players can’t ignore: theme-night fit.</p>
-      <div class="snapshot">
-        <span class="live-pill"><span class="live-dot"></span>Updated Sep. 26, 5:35 AM ET</span>
-        <span>Season 35</span>
-        <span>13 couples active</span>
-        <span>3 eliminated</span>
-        <span>Next live show: Tuesday, 8/7c</span>
-      </div>
-    </div>
-    <div class="hero-image">
-      <img src="assets/dwts-hosts.jpg" alt="Dancing with the Stars hosts Alfonso Ribeiro and Julianne Hough on the ballroom floor">
-      <a class="photo-credit" href="https://parade.com/tv/dancing-with-the-stars-2026-season-35">Photo source: Parade</a>
-    </div>
-  </header>
-
   <nav class="tabs" aria-label="Cheat sheet sections">
     <a href="#board">Power board</a><a href="#voted-off">Voted off</a><a href="#sleepers">Sleepers</a><a href="#themes">Theme edges</a><a href="#voting">Voting</a>
   </nav>
@@ -193,7 +161,23 @@
   <main>
     <section id="board">
       <div class="section-head">
-        <div><p class="kicker">Power rankings</p><h2>The Week 3 board</h2></div>
+        <div>
+          <div class="kicker-wrap">
+            <span class="kicker">Power rankings · Week 3 · Sept. 29, 2026</span>
+            <span class="subtle-update"><span class="subtle-dot"></span>Updated Sep. 26, 5:35 AM ET</span>
+          </div>
+          <h1>The Week 3 board</h1>
+          <p class="hero-sub">Thirteen couples remain. Rank proven technique against fandom, story, and the one thing fantasy players can’t ignore: theme-night fit.</p>
+          <div class="quick-meta">
+            <span>Season 35</span>
+            <span class="sep">/</span>
+            <span>13 couples active</span>
+            <span class="sep">/</span>
+            <span>3 eliminated</span>
+            <span class="sep">/</span>
+            <span>Next live show: Tuesday, 8/7c</span>
+          </div>
+        </div>
         <p>A composite fantasy draft order—not the show’s raw standings. Couples are ranked by a weighted <strong>Power Index (0–100)</strong> integrating four core pillars: <strong>45%</strong> verified judges’ scores &amp; week-over-week momentum, <strong>25%</strong> live <a href="https://kalshi.com/markets/kxdancingwiththestars/who-will-win-dancing-with-the-stars/kxdancingwiththestars-26dec31" target="_blank" rel="noopener noreferrer">Kalshi Season 35 winner market odds</a>, <strong>15%</strong> pro partner Mirrorball pedigree, and <strong>15%</strong> audience voting reach. Each card displays their Power Index, Kalshi win odds, judges’ scores, and social profiles. Tap a lens to reshape the board. <a href="https://abc.com/news/98f4bab4-757f-4f1a-a2e9-d392ff248d56/category/1138628">Season 35 portraits: Disney / ABC</a>.</p>
       </div>
       <div class="controls" aria-label="Filter contestants">
