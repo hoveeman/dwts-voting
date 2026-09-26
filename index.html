@@ -144,11 +144,22 @@
     .method{font-size:.76rem;color:var(--muted);margin-top:54px;padding-top:22px;border-top:1px solid var(--line);max-width:850px}
     footer{max-width:1240px;margin:0 auto;padding:0 clamp(18px,4vw,54px) 56px;color:var(--muted);font-size:.72rem}
     @media(max-width:900px){
-      .hero{grid-template-columns:1fr}.hero-copy{min-height:460px}.hero-image{min-height:330px}.hero-image:after{background:linear-gradient(0deg,rgba(0,0,0,.55),transparent 50%)}
+      .hero{position:relative;grid-template-columns:1fr;min-height:auto;overflow:hidden;background:#090a0b}
+      .hero-image{position:absolute;inset:0;width:100%;height:100%;min-height:0;z-index:1}
+      .hero-image img{width:100%;height:100%;object-fit:cover;object-position:center 20%;opacity:.34;filter:saturate(.75) contrast(1.1)}
+      .hero-image:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(9,10,11,.52) 0%,rgba(9,10,11,.76) 45%,rgba(9,10,11,.97) 100%)}
+      .hero-copy{position:relative;z-index:2;min-height:auto;padding:clamp(30px,5vw,52px) clamp(16px,4vw,36px)}
+      .photo-credit{position:absolute;z-index:3;right:10px;bottom:8px;font-size:.62rem;opacity:.72;padding:2px 6px}
       .section-head,.lineup-head{grid-template-columns:1fr}.board{grid-template-columns:1fr}.eliminated-card{grid-template-columns:minmax(220px,.8fr) 1.2fr}.sleeper-grid{grid-template-columns:repeat(2,1fr)}.theme-grid{grid-template-columns:repeat(2,1fr)}.spotlight,.vote{grid-template-columns:1fr}.market{min-height:300px}
     }
     @media(max-width:560px){
-      h1{font-size:3.3rem}.hero-copy{padding:46px 22px;min-height:430px}.hero-image{min-height:250px}.tabs{justify-content:center;flex-wrap:wrap;overflow:visible}.tabs a{padding:7px 9px;font-size:.74rem}
+      h1{font-size:2.25rem;letter-spacing:-.045em;line-height:.95}
+      .season-line{margin-bottom:10px;font-size:.72rem}
+      .hero-copy{padding:26px 16px 22px;min-height:auto}
+      .hero-copy>p{font-size:.88rem;line-height:1.4;margin:12px 0 0;color:#d5d8da;max-width:520px}
+      .snapshot{margin-top:14px;gap:5px}
+      .snapshot span{padding:5px 8px;font-size:.71rem;background:rgba(18,20,22,.65);backdrop-filter:blur(6px);border-color:rgba(255,255,255,.14)}
+      .tabs{justify-content:center;flex-wrap:wrap;overflow:visible}.tabs a{padding:7px 9px;font-size:.74rem}
       main{padding-inline:14px}.card{grid-template-columns:50px 1fr}.rank{grid-row:1 / 3;font-size:1.72rem;padding-top:17px}.couple-photo{grid-column:2;height:auto}.card-body{grid-column:2;padding:15px 13px}.name{font-size:1.28rem}.score{min-width:44px;padding:3px 6px}.score-history{grid-template-columns:1fr}.score-week{padding-block:6px}
       .sleeper-grid,.theme-grid,.lineup-list{grid-template-columns:1fr}.eliminated-card{grid-template-columns:1fr}.eliminated-card img{min-height:0;height:auto;aspect-ratio:3/2}.eliminated-copy{padding:22px 18px 25px}.sleeper-card{min-height:0}.cal-row{grid-template-columns:50px 86px 1fr;gap:8px}.cal-row span{font-size:1rem}.spotlight{margin-inline:-14px}.week-lineup,.vote{margin-inline:-14px}.controls{gap:6px}.filter{padding:8px 11px}
     }
@@ -162,7 +173,7 @@
       <h1>Draft the ballroom like a pro.</h1>
       <p>Thirteen couples remain. Rank proven technique against fandom, story, and the one thing fantasy players can’t ignore: theme-night fit.</p>
       <div class="snapshot">
-        <span class="live-pill"><span class="live-dot"></span>Updated Sep. 26, 5:34 AM ET</span>
+        <span class="live-pill"><span class="live-dot"></span>Updated Sep. 26, 5:35 AM ET</span>
         <span>Season 35</span>
         <span>13 couples active</span>
         <span>3 eliminated</span>
@@ -238,7 +249,7 @@
       </div>
     </section>
 
-    <aside class="spotlight" aria-label="Market spotlight">
+        <aside class="spotlight" aria-label="Market spotlight">
       <div class="spot-copy">
         <p class="kicker">Live Kalshi market favorite</p>
         <h2>Ezra Frech surged to 40% to win it all.</h2>
@@ -279,7 +290,7 @@
         <article class="theme-card"><div class="theme-date">Nov. 17 &amp; 24 · Weeks 10–11</div><h3>Semi-Finals &amp; Finale</h3><p>Double-dance pressure, redemption routines, and the uninhibited, trophy-deciding Freestyle round.</p><p class="edge"><b>Edge:</b> Championship pro pedigree reigns supreme: Val Chmerkovskiy (3 titles), Mark Ballas (3 titles), and Jenna Johnson (2 titles) vs. Daniella Karagach’s freestyle wizardry.</p></article>
       </div>
 
-      <div class="week-lineup" aria-labelledby="week-lineup-title">
+            <div class="week-lineup" aria-labelledby="week-lineup-title">
         <div class="lineup-head">
           <div><p class="kicker" style="color:#efce82">Tuesday, September 29</p><h3 id="week-lineup-title">Yacht Rock Night lineup</h3></div>
           <p>The 13 active couples, their dance styles, and songs for Week 3.</p>
@@ -334,7 +345,7 @@
       {rank:1,name:'Ezra Frech',age:21,proName:'Daniella Karagach',mirrorballs:1,photo:'ezra-frech-daniella-karagach.jpg',weeks:[{'dance': 'Tango', 'score': 20}, {'dance': 'Cha-cha-cha', 'score': 21}],total:41,powerIndex:76.7,marketProb:40,cats:['anchor', 'athlete', 'social'],tags:['Anchor', '40% Market', '20+ avg', 'Paralympic champion'],case:'Ranks #1 on the composite Power Board (76.7/100) with a 20.5/30 scoring average and 40% market win odds. Paired with Daniella Karagach (1 Mirrorball), Elite athletic body awareness combined with a pro renowned for unlocking dynamic, unconventional choreography.'},
       {rank:2,name:'Jenna Dewan',age:45,proName:'Val Chmerkovskiy',mirrorballs:3,photo:'jenna-dewan-val-chmerkovskiy.jpg',weeks:[{'dance': 'Tango', 'score': 19}, {'dance': 'Jive', 'score': 21}],total:40,powerIndex:72.7,marketProb:15,cats:['anchor', 'dance', 'social'],tags:['Anchor', '15% Market', 'Riser (+2)', 'Pro dance background'],case:'Fantasy anchor averaging 20.0/30 through 2 completed weeks (72.7/100 Power Index). Paired with Val Chmerkovskiy (3 Mirrorballs), A true professional dancer paired with a three-time champion. Her high scoring floor makes her an elite anchor.'},
       {rank:3,name:'Maura Higgins',age:35,proName:'Mark Ballas',mirrorballs:3,photo:'maura-higgins-mark-ballas.jpg',weeks:[{'dance': 'Foxtrot', 'score': 21}, {'dance': 'Cha-cha-cha', 'score': 19}],total:40,powerIndex:66.2,marketProb:13,cats:['anchor', 'social'],tags:['Anchor', '13% Market', '20+ avg', 'No dance experience'],case:'Fantasy anchor averaging 20.0/30 through 2 completed weeks (66.2/100 Power Index). Paired with Mark Ballas (3 Mirrorballs), Mark’s three Mirrorballs and their immense reality fandom make the partnership built for a deep finale run.'},
-      {rank:4,name:'Harry Shum Jr.',age:44,proName:'Jenna Johnson',mirrorballs:2,photo:'harry-shum-jr-jenna-johnson.jpg',weeks:[{'dance': 'Cha-cha-cha', 'score': 21}, {'dance': 'Viennese waltz', 'score': 18}],total:39,powerIndex:65.3,marketProb:15,cats:['anchor', 'dance', 'social'],tags:['Anchor', '15% Market', 'Dip (-3)', 'Pro dance background'],case:'Overcame a temporary scoring dip (-3 WoW), bolstered by a 65.3/100 Power Index. Paired with Jenna Johnson (2 Mirrorballs), Possesses the highest technical ceiling in the cast; the only obvious challenge is overcoming ringer perception.'},
+      {rank:4,name:'Harry Shum Jr.',age:44,proName:'Jenna Johnson',mirrorballs:2,photo:'harry-shum-jr-jenna-johnson.jpg',weeks:[{'dance': 'Cha-cha-cha', 'score': 21}, {'dance': 'Viennese waltz', 'score': 18}],total:39,powerIndex:66.0,marketProb:16,cats:['anchor', 'dance', 'social'],tags:['Anchor', '16% Market', 'Dip (-3)', 'Pro dance background'],case:'Overcame a temporary scoring dip (-3 WoW), bolstered by a 66.0/100 Power Index. Paired with Jenna Johnson (2 Mirrorballs), Possesses the highest technical ceiling in the cast; the only obvious challenge is overcoming ringer perception.'},
       {rank:5,name:'Amber Glenn',age:26,proName:'Pasha Pashkov',mirrorballs:0,photo:'amber-glenn-pasha-pashkov.jpg',weeks:[{'dance': 'Cha-cha-cha', 'score': 18}, {'dance': 'Tango', 'score': 21}],total:39,powerIndex:60.6,marketProb:11,cats:['sleeper', 'athlete', 'social'],tags:['Sleeper', '11% Market', 'Riser (+3)', 'U.S. figure skater'],case:'Surged +3 points in the latest round (21/30 Tango) with a 60.6/100 Power Index. Paired with Pasha Pashkov (0 Mirrorballs), Figure-skating musicality, rotational speed, and Olympic visibility provide a reliable fantasy scoring floor.'},
       {rank:6,name:'Jackson Olson',age:28,proName:'Emma Slater',mirrorballs:1,photo:'jackson-olson-emma-slater.jpg',weeks:[{'dance': 'Cha-cha-cha', 'score': 15}, {'dance': 'Foxtrot', 'score': 18}],total:33,powerIndex:51.9,marketProb:4,cats:['sleeper', 'athlete', 'social'],tags:['Sleeper', '4% Market', 'Riser (+3)', '3M+ social reach'],case:'Surged +3 points in the latest round (18/30 Foxtrot) with a 51.9/100 Power Index. Paired with Emma Slater (1 Mirrorball), Elite social reach and Banana Ball entertainment value give him an exceptional public voting cushion.'},
       {rank:7,name:'Tyler Cameron',age:33,proName:'Sharna Burgess',mirrorballs:1,photo:'tyler-cameron-sharna-burgess.jpg',weeks:[{'dance': 'Tango', 'score': 17}, {'dance': 'Salsa', 'score': 16}],total:33,powerIndex:47.6,marketProb:2,cats:['sleeper', 'athlete', 'social'],tags:['Sleeper', '2% Market', 'Steady', 'Bachelor Nation'],case:'Holding steady with a 16.5/30 scoring average and 2% market win probability. Paired with Sharna Burgess (1 Mirrorball), Athletic frame, broad reality fanbase, and a returning champion pro give him higher upside than middle-pack scores suggest.'},
