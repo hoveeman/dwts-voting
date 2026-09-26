@@ -2,7 +2,7 @@
 
 Backend JSON configurations, auto-update manifest for the **DWTS Voting** iOS Shortcut, and the live interactive **DWTS Season 35 Fantasy Draft Cheat Sheet**.
 
-🌐 **Live Website**: [https://hoveeman.github.io/dwts-voting/](https://hoveeman.github.io/dwts-voting/)  
+🌐 **Live Website**: [https://dwts.hoverhobbies.com](https://dwts.hoverhobbies.com) (or [GitHub Pages](https://hoveeman.github.io/dwts-voting/))  
 📥 **iOS Shortcut**: [Install Shortcut (v1.6 iCloud Link)](https://www.icloud.com/shortcuts/3e951e5ba20b49dc82f5abded923b179)
 
 ---
@@ -188,7 +188,7 @@ To easily follow the exact math on any screen size:
 
 The repository includes the full interactive web application for the **DWTS Season 35 Fantasy Draft & Voting Cheat Sheet**:
 
-- 🌐 **Live Website**: [https://hoveeman.github.io/dwts-voting/](https://hoveeman.github.io/dwts-voting/)
+- 🌐 **Live Website**: [https://dwts.hoverhobbies.com](https://dwts.hoverhobbies.com) (or [https://hoveeman.github.io/dwts-voting/](https://hoveeman.github.io/dwts-voting/))
 - ⚙️ **Workflow File**: [`.github/workflows/daily-update.yml`](.github/workflows/daily-update.yml)
 - 🐍 **Update Script**: [`scripts/update_cheat_sheet.py`](scripts/update_cheat_sheet.py)
 
