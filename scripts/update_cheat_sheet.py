@@ -863,7 +863,7 @@ def update_index_html(wiki_data, market_odds=None):
 
     day_of_week_date = f"Tuesday, {target_date_str.rsplit(',', 1)[0].strip()}" if ',' in target_date_str else f"Tuesday, {target_date_str}"
     new_lineup_html = (
-        f'      <div class="week-lineup" aria-labelledby="week-lineup-title">\n'
+        f'      <div class="week-lineup" id="songs" aria-labelledby="week-lineup-title">\n'
         f'        <div class="lineup-head">\n'
         f'          <div><p class="kicker" style="color:#efce82">{day_of_week_date}</p><h3 id="week-lineup-title">{theme_title} lineup</h3></div>\n'
         f'          <p>The {len(active_couples)} active couples, their dance styles, and songs for Week {lineup_week_num}.</p>\n'
@@ -873,7 +873,7 @@ def update_index_html(wiki_data, market_odds=None):
         f'        </div>\n'
         f'      </div>'
     )
-    content = re.sub(r'<div class="week-lineup"[^>]*>.*?</div>\s*<div class="calendar"', new_lineup_html + '\n\n      <div class="calendar"', content, flags=re.DOTALL)
+    content = re.sub(r'<div class="week-lineup"[^>]*>.*?</div>\s*<div class="calendar"[^>]*>', new_lineup_html + '\n\n      <div class="calendar" id="schedule" aria-label="Season 35 theme calendar">', content, flags=re.DOTALL)
 
     # 6. Highlight current week in theme calendar & update newly announced themes
     content = re.sub(r'<div class="cal-row current">', '<div class="cal-row">', content)
