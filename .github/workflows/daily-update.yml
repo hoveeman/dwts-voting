@@ -2,9 +2,9 @@ name: DWTS Daily & Live Show Update
 
 on:
   schedule:
-    # 1. Tuesday Night Live Window: Every 15 minutes between 8:00 PM and 11:59 PM ET
+    # 1. Tuesday Night Live Window: Every 10 minutes between 8:00 PM and 11:59 PM ET
     # (00:00 UTC to 04:59 UTC Wednesday to support both EDT and EST)
-    - cron: '*/15 0-4 * * 3'
+    - cron: '*/10 0-4 * * 3'
 
     # 2. Daily Check: Every night at 11:00 PM ET (03:00 UTC / 04:00 UTC)
     # for songs, theme updates, and market shifts

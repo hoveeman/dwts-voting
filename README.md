@@ -199,8 +199,8 @@ The repository includes the full interactive web application for the **DWTS Seas
 A headless GitHub Actions runner executes [`scripts/update_cheat_sheet.py`](scripts/update_cheat_sheet.py) on the following schedule:
 
 1. **Tuesday Live Show Window (8:00 PM – 11:59 PM ET)**:
-   - Cron: `*/15 0-4 * * 3` UTC
-   - Runs every **15 minutes** during the live broadcast to ingest live judges’ scores, routine styles, and songs as they happen.
+   - Cron: `*/10 0-4 * * 3` UTC
+   - Runs every **10 minutes** during the live broadcast to ingest live judges’ scores, routine styles, and songs as they happen.
    - Detects when voting closes (~9:50 PM ET) and automatically moves eliminated couples to the `#voted-off` graveyard immediately following the live elimination announcement (~9:57 PM ET).
 2. **Nightly Maintenance (11:00 PM ET)**:
    - Cron: `0 3 * * *` (EDT) and `0 4 * * *` (EST) UTC
