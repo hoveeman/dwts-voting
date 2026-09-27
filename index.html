@@ -926,14 +926,24 @@
         const params=new URLSearchParams(window.location.search);
         if(params.get('live')==='1'){showLiveBanner(true);return;}
         if(params.get('live')==='0'){showLiveBanner(false);return;}
-        const now=new Date();
-        const etStr=now.toLocaleString("en-US",{timeZone:"America/New_York"});
-        const etDate=new Date(etStr);
-        const day=etDate.getDay(); // 2 is Tuesday
-        const hours=etDate.getHours();
-        const mins=etDate.getMinutes();
-        const isTuesdayLive=(day===2 && ((hours===20)||(hours===21)||(hours===22 && mins<=5)));
+
+        // Robust Eastern Time evaluation (handles EDT and EST automatically)
+        const formatter=new Intl.DateTimeFormat("en-US",{
+          timeZone:"America/New_York",
+          weekday:"short",
+          hour:"numeric",
+          minute:"numeric",
+          hourCycle:"h23"
+        });
+        const parts=formatter.formatToParts(new Date()).reduce((acc,p)=>({...acc,[p.type]:p.value}),{});
+        const day=parts.weekday; // "Tue"
+        const hour=parseInt(parts.hour,10);
+        const min=parseInt(parts.minute,10);
+
+        // Tuesday 8:00 PM (20:00) to 10:05 PM (22:05) Eastern Time
+        const isTuesdayLive=(day==="Tue" && (hour===20 || hour===21 || (hour===22 && min<=5)));
         const hasLiveScores=!!document.querySelector('.week-lineup .live-dot-inline');
+
         if(isTuesdayLive||hasLiveScores){
           showLiveBanner(true);
         }
