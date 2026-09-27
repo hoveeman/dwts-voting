@@ -169,6 +169,22 @@
     @media(max-width:900px){
       .section-head,.lineup-head{grid-template-columns:1fr}.board{grid-template-columns:1fr}.eliminated-card{grid-template-columns:minmax(220px,.8fr) 1.2fr}.sleeper-grid{grid-template-columns:repeat(2,1fr)}.theme-grid{grid-template-columns:repeat(2,1fr)}.spotlight,.vote{grid-template-columns:1fr}.market{min-height:300px}
     }
+    .live-banner{background:linear-gradient(90deg,#731521 0%,#430d15 100%);color:#fff;border-bottom:2px solid #efce82;padding:10px clamp(14px,3vw,24px);box-shadow:0 4px 14px rgba(0,0,0,.25);position:sticky;top:38px;z-index:90}
+    .live-banner-content{max-width:1240px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
+    .live-banner-badge{display:flex;align-items:center;gap:10px;font-size:.85rem;flex-wrap:wrap}
+    .live-banner-badge strong{color:#efce82;letter-spacing:.08em;font-size:.8rem;text-transform:uppercase}
+    .live-banner-desc{color:#f5dadd;font-size:.82rem}
+    .live-banner-actions{display:flex;align-items:center;gap:10px}
+    .live-action-btn{display:inline-flex;align-items:center;padding:6px 13px;border-radius:4px;font-size:.78rem;font-weight:700;text-decoration:none;transition:transform .15s ease,filter .15s ease}
+    .live-action-btn:hover{filter:brightness(1.1);transform:translateY(-1px)}
+    .live-action-btn.primary{background:#efce82;color:#1d1f21}
+    .live-action-btn.vote{background:#fff;color:#731521}
+    @media(max-width:640px){
+      .live-banner{position:static;padding:12px 14px}
+      .live-banner-content{flex-direction:column;align-items:stretch;gap:10px}
+      .live-banner-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+      .live-action-btn{justify-content:center;text-align:center;padding:9px 10px;font-size:.76rem}
+    }
     @media(max-width:560px){
       main{padding:18px 14px 60px}
       h1{font-size:2.15rem;letter-spacing:-.04em;line-height:.96}
@@ -189,13 +205,27 @@
     <a href="#board">Power board</a><a href="#scores">Scores &amp; songs</a><a href="#schedule">Schedule</a><a href="#voted-off">Voted off</a><a href="#sleepers">Sleepers</a><a href="#themes">Theme edges</a><a href="#voting">Voting</a>
   </nav>
 
+  <div id="live-banner" class="live-banner" style="display:none" role="region" aria-label="Live show quick actions">
+    <div class="live-banner-content">
+      <div class="live-banner-badge">
+        <span class="live-dot-inline" style="background:#52ffa8"></span>
+        <strong>LIVE ON AIR</strong>
+        <span class="live-banner-desc">Week 3: Yacht Rock Night · Live voting open until ~9:55 PM ET</span>
+      </div>
+      <div class="live-banner-actions">
+        <a href="#scores" class="live-action-btn primary">Live Scores &amp; Songs ↘</a>
+        <a href="https://www.icloud.com/shortcuts/3e951e5ba20b49dc82f5abded923b179" target="_blank" rel="noopener noreferrer" class="live-action-btn vote">Quick SMS Vote 📲</a>
+      </div>
+    </div>
+  </div>
+
   <main>
     <section id="board">
       <div class="section-head">
         <div>
           <div class="kicker-wrap">
             <span class="kicker">Power rankings · Week 3 · Sept. 29, 2026</span>
-            <span class="subtle-update"><span class="subtle-dot"></span>Updated Sep. 27, 12:57 PM ET</span>
+            <span class="subtle-update"><span class="subtle-dot"></span>Updated Sep. 27, 1:00 PM ET</span>
           </div>
           <h1>The Week 3 board</h1>
           <p class="hero-sub">Thirteen couples remain. Rank proven technique against fandom, story, and the one thing fantasy players can’t ignore: theme-night fit.</p>
@@ -264,7 +294,7 @@
       </div>
     </section>
 
-                                        <aside class="spotlight" aria-label="Market spotlight">
+                                                <aside class="spotlight" aria-label="Market spotlight">
       <div class="spot-copy">
         <p class="kicker">Live Kalshi market favorite</p>
         <h2>Ezra Frech surged to 37% to win it all.</h2>
@@ -305,7 +335,7 @@
         <article class="theme-card"><div class="theme-date">Nov. 17 &amp; 24 · Weeks 10–11</div><h3>Semi-Finals &amp; Finale</h3><p>Double-dance pressure, redemption routines, and the uninhibited, trophy-deciding Freestyle round.</p><p class="edge"><b>Edge:</b> Championship pro pedigree reigns supreme: Val Chmerkovskiy (3 titles), Mark Ballas (3 titles), and Jenna Johnson (2 titles) vs. Daniella Karagach’s freestyle wizardry.</p></article>
       </div>
 
-                                                      <div class="week-lineup" id="scores" aria-labelledby="week-lineup-title">
+                                                                  <div class="week-lineup" id="scores" aria-labelledby="week-lineup-title">
         <span id="songs" style="scroll-margin-top:60px"></span>
         <div class="lineup-head">
           <div><p class="kicker" style="color:#efce82">Tuesday, September 29 · Live at 8/7c</p><h3 id="week-lineup-title">Yacht Rock Night: Scores &amp; Songs</h3></div>
@@ -772,19 +802,19 @@
 
   <script>
     const dancers = [
-      {rank:1,name:'Ezra Frech',age:21,proName:'Daniella Karagach',mirrorballs:1,photo:'ezra-frech-daniella-karagach.jpg',weeks:[{'dance': 'Salsa', 'score': 12, 'isLive': false}],total:12,powerIndex:63.2,marketProb:37,cats:['anchor', 'athlete', 'social'],tags:['Anchor', '37% Market', 'Steady', 'Paralympic champion'],case:'Ranks #1 on the composite Power Board (63.2/100) with a 12.0/30 scoring average and 37% market win odds. Paired with Daniella Karagach (1 Mirrorball), Elite athletic body awareness combined with a pro renowned for unlocking dynamic, unconventional choreography.'},
-      {rank:2,name:'Jenna Dewan',age:45,proName:'Val Chmerkovskiy',mirrorballs:3,photo:'jenna-dewan-val-chmerkovskiy.jpg',weeks:[{'dance': 'Salsa', 'score': 12, 'isLive': false}],total:12,powerIndex:59.4,marketProb:15,cats:['anchor', 'dance', 'social'],tags:['Anchor', '15% Market', 'Steady', 'Pro dance background'],case:'Top-tier contender holding rank #2 on the Power Board (59.4/100). Paired with Val Chmerkovskiy (3 Mirrorballs), A true professional dancer paired with a three-time champion. Her high scoring floor makes her an elite anchor.'},
-      {rank:3,name:'Maura Higgins',age:35,proName:'Mark Ballas',mirrorballs:3,photo:'maura-higgins-mark-ballas.jpg',weeks:[{'dance': 'Salsa', 'score': 12, 'isLive': false}],total:12,powerIndex:56.4,marketProb:14,cats:['anchor', 'social'],tags:['Anchor', '14% Market', 'Steady', 'No dance experience'],case:'Top-tier contender holding rank #3 on the Power Board (56.4/100). Paired with Mark Ballas (3 Mirrorballs), Mark’s three Mirrorballs and their immense reality fandom make the partnership built for a deep finale run.'},
-      {rank:4,name:'Harry Shum Jr.',age:44,proName:'Jenna Johnson',mirrorballs:2,photo:'harry-shum-jr-jenna-johnson.jpg',weeks:[{'dance': 'Salsa', 'score': 12, 'isLive': false}],total:12,powerIndex:53.8,marketProb:12,cats:['anchor', 'dance', 'social'],tags:['Anchor', '12% Market', 'Steady', 'Pro dance background'],case:'Top-tier contender holding rank #4 on the Power Board (53.8/100). Paired with Jenna Johnson (2 Mirrorballs), Possesses the highest technical ceiling in the cast; the only obvious challenge is overcoming ringer perception.'},
-      {rank:5,name:'Amber Glenn',age:26,proName:'Pasha Pashkov',mirrorballs:0,photo:'amber-glenn-pasha-pashkov.jpg',weeks:[{'dance': 'Salsa', 'score': 12, 'isLive': false}],total:12,powerIndex:47.3,marketProb:11,cats:['sleeper', 'athlete', 'social'],tags:['Sleeper', '11% Market', 'Steady', 'U.S. figure skater'],case:'Holding steady with a 12.0/30 scoring average and 11% market win probability. Paired with Pasha Pashkov (0 Mirrorballs), Figure-skating musicality, rotational speed, and Olympic visibility provide a reliable fantasy scoring floor.'},
-      {rank:6,name:'Jackson Olson',age:28,proName:'Emma Slater',mirrorballs:1,photo:'jackson-olson-emma-slater.jpg',weeks:[{'dance': 'Salsa', 'score': 12, 'isLive': false}],total:12,powerIndex:43.1,marketProb:4,cats:['sleeper', 'athlete', 'social'],tags:['Sleeper', '4% Market', 'Steady', '3M+ social reach'],case:'Holding steady with a 12.0/30 scoring average and 4% market win probability. Paired with Emma Slater (1 Mirrorball), Elite social reach and Banana Ball entertainment value give him an exceptional public voting cushion.'},
-      {rank:7,name:'Tyler Cameron',age:33,proName:'Sharna Burgess',mirrorballs:1,photo:'tyler-cameron-sharna-burgess.jpg',weeks:[{'dance': 'Salsa', 'score': 12, 'isLive': false}],total:12,powerIndex:41.6,marketProb:2,cats:['athlete', 'social'],tags:['Risk', '2% Market', 'Steady', 'Bachelor Nation'],case:'Holding steady with a 12.0/30 scoring average and 2% market win probability. Paired with Sharna Burgess (1 Mirrorball), Athletic frame, broad reality fanbase, and a returning champion pro give him higher upside than middle-pack scores suggest.'},
-      {rank:8,name:'Guillermo Rodriguez',age:55,proName:'Witney Carson',mirrorballs:2,photo:'guillermo-rodriguez-witney-carson.jpg',weeks:[{'dance': 'Salsa', 'score': 12, 'isLive': false}],total:12,powerIndex:40.2,marketProb:3,cats:[],tags:['Risk', '3% Market', 'Steady', 'Fan favorite'],case:'Holding steady with a 12.0/30 scoring average and 3% market win probability. Paired with Witney Carson (2 Mirrorballs), Carries the lowest scoring average, but reigning champion Witney Carson and Jimmy Kimmel viewers protect him from the bottom.'},
-      {rank:9,name:'Connor Wood',age:31,proName:'Rylee Arnold',mirrorballs:0,photo:'connor-wood-rylee-arnold.jpg',weeks:[{'dance': 'Salsa', 'score': 12, 'isLive': false}],total:12,powerIndex:37.5,marketProb:4,cats:['social'],tags:['Risk', '4% Market', 'Steady', 'Comedy podcast'],case:'Holding steady with a 12.0/30 scoring average and 4% market win probability. Paired with Rylee Arnold (0 Mirrorballs), Rapidly growing digital following and podcast listener loyalty keep him safe while his technique develops.'},
-      {rank:10,name:'Julia Stiles',age:45,proName:'Ezra Sosa',mirrorballs:0,photo:'julia-stiles-ezra-sosa.jpg',weeks:[{'dance': 'Salsa', 'score': 12, 'isLive': false}],total:12,powerIndex:37.2,marketProb:2,cats:['dance', 'social'],tags:['Risk', '2% Market', 'Steady', 'Nostalgia icon'],case:'Holding steady with a 12.0/30 scoring average and 2% market win probability. Paired with Ezra Sosa (0 Mirrorballs), Deep cross-generational nostalgia, screen dance memory, and the season’s cleanest motivational storyline.'},
-      {rank:11,name:'Tatyana Ali',age:47,proName:'Jan Ravnik',mirrorballs:0,photo:'tatyana-ali-jan-ravnik.jpg',weeks:[{'dance': 'Salsa', 'score': 12, 'isLive': false}],total:12,powerIndex:37.1,marketProb:1,cats:['social'],tags:['Risk', '1% Market', 'Steady', 'Fresh Prince icon'],case:'Holding steady with a 12.0/30 scoring average and 1% market win probability. Paired with Jan Ravnik (0 Mirrorballs), The Alfonso Ribeiro reunion and cross-generational warmth generate huge audience affection and voting momentum.'},
-      {rank:12,name:'Ciara Miller',age:30,proName:'Brandon Armstrong',mirrorballs:0,photo:'ciara-miller-brandon-armstrong.jpg',weeks:[{'dance': 'Salsa', 'score': 12, 'isLive': false}],total:12,powerIndex:35.3,marketProb:1,cats:['social'],tags:['Risk', '1% Market', 'Steady', 'Bravo fandom'],case:'Holding steady with a 12.0/30 scoring average and 1% market win probability. Paired with Brandon Armstrong (0 Mirrorballs), Bravo and Traitors viewers are notoriously reliable voters; steady technical growth can push her deep into the bracket.'},
-      {rank:13,name:'Taylor Hanson',age:43,proName:'Britt Stewart',mirrorballs:0,photo:'taylor-hanson-britt-stewart.jpg',weeks:[{'dance': 'Salsa', 'score': 12, 'isLive': false}],total:12,powerIndex:33.5,marketProb:1,cats:[],tags:['Risk', '1% Market', 'Steady', 'Musician timing'],case:'Holding steady with a 12.0/30 scoring average and 1% market win probability. Paired with Britt Stewart (0 Mirrorballs), Natural musical rhythm and a dedicated multi-decade fan community provide durability into themed music weeks.'}
+      {rank:1,name:'Ezra Frech',age:21,proName:'Daniella Karagach',mirrorballs:1,photo:'ezra-frech-daniella-karagach.jpg',weeks:[{'dance': 'Tango', 'score': 20, 'isLive': false}, {'dance': 'Cha-cha-cha', 'score': 21, 'isLive': false}],total:41,powerIndex:76.7,marketProb:37,cats:['anchor', 'athlete', 'social'],tags:['Anchor', '37% Market', '20+ avg', 'Paralympic champion'],case:'Ranks #1 on the composite Power Board (76.7/100) with a 20.5/30 scoring average and 37% market win odds. Paired with Daniella Karagach (1 Mirrorball), Elite athletic body awareness combined with a pro renowned for unlocking dynamic, unconventional choreography.'},
+      {rank:2,name:'Jenna Dewan',age:45,proName:'Val Chmerkovskiy',mirrorballs:3,photo:'jenna-dewan-val-chmerkovskiy.jpg',weeks:[{'dance': 'Tango', 'score': 19, 'isLive': false}, {'dance': 'Jive', 'score': 21, 'isLive': false}],total:40,powerIndex:72.7,marketProb:15,cats:['anchor', 'dance', 'social'],tags:['Anchor', '15% Market', 'Riser (+2)', 'Pro dance background'],case:'Fantasy anchor averaging 20.0/30 through 2 completed weeks (72.7/100 Power Index). Paired with Val Chmerkovskiy (3 Mirrorballs), A true professional dancer paired with a three-time champion. Her high scoring floor makes her an elite anchor.'},
+      {rank:3,name:'Maura Higgins',age:35,proName:'Mark Ballas',mirrorballs:3,photo:'maura-higgins-mark-ballas.jpg',weeks:[{'dance': 'Foxtrot', 'score': 21, 'isLive': false}, {'dance': 'Cha-cha-cha', 'score': 19, 'isLive': false}],total:40,powerIndex:66.2,marketProb:13,cats:['anchor', 'social'],tags:['Anchor', '13% Market', '20+ avg', 'No dance experience'],case:'Fantasy anchor averaging 20.0/30 through 2 completed weeks (66.2/100 Power Index). Paired with Mark Ballas (3 Mirrorballs), Mark’s three Mirrorballs and their immense reality fandom make the partnership built for a deep finale run.'},
+      {rank:4,name:'Harry Shum Jr.',age:44,proName:'Jenna Johnson',mirrorballs:2,photo:'harry-shum-jr-jenna-johnson.jpg',weeks:[{'dance': 'Cha-cha-cha', 'score': 21, 'isLive': false}, {'dance': 'Viennese waltz', 'score': 18, 'isLive': false}],total:39,powerIndex:63.0,marketProb:12,cats:['anchor', 'dance', 'social'],tags:['Anchor', '12% Market', 'Dip (-3)', 'Pro dance background'],case:'Overcame a temporary scoring dip (-3 WoW), bolstered by a 63.0/100 Power Index. Paired with Jenna Johnson (2 Mirrorballs), Possesses the highest technical ceiling in the cast; the only obvious challenge is overcoming ringer perception.'},
+      {rank:5,name:'Amber Glenn',age:26,proName:'Pasha Pashkov',mirrorballs:0,photo:'amber-glenn-pasha-pashkov.jpg',weeks:[{'dance': 'Cha-cha-cha', 'score': 18, 'isLive': false}, {'dance': 'Tango', 'score': 21, 'isLive': false}],total:39,powerIndex:60.6,marketProb:11,cats:['sleeper', 'athlete', 'social'],tags:['Sleeper', '11% Market', 'Riser (+3)', 'U.S. figure skater'],case:'Surged +3 points in the latest round (21/30 Tango) with a 60.6/100 Power Index. Paired with Pasha Pashkov (0 Mirrorballs), Figure-skating musicality, rotational speed, and Olympic visibility provide a reliable fantasy scoring floor.'},
+      {rank:6,name:'Jackson Olson',age:28,proName:'Emma Slater',mirrorballs:1,photo:'jackson-olson-emma-slater.jpg',weeks:[{'dance': 'Cha-cha-cha', 'score': 15, 'isLive': false}, {'dance': 'Foxtrot', 'score': 18, 'isLive': false}],total:33,powerIndex:51.9,marketProb:4,cats:['sleeper', 'athlete', 'social'],tags:['Sleeper', '4% Market', 'Riser (+3)', '3M+ social reach'],case:'Surged +3 points in the latest round (18/30 Foxtrot) with a 51.9/100 Power Index. Paired with Emma Slater (1 Mirrorball), Elite social reach and Banana Ball entertainment value give him an exceptional public voting cushion.'},
+      {rank:7,name:'Tyler Cameron',age:33,proName:'Sharna Burgess',mirrorballs:1,photo:'tyler-cameron-sharna-burgess.jpg',weeks:[{'dance': 'Tango', 'score': 17, 'isLive': false}, {'dance': 'Salsa', 'score': 16, 'isLive': false}],total:33,powerIndex:47.6,marketProb:2,cats:['sleeper', 'athlete', 'social'],tags:['Sleeper', '2% Market', 'Steady', 'Bachelor Nation'],case:'Holding steady with a 16.5/30 scoring average and 2% market win probability. Paired with Sharna Burgess (1 Mirrorball), Athletic frame, broad reality fanbase, and a returning champion pro give him higher upside than middle-pack scores suggest.'},
+      {rank:8,name:'Tatyana Ali',age:47,proName:'Jan Ravnik',mirrorballs:0,photo:'tatyana-ali-jan-ravnik.jpg',weeks:[{'dance': 'Jive', 'score': 12, 'isLive': false}, {'dance': 'Foxtrot', 'score': 18, 'isLive': false}],total:30,powerIndex:44.3,marketProb:1,cats:['sleeper', 'social'],tags:['Sleeper', '1% Market', 'Surging (+6)', 'Fresh Prince icon'],case:'Surged +6 points in the latest round (18/30 Foxtrot) with a 44.3/100 Power Index. Paired with Jan Ravnik (0 Mirrorballs), The Alfonso Ribeiro reunion and cross-generational warmth generate huge audience affection and voting momentum.'},
+      {rank:9,name:'Ciara Miller',age:30,proName:'Brandon Armstrong',mirrorballs:0,photo:'ciara-miller-brandon-armstrong.jpg',weeks:[{'dance': 'Foxtrot', 'score': 15, 'isLive': false}, {'dance': 'Tango', 'score': 18, 'isLive': false}],total:33,powerIndex:44.0,marketProb:1,cats:['social'],tags:['Contender', '1% Market', 'Riser (+3)', 'Bravo fandom'],case:'Surged +3 points in the latest round (18/30 Tango) with a 44.0/100 Power Index. Paired with Brandon Armstrong (0 Mirrorballs), Bravo and Traitors viewers are notoriously reliable voters; steady technical growth can push her deep into the bracket.'},
+      {rank:10,name:'Julia Stiles',age:45,proName:'Ezra Sosa',mirrorballs:0,photo:'julia-stiles-ezra-sosa.jpg',weeks:[{'dance': 'Quickstep', 'score': 18, 'isLive': false}, {'dance': 'Tango', 'score': 16, 'isLive': false}],total:34,powerIndex:43.4,marketProb:2,cats:['dance', 'social'],tags:['Contender', '2% Market', 'Steady', 'Nostalgia icon'],case:'Holding steady with a 17.0/30 scoring average and 2% market win probability. Paired with Ezra Sosa (0 Mirrorballs), Deep cross-generational nostalgia, screen dance memory, and the season’s cleanest motivational storyline.'},
+      {rank:11,name:'Connor Wood',age:31,proName:'Rylee Arnold',mirrorballs:0,photo:'connor-wood-rylee-arnold.jpg',weeks:[{'dance': 'Cha-cha-cha', 'score': 16, 'isLive': false}, {'dance': 'Tango', 'score': 15, 'isLive': false}],total:31,powerIndex:42.1,marketProb:4,cats:['social'],tags:['Contender', '4% Market', 'Steady', 'Comedy podcast'],case:'Holding steady with a 15.5/30 scoring average and 4% market win probability. Paired with Rylee Arnold (0 Mirrorballs), Rapidly growing digital following and podcast listener loyalty keep him safe while his technique develops.'},
+      {rank:12,name:'Guillermo Rodriguez',age:55,proName:'Witney Carson',mirrorballs:2,photo:'guillermo-rodriguez-witney-carson.jpg',weeks:[{'dance': 'Cha-cha-cha', 'score': 10, 'isLive': false}, {'dance': 'Paso doble', 'score': 12, 'isLive': false}],total:22,powerIndex:40.1,marketProb:3,cats:[],tags:['Risk', '3% Market', 'Riser (+2)', 'Fan favorite'],case:'Holding steady with a 11.0/30 scoring average and 3% market win probability. Paired with Witney Carson (2 Mirrorballs), Carries the lowest scoring average, but reigning champion Witney Carson and Jimmy Kimmel viewers protect him from the bottom.'},
+      {rank:13,name:'Taylor Hanson',age:43,proName:'Britt Stewart',mirrorballs:0,photo:'taylor-hanson-britt-stewart.jpg',weeks:[{'dance': 'Quickstep', 'score': 16, 'isLive': false}, {'dance': 'Cha-cha-cha', 'score': 15, 'isLive': false}],total:31,powerIndex:38.0,marketProb:1,cats:[],tags:['Risk', '1% Market', 'Steady', 'Musician timing'],case:'Holding steady with a 15.5/30 scoring average and 1% market win probability. Paired with Britt Stewart (0 Mirrorballs), Natural musical rhythm and a dedicated multi-decade fan community provide durability into themed music weeks.'}
     ];
     const socialByName = {
       "Maura Higgins": {
@@ -870,6 +900,30 @@
       btn.classList.add('active');render(btn.dataset.filter);
     }));
     render();
+
+    function checkLiveShow(){
+      try{
+        const params=new URLSearchParams(window.location.search);
+        if(params.get('live')==='1'){showLiveBanner(true);return;}
+        if(params.get('live')==='0'){showLiveBanner(false);return;}
+        const now=new Date();
+        const etStr=now.toLocaleString("en-US",{timeZone:"America/New_York"});
+        const etDate=new Date(etStr);
+        const day=etDate.getDay(); // 2 is Tuesday
+        const hours=etDate.getHours();
+        const mins=etDate.getMinutes();
+        const isTuesdayLive=(day===2 && ((hours===20)||(hours===21)||(hours===22 && mins<=5)));
+        const hasLiveScores=!!document.querySelector('.week-lineup .live-dot-inline');
+        if(isTuesdayLive||hasLiveScores){
+          showLiveBanner(true);
+        }
+      }catch(e){}
+    }
+    function showLiveBanner(show){
+      const banner=document.getElementById('live-banner');
+      if(banner){banner.style.display=show?'block':'none';}
+    }
+    checkLiveShow();
   </script>
 </body>
 </html>

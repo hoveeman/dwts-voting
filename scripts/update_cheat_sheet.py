@@ -719,6 +719,7 @@ def update_index_html(wiki_data, market_odds=None):
     active_dancers_raw = []
     for name in active_couples:
         meta = COUPLE_REGISTRY[name]
+        perfs = couple_history.get(name, [])
         valid_weeks = [p for p in perfs if p['score'] is not None]
         for p in valid_weeks:
             p['is_live'] = (p['week'] not in completed_weeks)
