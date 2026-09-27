@@ -169,21 +169,30 @@
     @media(max-width:900px){
       .section-head,.lineup-head{grid-template-columns:1fr}.board{grid-template-columns:1fr}.eliminated-card{grid-template-columns:minmax(220px,.8fr) 1.2fr}.sleeper-grid{grid-template-columns:repeat(2,1fr)}.theme-grid{grid-template-columns:repeat(2,1fr)}.spotlight,.vote{grid-template-columns:1fr}.market{min-height:300px}
     }
-    .live-banner{background:linear-gradient(90deg,#731521 0%,#430d15 100%);color:#fff;border-bottom:2px solid #efce82;padding:10px clamp(14px,3vw,24px);box-shadow:0 4px 14px rgba(0,0,0,.25);position:sticky;top:38px;z-index:90}
-    .live-banner-content{max-width:1240px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
-    .live-banner-badge{display:flex;align-items:center;gap:10px;font-size:.85rem;flex-wrap:wrap}
-    .live-banner-badge strong{color:#efce82;letter-spacing:.08em;font-size:.8rem;text-transform:uppercase}
-    .live-banner-desc{color:#f5dadd;font-size:.82rem}
-    .live-banner-actions{display:flex;align-items:center;gap:10px}
-    .live-action-btn{display:inline-flex;align-items:center;padding:6px 13px;border-radius:4px;font-size:.78rem;font-weight:700;text-decoration:none;transition:transform .15s ease,filter .15s ease}
-    .live-action-btn:hover{filter:brightness(1.1);transform:translateY(-1px)}
-    .live-action-btn.primary{background:#efce82;color:#1d1f21}
-    .live-action-btn.vote{background:#fff;color:#731521}
-    @media(max-width:640px){
-      .live-banner{position:static;padding:12px 14px}
-      .live-banner-content{flex-direction:column;align-items:stretch;gap:10px}
-      .live-banner-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-      .live-action-btn{justify-content:center;text-align:center;padding:9px 10px;font-size:.76rem}
+    .live-banner{background:radial-gradient(140% 120% at 50% 0%,#3d070e 0%,#1c0407 65%,#110103 100%);color:#fff;border-top:1px solid rgba(239,206,130,.25);border-bottom:1px solid rgba(239,206,130,.4);padding:13px clamp(16px,4vw,32px);box-shadow:0 8px 24px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.08);position:sticky;top:38px;z-index:90;backdrop-filter:blur(12px)}
+    .live-banner-content{max-width:1240px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:16px}
+    .live-banner-left{display:flex;flex-direction:column;gap:4px}
+    .live-beacon-wrap{display:inline-flex;align-items:center;gap:7px}
+    .live-pulse-dot{width:8px;height:8px;background:#52ffa8;border-radius:50%;box-shadow:0 0 10px #52ffa8,0 0 2px #52ffa8;animation:pulse 1.5s infinite;flex-shrink:0}
+    .live-kicker{font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#efce82}
+    .live-title-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+    .live-show-title{font-family:"Bodoni Moda",serif;font-size:clamp(1.15rem,2.4vw,1.45rem);margin:0;line-height:1.15;color:#fff;font-weight:700}
+    .live-timing-pill{font-size:.73rem;color:#f0cad0;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);padding:2px 8px;border-radius:999px;white-space:nowrap}
+    .live-banner-actions{display:flex;align-items:center;gap:10px;flex-shrink:0}
+    .live-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:9px 16px;border-radius:6px;font-size:.8rem;font-weight:700;text-decoration:none;white-space:nowrap;transition:all .18s ease;box-sizing:border-box}
+    .live-btn svg{width:13px;height:13px;flex-shrink:0}
+    .live-btn-scores{background:linear-gradient(135deg,#efce82 0%,#caa452 100%);color:#1a1202;border:1px solid #f7dfa4;box-shadow:0 2px 8px rgba(239,206,130,.25)}
+    .live-btn-scores:hover{background:linear-gradient(135deg,#f7dfa4 0%,#d8b260 100%);transform:translateY(-1px);box-shadow:0 4px 12px rgba(239,206,130,.35)}
+    .live-btn-vote{background:rgba(255,255,255,.1);color:#fff;border:1px solid rgba(255,255,255,.22);backdrop-filter:blur(8px);box-shadow:0 2px 8px rgba(0,0,0,.2)}
+    .live-btn-vote:hover{background:rgba(255,255,255,.18);border-color:rgba(255,255,255,.35);transform:translateY(-1px)}
+    @media(max-width:768px){
+      .live-banner{position:static;padding:14px 16px}
+      .live-banner-content{flex-direction:column;align-items:stretch;gap:12px}
+      .live-banner-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;width:100%}
+      .live-btn{padding:11px 8px;font-size:.76rem;width:100%}
+    }
+    @media(max-width:390px){
+      .live-banner-actions{grid-template-columns:1fr;gap:8px}
     }
     @media(max-width:560px){
       main{padding:18px 14px 60px}
@@ -207,14 +216,25 @@
 
   <div id="live-banner" class="live-banner" style="display:none" role="region" aria-label="Live show quick actions">
     <div class="live-banner-content">
-      <div class="live-banner-badge">
-        <span class="live-dot-inline" style="background:#52ffa8"></span>
-        <strong>LIVE ON AIR</strong>
-        <span class="live-banner-desc">Week 3: Yacht Rock Night · Live voting open until ~9:55 PM ET</span>
+      <div class="live-banner-left">
+        <div class="live-beacon-wrap">
+          <span class="live-pulse-dot"></span>
+          <span class="live-kicker">Live Broadcast · ABC &amp; Disney+</span>
+        </div>
+        <div class="live-title-row">
+          <h3 class="live-show-title">Week 3: Yacht Rock Night</h3>
+          <span class="live-timing-pill">Voting open until ~9:55 PM ET</span>
+        </div>
       </div>
       <div class="live-banner-actions">
-        <a href="#scores" class="live-action-btn primary">Live Scores &amp; Songs ↘</a>
-        <a href="https://www.icloud.com/shortcuts/3e951e5ba20b49dc82f5abded923b179" target="_blank" rel="noopener noreferrer" class="live-action-btn vote">Quick SMS Vote 📲</a>
+        <a href="#scores" class="live-btn live-btn-scores">
+          <span>Live Scores &amp; Lineup</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="7" x2="17" y2="17"></line><polyline points="17 7 17 17 7 17"></polyline></svg>
+        </a>
+        <a href="https://www.icloud.com/shortcuts/3e951e5ba20b49dc82f5abded923b179" target="_blank" rel="noopener noreferrer" class="live-btn live-btn-vote">
+          <span>Quick SMS Vote</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+        </a>
       </div>
     </div>
   </div>
@@ -225,7 +245,7 @@
         <div>
           <div class="kicker-wrap">
             <span class="kicker">Power rankings · Week 3 · Sept. 29, 2026</span>
-            <span class="subtle-update"><span class="subtle-dot"></span>Updated Sep. 27, 1:00 PM ET</span>
+            <span class="subtle-update"><span class="subtle-dot"></span>Updated Sep. 27, 1:04 PM ET</span>
           </div>
           <h1>The Week 3 board</h1>
           <p class="hero-sub">Thirteen couples remain. Rank proven technique against fandom, story, and the one thing fantasy players can’t ignore: theme-night fit.</p>
@@ -294,7 +314,7 @@
       </div>
     </section>
 
-                                                <aside class="spotlight" aria-label="Market spotlight">
+                                                    <aside class="spotlight" aria-label="Market spotlight">
       <div class="spot-copy">
         <p class="kicker">Live Kalshi market favorite</p>
         <h2>Ezra Frech surged to 37% to win it all.</h2>
@@ -335,7 +355,7 @@
         <article class="theme-card"><div class="theme-date">Nov. 17 &amp; 24 · Weeks 10–11</div><h3>Semi-Finals &amp; Finale</h3><p>Double-dance pressure, redemption routines, and the uninhibited, trophy-deciding Freestyle round.</p><p class="edge"><b>Edge:</b> Championship pro pedigree reigns supreme: Val Chmerkovskiy (3 titles), Mark Ballas (3 titles), and Jenna Johnson (2 titles) vs. Daniella Karagach’s freestyle wizardry.</p></article>
       </div>
 
-                                                                  <div class="week-lineup" id="scores" aria-labelledby="week-lineup-title">
+                                                                        <div class="week-lineup" id="scores" aria-labelledby="week-lineup-title">
         <span id="songs" style="scroll-margin-top:60px"></span>
         <div class="lineup-head">
           <div><p class="kicker" style="color:#efce82">Tuesday, September 29 · Live at 8/7c</p><h3 id="week-lineup-title">Yacht Rock Night: Scores &amp; Songs</h3></div>
