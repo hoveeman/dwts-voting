@@ -997,6 +997,79 @@ def update_index_html(wiki_data, market_odds=None):
             f'        </div>'
         )
 
+    # Build expandable past weeks archive (e.g. Week 2, Week 1)
+    past_weeks = [w for w in sorted(week_lineups.keys(), reverse=True) if w < lineup_week_num]
+    past_weeks_blocks = []
+    
+    for pw in past_weeks:
+        pw_info = week_lineups[pw]
+        pw_theme = pw_info.get('theme', f'Week {pw}')
+        pw_couples = pw_info.get('couples', [])
+        pw_scored = [c for c in pw_couples if c.get('score') is not None]
+        if not pw_scored:
+            continue
+        
+        pw_sorted = sorted(pw_scored, key=lambda c: (-c['score'], c['name']))
+        pw_top_score = pw_sorted[0]['score'] if pw_sorted else 30
+        
+        pw_items = []
+        for r_idx, c in enumerate(pw_sorted, start=1):
+            num_str = f"#{r_idx}"
+            meta = COUPLE_REGISTRY.get(c['name'], {})
+            dance = c.get('dance', 'TBA')
+            song = c.get('song', 'TBA')
+            score = c.get('score', 0)
+            is_leader = (score == pw_top_score)
+            leader_badge = '<span class="leader-tag">High Score</span>' if is_leader else ''
+            elim_badge = '<span class="elim-tag">Eliminated</span>' if ('eliminated' in c.get('result', '').lower()) else ''
+            score_class = 'lineup-score-box leader' if is_leader else 'lineup-score-box'
+            
+            item = (
+                f'              <div class="lineup-item">\n'
+                f'                <span class="lineup-no">{num_str}</span>\n'
+                f'                <div>\n'
+                f'                  <span class="lineup-couple">{c["name"]} &amp; {meta.get("proName", "")}{leader_badge}{elim_badge}</span>\n'
+                f'                  <span class="lineup-dance">{dance}</span>\n'
+                f'                  <span class="lineup-song">{song}</span>\n'
+                f'                </div>\n'
+                f'                <div class="{score_class}"><strong>{score}</strong><span>/30</span></div>\n'
+                f'              </div>'
+            )
+            pw_items.append(item)
+        
+        ep_date_val = ep_dates.get(pw + 1, '')
+        date_snippet = f" · {ep_date_val.rsplit(',', 1)[0]}" if ep_date_val else ''
+        
+        details_block = (
+            f'          <details class="past-week-details">\n'
+            f'            <summary>\n'
+            f'              <div class="pw-summary-left">\n'
+            f'                <span class="pw-summary-title">Week {pw} · {pw_theme}{date_snippet}</span>\n'
+            f'                <span class="pw-summary-meta">{len(pw_couples)} couples · High score: {pw_top_score}/30</span>\n'
+            f'              </div>\n'
+            f'              <span class="pw-chevron">▼</span>\n'
+            f'            </summary>\n'
+            f'            <div class="pw-body">\n'
+            f'              <div class="lineup-list">\n' +
+            "\n".join(pw_items) + "\n"
+            f'              </div>\n'
+            f'            </div>\n'
+            f'          </details>'
+        )
+        past_weeks_blocks.append(details_block)
+    
+    past_weeks_html = ""
+    if past_weeks_blocks:
+        past_weeks_html = (
+            f'\n        <div class="past-weeks-wrap">\n'
+            f'          <div class="past-weeks-header">\n'
+            f'            <h4>Past Week Archives</h4>\n'
+            f'            <span>Tap to expand previous songs &amp; scores</span>\n'
+            f'          </div>\n' +
+            "\n".join(past_weeks_blocks) + "\n"
+            f'        </div>'
+        )
+
     new_lineup_html = (
         f'      <div class="week-lineup" id="scores" aria-labelledby="week-lineup-title">\n'
         f'        <span id="songs" style="scroll-margin-top:60px"></span>\n'
@@ -1004,7 +1077,8 @@ def update_index_html(wiki_data, market_odds=None):
         f'          <div><p class="kicker" style="color:#efce82">{head_kicker}</p><h3 id="week-lineup-title">{head_title}</h3></div>\n'
         f'          <p>{head_desc}</p>\n'
         f'        </div>\n'
-        f'{lineup_content_html}\n'
+        f'{lineup_content_html}'
+        f'{past_weeks_html}\n'
         f'      </div>'
     )
     content = re.sub(r'<div class="week-lineup"[^>]*>.*?</div>\s*<div class="calendar"[^>]*>', new_lineup_html + '\n\n      <div class="calendar" id="schedule" aria-label="Season 35 theme calendar">', content, flags=re.DOTALL)

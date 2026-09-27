@@ -132,6 +132,20 @@
     .live-dot-inline{width:7px;height:7px;background:#52ffa8;border-radius:50%;display:inline-block;margin-right:5px;animation:pulse 1.5s infinite;vertical-align:middle}
     .score-week.live-score{border-color:#52ffa8;background:rgba(82,255,168,.05)}
     @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.85)}}
+    .past-weeks-wrap{margin-top:38px;border-top:1px solid #3b3d40;padding-top:26px}
+    .past-weeks-header{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:8px}
+    .past-weeks-header h4{font-family:"Bodoni Moda",serif;font-size:1.35rem;color:#efce82;margin:0}
+    .past-weeks-header span{font-size:.78rem;color:#cfd2d4}
+    .past-week-details{background:rgba(255,255,255,.03);border:1px solid #3b3d40;border-radius:4px;margin-bottom:12px;overflow:hidden;transition:background .2s ease}
+    .past-week-details[open]{background:rgba(255,255,255,.06);border-color:#5a5d61}
+    .past-week-details summary{padding:13px 16px;cursor:pointer;list-style:none;display:flex;align-items:center;justify-content:space-between;gap:12px;user-select:none}
+    .past-week-details summary::-webkit-details-marker{display:none}
+    .pw-summary-left{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+    .pw-summary-title{font-weight:700;font-size:.92rem;color:#efce82}
+    .pw-summary-meta{font-size:.76rem;color:#cfd2d4}
+    .pw-chevron{font-size:.72rem;color:#efce82;transition:transform .2s ease;font-weight:700}
+    .past-week-details[open] .pw-chevron{transform:rotate(180deg)}
+    .pw-body{padding:4px 16px 16px;border-top:1px solid rgba(255,255,255,.08)}
     .calendar{margin:72px 0 0;border-top:1px solid var(--line)}
     .cal-head{padding:18px 4px 14px;border-bottom:1px solid var(--line)}
     .cal-head h3{font-family:"Bodoni Moda",serif;font-size:clamp(1.5rem,3.2vw,2.2rem);line-height:1.05;margin:4px 0 6px}
@@ -181,7 +195,7 @@
         <div>
           <div class="kicker-wrap">
             <span class="kicker">Power rankings · Week 3 · Sept. 29, 2026</span>
-            <span class="subtle-update"><span class="subtle-dot"></span>Updated Sep. 27, 12:37 PM ET</span>
+            <span class="subtle-update"><span class="subtle-dot"></span>Updated Sep. 27, 12:57 PM ET</span>
           </div>
           <h1>The Week 3 board</h1>
           <p class="hero-sub">Thirteen couples remain. Rank proven technique against fandom, story, and the one thing fantasy players can’t ignore: theme-night fit.</p>
@@ -250,7 +264,7 @@
       </div>
     </section>
 
-                                    <aside class="spotlight" aria-label="Market spotlight">
+                                        <aside class="spotlight" aria-label="Market spotlight">
       <div class="spot-copy">
         <p class="kicker">Live Kalshi market favorite</p>
         <h2>Ezra Frech surged to 37% to win it all.</h2>
@@ -291,7 +305,7 @@
         <article class="theme-card"><div class="theme-date">Nov. 17 &amp; 24 · Weeks 10–11</div><h3>Semi-Finals &amp; Finale</h3><p>Double-dance pressure, redemption routines, and the uninhibited, trophy-deciding Freestyle round.</p><p class="edge"><b>Edge:</b> Championship pro pedigree reigns supreme: Val Chmerkovskiy (3 titles), Mark Ballas (3 titles), and Jenna Johnson (2 titles) vs. Daniella Karagach’s freestyle wizardry.</p></article>
       </div>
 
-                                                <div class="week-lineup" id="scores" aria-labelledby="week-lineup-title">
+                                                      <div class="week-lineup" id="scores" aria-labelledby="week-lineup-title">
         <span id="songs" style="scroll-margin-top:60px"></span>
         <div class="lineup-head">
           <div><p class="kicker" style="color:#efce82">Tuesday, September 29 · Live at 8/7c</p><h3 id="week-lineup-title">Yacht Rock Night: Scores &amp; Songs</h3></div>
@@ -419,6 +433,308 @@
           </div>
           </div>
         </div>
+        <div class="past-weeks-wrap">
+          <div class="past-weeks-header">
+            <h4>Past Week Archives</h4>
+            <span>Tap to expand previous songs &amp; scores</span>
+          </div>
+          <details class="past-week-details">
+            <summary>
+              <div class="pw-summary-left">
+                <span class="pw-summary-title">Week 2 · Viral Hits Night · September 22</span>
+                <span class="pw-summary-meta">14 couples · High score: 21/30</span>
+              </div>
+              <span class="pw-chevron">▼</span>
+            </summary>
+            <div class="pw-body">
+              <div class="lineup-list">
+              <div class="lineup-item">
+                <span class="lineup-no">#1</span>
+                <div>
+                  <span class="lineup-couple">Amber Glenn &amp; Pasha Pashkov<span class="leader-tag">High Score</span></span>
+                  <span class="lineup-dance">Tango</span>
+                  <span class="lineup-song">“All the Things She Said” · Harrison</span>
+                </div>
+                <div class="lineup-score-box leader"><strong>21</strong><span>/30</span></div>
+              </div>
+              <div class="lineup-item">
+                <span class="lineup-no">#2</span>
+                <div>
+                  <span class="lineup-couple">Ezra Frech &amp; Daniella Karagach<span class="leader-tag">High Score</span></span>
+                  <span class="lineup-dance">Cha-cha-cha</span>
+                  <span class="lineup-song">“Low” · Flo Rida</span>
+                </div>
+                <div class="lineup-score-box leader"><strong>21</strong><span>/30</span></div>
+              </div>
+              <div class="lineup-item">
+                <span class="lineup-no">#3</span>
+                <div>
+                  <span class="lineup-couple">Jenna Dewan &amp; Val Chmerkovskiy<span class="leader-tag">High Score</span></span>
+                  <span class="lineup-dance">Jive</span>
+                  <span class="lineup-song">“Animal” · Katseye</span>
+                </div>
+                <div class="lineup-score-box leader"><strong>21</strong><span>/30</span></div>
+              </div>
+              <div class="lineup-item">
+                <span class="lineup-no">#4</span>
+                <div>
+                  <span class="lineup-couple">Maura Higgins &amp; Mark Ballas</span>
+                  <span class="lineup-dance">Cha-cha-cha</span>
+                  <span class="lineup-song">“September” · Earth, Wind & Fire</span>
+                </div>
+                <div class="lineup-score-box"><strong>19</strong><span>/30</span></div>
+              </div>
+              <div class="lineup-item">
+                <span class="lineup-no">#5</span>
+                <div>
+                  <span class="lineup-couple">Ciara Miller &amp; Brandon Armstrong</span>
+                  <span class="lineup-dance">Tango</span>
+                  <span class="lineup-song">“No Broke Boys” · Disco Lines & Tinashe</span>
+                </div>
+                <div class="lineup-score-box"><strong>18</strong><span>/30</span></div>
+              </div>
+              <div class="lineup-item">
+                <span class="lineup-no">#6</span>
+                <div>
+                  <span class="lineup-couple">Harry Shum Jr. &amp; Jenna Johnson</span>
+                  <span class="lineup-dance">Viennese waltz</span>
+                  <span class="lineup-song">“Iris” · Goo Goo Dolls</span>
+                </div>
+                <div class="lineup-score-box"><strong>18</strong><span>/30</span></div>
+              </div>
+              <div class="lineup-item">
+                <span class="lineup-no">#7</span>
+                <div>
+                  <span class="lineup-couple">Jackson Olson &amp; Emma Slater</span>
+                  <span class="lineup-dance">Foxtrot</span>
+                  <span class="lineup-song">“That's So True” · Gracie Abrams</span>
+                </div>
+                <div class="lineup-score-box"><strong>18</strong><span>/30</span></div>
+              </div>
+              <div class="lineup-item">
+                <span class="lineup-no">#8</span>
+                <div>
+                  <span class="lineup-couple">Tatyana Ali &amp; Jan Ravnik</span>
+                  <span class="lineup-dance">Foxtrot</span>
+                  <span class="lineup-song">“What Was I Made For?” · Billie Eilish</span>
+                </div>
+                <div class="lineup-score-box"><strong>18</strong><span>/30</span></div>
+              </div>
+              <div class="lineup-item">
+                <span class="lineup-no">#9</span>
+                <div>
+                  <span class="lineup-couple">Julia Stiles &amp; Ezra Sosa</span>
+                  <span class="lineup-dance">Tango</span>
+                  <span class="lineup-song">“The Door” · Teddy Swims</span>
+                </div>
+                <div class="lineup-score-box"><strong>16</strong><span>/30</span></div>
+              </div>
+              <div class="lineup-item">
+                <span class="lineup-no">#10</span>
+                <div>
+                  <span class="lineup-couple">Tyler Cameron &amp; Sharna Burgess</span>
+                  <span class="lineup-dance">Salsa</span>
+                  <span class="lineup-song">“Girls” · The Kid Laroi</span>
+                </div>
+                <div class="lineup-score-box"><strong>16</strong><span>/30</span></div>
+              </div>
+              <div class="lineup-item">
+                <span class="lineup-no">#11</span>
+                <div>
+                  <span class="lineup-couple">Connor Wood &amp; Rylee Arnold</span>
+                  <span class="lineup-dance">Tango</span>
+                  <span class="lineup-song">“12 to 12” · Sombr</span>
+                </div>
+                <div class="lineup-score-box"><strong>15</strong><span>/30</span></div>
+              </div>
+              <div class="lineup-item">
+                <span class="lineup-no">#12</span>
+                <div>
+                  <span class="lineup-couple">Taylor Hanson &amp; Britt Stewart</span>
+                  <span class="lineup-dance">Cha-cha-cha</span>
+                  <span class="lineup-song">“Cake by the Ocean” · DNCE</span>
+                </div>
+                <div class="lineup-score-box"><strong>15</strong><span>/30</span></div>
+              </div>
+              <div class="lineup-item">
+                <span class="lineup-no">#13</span>
+                <div>
+                  <span class="lineup-couple">Giada De Laurentiis &amp; Alan Bersten<span class="elim-tag">Eliminated</span></span>
+                  <span class="lineup-dance">Salsa</span>
+                  <span class="lineup-song">“Bella Ciao” · Becky G</span>
+                </div>
+                <div class="lineup-score-box"><strong>12</strong><span>/30</span></div>
+              </div>
+              <div class="lineup-item">
+                <span class="lineup-no">#14</span>
+                <div>
+                  <span class="lineup-couple">Guillermo Rodriguez &amp; Witney Carson</span>
+                  <span class="lineup-dance">Paso doble</span>
+                  <span class="lineup-song">“Where Have You Been” · Rihanna</span>
+                </div>
+                <div class="lineup-score-box"><strong>12</strong><span>/30</span></div>
+              </div>
+              </div>
+            </div>
+          </details>
+          <details class="past-week-details">
+            <summary>
+              <div class="pw-summary-left">
+                <span class="pw-summary-title">Week 1 · Premiere · September 16</span>
+                <span class="pw-summary-meta">16 couples · High score: 21/30</span>
+              </div>
+              <span class="pw-chevron">▼</span>
+            </summary>
+            <div class="pw-body">
+              <div class="lineup-list">
+              <div class="lineup-item">
+                <span class="lineup-no">#1</span>
+                <div>
+                  <span class="lineup-couple">Harry Shum Jr. &amp; Jenna Johnson<span class="leader-tag">High Score</span></span>
+                  <span class="lineup-dance">Cha-cha-cha</span>
+                  <span class="lineup-song">“Let's Groove” · Earth, Wind & Fire</span>
+                </div>
+                <div class="lineup-score-box leader"><strong>21</strong><span>/30</span></div>
+              </div>
+              <div class="lineup-item">
+                <span class="lineup-no">#2</span>
+                <div>
+                  <span class="lineup-couple">Maura Higgins &amp; Mark Ballas<span class="leader-tag">High Score</span></span>
+                  <span class="lineup-dance">Foxtrot</span>
+                  <span class="lineup-song">“Black Velvet” · Alannah Myles</span>
+                </div>
+                <div class="lineup-score-box leader"><strong>21</strong><span>/30</span></div>
+              </div>
+              <div class="lineup-item">
+                <span class="lineup-no">#3</span>
+                <div>
+                  <span class="lineup-couple">Ezra Frech &amp; Daniella Karagach</span>
+                  <span class="lineup-dance">Tango</span>
+                  <span class="lineup-song">“Since U Been Gone” · Kelly Clarkson</span>
+                </div>
+                <div class="lineup-score-box"><strong>20</strong><span>/30</span></div>
+              </div>
+              <div class="lineup-item">
+                <span class="lineup-no">#4</span>
+                <div>
+                  <span class="lineup-couple">Jenna Dewan &amp; Val Chmerkovskiy</span>
+                  <span class="lineup-dance">Tango</span>
+                  <span class="lineup-song">“Call Me” · Blondie</span>
+                </div>
+                <div class="lineup-score-box"><strong>19</strong><span>/30</span></div>
+              </div>
+              <div class="lineup-item">
+                <span class="lineup-no">#5</span>
+                <div>
+                  <span class="lineup-couple">Amber Glenn &amp; Pasha Pashkov</span>
+                  <span class="lineup-dance">Cha-cha-cha</span>
+                  <span class="lineup-song">“Smooth” · Santana feat. Rob Thomas</span>
+                </div>
+                <div class="lineup-score-box"><strong>18</strong><span>/30</span></div>
+              </div>
+              <div class="lineup-item">
+                <span class="lineup-no">#6</span>
+                <div>
+                  <span class="lineup-couple">Julia Stiles &amp; Ezra Sosa</span>
+                  <span class="lineup-dance">Quickstep</span>
+                  <span class="lineup-song">“9 to 5” · Dolly Parton</span>
+                </div>
+                <div class="lineup-score-box"><strong>18</strong><span>/30</span></div>
+              </div>
+              <div class="lineup-item">
+                <span class="lineup-no">#7</span>
+                <div>
+                  <span class="lineup-couple">Tyler Cameron &amp; Sharna Burgess</span>
+                  <span class="lineup-dance">Tango</span>
+                  <span class="lineup-song">“Are You Gonna Go My Way” · Lenny Kravitz</span>
+                </div>
+                <div class="lineup-score-box"><strong>17</strong><span>/30</span></div>
+              </div>
+              <div class="lineup-item">
+                <span class="lineup-no">#8</span>
+                <div>
+                  <span class="lineup-couple">Connor Wood &amp; Rylee Arnold</span>
+                  <span class="lineup-dance">Cha-cha-cha</span>
+                  <span class="lineup-song">“I Like It, I Love It” · Tim McGraw</span>
+                </div>
+                <div class="lineup-score-box"><strong>16</strong><span>/30</span></div>
+              </div>
+              <div class="lineup-item">
+                <span class="lineup-no">#9</span>
+                <div>
+                  <span class="lineup-couple">Giada De Laurentiis &amp; Alan Bersten</span>
+                  <span class="lineup-dance">Tango</span>
+                  <span class="lineup-song">“Venus” · Shocking Blue</span>
+                </div>
+                <div class="lineup-score-box"><strong>16</strong><span>/30</span></div>
+              </div>
+              <div class="lineup-item">
+                <span class="lineup-no">#10</span>
+                <div>
+                  <span class="lineup-couple">Taylor Hanson &amp; Britt Stewart</span>
+                  <span class="lineup-dance">Quickstep</span>
+                  <span class="lineup-song">“Tell Her About It” · Billy Joel</span>
+                </div>
+                <div class="lineup-score-box"><strong>16</strong><span>/30</span></div>
+              </div>
+              <div class="lineup-item">
+                <span class="lineup-no">#11</span>
+                <div>
+                  <span class="lineup-couple">Ciara Miller &amp; Brandon Armstrong</span>
+                  <span class="lineup-dance">Foxtrot</span>
+                  <span class="lineup-song">“Exhale (Shoop Shoop)” · Whitney Houston</span>
+                </div>
+                <div class="lineup-score-box"><strong>15</strong><span>/30</span></div>
+              </div>
+              <div class="lineup-item">
+                <span class="lineup-no">#12</span>
+                <div>
+                  <span class="lineup-couple">Jackson Olson &amp; Emma Slater</span>
+                  <span class="lineup-dance">Cha-cha-cha</span>
+                  <span class="lineup-song">“Wannabe” · Spice Girls</span>
+                </div>
+                <div class="lineup-score-box"><strong>15</strong><span>/30</span></div>
+              </div>
+              <div class="lineup-item">
+                <span class="lineup-no">#13</span>
+                <div>
+                  <span class="lineup-couple">Sarah Jane Nader &amp; Hailey Bills<span class="elim-tag">Eliminated</span></span>
+                  <span class="lineup-dance">Jive</span>
+                  <span class="lineup-song">“Sk8er Boi” · Avril Lavigne</span>
+                </div>
+                <div class="lineup-score-box"><strong>14</strong><span>/30</span></div>
+              </div>
+              <div class="lineup-item">
+                <span class="lineup-no">#14</span>
+                <div>
+                  <span class="lineup-couple">Conner Leavitt &amp; Adele Zaikman<span class="elim-tag">Eliminated</span></span>
+                  <span class="lineup-dance">Salsa</span>
+                  <span class="lineup-song">“Whoomp! (There It Is)” · Tag Team</span>
+                </div>
+                <div class="lineup-score-box"><strong>12</strong><span>/30</span></div>
+              </div>
+              <div class="lineup-item">
+                <span class="lineup-no">#15</span>
+                <div>
+                  <span class="lineup-couple">Tatyana Ali &amp; Jan Ravnik</span>
+                  <span class="lineup-dance">Jive</span>
+                  <span class="lineup-song">“Knock on Wood” · Amii Stewart</span>
+                </div>
+                <div class="lineup-score-box"><strong>12</strong><span>/30</span></div>
+              </div>
+              <div class="lineup-item">
+                <span class="lineup-no">#16</span>
+                <div>
+                  <span class="lineup-couple">Guillermo Rodriguez &amp; Witney Carson</span>
+                  <span class="lineup-dance">Cha-cha-cha</span>
+                  <span class="lineup-song">“Mr. Big Stuff” · Jean Knight</span>
+                </div>
+                <div class="lineup-score-box"><strong>10</strong><span>/30</span></div>
+              </div>
+              </div>
+            </div>
+          </details>
+        </div>
       </div>
 
       <div class="calendar" id="schedule" aria-label="Season 35 theme calendar">
@@ -464,8 +780,8 @@
       {rank:6,name:'Jackson Olson',age:28,proName:'Emma Slater',mirrorballs:1,photo:'jackson-olson-emma-slater.jpg',weeks:[{'dance': 'Salsa', 'score': 12, 'isLive': false}],total:12,powerIndex:43.1,marketProb:4,cats:['sleeper', 'athlete', 'social'],tags:['Sleeper', '4% Market', 'Steady', '3M+ social reach'],case:'Holding steady with a 12.0/30 scoring average and 4% market win probability. Paired with Emma Slater (1 Mirrorball), Elite social reach and Banana Ball entertainment value give him an exceptional public voting cushion.'},
       {rank:7,name:'Tyler Cameron',age:33,proName:'Sharna Burgess',mirrorballs:1,photo:'tyler-cameron-sharna-burgess.jpg',weeks:[{'dance': 'Salsa', 'score': 12, 'isLive': false}],total:12,powerIndex:41.6,marketProb:2,cats:['athlete', 'social'],tags:['Risk', '2% Market', 'Steady', 'Bachelor Nation'],case:'Holding steady with a 12.0/30 scoring average and 2% market win probability. Paired with Sharna Burgess (1 Mirrorball), Athletic frame, broad reality fanbase, and a returning champion pro give him higher upside than middle-pack scores suggest.'},
       {rank:8,name:'Guillermo Rodriguez',age:55,proName:'Witney Carson',mirrorballs:2,photo:'guillermo-rodriguez-witney-carson.jpg',weeks:[{'dance': 'Salsa', 'score': 12, 'isLive': false}],total:12,powerIndex:40.2,marketProb:3,cats:[],tags:['Risk', '3% Market', 'Steady', 'Fan favorite'],case:'Holding steady with a 12.0/30 scoring average and 3% market win probability. Paired with Witney Carson (2 Mirrorballs), Carries the lowest scoring average, but reigning champion Witney Carson and Jimmy Kimmel viewers protect him from the bottom.'},
-      {rank:9,name:'Julia Stiles',age:45,proName:'Ezra Sosa',mirrorballs:0,photo:'julia-stiles-ezra-sosa.jpg',weeks:[{'dance': 'Salsa', 'score': 12, 'isLive': false}],total:12,powerIndex:38.0,marketProb:3,cats:['dance', 'social'],tags:['Risk', '3% Market', 'Steady', 'Nostalgia icon'],case:'Holding steady with a 12.0/30 scoring average and 3% market win probability. Paired with Ezra Sosa (0 Mirrorballs), Deep cross-generational nostalgia, screen dance memory, and the season’s cleanest motivational storyline.'},
-      {rank:10,name:'Connor Wood',age:31,proName:'Rylee Arnold',mirrorballs:0,photo:'connor-wood-rylee-arnold.jpg',weeks:[{'dance': 'Salsa', 'score': 12, 'isLive': false}],total:12,powerIndex:37.5,marketProb:4,cats:['social'],tags:['Risk', '4% Market', 'Steady', 'Comedy podcast'],case:'Holding steady with a 12.0/30 scoring average and 4% market win probability. Paired with Rylee Arnold (0 Mirrorballs), Rapidly growing digital following and podcast listener loyalty keep him safe while his technique develops.'},
+      {rank:9,name:'Connor Wood',age:31,proName:'Rylee Arnold',mirrorballs:0,photo:'connor-wood-rylee-arnold.jpg',weeks:[{'dance': 'Salsa', 'score': 12, 'isLive': false}],total:12,powerIndex:37.5,marketProb:4,cats:['social'],tags:['Risk', '4% Market', 'Steady', 'Comedy podcast'],case:'Holding steady with a 12.0/30 scoring average and 4% market win probability. Paired with Rylee Arnold (0 Mirrorballs), Rapidly growing digital following and podcast listener loyalty keep him safe while his technique develops.'},
+      {rank:10,name:'Julia Stiles',age:45,proName:'Ezra Sosa',mirrorballs:0,photo:'julia-stiles-ezra-sosa.jpg',weeks:[{'dance': 'Salsa', 'score': 12, 'isLive': false}],total:12,powerIndex:37.2,marketProb:2,cats:['dance', 'social'],tags:['Risk', '2% Market', 'Steady', 'Nostalgia icon'],case:'Holding steady with a 12.0/30 scoring average and 2% market win probability. Paired with Ezra Sosa (0 Mirrorballs), Deep cross-generational nostalgia, screen dance memory, and the season’s cleanest motivational storyline.'},
       {rank:11,name:'Tatyana Ali',age:47,proName:'Jan Ravnik',mirrorballs:0,photo:'tatyana-ali-jan-ravnik.jpg',weeks:[{'dance': 'Salsa', 'score': 12, 'isLive': false}],total:12,powerIndex:37.1,marketProb:1,cats:['social'],tags:['Risk', '1% Market', 'Steady', 'Fresh Prince icon'],case:'Holding steady with a 12.0/30 scoring average and 1% market win probability. Paired with Jan Ravnik (0 Mirrorballs), The Alfonso Ribeiro reunion and cross-generational warmth generate huge audience affection and voting momentum.'},
       {rank:12,name:'Ciara Miller',age:30,proName:'Brandon Armstrong',mirrorballs:0,photo:'ciara-miller-brandon-armstrong.jpg',weeks:[{'dance': 'Salsa', 'score': 12, 'isLive': false}],total:12,powerIndex:35.3,marketProb:1,cats:['social'],tags:['Risk', '1% Market', 'Steady', 'Bravo fandom'],case:'Holding steady with a 12.0/30 scoring average and 1% market win probability. Paired with Brandon Armstrong (0 Mirrorballs), Bravo and Traitors viewers are notoriously reliable voters; steady technical growth can push her deep into the bracket.'},
       {rank:13,name:'Taylor Hanson',age:43,proName:'Britt Stewart',mirrorballs:0,photo:'taylor-hanson-britt-stewart.jpg',weeks:[{'dance': 'Salsa', 'score': 12, 'isLive': false}],total:12,powerIndex:33.5,marketProb:1,cats:[],tags:['Risk', '1% Market', 'Steady', 'Musician timing'],case:'Holding steady with a 12.0/30 scoring average and 1% market win probability. Paired with Britt Stewart (0 Mirrorballs), Natural musical rhythm and a dedicated multi-decade fan community provide durability into themed music weeks.'}
