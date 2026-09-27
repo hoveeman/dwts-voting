@@ -102,16 +102,29 @@ def poll_cycle(last_snapshot=None, market_odds=None, dry_run=False):
         tuple(sorted(data.get('eliminated_info', {}).keys()))
     )
 
+    has_results = any(bool(c.get('result')) for c in couples)
+    all_scored = (len(scored) == total and total > 0)
+
+    # Show is done if all routines have scores AND either:
+    # 1. Elimination/results are recorded on Wikipedia, OR
+    # 2. It is past 10:10 PM ET for a normal show (or past 11:10 PM ET for a 3-hour finale)
+    now_et = get_current_et()
+    all_done = False
+    if all_scored:
+        if has_results:
+            all_done = True
+        elif (now_et.hour == 22 and now_et.minute >= 10) or (now_et.hour >= 23 and now_et.minute >= 10):
+            all_done = True
+
     if last_snapshot is not None and current_snapshot == last_snapshot:
-        print(f"[{get_current_et().strftime('%I:%M:%S %p ET')}] No changes detected ({len(scored)}/{total} scored). Waiting for next poll...")
-        all_done = (len(scored) == total and total > 0)
+        print(f"[{now_et.strftime('%I:%M:%S %p ET')}] No changes detected ({len(scored)}/{total} scored). Waiting for next poll...")
         return len(scored), total, all_done, current_snapshot
 
-    print(f"[{get_current_et().strftime('%I:%M:%S %p ET')}] Update detected: {len(scored)} of {total} couples scored.")
+    print(f"[{now_et.strftime('%I:%M:%S %p ET')}] Update detected: {len(scored)} of {total} couples scored.")
 
     if dry_run:
         print("Dry run mode: Skipping file modifications and git push.")
-        return len(scored), total, (len(scored) == total and total > 0), current_snapshot
+        return len(scored), total, all_done, current_snapshot
 
     # Update index.html, dancers.json, dancers.txt
     update_index_html(data, market_odds)
@@ -122,7 +135,6 @@ def poll_cycle(last_snapshot=None, market_odds=None, dry_run=False):
     else:
         print("Files already up to date.")
 
-    all_done = (len(scored) == total and total > 0)
     return len(scored), total, all_done, current_snapshot
 
 
@@ -152,7 +164,7 @@ def main():
     parser.add_argument("--dry-run", action="store_true", help="Fetch and inspect without committing or pushing")
     parser.add_argument("--once", action="store_true", help="Run a single check now and exit")
     parser.add_argument("--wait-until-show", action="store_true", help="Sleep until Tuesday 8:00 PM ET before running")
-    parser.add_argument("--max-hours", type=float, default=2.5, help="Max hours to run before exiting (default: 2.5h)")
+    parser.add_argument("--max-hours", type=float, default=3.5, help="Max hours to run before exiting (default: 3.5h, accommodates 3h specials)")
     args = parser.parse_args()
 
     print("=== DWTS Season 35 Live Show Watcher ===")
