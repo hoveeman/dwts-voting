@@ -655,6 +655,7 @@ def update_index_html(wiki_data, market_odds=None):
     target_date_str = ep_dates.get(ep_idx, "September 29, 2026")
     theme_title = ep_themes.get(ep_idx, week_lineups.get(lineup_week_num, {}).get('theme', 'Yacht Rock Night'))
     theme_title = theme_title.strip('"').strip()
+    short_date = target_date_str.replace("September", "Sept.").replace("October", "Oct.").replace("November", "Nov.")
 
     # 1. Update subtle timestamp & quick meta
     now_et = datetime.now(ZoneInfo("America/New_York")).strftime("%b. %-d, %-I:%M %p ET")
