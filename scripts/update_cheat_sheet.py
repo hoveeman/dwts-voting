@@ -719,8 +719,9 @@ def update_index_html(wiki_data, market_odds=None):
     active_dancers_raw = []
     for name in active_couples:
         meta = COUPLE_REGISTRY[name]
-        perfs = couple_history.get(name, [])
-        valid_weeks = [p for p in perfs if p['score'] is not None and p['week'] in completed_weeks]
+        valid_weeks = [p for p in perfs if p['score'] is not None]
+        for p in valid_weeks:
+            p['is_live'] = (p['week'] not in completed_weeks)
         total_score = sum(w['score'] for w in valid_weeks)
         latest_score = valid_weeks[-1]['score'] if valid_weeks else 0
         prev_score = valid_weeks[-2]['score'] if len(valid_weeks) >= 2 else latest_score
@@ -753,8 +754,8 @@ def update_index_html(wiki_data, market_odds=None):
             'initial_rank': meta.get('initial_rank', 99)
         })
 
-    # Sort dancers by Composite Power Index descending, tie-breaker total score, then market probability
-    active_dancers_raw.sort(key=lambda d: (-d['power_index'], -d['total_score'], -d['market_prob']))
+    # Sort dancers by Composite Power Index descending, tie-breaker avg score, then market probability
+    active_dancers_raw.sort(key=lambda d: (-d['power_index'], -d['avg_score'], -d['market_prob']))
     
     active_dancers_data = []
     active_count = len(active_dancers_raw)
@@ -790,7 +791,7 @@ def update_index_html(wiki_data, market_odds=None):
 
     dancer_lines = []
     for d in active_dancers_data:
-        weeks_js = json.dumps([{'dance': w['dance'], 'score': w['score']} for w in d['weeks']]).replace('"', "'")
+        weeks_js = json.dumps([{'dance': w['dance'], 'score': w['score'], 'isLive': w.get('is_live', False)} for w in d['weeks']]).replace('"', "'")
         cats_js = json.dumps(d['cats']).replace('"', "'")
         tags_js = json.dumps(d['tags']).replace('"', "'")
         case_escaped = d['case'].replace("'", "\\'")
@@ -839,39 +840,171 @@ def update_index_html(wiki_data, market_odds=None):
     )
     content = re.sub(r'<div class="eliminated-list" id="voted-off">.*?</div>\s*</section>', new_eliminated_list + '\n    </section>', content, flags=re.DOTALL)
 
-    # 5. Update .week-lineup section
+    # 5. Update .week-lineup / Scores & Songs section
     target_lineup = week_lineups.get(lineup_week_num, {'couples': []})['couples']
-    lineup_items = []
     active_in_lineup = [c for c in target_lineup if c['name'] in active_couples]
     if not active_in_lineup:
-        for idx, d in enumerate(active_dancers_data, start=1):
-            num_str = f"{idx:02d}"
-            item = f'          <div class="lineup-item"><span class="lineup-no">{num_str}</span><div><span class="lineup-couple">{d["name"]} &amp; {d["proName"]}</span><span class="lineup-dance">TBA</span><span class="lineup-song">TBA</span></div></div>'
-            lineup_items.append(item)
-    else:
-        for idx, c in enumerate(active_in_lineup, start=1):
-            num_str = f"{idx:02d}"
+        active_in_lineup = [{'name': d['name'], 'dance': 'TBA', 'song': 'TBA', 'score': None, 'result': ''} for d in active_dancers_data]
+
+    day_of_week_date = f"Tuesday, {target_date_str.rsplit(',', 1)[0].strip()}" if ',' in target_date_str else f"Tuesday, {target_date_str}"
+
+    scored_couples = [c for c in active_in_lineup if c.get('score') is not None]
+    unscored_couples = [c for c in active_in_lineup if c.get('score') is None]
+
+    if scored_couples and len(scored_couples) == len(active_in_lineup):
+        # Case A: All couples have performed! (Official Leaderboard - Stays for the week)
+        scored_sorted = sorted(scored_couples, key=lambda c: (-c['score'], c['name']))
+        top_score = scored_sorted[0]['score'] if scored_sorted else 30
+        
+        leaderboard_items = []
+        for rank_idx, c in enumerate(scored_sorted, start=1):
+            num_str = f"#{rank_idx}"
             meta = COUPLE_REGISTRY[c['name']]
             dance = c.get('dance', 'TBA')
             song = c.get('song', 'TBA')
-            score = c.get('score')
-            if score is not None:
-                dance_display = f'{dance} · <strong style="color:#efce82">{score}/30</strong>'
-            else:
-                dance_display = dance
-            item = f'          <div class="lineup-item"><span class="lineup-no">{num_str}</span><div><span class="lineup-couple">{c["name"]} &amp; {meta["proName"]}</span><span class="lineup-dance">{dance_display}</span><span class="lineup-song">{song}</span></div></div>'
-            lineup_items.append(item)
+            score = c.get('score', 0)
+            is_leader = (score == top_score)
+            leader_badge = '<span class="leader-tag">High Score</span>' if is_leader else ''
+            elim_badge = '<span class="elim-tag">Eliminated</span>' if ('eliminated' in c.get('result', '').lower()) else ''
+            score_class = 'lineup-score-box leader' if is_leader else 'lineup-score-box'
+            
+            item = (
+                f'          <div class="lineup-item">\n'
+                f'            <span class="lineup-no">{num_str}</span>\n'
+                f'            <div>\n'
+                f'              <span class="lineup-couple">{c["name"]} &amp; {meta["proName"]}{leader_badge}{elim_badge}</span>\n'
+                f'              <span class="lineup-dance">{dance}</span>\n'
+                f'              <span class="lineup-song">{song}</span>\n'
+                f'            </div>\n'
+                f'            <div class="{score_class}"><strong>{score}</strong><span>/30</span></div>\n'
+                f'          </div>'
+            )
+            leaderboard_items.append(item)
 
-    day_of_week_date = f"Tuesday, {target_date_str.rsplit(',', 1)[0].strip()}" if ',' in target_date_str else f"Tuesday, {target_date_str}"
+        head_kicker = f'{day_of_week_date} · Official Week {lineup_week_num} Scores'
+        head_title = f'{theme_title}: Scores &amp; Songs'
+        head_desc = f'Final judges’ standings and complete music lineup for all {len(active_in_lineup)} couples in Week {lineup_week_num}.'
+        
+        lineup_content_html = (
+            f'        <div class="lineup-group">\n'
+            f'          <h4 class="lineup-group-title">Official Week {lineup_week_num} Leaderboard</h4>\n'
+            f'          <div class="lineup-list">\n' +
+            "\n".join(leaderboard_items) + "\n"
+            f'          </div>\n'
+            f'        </div>'
+        )
+
+    elif scored_couples and unscored_couples:
+        # Case B: Live show in progress! (Tonight’s Leaderboard + Up Next)
+        scored_sorted = sorted(scored_couples, key=lambda c: (-c['score'], c['name']))
+        top_score = scored_sorted[0]['score'] if scored_sorted else 30
+        
+        danced_items = []
+        for rank_idx, c in enumerate(scored_sorted, start=1):
+            num_str = f"#{rank_idx}"
+            meta = COUPLE_REGISTRY[c['name']]
+            dance = c.get('dance', 'TBA')
+            song = c.get('song', 'TBA')
+            score = c.get('score', 0)
+            is_leader = (score == top_score)
+            leader_badge = '<span class="leader-tag">Leader</span>' if is_leader else ''
+            score_class = 'lineup-score-box leader' if is_leader else 'lineup-score-box'
+            
+            item = (
+                f'          <div class="lineup-item">\n'
+                f'            <span class="lineup-no">{num_str}</span>\n'
+                f'            <div>\n'
+                f'              <span class="lineup-couple">{c["name"]} &amp; {meta["proName"]}{leader_badge}</span>\n'
+                f'              <span class="lineup-dance">{dance}</span>\n'
+                f'              <span class="lineup-song">{song}</span>\n'
+                f'            </div>\n'
+                f'            <div class="{score_class}"><strong>{score}</strong><span>/30</span></div>\n'
+                f'          </div>'
+            )
+            danced_items.append(item)
+
+        up_next_items = []
+        for c_idx, c in enumerate(unscored_couples, start=1):
+            num_str = f"{c_idx:02d}"
+            meta = COUPLE_REGISTRY[c['name']]
+            dance = c.get('dance', 'TBA')
+            song = c.get('song', 'TBA')
+            
+            item = (
+                f'          <div class="lineup-item">\n'
+                f'            <span class="lineup-no">{num_str}</span>\n'
+                f'            <div>\n'
+                f'              <span class="lineup-couple">{c["name"]} &amp; {meta["proName"]}</span>\n'
+                f'              <span class="lineup-dance">{dance}</span>\n'
+                f'              <span class="lineup-song">{song}</span>\n'
+                f'            </div>\n'
+                f'            <div class="lineup-pending-box">Up next</div>\n'
+                f'          </div>'
+            )
+            up_next_items.append(item)
+
+        head_kicker = f'<span class="live-dot-inline"></span> Live Show in Progress · {len(scored_couples)} of {len(active_in_lineup)} danced'
+        head_title = f'{theme_title}: Scores &amp; Songs'
+        head_desc = f'Real-time live show scores and music lineup. {scored_sorted[0]["name"]} leads tonight with {top_score}/30.'
+
+        lineup_content_html = (
+            f'        <div class="lineup-group">\n'
+            f'          <h4 class="lineup-group-title">Tonight’s Leaderboard ({len(scored_couples)} Danced)</h4>\n'
+            f'          <div class="lineup-list">\n' +
+            "\n".join(danced_items) + "\n"
+            f'          </div>\n'
+            f'        </div>\n'
+            f'        <div class="lineup-group" style="margin-top:32px">\n'
+            f'          <h4 class="lineup-group-title">Up Next Tonight ({len(unscored_couples)} Remaining)</h4>\n'
+            f'          <div class="lineup-list">\n' +
+            "\n".join(up_next_items) + "\n"
+            f'          </div>\n'
+            f'        </div>'
+        )
+
+    else:
+        # Case C: Pre-show (Upcoming show lineup)
+        scheduled_items = []
+        for c_idx, c in enumerate(active_in_lineup, start=1):
+            num_str = f"{c_idx:02d}"
+            meta = COUPLE_REGISTRY[c['name']]
+            dance = c.get('dance', 'TBA')
+            song = c.get('song', 'TBA')
+            
+            item = (
+                f'          <div class="lineup-item">\n'
+                f'            <span class="lineup-no">{num_str}</span>\n'
+                f'            <div>\n'
+                f'              <span class="lineup-couple">{c["name"]} &amp; {meta["proName"]}</span>\n'
+                f'              <span class="lineup-dance">{dance}</span>\n'
+                f'              <span class="lineup-song">{song}</span>\n'
+                f'            </div>\n'
+                f'            <div class="lineup-pending-box">Scheduled</div>\n'
+                f'          </div>'
+            )
+            scheduled_items.append(item)
+
+        head_kicker = f'{day_of_week_date} · Live at 8/7c'
+        head_title = f'{theme_title}: Scores &amp; Songs'
+        head_desc = f'The {len(active_in_lineup)} active couples, their dance styles, and songs for Week {lineup_week_num}. Scores will populate here live as routines air.'
+
+        lineup_content_html = (
+            f'        <div class="lineup-group">\n'
+            f'          <h4 class="lineup-group-title">Official Week {lineup_week_num} Performance Lineup</h4>\n'
+            f'          <div class="lineup-list">\n' +
+            "\n".join(scheduled_items) + "\n"
+            f'          </div>\n'
+            f'        </div>'
+        )
+
     new_lineup_html = (
-        f'      <div class="week-lineup" id="songs" aria-labelledby="week-lineup-title">\n'
+        f'      <div class="week-lineup" id="scores" aria-labelledby="week-lineup-title">\n'
+        f'        <span id="songs" style="scroll-margin-top:60px"></span>\n'
         f'        <div class="lineup-head">\n'
-        f'          <div><p class="kicker" style="color:#efce82">{day_of_week_date}</p><h3 id="week-lineup-title">{theme_title} lineup</h3></div>\n'
-        f'          <p>The {len(active_couples)} active couples, their dance styles, and songs for Week {lineup_week_num}.</p>\n'
+        f'          <div><p class="kicker" style="color:#efce82">{head_kicker}</p><h3 id="week-lineup-title">{head_title}</h3></div>\n'
+        f'          <p>{head_desc}</p>\n'
         f'        </div>\n'
-        f'        <div class="lineup-list">\n' +
-        "\n".join(lineup_items) + "\n"
-        f'        </div>\n'
+        f'{lineup_content_html}\n'
         f'      </div>'
     )
     content = re.sub(r'<div class="week-lineup"[^>]*>.*?</div>\s*<div class="calendar"[^>]*>', new_lineup_html + '\n\n      <div class="calendar" id="schedule" aria-label="Season 35 theme calendar">', content, flags=re.DOTALL)
