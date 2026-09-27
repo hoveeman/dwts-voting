@@ -660,7 +660,7 @@ def update_index_html(wiki_data, market_odds=None):
     # 1. Update subtle timestamp & quick meta
     now_et = datetime.now(ZoneInfo("America/New_York")).strftime("%b. %-d, %-I:%M %p ET")
     subtle_update_new = f'<span class="subtle-update"><span class="subtle-dot"></span>Updated {now_et}</span>'
-    content = re.sub(r'<span class="subtle-update">.*?</span>', subtle_update_new, content)
+    content = re.sub(r'<span class="subtle-update">.*?(?=\s*</div>)', subtle_update_new, content, flags=re.DOTALL)
 
     quick_meta_new = (
         f'<div class="quick-meta">\n'
