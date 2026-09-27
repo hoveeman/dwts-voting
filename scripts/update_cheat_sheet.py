@@ -1127,7 +1127,7 @@ def update_index_html(wiki_data, market_odds=None):
 
     # 8. Update citations timestamp in method paragraph
     today_str = datetime.now(timezone.utc).strftime("%b. %d, %Y")
-    method_new = f'<p class="method">Week {lineup_week_num} lineup updated {today_str} with confirmed songs and dance styles for the {short_date} broadcast. The ranking, tier tags, and theme-night “edges” are dynamically calculated from verified scoring data, backgrounds, pro records, and audience reach—not official DWTS projections.</p>'
+    method_new = f'<p class="method">Week {lineup_week_num} lineup updated {today_str} with confirmed songs and dance styles for the {short_date} broadcast. The ranking and tier tags are dynamically calculated from verified scoring data, backgrounds, pro records, and audience reach—not official DWTS projections.</p>'
     content = re.sub(r'<p class="method">.*?</p>', method_new, content)
 
     with open(HTML_FILE, 'w', encoding='utf-8') as f:

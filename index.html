@@ -100,16 +100,6 @@
     .market{display:flex;align-items:center;justify-content:center;padding:44px;background:linear-gradient(145deg,#8b1725,#4f1018);text-align:center}
     .market strong{font-family:"Bodoni Moda",serif;font-size:clamp(5rem,11vw,9rem);line-height:.75;color:#f7d889;display:block}
     .market span{display:block;margin-top:20px;font-size:.78rem;text-transform:uppercase;letter-spacing:.12em}
-    .sleeper-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-    .sleeper-card{background:var(--paper);border-top:4px solid var(--green);padding:20px;min-height:210px}
-    .sleeper-card .pick{color:var(--green);font-size:.71rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em}
-    .sleeper-card h3,.theme-card h3{font-family:"Bodoni Moda",serif;font-size:1.42rem;line-height:1.05;margin:8px 0}
-    .sleeper-card p,.theme-card p{font-size:.86rem;color:var(--muted);margin:0}
-    .theme-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:28px}
-    .theme-card{background:var(--paper);border:1px solid var(--line);padding:20px}
-    .theme-date{font-size:.72rem;font-weight:700;color:var(--red);text-transform:uppercase;letter-spacing:.08em}
-    .edge{margin-top:13px!important;padding-top:11px;border-top:1px solid var(--line);color:var(--ink)!important}
-    .edge b{color:var(--red)}
     .week-lineup{margin-top:34px;background:var(--nav);color:#fff;padding:clamp(24px,4vw,42px);scroll-margin-top:60px}
     .lineup-head{display:grid;grid-template-columns:minmax(0,1fr) minmax(240px,430px);gap:24px;align-items:end;margin-bottom:28px}
     .lineup-head h3{font-family:"Bodoni Moda",serif;font-size:clamp(1.9rem,3.8vw,3.2rem);line-height:1.05;margin:4px 0 0}
@@ -204,14 +194,14 @@
       .tabs{justify-content:flex-start;flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;padding:6px 10px;scrollbar-width:none}.tabs::-webkit-scrollbar{display:none}.tabs a{padding:6px 9px;font-size:.74rem;flex:0 0 auto}
       section,.week-lineup,.calendar{scroll-margin-top:46px}
       .card{grid-template-columns:50px 1fr}.rank{grid-row:1 / 3;font-size:1.72rem;padding-top:17px}.couple-photo{grid-column:2;height:auto}.card-body{grid-column:2;padding:15px 13px}.name{font-size:1.28rem}.score{min-width:44px;padding:3px 6px}.score-history{grid-template-columns:1fr}.score-week{padding-block:6px}
-      .sleeper-grid,.theme-grid,.lineup-list{grid-template-columns:1fr}.eliminated-card{grid-template-columns:1fr}.eliminated-card img{min-height:0;height:auto;aspect-ratio:3/2}.eliminated-copy{padding:22px 18px 25px}.sleeper-card{min-height:0}.cal-row{grid-template-columns:50px 86px 1fr;gap:8px}.cal-row span{font-size:1rem}.spotlight{margin-inline:-14px}.week-lineup,.vote{margin-inline:-14px}.controls{gap:6px}.filter{padding:8px 11px}
+      .lineup-list{grid-template-columns:1fr}.eliminated-card{grid-template-columns:1fr}.eliminated-card img{min-height:0;height:auto;aspect-ratio:3/2}.eliminated-copy{padding:22px 18px 25px}.cal-row{grid-template-columns:50px 86px 1fr;gap:8px}.cal-row span{font-size:1rem}.spotlight{margin-inline:-14px}.week-lineup,.vote{margin-inline:-14px}.controls{gap:6px}.filter{padding:8px 11px}
     }
     @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
   </style>
 </head>
 <body>
   <nav class="tabs" aria-label="Cheat sheet sections">
-    <a href="#board">Power board</a><a href="#scores">Scores &amp; songs</a><a href="#schedule">Schedule</a><a href="#voted-off">Voted off</a><a href="#sleepers">Sleepers</a><a href="#themes">Theme edges</a><a href="#voting">Voting</a>
+    <a href="#board">Power board</a><a href="#scores">Scores &amp; songs</a><a href="#schedule">Schedule</a><a href="#voted-off">Voted off</a><a href="#voting">Voting</a>
   </nav>
 
   <div id="live-banner" class="live-banner" style="display:none" role="region" aria-label="Live show quick actions">
@@ -327,35 +317,7 @@
       <div class="market"><div><strong>37%</strong><span>Kalshi Market Favorite</span></div></div>
     </aside>
 
-    <section id="sleepers">
-      <div class="section-head">
-        <div><p class="kicker">Value picks</p><h2>Three sleepers worth drafting</h2></div>
-        <p>High-upside contenders whose current rank or market price underestimates their ceiling. As the bottom clears, their technical trajectory, partner pedigree, and voting coalitions make them top fantasy plays.</p>
-      </div>
-      <div class="sleeper-grid">
-        <article class="sleeper-card"><span class="pick">Athletic breakout</span><h3>Amber Glenn</h3><p>Surged into the top 5 with a standout 21/30 Tango (+3 WoW). Her Olympic figure-skating foundation delivers elite rotational velocity, frame discipline, and musicality. Paired with Pasha Pashkov, she commands an 11% Kalshi market share and significant fantasy headroom.</p></article>
-        <article class="sleeper-card"><span class="pick">Social titan</span><h3>Jackson Olson</h3><p>Jumped from 15 to 18/30 on Foxtrot (+3 WoW), demonstrating real coachability under champion Emma Slater. With 3M+ TikTok and Instagram followers and Savannah Bananas entertainment instincts, his public voting cushion will protect him deep into themed weeks.</p></article>
-        <article class="sleeper-card"><span class="pick">Momentum riser</span><h3>Tatyana Ali</h3><p>Delivered the biggest Week 2 leap in the entire cast (+6 WoW, 12 → 18/30 Foxtrot) alongside Jan Ravnik. Cross-generational <i>Fresh Prince</i> nostalgia, natural stage charisma, and the sentimental Alfonso Ribeiro hosting connection make her a potent dark horse.</p></article>
-      </div>
-    </section>
-
-    <section id="themes" style="margin-top:84px">
-      <div class="section-head">
-        <div><p class="kicker">Theme-night edges</p><h2>Where the board could swing</h2></div>
-        <p>Confirmed themes across Season 35 and where specific skillsets, music genres, and staging styles create matchup advantages for the remaining 13 couples.</p>
-      </div>
-      <div class="theme-grid">
-        <article class="theme-card"><div class="theme-date" style="color:var(--green)">Sept. 29 · Week 3 · Current</div><h3>Yacht Rock Night</h3><p>Thirteen couples take on breezy soft-rock classics, with Foxtrot leading the slate at five routines.</p><p class="edge"><b>Edge:</b> Taylor Hanson’s innate musician timing; Jenna Dewan &amp; Val’s samba bounce to “Africa”; Ezra Frech &amp; Daniella mastering smooth ballroom hold.</p></article>
-        <article class="theme-card"><div class="theme-date">Oct. 6 · Week 4</div><h3>Mariah Carey Night</h3><p>Iconic pop and R&amp;B vocal anthems requiring dramatic performance quality and syncopated groove.</p><p class="edge"><b>Edge:</b> Harry Shum Jr.—a former backup dancer for Mariah Carey on tour; Maura Higgins &amp; Mark Ballas in theatrical glam; Amber Glenn’s lyrical flow.</p></article>
-        <article class="theme-card"><div class="theme-date">Oct. 13 · Week 5</div><h3>Midseason Pivot (TBA)</h3><p>Production’s unannounced specialty theme (fan buzz centers on 90s nostalgia or country) marking the first double-elimination pressure point.</p><p class="edge"><b>Edge:</b> High-floor technicians Jenna Dewan and Harry Shum Jr. hold ground, while loyal fanbases (Tyler Cameron, Jackson Olson) avoid shock elimination.</p></article>
-        <article class="theme-card"><div class="theme-date">Oct. 20 · Week 6</div><h3>Dedication Night</h3><p>Contemporary and Viennese waltzes honoring personal heroes, resilience, and emotional life chapters.</p><p class="edge"><b>Edge:</b> Narrative authenticity sways public voting. Ezra Frech’s dual-gold Paralympic triumph, Amber Glenn’s Olympic perseverance, and Julia Stiles’ comeback arc.</p></article>
-        <article class="theme-card"><div class="theme-date">Oct. 27 · Week 7</div><h3>Horror Movie Night</h3><p>High-concept Halloween theatricality, Paso Dobles, and Argentine Tangos under dramatic cinema lighting.</p><p class="edge"><b>Edge:</b> Choreography masters Daniella Karagach and Mark Ballas excel in dark concepts; actor-dancers Harry Shum Jr. and Jenna Dewan bring crucial dramatic commitment.</p></article>
-        <article class="theme-card"><div class="theme-date">Nov. 3 · Week 8</div><h3>Disney Night</h3><p>The ballroom’s annual family-viewing showcase celebrating animated and live-action musical classics.</p><p class="edge"><b>Edge:</b> Broad family affection and joyful charisma. Tatyana Ali’s generational warmth, Jackson Olson’s entertainer flair, and Connor Wood’s relatable comedy.</p></article>
-        <article class="theme-card"><div class="theme-date">Nov. 10 · Week 9</div><h3>Grammy Night</h3><p>Fast-paced Latin and intricate ballroom set to award-winning chart-toppers across decades.</p><p class="edge"><b>Edge:</b> Multi-instrumentalist Taylor Hanson’s syncopation; Harry Shum Jr. and Jenna Dewan with 3-time champion Val Chmerkovskiy navigating complex polyrhythms.</p></article>
-        <article class="theme-card"><div class="theme-date">Nov. 17 &amp; 24 · Weeks 10–11</div><h3>Semi-Finals &amp; Finale</h3><p>Double-dance pressure, redemption routines, and the uninhibited, trophy-deciding Freestyle round.</p><p class="edge"><b>Edge:</b> Championship pro pedigree reigns supreme: Val Chmerkovskiy (3 titles), Mark Ballas (3 titles), and Jenna Johnson (2 titles) vs. Daniella Karagach’s freestyle wizardry.</p></article>
-      </div>
-
-                                                                                          <div class="week-lineup" id="scores" aria-labelledby="week-lineup-title">
+    <div class="week-lineup" id="scores" aria-labelledby="week-lineup-title">
         <span id="songs" style="scroll-margin-top:60px"></span>
         <div class="lineup-head">
           <div><p class="kicker" style="color:#efce82">Tuesday, September 29 · Live at 8/7c</p><h3 id="week-lineup-title">Yacht Rock Night: Scores &amp; Songs</h3></div>
@@ -816,7 +778,7 @@
       </div>
     </section>
 
-    <p class="method">Week 3 lineup updated Sep. 27, 2026 with confirmed songs and dance styles for the Sept. 29, 2026 broadcast. The ranking, tier tags, and theme-night “edges” are dynamically calculated from verified scoring data, backgrounds, pro records, and audience reach—not official DWTS projections.</p>
+    <p class="method">Week 3 lineup updated Sep. 27, 2026 with confirmed songs and dance styles for the Sept. 29, 2026 broadcast. The ranking and tier tags are dynamically calculated from verified scoring data, backgrounds, pro records, and audience reach—not official DWTS projections.</p>
   </main>
   <footer>Season 35 airs live Tuesdays at 8/7c on ABC and Disney+, hosted by Alfonso Ribeiro and Julianne Hough.</footer>
 
