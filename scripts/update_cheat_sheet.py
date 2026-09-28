@@ -614,10 +614,15 @@ def compute_dynamic_attributes(name, valid_weeks, total_score, rank, active_coun
     if meta.get('social_reach_num', 0) >= 1.0:
         cats.append('social')
 
-    # 3. Dynamic Tags
-    tags = [tier]
+    # 3. Dynamic Tags (Celebrity background trait, live market odds, score momentum)
+    tags = []
+    trait = meta.get('trait')
+    if trait and trait not in ('Contender', 'Risk', 'Sleeper', 'Anchor'):
+        tags.append(trait)
+
     # Market win probability tag
     tags.append(f'{m_prob}% Market')
+
     # Momentum / Trend
     if wow_delta >= 4:
         tags.append(f'Surging (+{wow_delta})')
@@ -629,12 +634,6 @@ def compute_dynamic_attributes(name, valid_weeks, total_score, rank, active_coun
         tags.append('20+ avg')
     else:
         tags.append('Steady')
-
-    # Trait / Specialty
-    tags.append(meta.get('trait', 'Contender'))
-
-    if tier == 'Risk' and 'Risk' not in tags:
-        tags.append('Risk')
 
     # 4. Dynamic Case Blurb
     pro = meta['proName']
@@ -651,7 +650,7 @@ def compute_dynamic_attributes(name, valid_weeks, total_score, rank, active_coun
     elif wow_delta <= -3:
         scoring_lead = f"Overcame a temporary scoring dip ({wow_delta} WoW), bolstered by a {p_idx}/100 Power Index."
     elif avg_score >= 20.0:
-        scoring_lead = f"Ballroom anchor averaging {avg_score:.1f}/30 through {num_weeks} completed weeks ({p_idx}/100 Power Index)."
+        scoring_lead = f"Consistent scorer averaging {avg_score:.1f}/30 through {num_weeks} completed weeks ({p_idx}/100 Power Index)."
     elif rank <= 4:
         scoring_lead = f"Top-tier contender holding rank #{rank} on the Power Board ({p_idx}/100)."
     else:
