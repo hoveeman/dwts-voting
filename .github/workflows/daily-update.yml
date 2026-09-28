@@ -28,7 +28,16 @@ jobs:
         with:
           python-version: '3.11'
 
+      - name: Install dependencies
+        run: |
+          python3 -m pip install --upgrade pip
+          pip install pillow
+
       - name: Run DWTS Daily & Market Updater
+        env:
+          SPOTIPY_CLIENT_ID: ${{ secrets.SPOTIPY_CLIENT_ID }}
+          SPOTIPY_CLIENT_SECRET: ${{ secrets.SPOTIPY_CLIENT_SECRET }}
+          SPOTIFY_REFRESH_TOKEN: ${{ secrets.SPOTIFY_REFRESH_TOKEN }}
         run: |
           python3 scripts/update_cheat_sheet.py
 
@@ -40,10 +49,10 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add index.html dancers.json dancers.txt
+          git add index.html dancers.json dancers.txt spotify_playlists.json assets/playlist_covers/
           if git diff --staged --quiet; then
             echo "No changes detected. Everything is up to date."
           else
-            git commit -m "chore(update): refresh DWTS scores, songs, eliminations & market data"
+            git commit -m "chore(update): refresh DWTS scores, songs, eliminations, market data & Spotify playlists"
             git push origin main
           fi

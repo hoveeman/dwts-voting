@@ -1,1 +1,10 @@
 __pycache__/
+*.pyc
+.env
+.env.*
+*.env
+.spotify_tokens.json
+.spotify_cache*
+credentials.json
+client_secret*.json
+.spotify_track_cache.json
