@@ -1240,13 +1240,16 @@
       }, 0) || 1;
       const totalMarket = dancerList.reduce((sum, d) => sum + (d.marketProb || 1), 0) || 1;
       const data = dancerList.map(d => {
-        const latestScore = d.weeks && d.weeks.length ? d.weeks[d.weeks.length - 1].score : 15;
+        const latestWeek = d.weeks && d.weeks.length ? d.weeks[d.weeks.length - 1] : null;
+        const isLive = !!(latestWeek && latestWeek.isLive);
+        const tonightScore = isLive ? latestWeek.score : null;
+        const latestScore = latestWeek ? latestWeek.score : 15;
         const avgScore = d.weeks && d.weeks.length ? (d.total / d.weeks.length) : 15;
         const judgesShare = (avgScore / totalAvgScore) * 100;
         const marketShare = ((d.marketProb || 1) / totalMarket) * 100;
         const proBoost = (d.mirrorballs || 0) * 2.5;
         const rawFan = marketShare * 0.65 + proBoost * 0.35 + 1.0;
-        return { d, judgesShare, avgScore, rawFan, latestScore };
+        return { d, judgesShare, avgScore, rawFan, latestScore, isLive, tonightScore };
       });
       const totalFan = data.reduce((sum, item) => sum + item.rawFan, 0) || 1;
       data.forEach(item => {
@@ -1284,7 +1287,9 @@
           riskTier,
           riskLabel,
           cushionStr,
-          projRank: index + 1
+          projRank: index + 1,
+          isLive: item.isLive,
+          tonightScore: item.tonightScore
         };
       });
       return { projMap, sorted: data.map(item => projMap[item.d.name]) };
@@ -1762,12 +1767,21 @@
 
       const items = sortedProjections.filter(p => filter === 'all' || p.riskTier === filter);
 
+      const anyLiveTonight = sortedProjections.some(p => p.isLive);
+      const subtitleEl = document.querySelector('.analytics-card.full-width .card-subtitle');
+      if (subtitleEl && anyLiveTonight) {
+        subtitleEl.innerHTML = `Live in-progress standings under the 50/50 system. Couples yet to perform are evaluated on their pre-show baseline to prevent running-order bias.`;
+      }
+
       // Desktop Table Body (Full-row color highlight: green for safe, gold for bubble, red for danger)
       if (tbody) {
         tbody.innerHTML = items.map((p) => `
           <tr class="risk-row ${p.riskTier}">
             <td><span class="risk-rank">#${p.projRank}</span></td>
-            <td><strong>${p.name}</strong> <span style="color:var(--muted);font-size:.76rem">with ${p.pro}</span></td>
+            <td>
+              <strong>${p.name}</strong> <span style="color:var(--muted);font-size:.76rem">with ${p.pro}</span>
+              ${anyLiveTonight ? (p.isLive ? `<div style="font-size:0.68rem;color:var(--green);font-weight:700;margin-top:2px"><span class="live-dot-inline" style="width:6px;height:6px"></span>Danced Tonight: ${p.tonightScore}/30</div>` : `<div style="font-size:0.68rem;color:var(--muted);font-weight:600;margin-top:2px">⏳ Pending Tonight (Baseline)</div>`) : ''}
+            </td>
             <td><b>${p.avg}</b> <small style="color:var(--muted)">/30</small></td>
             <td><b>${p.judgesShare}</b></td>
             <td><b>${p.fanShare}</b> <small style="color:${p.cushionStr.startsWith('+') ? 'var(--green)' : 'var(--red)'};font-weight:700">(${p.cushionStr})</small></td>
@@ -1787,6 +1801,7 @@
                 <div class="rc-names">
                   <strong>${p.name}</strong>
                   <span>with ${p.pro}</span>
+                  ${anyLiveTonight ? (p.isLive ? `<span style="font-size:0.68rem;color:var(--green);font-weight:700;display:block;margin-top:2px"><span class="live-dot-inline" style="width:6px;height:6px"></span>Danced Tonight: ${p.tonightScore}/30</span>` : `<span style="font-size:0.68rem;color:var(--muted);font-weight:600;display:block;margin-top:2px">⏳ Pending Tonight (Baseline)</span>`) : ''}
                 </div>
               </div>
               <span class="rc-badge ${p.riskTier}">${p.riskLabel} (${p.survivalPct}%)</span>
@@ -1816,7 +1831,7 @@
               </div>
             </div>
             <div class="rc-expand-detail">
-              <span>💡 <b>50/50 Projection Model:</b> Cumulative judges' average of ${p.avg}/30 gives ${p.judgesShare} judge share. Kalshi odds of ${p.odds}% model ${p.fanShare} implied public voting share (${p.cushionStr} cushion). Overall 50/50 power is <b>${p.combined}</b> (Projected #${p.projRank}).</span>
+              <span>💡 <b>50/50 Projection Model:</b> Cumulative judges' average of ${p.avg}/30 gives ${p.judgesShare} judge share${anyLiveTonight ? (p.isLive ? ' (includes tonight’s live score)' : ' (evaluated on pre-show baseline until live score arrives)') : ''}. Kalshi odds of ${p.odds}% model ${p.fanShare} implied public voting share (${p.cushionStr} cushion). Overall 50/50 power is <b>${p.combined}</b> (Projected #${p.projRank}).</span>
             </div>
           </div>
         `).join('');
