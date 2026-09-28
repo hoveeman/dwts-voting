@@ -1572,9 +1572,12 @@
       const padLeft = 45, padRight = 100, padTop = 30, padBottom = 35;
       const plotW = width - padLeft - padRight;
       const plotH = height - padTop - padBottom;
-      const maxWeeks = 2;
-      const xForWeek = (wIdx) => padLeft + (wIdx / (maxWeeks - 1)) * plotW;
-      const minY = 8, maxY = 23;
+      const maxWeeks = dancers.reduce((max, d) => Math.max(max, d.weeks ? d.weeks.length : 1), 2);
+      const xForWeek = (wIdx) => padLeft + (maxWeeks <= 1 ? plotW / 2 : (wIdx / (maxWeeks - 1)) * plotW);
+      const allScores = dancers.flatMap(d => (d.weeks || []).map(w => w.score)).filter(s => typeof s === 'number');
+      const maxScore = allScores.length ? Math.max(...allScores) : 21;
+      const minY = 8;
+      const maxY = Math.max(23, Math.min(30, maxScore + 2));
       const yForScore = (s) => padTop + plotH - (((s - minY) / (maxY - minY)) * plotH);
 
       let filtered = [...dancers];
@@ -1587,7 +1590,7 @@
       }
 
       let svg = `<svg viewBox="0 0 ${width} ${height}" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Score Trajectory Lines">`;
-      for (let s = 10; s <= 22; s += 3) {
+      for (let s = 10; s <= maxY; s += 3) {
         const y = yForScore(s);
         svg += `<line x1="${padLeft}" y1="${y}" x2="${width - padRight}" y2="${y}" stroke="var(--line)" stroke-width="1" stroke-dasharray="3,3" opacity="0.6"/>`;
         svg += `<text x="${padLeft - 8}" y="${y + 4}" text-anchor="end" fill="var(--muted)" font-size="10">${s}</text>`;
