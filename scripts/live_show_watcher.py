@@ -70,6 +70,11 @@ def push_updates(scored_count, total_count, leader_name, leader_score):
     print(f"Committed: {commit_msg}")
     print("Pushing to origin main...")
     code, out, err = run_cmd("git push origin main")
+    if code != 0:
+        print(f"Initial push rejected ({err}). Pulling remote changes with rebase and retrying...")
+        run_cmd("git pull --rebase origin main")
+        code, out, err = run_cmd("git push origin main")
+
     if code == 0:
         print("Successfully pushed live update to main!")
         return True

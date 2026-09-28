@@ -1,12 +1,8 @@
-name: DWTS Daily & Live Show Update
-
+name: DWTS Nightly Update
+ 
 on:
   schedule:
-    # 1. Tuesday Night Live Window: Every 5 minutes between 8:00 PM and 11:59 PM ET
-    # (00:00 UTC to 04:59 UTC Wednesday to support both EDT and EST)
-    - cron: '*/5 0-4 * * 3'
-
-    # 2. Daily Check: Every night at ~11:15 PM ET (03:15 UTC for EDT / 04:15 UTC for EST)
+    # Nightly Check: Every night at ~11:15 PM ET (03:15 UTC for EDT / 04:15 UTC for EST)
     # Using off-minute (:15) avoids severe GitHub Actions queue delays at the top of the hour (:00)
     - cron: '15 3 * * *'
     - cron: '15 4 * * *'
