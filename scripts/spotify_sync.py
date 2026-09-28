@@ -19,6 +19,7 @@ ENV_FILE = os.path.join(WORKSPACE_DIR, '.env')
 TOKENS_FILE = os.path.join(WORKSPACE_DIR, '.spotify_tokens.json')
 PLAYLISTS_FILE = os.path.join(WORKSPACE_DIR, 'spotify_playlists.json')
 CACHE_FILE = os.path.join(WORKSPACE_DIR, '.spotify_track_cache.json')
+TRACKS_FILE = os.path.join(WORKSPACE_DIR, 'spotify_tracks.json')
 COVERS_DIR = os.path.join(WORKSPACE_DIR, 'assets', 'playlist_covers')
 
 SCOPES = "playlist-modify-public playlist-modify-private ugc-image-upload"
@@ -173,6 +174,18 @@ def load_track_cache():
 def save_track_cache(cache):
     with open(CACHE_FILE, 'w', encoding='utf-8') as f:
         json.dump(cache, f, indent=2)
+    tracks = {}
+    for k, uri in cache.items():
+        track_id = uri.split(':')[-1]
+        track_url = f"https://open.spotify.com/track/{track_id}"
+        tracks[k] = track_url
+        parts = k.split(' --- ')
+        if len(parts) == 2:
+            title, artist = parts[0], parts[1]
+            simple_key = f"{title} {artist}".replace('&', 'and').replace('feat.', '').replace('  ', ' ').strip()
+            tracks[simple_key] = track_url
+    with open(TRACKS_FILE, 'w', encoding='utf-8') as f:
+        json.dump(tracks, f, indent=2)
 
 
 def search_track_cached(token, title, artist):
@@ -436,17 +449,17 @@ def sync_all_dwts_playlists(week_lineups, current_week_num=3):
     KNOWN_THEMES = {
         1: {
             'name': 'DWTS Season 35 · Week 1: Premiere (Birth-Year #1 Hits)',
-            'desc': 'All official songs from Dancing with the Stars Season 35 Week 1 (Premiere Night), synced in performance order.',
+            'desc': 'All songs from Dancing with the Stars Season 35 Week 1 (Premiere Night), synced in performance order.',
             'cover': 'week_1.jpg'
         },
         2: {
             'name': 'DWTS Season 35 · Week 2: Viral Hits Night',
-            'desc': 'All official songs from Dancing with the Stars Season 35 Week 2 (Viral Hits Night), synced in performance order.',
+            'desc': 'All songs from Dancing with the Stars Season 35 Week 2 (Viral Hits Night), synced in performance order.',
             'cover': 'week_2.jpg'
         },
         3: {
             'name': 'DWTS Season 35 · Week 3: Yacht Rock Night',
-            'desc': 'All official songs from Dancing with the Stars Season 35 Week 3 (Yacht Rock Night), synced in performance order.',
+            'desc': 'All songs from Dancing with the Stars Season 35 Week 3 (Yacht Rock Night), synced in performance order.',
             'cover': 'week_3.jpg'
         }
     }
@@ -473,7 +486,7 @@ def sync_all_dwts_playlists(week_lineups, current_week_num=3):
             cover_file = KNOWN_THEMES[wk_num]['cover']
         else:
             pl_name = f'DWTS Season 35 · Week {wk_num}: {theme_name}'
-            pl_desc = f'All official songs from Dancing with the Stars Season 35 Week {wk_num} ({theme_name}), synced in performance order.'
+            pl_desc = f'All songs from Dancing with the Stars Season 35 Week {wk_num} ({theme_name}), synced in performance order.'
             cover_file = ensure_cover_image(wk_num, theme_name)
 
         sync_weekly_playlist(

@@ -320,21 +320,45 @@ def ordinal(n):
 def mirrorball_label(count):
     return f"{count} Mirrorball{'s' if count != 1 else ''}"
 
+def get_spotify_track_url(song):
+    if not song:
+        return None
+    tracks_file = os.path.join(WORKSPACE_DIR, 'spotify_tracks.json')
+    if os.path.exists(tracks_file):
+        try:
+            with open(tracks_file, 'r', encoding='utf-8') as f:
+                mapping = json.load(f)
+            raw = song.replace('“', '').replace('”', '').replace('"', '').strip()
+            if '·' in raw:
+                title, artist = raw.split('·', 1)
+                k1 = f"{title.strip().lower()} --- {artist.strip().lower()}"
+                k2 = f"{title.strip().lower()} {artist.strip().lower()}".replace('&', 'and').replace('feat.', '').replace('  ', ' ').strip()
+                if k1 in mapping:
+                    return mapping[k1]
+                if k2 in mapping:
+                    return mapping[k2]
+        except Exception:
+            pass
+    return None
+
 def make_music_links_html(song, indent="              "):
     if not song or song == 'TBA' or not song.strip():
         return ''
     clean_text = song.replace('“', '').replace('”', '').replace('"', '').replace('&amp;', '&').replace('·', ' ')
     clean_text = ' '.join(clean_text.split())
-    encoded = urllib.parse.quote(clean_text)
-    spotify_url = f"https://open.spotify.com/search/{encoded}"
-    apple_url = f"https://music.apple.com/us/search?term={encoded}"
+    direct_url = get_spotify_track_url(song)
+    if direct_url:
+        spotify_url = direct_url
+    else:
+        encoded = urllib.parse.quote(clean_text)
+        spotify_url = f"https://open.spotify.com/search/{encoded}"
+
     clean_attr = html.escape(clean_text)
     spotify_svg = '<svg viewBox="0 0 24 24" class="music-icon" aria-hidden="true"><path fill="currentColor" d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.503 17.308c-.218.357-.681.472-1.038.254-2.853-1.743-6.444-2.138-10.673-1.171-.408.093-.812-.162-.905-.57-.093-.408.162-.812.57-.905 4.634-1.059 8.604-.614 11.792 1.354.357.218.472.681.254 1.038zm1.47-3.267c-.275.447-.862.59-1.309.315-3.265-2.008-8.243-2.59-12.106-1.417-.502.152-1.034-.136-1.186-.638-.152-.502.136-1.034.638-1.186 4.417-1.341 9.907-.7 13.648 1.603.447.275.59.862.315 1.309zm.126-3.41c-3.916-2.325-10.374-2.54-14.116-1.403-.6.182-1.24-.165-1.422-.765-.182-.6.165-1.24.765-1.422 4.301-1.306 11.431-1.057 15.932 1.616.54.321.716 1.02.395 1.56-.321.54-1.02.716-1.56.395z"/></svg>'
-    apple_svg = '<svg viewBox="0 0 24 24" class="music-icon" aria-hidden="true"><path fill="currentColor" d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.37c.61-.75 1.04-1.8 0.92-2.85-.92.04-2.07.62-2.73 1.38-.58.66-1.1 1.73-.96 2.76 1.04.08 2.14-.52 2.77-1.29z"/></svg>'
+
     return (
         f'\n{indent}<div class="music-links">'
-        f'<a href="{spotify_url}" target="_blank" rel="noopener noreferrer" class="music-btn spotify-btn" title="Search {clean_attr} on Spotify" aria-label="Listen to {clean_attr} on Spotify">{spotify_svg}<span>Spotify</span></a>'
-        f'<a href="{apple_url}" target="_blank" rel="noopener noreferrer" class="music-btn apple-btn" title="Search {clean_attr} on Apple Music" aria-label="Listen to {clean_attr} on Apple Music">{apple_svg}<span>Apple Music</span></a>'
+        f'<a href="{spotify_url}" target="_blank" rel="noopener noreferrer" class="music-btn spotify-btn" title="Listen to {clean_attr} on Spotify" aria-label="Listen to {clean_attr} on Spotify">{spotify_svg}<span>Spotify</span></a>'
         f'</div>'
     )
 
@@ -1036,10 +1060,9 @@ def update_index_html(wiki_data, market_odds=None):
             pass
 
     sp_icon_svg = '<svg viewBox="0 0 24 24" class="music-icon" aria-hidden="true"><path fill="currentColor" d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.503 17.308c-.218.357-.681.472-1.038.254-2.853-1.743-6.444-2.138-10.673-1.171-.408.093-.812-.162-.905-.57-.093-.408.162-.812.57-.905 4.634-1.059 8.604-.614 11.792 1.354.357.218.472.681.254 1.038zm1.47-3.267c-.275.447-.862.59-1.309.315-3.265-2.008-8.243-2.59-12.106-1.417-.502.152-1.034-.136-1.186-.638-.152-.502.136-1.034.638-1.186 4.417-1.341 9.907-.7 13.648 1.603.447.275.59.862.315 1.309zm.126-3.41c-3.916-2.325-10.374-2.54-14.116-1.403-.6.182-1.24-.165-1.422-.765-.182-.6.165-1.24.765-1.422 4.301-1.306 11.431-1.057 15.932 1.616.54.321.716 1.02.395 1.56-.321.54-1.02.716-1.56.395z"/></svg>'
-    apple_icon_svg = '<svg viewBox="0 0 24 24" class="music-icon" aria-hidden="true"><path fill="currentColor" d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.37c.61-.75 1.04-1.8 0.92-2.85-.92.04-2.07.62-2.73 1.38-.58.66-1.1 1.73-.96 2.76 1.04.08 2.14-.52 2.77-1.29z"/></svg>'
 
     current_sp_url = sp_reg.get(f'week_{lineup_week_num}', {}).get('url') or f"https://open.spotify.com/search/{urllib.parse.quote(theme_title + ' Dancing With The Stars')}"
-    current_apple_url = f"https://music.apple.com/us/search?term={urllib.parse.quote('DWTS Season 35 ' + theme_title)}"
+    season_sp_url = sp_reg.get('season_35', {}).get('url') or "https://open.spotify.com/playlist/73k9Xl6wFg7xAWOpG69Yux"
 
     for pw in past_weeks:
         pw_info = week_lineups[pw]
@@ -1082,7 +1105,6 @@ def update_index_html(wiki_data, market_odds=None):
         date_snippet = f" · {ep_date_val.rsplit(',', 1)[0]}" if ep_date_val else ''
         
         pw_sp_url = sp_reg.get(f'week_{pw}', {}).get('url') or f"https://open.spotify.com/search/{urllib.parse.quote('DWTS Season 35 ' + pw_theme)}"
-        pw_apple_url = f"https://music.apple.com/us/search?term={urllib.parse.quote('DWTS Season 35 ' + pw_theme)}"
 
         details_block = (
             f'          <details class="past-week-details">\n'
@@ -1095,8 +1117,7 @@ def update_index_html(wiki_data, market_odds=None):
             f'            </summary>\n'
             f'            <div class="pw-body">\n'
             f'              <div class="week-playlist-actions" style="margin: 10px 0 14px 0;">\n'
-            f'                <a href="{pw_sp_url}" target="_blank" rel="noopener noreferrer" class="playlist-btn spotify-playlist-btn" title="Listen to Week {pw} on Spotify">{sp_icon_svg}<span>Week {pw} Spotify Playlist</span></a>\n'
-            f'                <a href="{pw_apple_url}" target="_blank" rel="noopener noreferrer" class="playlist-btn apple-playlist-btn" title="Search Week {pw} on Apple Music">{apple_icon_svg}<span>Apple Music</span></a>\n'
+            f'                <a href="{pw_sp_url}" target="_blank" rel="noopener noreferrer" class="playlist-btn spotify-playlist-btn" title="Listen to Week {pw} Playlist on Spotify">{sp_icon_svg}<span>Week {pw} Playlist</span></a>\n'
             f'              </div>\n'
             f'              <div class="lineup-list">\n' +
             "\n".join(pw_items) + "\n"
@@ -1126,8 +1147,8 @@ def update_index_html(wiki_data, market_odds=None):
         f'          <div>\n'
         f'            <p>{head_desc}</p>\n'
         f'            <div class="week-playlist-actions">\n'
-        f'              <a href="{current_sp_url}" target="_blank" rel="noopener noreferrer" class="playlist-btn spotify-playlist-btn" title="Listen to Week {lineup_week_num} on Spotify">{sp_icon_svg}<span>Week {lineup_week_num} Spotify Playlist</span></a>\n'
-        f'              <a href="{current_apple_url}" target="_blank" rel="noopener noreferrer" class="playlist-btn apple-playlist-btn" title="Search Week {lineup_week_num} on Apple Music">{apple_icon_svg}<span>Apple Music</span></a>\n'
+        f'              <a href="{current_sp_url}" target="_blank" rel="noopener noreferrer" class="playlist-btn spotify-playlist-btn" title="Listen to Week {lineup_week_num} Playlist on Spotify">{sp_icon_svg}<span>Week {lineup_week_num} Playlist</span></a>\n'
+        f'              <a href="{season_sp_url}" target="_blank" rel="noopener noreferrer" class="playlist-btn master-playlist-btn" title="Listen to Full Season 35 Soundtrack on Spotify">{sp_icon_svg}<span>Full Season 35 Playlist</span></a>\n'
         f'            </div>\n'
         f'          </div>\n'
         f'        </div>\n'
