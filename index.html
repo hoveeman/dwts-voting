@@ -252,10 +252,34 @@
     .card-subtitle{font-size:.78rem;color:var(--muted);margin:0}
     .chart-container{width:100%;position:relative;overflow:hidden}
     .chart-container svg{display:block;width:100%;height:auto}
+    .quadrant-chart-container{width:100%;max-width:480px;margin:0 auto;aspect-ratio:1 / 1;position:relative}
+    .quadrant-chart-container svg{display:block;width:100%;height:100%}
+    .chart-couple-pills{display:flex;gap:5px;overflow-x:auto;-webkit-overflow-scrolling:touch;padding:3px 0 8px;scrollbar-width:none}
+    .chart-couple-pills::-webkit-scrollbar{display:none}
+    .couple-pill{flex:0 0 auto;font-size:.70rem;font-weight:600;padding:4px 9px;border-radius:999px;border:1px solid var(--line);background:var(--bg);color:var(--ink);cursor:pointer;transition:all .15s ease}
+    .couple-pill:hover{border-color:var(--ink)}
+    .couple-pill.active{background:var(--ink);color:var(--paper);border-color:var(--ink)}
     .chart-filters{display:flex;gap:6px;flex-wrap:wrap}
     .chart-filter{font-size:.72rem;font-weight:700;padding:5px 10px;border-radius:999px;border:1px solid var(--line);background:var(--paper);color:var(--ink);cursor:pointer;transition:all .15s}
     .chart-filter.active{background:var(--ink);color:var(--paper);border-color:var(--ink)}
-    .chart-detail-box{margin-top:10px;font-size:.76rem;color:var(--muted);padding:8px 12px;background:var(--bg);border-radius:4px;border:1px solid var(--line);min-height:36px;display:flex;align-items:center}
+    .chart-detail-box{margin-top:12px;font-size:.78rem;color:var(--ink);padding:10px 14px;background:var(--bg);border-radius:6px;border:1px solid var(--line);min-height:46px;display:flex;align-items:center;transition:all .2s ease;gap:10px}
+    .chart-detail-box.has-active{background:var(--paper);border-color:var(--gold);box-shadow:0 2px 8px rgba(0,0,0,.06)}
+    .qd-card{display:flex;align-items:center;gap:12px;width:100%}
+    .qd-avatar{width:42px;height:42px;border-radius:50%;object-fit:cover;flex-shrink:0;border:2px solid var(--line)}
+    .qd-info{flex:1;min-width:0}
+    .qd-top{display:flex;align-items:baseline;gap:6px;flex-wrap:wrap;margin-bottom:2px}
+    .qd-top strong{font-size:.88rem;color:var(--ink)}
+    .qd-top span.qd-pro{font-size:.74rem;color:var(--muted)}
+    .qd-quad-badge{font-size:.65rem;font-weight:700;padding:2px 7px;border-radius:3px;text-transform:uppercase;letter-spacing:.04em;margin-left:auto}
+    .qd-quad-badge.fav{background:rgba(35,99,79,.14);color:var(--green)}
+    .qd-quad-badge.armor{background:var(--gold-soft);color:var(--gold)}
+    .qd-quad-badge.ringer{background:rgba(36,93,120,.14);color:var(--blue)}
+    .qd-quad-badge.danger{background:rgba(159,30,45,.14);color:var(--red)}
+    .qd-metrics{display:flex;gap:12px;font-size:.74rem;color:var(--muted);flex-wrap:wrap}
+    .qd-metrics b{color:var(--ink)}
+    .risk-text-safe{color:var(--green)!important}
+    .risk-text-bubble{color:var(--gold)!important}
+    .risk-text-danger{color:var(--red)!important}
     .quadrant-legend{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:14px;font-size:.72rem}
     .q-tag{padding:6px 9px;border-radius:3px;font-weight:600}
     .q-tag.fav{background:rgba(35,99,79,.08);color:var(--green);border:1px solid rgba(35,99,79,.22)}
@@ -264,11 +288,60 @@
     .q-tag.danger{background:rgba(159,30,45,.08);color:var(--red);border:1px solid rgba(159,30,45,.22)}
     .bottom2-alert{display:inline-flex;align-items:center;gap:8px;font-size:.78rem;background:rgba(159,30,45,.08);border:1px solid rgba(159,30,45,.25);color:var(--red);padding:6px 12px;border-radius:4px}
     .alert-pulse{width:6px;height:6px;border-radius:50%;background:var(--red);animation:pulse 1.5s infinite;flex-shrink:0}
-    .risk-table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin-top:8px}
-    .risk-table{width:100%;border-collapse:collapse;font-size:.82rem;text-align:left}
+    .risk-matrix-controls{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:12px;flex-wrap:wrap}
+    .risk-filters{display:flex;gap:6px;flex-wrap:wrap}
+    .risk-filter-btn{font-size:.72rem;font-weight:700;padding:5px 11px;border-radius:999px;border:1px solid var(--line);background:var(--paper);color:var(--ink);cursor:pointer;transition:all .15s}
+    .risk-filter-btn:hover{border-color:var(--ink)}
+    .risk-filter-btn.active{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+    .view-toggle{display:flex;gap:4px}
+    .view-toggle-btn{font-size:.70rem;font-weight:600;padding:4px 9px;border-radius:4px;border:1px solid var(--line);background:var(--bg);color:var(--muted);cursor:pointer;transition:all .15s}
+    .view-toggle-btn.active{background:var(--paper);color:var(--ink);border-color:var(--ink);font-weight:700}
+    .risk-table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin-top:4px}
+    .risk-table{width:100%;border-collapse:separate;border-spacing:0 4px;font-size:.82rem;text-align:left}
     .risk-table th{padding:10px 12px;background:var(--bg);border-bottom:2px solid var(--line);color:var(--muted);font-size:.72rem;text-transform:uppercase;letter-spacing:.05em;white-space:nowrap}
-    .risk-table td{padding:11px 12px;border-bottom:1px solid var(--line);white-space:nowrap}
-    .risk-table tr:hover td{background:rgba(0,0,0,.015)}
+    .risk-table td{padding:10px 12px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);white-space:nowrap;transition:background .15s ease}
+    .risk-table td:first-child{border-left:5px solid transparent;border-top-left-radius:4px;border-bottom-left-radius:4px}
+    .risk-table td:last-child{border-right:1px solid var(--line);border-top-right-radius:4px;border-bottom-right-radius:4px}
+    .risk-row.safe td{background:rgba(35,99,79,.06)}
+    .risk-row.safe td:first-child{border-left:5px solid var(--green)}
+    .risk-row.safe:hover td{background:rgba(35,99,79,.13)}
+    .risk-row.bubble td{background:rgba(195,139,37,.08)}
+    .risk-row.bubble td:first-child{border-left:5px solid var(--gold)}
+    .risk-row.bubble:hover td{background:rgba(195,139,37,.16)}
+    .risk-row.danger td{background:rgba(159,30,45,.09)}
+    .risk-row.danger td:first-child{border-left:5px solid var(--red)}
+    .risk-row.danger:hover td{background:rgba(159,30,45,.17)}
+    .risk-mobile-cards{display:none;flex-direction:column;gap:8px;margin-top:4px}
+    .risk-card{background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:12px 14px;display:flex;flex-direction:column;gap:8px;transition:all .15s ease;cursor:pointer}
+    .risk-card.safe{background:rgba(35,99,79,.06);border-left:5px solid var(--green)}
+    .risk-card.safe:hover{background:rgba(35,99,79,.12)}
+    .risk-card.bubble{background:rgba(195,139,37,.08);border-left:5px solid var(--gold)}
+    .risk-card.bubble:hover{background:rgba(195,139,37,.15)}
+    .risk-card.danger{background:rgba(159,30,45,.09);border-left:5px solid var(--red)}
+    .risk-card.danger:hover{background:rgba(159,30,45,.16)}
+    .rc-header{display:flex;align-items:center;justify-content:space-between;gap:8px}
+    .rc-couple-wrap{display:flex;align-items:center;gap:10px}
+    .rc-rank{font-family:var(--font-display);font-size:1.25rem;font-weight:700;line-height:1;min-width:28px}
+    .rc-names strong{display:block;font-size:.92rem;line-height:1.2}
+    .rc-names span{font-size:.74rem;color:var(--muted)}
+    .rc-badge{padding:3px 8px;border-radius:3px;font-size:.70rem;font-weight:700;text-transform:uppercase;letter-spacing:.03em;white-space:nowrap}
+    .rc-badge.safe{background:rgba(35,99,79,.14);color:var(--green)}
+    .rc-badge.bubble{background:var(--gold-soft);color:var(--gold)}
+    .rc-badge.danger{background:rgba(159,30,45,.14);color:var(--red)}
+    .rc-stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;font-size:.76rem;background:rgba(0,0,0,.03);padding:7px 10px;border-radius:4px}
+    .rc-stat{display:flex;flex-direction:column}
+    .rc-stat-label{font-size:.64rem;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;margin-bottom:2px}
+    .rc-stat-val{font-weight:700;font-size:.82rem}
+    .rc-stat-val small{font-weight:normal;font-size:.68rem;color:var(--muted)}
+    .rc-split-bar-wrap{display:flex;flex-direction:column;gap:3px}
+    .rc-split-labels{display:flex;justify-content:space-between;font-size:.65rem;color:var(--muted)}
+    .rc-split-bar{display:flex;height:6px;border-radius:3px;overflow:hidden;background:rgba(0,0,0,.08)}
+    .rc-bar-judges{background:var(--blue);transition:width .3s}
+    .rc-bar-fan.safe{background:var(--green)}
+    .rc-bar-fan.bubble{background:var(--gold)}
+    .rc-bar-fan.danger{background:var(--red)}
+    .rc-expand-detail{font-size:.74rem;color:var(--muted);padding-top:6px;border-top:1px dashed var(--line);display:none;line-height:1.4}
+    .risk-card.expanded .rc-expand-detail{display:block}
     .risk-badge{display:inline-block;padding:3px 7px;border-radius:3px;font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em}
     .risk-badge.safe{background:rgba(35,99,79,.12);color:var(--green)}
     .risk-badge.bubble{background:var(--gold-soft);color:var(--gold)}
@@ -279,6 +352,9 @@
       .quadrant-legend{grid-template-columns:1fr}
     }
     @media(max-width:768px){
+      .risk-table-wrap{display:none}
+      .risk-mobile-cards{display:flex}
+      .risk-matrix-controls .view-toggle{display:none}
       .live-banner{position:static;padding:14px 16px}
       .live-banner-content{flex-direction:column;align-items:stretch;gap:12px}
       .live-banner-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;width:100%}
@@ -387,10 +463,12 @@
           <div class="card-header">
             <div>
               <h3>Judges vs. Public Quadrant</h3>
-              <p class="card-subtitle">Technical scoring floor (X) vs. Implied fan vote share &amp; market odds (Y)</p>
+              <p class="card-subtitle">Equal 1:1 square matrix: Technical scoring floor (X) vs. Implied fan vote share &amp; market odds (Y)</p>
             </div>
           </div>
-          <div class="chart-container" id="quadrant-container" aria-label="Judges vs. Public Quadrant Scatter Plot"></div>
+          <div class="chart-couple-pills" id="quadrant-pills" role="toolbar" aria-label="Tap couple to spotlight on quadrant"></div>
+          <div class="chart-container quadrant-chart-container" id="quadrant-container" aria-label="Judges vs. Public Quadrant Scatter Plot"></div>
+          <div id="quadrant-detail" class="chart-detail-box" aria-live="polite">Tap any couple chip or circle above to spotlight their quadrant placement</div>
           <div class="quadrant-legend">
             <span class="q-tag fav">Top-Right: Favorites (High Scores + High Votes)</span>
             <span class="q-tag armor">Top-Left: Fan Armor (Low Scores + Heavy Vote Cushion)</span>
@@ -413,8 +491,9 @@
               <button class="chart-filter" data-traj="danger">At Risk</button>
             </div>
           </div>
+          <div class="chart-couple-pills" id="trajectory-pills" role="toolbar" aria-label="Tap couple to highlight score trajectory"></div>
           <div class="chart-container" id="trajectory-container" aria-label="Score Trajectory Line Chart"></div>
-          <div id="trajectory-detail" class="chart-detail-box">Hover or tap any couple line to view weekly breakdown</div>
+          <div id="trajectory-detail" class="chart-detail-box" aria-live="polite">Tap any line, data dot, or couple chip above to view weekly breakdown</div>
         </article>
       </div>
 
@@ -430,6 +509,21 @@
             <strong>Projected Bottom 2:</strong> Taylor Hanson &amp; Julia Stiles (Ciara Miller on bubble)
           </div>
         </div>
+
+        <div class="risk-matrix-controls">
+          <div class="risk-filters" role="group" aria-label="Filter risk matrix by survival outlook">
+            <button class="risk-filter-btn active" data-risk-filter="all">All 13 Couples</button>
+            <button class="risk-filter-btn" data-risk-filter="danger">⚠️ Bottom 2 Danger</button>
+            <button class="risk-filter-btn" data-risk-filter="bubble">🟡 On Bubble</button>
+            <button class="risk-filter-btn" data-risk-filter="safe">🟢 Safe Tier</button>
+          </div>
+          <div class="view-toggle" role="group" aria-label="Toggle risk matrix display format">
+            <button class="view-toggle-btn" data-view="cards">📱 Compact View</button>
+            <button class="view-toggle-btn active" data-view="table">📊 Full Table</button>
+          </div>
+        </div>
+
+        <!-- Desktop Spreadsheet View (with full-row color highlights) -->
         <div class="risk-table-wrap">
           <table class="risk-table">
             <thead>
@@ -446,6 +540,9 @@
             <tbody id="risk-table-body"></tbody>
           </table>
         </div>
+
+        <!-- Mobile-first View (Zero horizontal scrolling, full card color tint) -->
+        <div class="risk-mobile-cards" id="risk-cards-body" aria-label="Mobile risk standings list"></div>
       </article>
     </section>
 
@@ -1254,57 +1351,234 @@
     }));
     render('power');
 
+    let selectedQuadrantDancer = null;
     function initQuadrantChart(){
       const container = document.getElementById('quadrant-container');
+      const pillsContainer = document.getElementById('quadrant-pills');
+      const detailBox = document.getElementById('quadrant-detail');
       if(!container) return;
-      const width = 640, height = 400;
-      const padLeft = 55, padRight = 30, padTop = 35, padBottom = 45;
-      const plotW = width - padLeft - padRight;
-      const plotH = height - padTop - padBottom;
+
+      const width = 520, height = 520;
+      const padLeft = 45, padRight = 25, padTop = 25, padBottom = 45;
+      const plotW = width - padLeft - padRight; // 450
+      const plotH = height - padTop - padBottom; // 450
       const minX = 10, maxX = 22;
-      const splitScore = 17.5;
-      const splitX = padLeft + ((splitScore - minX) / (maxX - minX)) * plotW;
-      const maxOdds = 40;
-      const splitOdds = 5.0;
-      const splitY = padTop + plotH - (Math.sqrt(splitOdds / maxOdds) * plotH);
+      const splitScore = 16.0;
+      const splitX = padLeft + ((splitScore - minX) / (maxX - minX)) * plotW; // 270
+      const splitY = padTop + plotH / 2; // 250
+      const maxOdds = 40, splitOdds = 5.0, minOdds = 0.5;
+
+      function getCoords(avg, odds) {
+        const cx = padLeft + ((Math.min(maxX, Math.max(minX, avg)) - minX) / (maxX - minX)) * plotW;
+        let cy;
+        if (odds >= splitOdds) {
+          const norm = (Math.min(maxOdds, odds) - splitOdds) / (maxOdds - splitOdds);
+          cy = splitY - Math.sqrt(norm) * (plotH / 2);
+        } else {
+          const norm = (splitOdds - Math.max(minOdds, odds)) / (splitOdds - minOdds);
+          cy = splitY + Math.sqrt(norm) * (plotH / 2);
+        }
+        return { cx: Math.round(cx), cy: Math.round(cy) };
+      }
+
+      const labelOffsets = {
+        "Ezra Frech": { dx: -14, dy: 4, anchor: "end" },
+        "Jenna Dewan": { dx: -14, dy: -4, anchor: "end" },
+        "Maura Higgins": { dx: 14, dy: 10, anchor: "start" },
+        "Amber Glenn": { dx: -14, dy: -6, anchor: "end" },
+        "Harry Shum Jr.": { dx: 14, dy: 4, anchor: "start" },
+        "Jackson Olson": { dx: 14, dy: -6, anchor: "start" },
+        "Connor Wood": { dx: -14, dy: -6, anchor: "end" },
+        "Tyler Cameron": { dx: -14, dy: 4, anchor: "end" },
+        "Julia Stiles": { dx: 14, dy: 4, anchor: "start" },
+        "Tatyana Ali": { dx: -14, dy: 10, anchor: "end" },
+        "Taylor Hanson": { dx: 14, dy: -8, anchor: "start" },
+        "Ciara Miller": { dx: 14, dy: 12, anchor: "start" },
+        "Guillermo Rodriguez": { dx: 14, dy: 4, anchor: "start" }
+      };
 
       let svg = `<svg viewBox="0 0 ${width} ${height}" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Judges vs. Public Quadrant Matrix">`;
+      // Quadrant backdrops
       svg += `<rect x="${padLeft}" y="${padTop}" width="${splitX - padLeft}" height="${splitY - padTop}" fill="rgba(195,139,37,0.06)" />`;
       svg += `<rect x="${splitX}" y="${padTop}" width="${width - padRight - splitX}" height="${splitY - padTop}" fill="rgba(35,99,79,0.06)" />`;
       svg += `<rect x="${padLeft}" y="${splitY}" width="${splitX - padLeft}" height="${padTop + plotH - splitY}" fill="rgba(159,30,45,0.06)" />`;
       svg += `<rect x="${splitX}" y="${splitY}" width="${width - padRight - splitX}" height="${padTop + plotH - splitY}" fill="rgba(36,93,120,0.05)" />`;
-      svg += `<text x="${padLeft + 12}" y="${padTop + 20}" fill="var(--gold)" font-size="11" font-weight="700" letter-spacing="0.08em" opacity="0.85">FAN ARMOR</text>`;
-      svg += `<text x="${width - padRight - 12}" y="${padTop + 20}" text-anchor="end" fill="var(--green)" font-size="11" font-weight="700" letter-spacing="0.08em" opacity="0.85">FAVORITES</text>`;
-      svg += `<text x="${padLeft + 12}" y="${padTop + plotH - 12}" fill="var(--red)" font-size="11" font-weight="700" letter-spacing="0.08em" opacity="0.85">DANGER ZONE</text>`;
-      svg += `<text x="${width - padRight - 12}" y="${padTop + plotH - 12}" text-anchor="end" fill="var(--blue)" font-size="11" font-weight="700" letter-spacing="0.08em" opacity="0.85">VULNERABLE RINGERS</text>`;
+
+      // Quadrant Titles
+      svg += `<text x="${padLeft + 10}" y="${padTop + 18}" fill="var(--gold)" font-size="10" font-weight="700" letter-spacing="0.08em" opacity="0.85">FAN ARMOR</text>`;
+      svg += `<text x="${width - padRight - 10}" y="${padTop + 18}" text-anchor="end" fill="var(--green)" font-size="10" font-weight="700" letter-spacing="0.08em" opacity="0.85">FAVORITES</text>`;
+      svg += `<text x="${padLeft + 10}" y="${padTop + plotH - 10}" fill="var(--red)" font-size="10" font-weight="700" letter-spacing="0.08em" opacity="0.85">DANGER ZONE</text>`;
+      svg += `<text x="${width - padRight - 10}" y="${padTop + plotH - 10}" text-anchor="end" fill="var(--blue)" font-size="10" font-weight="700" letter-spacing="0.08em" opacity="0.85">VULNERABLE RINGERS</text>`;
+
+      // Center divider lines
       svg += `<line x1="${splitX}" y1="${padTop}" x2="${splitX}" y2="${padTop + plotH}" stroke="var(--line)" stroke-width="1.5" stroke-dasharray="4,4" />`;
       svg += `<line x1="${padLeft}" y1="${splitY}" x2="${width - padRight}" y2="${splitY}" stroke="var(--line)" stroke-width="1.5" stroke-dasharray="4,4" />`;
+      // Axes
       svg += `<line x1="${padLeft}" y1="${padTop + plotH}" x2="${width - padRight}" y2="${padTop + plotH}" stroke="var(--line)" stroke-width="1.5" />`;
       svg += `<line x1="${padLeft}" y1="${padTop}" x2="${padLeft}" y2="${padTop + plotH}" stroke="var(--line)" stroke-width="1.5" />`;
-      svg += `<text x="${width / 2}" y="${height - 10}" text-anchor="middle" fill="var(--muted)" font-size="11" font-weight="600">Judges' Scoring Average →</text>`;
-      svg += `<text x="16" y="${height / 2}" text-anchor="middle" transform="rotate(-90 16 ${height / 2})" fill="var(--muted)" font-size="11" font-weight="600">Kalshi Win Odds % →</text>`;
+      svg += `<text x="${width / 2}" y="${height - 12}" text-anchor="middle" fill="var(--muted)" font-size="11" font-weight="600">Judges' Scoring Floor (Avg) →</text>`;
+      svg += `<text x="14" y="${height / 2}" text-anchor="middle" transform="rotate(-90 14 ${height / 2})" fill="var(--muted)" font-size="11" font-weight="600">Kalshi Win Odds % →</text>`;
 
-      dancers.forEach(d => {
+      // Active halo element
+      svg += `<circle id="q-active-halo" cx="-100" cy="-100" r="18" fill="none" stroke="var(--gold)" stroke-width="3" opacity="0" style="transition:all .2s ease;pointer-events:none"/>`;
+
+      dancers.forEach((d, idx) => {
         const avg = d.weeks && d.weeks.length ? (d.total / d.weeks.length) : 15;
         const odds = d.marketProb || 1;
-        const cx = padLeft + ((Math.min(maxX, Math.max(minX, avg)) - minX) / (maxX - minX)) * plotW;
-        const cy = padTop + plotH - (Math.sqrt(Math.min(maxOdds, Math.max(0.5, odds)) / maxOdds) * plotH);
+        const pt = getCoords(avg, odds);
         const p = globalProjMap[d.name] || {};
         const color = p.riskTier === 'safe' ? 'var(--green)' : (p.riskTier === 'danger' ? 'var(--red)' : 'var(--gold)');
         const shortName = d.name.split(' ')[0];
-        svg += `<g class="q-node-group" data-name="${d.name}" tabindex="0" style="cursor:pointer">`;
-        svg += `<circle cx="${cx}" cy="${cy}" r="11" fill="${color}" stroke="var(--paper)" stroke-width="2" class="q-node-circle" />`;
-        svg += `<text x="${cx}" y="${cy + 4}" text-anchor="middle" fill="#fff" font-size="10" font-weight="800">${d.rank}</text>`;
-        svg += `<text x="${cx + 14}" y="${cy + 4}" fill="var(--ink)" font-size="11" font-weight="700" class="q-node-label">${shortName} (${odds}%)</text>`;
+        const offset = labelOffsets[d.name] || { dx: 14, dy: 4, anchor: "start" };
+        const lx = pt.cx + offset.dx;
+        const ly = pt.cy + offset.dy;
+
+        svg += `<g class="q-node-group" id="q-node-${idx}" data-name="${d.name}" data-idx="${idx}" data-cx="${pt.cx}" data-cy="${pt.cy}" tabindex="0" role="button" aria-label="${d.name}, ${odds}% Kalshi odds, avg score ${avg.toFixed(1)}" style="cursor:pointer;transition:opacity .2s ease">`;
+        // Large transparent touch hit area (48px diameter for effortless tapping on mobile)
+        svg += `<circle cx="${pt.cx}" cy="${pt.cy}" r="24" fill="transparent" class="q-touch-target" />`;
+        // Visible colored node circle
+        svg += `<circle cx="${pt.cx}" cy="${pt.cy}" r="11" fill="${color}" stroke="var(--paper)" stroke-width="2.5" class="q-node-circle" id="q-circle-${idx}" style="transition:all .2s ease" />`;
+        // Rank text
+        svg += `<text x="${pt.cx}" y="${pt.cy + 4}" text-anchor="middle" fill="#fff" font-size="10" font-weight="800" pointer-events="none">${d.rank}</text>`;
+        // Name and odds label
+        svg += `<text x="${lx}" y="${ly}" text-anchor="${offset.anchor}" fill="var(--ink)" font-size="11" font-weight="700" class="q-node-label" id="q-label-${idx}" pointer-events="none" style="text-shadow: 0 1px 3px rgba(255,255,255,0.9), 0 -1px 3px rgba(255,255,255,0.9);transition:all .2s ease">${shortName} (${odds}%)</text>`;
         svg += `</g>`;
       });
       svg += `</svg>`;
       container.innerHTML = svg;
+
+      // Render Couple Selector Pills
+      if (pillsContainer) {
+        let pillsHtml = `<button class="couple-pill active" data-pill-name="all">Show All</button>`;
+        dancers.forEach(d => {
+          const shortName = d.name.split(' ')[0];
+          pillsHtml += `<button class="couple-pill" data-pill-name="${d.name}">#${d.rank} ${shortName}</button>`;
+        });
+        pillsContainer.innerHTML = pillsHtml;
+
+        pillsContainer.querySelectorAll('.couple-pill').forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const name = btn.dataset.pillName;
+            selectDancer(name === 'all' ? null : name);
+          });
+        });
+      }
+
+      function selectDancer(name) {
+        selectedQuadrantDancer = name;
+        const halo = document.getElementById('q-active-halo');
+
+        // Update pills
+        if (pillsContainer) {
+          pillsContainer.querySelectorAll('.couple-pill').forEach(btn => {
+            if (!name && btn.dataset.pillName === 'all') {
+              btn.classList.add('active');
+            } else if (name && btn.dataset.pillName === name) {
+              btn.classList.add('active');
+              btn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+            } else {
+              btn.classList.remove('active');
+            }
+          });
+        }
+
+        if (!name) {
+          // Reset view
+          container.querySelectorAll('.q-node-group').forEach(g => {
+            g.style.opacity = '1.0';
+            const c = g.querySelector('.q-node-circle');
+            if (c) c.setAttribute('r', '11');
+          });
+          if (halo) halo.setAttribute('opacity', '0');
+          if (detailBox) {
+            detailBox.classList.remove('has-active');
+            detailBox.innerHTML = 'Tap any couple chip or circle above to spotlight their quadrant placement';
+          }
+          return;
+        }
+
+        const dancer = dancers.find(d => d.name === name);
+        if (!dancer) return;
+        const avg = dancer.weeks && dancer.weeks.length ? (dancer.total / dancer.weeks.length) : 15;
+        const odds = dancer.marketProb || 1;
+        const pt = getCoords(avg, odds);
+        const p = globalProjMap[dancer.name] || {};
+
+        // Quadrant category determine
+        let quadClass = 'fav', quadTitle = 'Favorites (Top-Right)';
+        if (avg >= splitScore && odds >= splitOdds) {
+          quadClass = 'fav'; quadTitle = 'Favorites (Top-Right)';
+        } else if (avg < splitScore && odds >= splitOdds) {
+          quadClass = 'armor'; quadTitle = 'Fan Armor (Top-Left)';
+        } else if (avg >= splitScore && odds < splitOdds) {
+          quadClass = 'ringer'; quadTitle = 'Vulnerable Ringers (Bottom-Right)';
+        } else {
+          quadClass = 'danger'; quadTitle = 'Danger Zone (Bottom-Left)';
+        }
+
+        // Spotlight node on chart
+        container.querySelectorAll('.q-node-group').forEach(g => {
+          const isTarget = g.dataset.name === name;
+          g.style.opacity = isTarget ? '1.0' : '0.22';
+          const c = g.querySelector('.q-node-circle');
+          if (c) c.setAttribute('r', isTarget ? '14' : '11');
+        });
+
+        if (halo) {
+          halo.setAttribute('cx', pt.cx);
+          halo.setAttribute('cy', pt.cy);
+          halo.setAttribute('opacity', '0.9');
+        }
+
+        // Update detail card
+        if (detailBox) {
+          detailBox.classList.add('has-active');
+          detailBox.innerHTML = `
+            <div class="qd-card">
+              <img class="qd-avatar" src="assets/${dancer.photo}" alt="${dancer.name}">
+              <div class="qd-info">
+                <div class="qd-top">
+                  <strong>${dancer.name}</strong>
+                  <span class="qd-pro">with ${dancer.proName}</span>
+                  <span class="qd-quad-badge ${quadClass}">${quadTitle}</span>
+                </div>
+                <div class="qd-metrics">
+                  <span>Scoring Avg: <b>${avg.toFixed(1)}/30</b></span>
+                  <span>Kalshi Win Odds: <b>${odds}%</b></span>
+                  <span>Survival Outlook: <b class="risk-text-${p.riskTier}">${p.riskLabel} (${p.survivalPct}%)</b></span>
+                </div>
+              </div>
+            </div>
+          `;
+        }
+      }
+
+      // Attach Touch and Click Events to SVG node groups
+      container.querySelectorAll('.q-node-group').forEach(group => {
+        const handler = (e) => {
+          e.preventDefault();
+          const name = group.dataset.name;
+          if (selectedQuadrantDancer === name) {
+            selectDancer(null);
+          } else {
+            selectDancer(name);
+          }
+        };
+        group.addEventListener('click', handler);
+        group.addEventListener('pointerdown', (e) => {
+          if (e.pointerType === 'touch') handler(e);
+        });
+      });
     }
 
+    let selectedTrajectoryDancer = null;
     function initTrajectoryChart(filter='all'){
       const container = document.getElementById('trajectory-container');
+      const pillsContainer = document.getElementById('trajectory-pills');
+      const detailBox = document.getElementById('trajectory-detail');
       if(!container) return;
+
       const width = 640, height = 280;
       const padLeft = 45, padRight = 100, padTop = 30, padBottom = 35;
       const plotW = width - padLeft - padRight;
@@ -1353,61 +1627,255 @@
         }));
         if (points.length >= 2) {
           const pathD = points.map((p, i) => `${i === 0 ? 'M' : 'L'} ${p.x} ${p.y}`).join(' ');
-          svg += `<path d="${pathD}" fill="none" stroke="${color}" stroke-width="${isVisible ? 2.5 : 1.5}" opacity="${opacity}" class="traj-line" data-name="${d.name}" style="transition:all .2s ease"/>`;
+          // Invisible touch hit path (28px width)
+          svg += `<path d="${pathD}" fill="none" stroke="transparent" stroke-width="28" stroke-linecap="round" class="traj-hit-area" data-name="${d.name}" style="cursor:pointer" />`;
+          // Visible line
+          svg += `<path d="${pathD}" fill="none" stroke="${color}" stroke-width="${isVisible ? 2.5 : 1.5}" opacity="${opacity}" class="traj-line" id="traj-line-${idx}" data-name="${d.name}" style="transition:all .2s ease;pointer-events:none"/>`;
           points.forEach(p => {
-            svg += `<circle cx="${p.x}" cy="${p.y}" r="${isVisible ? 4 : 2}" fill="${color}" stroke="var(--paper)" stroke-width="1.5" opacity="${opacity}" class="traj-dot" data-name="${d.name}"/>`;
+            // Invisible touch dot
+            svg += `<circle cx="${p.x}" cy="${p.y}" r="18" fill="transparent" class="traj-hit-dot" data-name="${d.name}" style="cursor:pointer" />`;
+            // Visible dot
+            svg += `<circle cx="${p.x}" cy="${p.y}" r="${isVisible ? 4 : 2}" fill="${color}" stroke="var(--paper)" stroke-width="1.5" opacity="${opacity}" class="traj-dot" id="traj-dot-${idx}" data-name="${d.name}" style="pointer-events:none;transition:all .2s ease"/>`;
           });
           const lastP = points[points.length - 1];
           const wow = getWoW(d);
           const wowStr = wow > 0 ? `+${wow}` : `${wow}`;
-          svg += `<text x="${lastP.x + 8}" y="${lastP.y + 4}" fill="${color}" font-size="10" font-weight="700" opacity="${opacity}" class="traj-label" data-name="${d.name}">${d.name.split(' ')[0]} (${lastP.score} · ${wowStr})</text>`;
+          svg += `<text x="${lastP.x + 8}" y="${lastP.y + 4}" fill="${color}" font-size="10" font-weight="700" opacity="${opacity}" class="traj-label" id="traj-label-${idx}" data-name="${d.name}" style="transition:all .2s ease;cursor:pointer">${d.name.split(' ')[0]} (${lastP.score} · ${wowStr})</text>`;
         }
       });
       svg += `</svg>`;
       container.innerHTML = svg;
 
-      // Trajectory hover details
-      const detailBox = document.getElementById('trajectory-detail');
-      container.querySelectorAll('.traj-line, .traj-dot, .traj-label').forEach(el => {
-        el.addEventListener('mouseenter', () => {
-          const name = el.dataset.name;
-          const dancer = dancers.find(d => d.name === name);
-          if (dancer && detailBox) {
-            const wow = getWoW(dancer);
-            const wowStr = wow > 0 ? `+${wow}` : `${wow}`;
-            const scoresStr = dancer.weeks.map((w, i) => `Week ${i+1}: ${w.score}/30 (${w.dance})`).join(' → ');
-            detailBox.innerHTML = `<strong>${dancer.name}</strong> (with ${dancer.proName}): ${scoresStr} · <b>Trend: ${wowStr} WoW</b>`;
+      // Render Trajectory couple selector pills
+      if (pillsContainer) {
+        let pillsHtml = `<button class="couple-pill active" data-traj-pill="all">Show All</button>`;
+        dancers.forEach(d => {
+          const shortName = d.name.split(' ')[0];
+          pillsHtml += `<button class="couple-pill" data-traj-pill="${d.name}">#${d.rank} ${shortName}</button>`;
+        });
+        pillsContainer.innerHTML = pillsHtml;
+
+        pillsContainer.querySelectorAll('.couple-pill').forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const name = btn.dataset.trajPill;
+            selectTrajectory(name === 'all' ? null : name);
+          });
+        });
+      }
+
+      function selectTrajectory(name) {
+        selectedTrajectoryDancer = name;
+
+        // Update pills
+        if (pillsContainer) {
+          pillsContainer.querySelectorAll('.couple-pill').forEach(btn => {
+            if (!name && btn.dataset.trajPill === 'all') {
+              btn.classList.add('active');
+            } else if (name && btn.dataset.trajPill === name) {
+              btn.classList.add('active');
+              btn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+            } else {
+              btn.classList.remove('active');
+            }
+          });
+        }
+
+        if (!name) {
+          container.querySelectorAll('.traj-line').forEach(el => {
+            const isVis = filtered.some(f => f.name === el.dataset.name);
+            el.setAttribute('stroke-width', isVis ? '2.5' : '1.5');
+            el.style.opacity = isVis ? '1.0' : '0.12';
+          });
+          container.querySelectorAll('.traj-dot').forEach(el => {
+            const isVis = filtered.some(f => f.name === el.dataset.name);
+            el.setAttribute('r', isVis ? '4' : '2');
+            el.style.opacity = isVis ? '1.0' : '0.12';
+          });
+          container.querySelectorAll('.traj-label').forEach(el => {
+            const isVis = filtered.some(f => f.name === el.dataset.name);
+            el.style.opacity = isVis ? '1.0' : '0.12';
+          });
+          if (detailBox) {
+            detailBox.classList.remove('has-active');
+            detailBox.innerHTML = 'Tap any line, data dot, or couple chip above to view weekly breakdown';
           }
+          return;
+        }
+
+        const dancer = dancers.find(d => d.name === name);
+        if (!dancer) return;
+
+        container.querySelectorAll('.traj-line').forEach(el => {
+          const match = el.dataset.name === name;
+          el.setAttribute('stroke-width', match ? '4.5' : '1.5');
+          el.style.opacity = match ? '1.0' : '0.12';
+        });
+        container.querySelectorAll('.traj-dot').forEach(el => {
+          const match = el.dataset.name === name;
+          el.setAttribute('r', match ? '6' : '2');
+          el.style.opacity = match ? '1.0' : '0.12';
+        });
+        container.querySelectorAll('.traj-label').forEach(el => {
+          const match = el.dataset.name === name;
+          el.style.opacity = match ? '1.0' : '0.12';
+        });
+
+        if (detailBox) {
+          detailBox.classList.add('has-active');
+          const wow = getWoW(dancer);
+          const wowStr = wow > 0 ? `+${wow}` : `${wow}`;
+          const scoresStr = dancer.weeks.map((w, i) => `Week ${i+1}: <b>${w.score}/30</b> (${w.dance})`).join(' → ');
+          detailBox.innerHTML = `
+            <div class="qd-card">
+              <img class="qd-avatar" src="assets/${dancer.photo}" alt="${dancer.name}">
+              <div class="qd-info">
+                <div class="qd-top">
+                  <strong>${dancer.name}</strong>
+                  <span class="qd-pro">with ${dancer.proName}</span>
+                  <span class="tag ${wow>0?'rising':(wow<0?'dipping':'')}">${wowStr} WoW Trend</span>
+                </div>
+                <div class="qd-metrics">
+                  <span>${scoresStr}</span>
+                </div>
+              </div>
+            </div>
+          `;
+        }
+      }
+
+      container.querySelectorAll('.traj-hit-area, .traj-hit-dot, .traj-label').forEach(el => {
+        const handler = (e) => {
+          e.preventDefault();
+          const name = el.dataset.name;
+          if (selectedTrajectoryDancer === name) {
+            selectTrajectory(null);
+          } else {
+            selectTrajectory(name);
+          }
+        };
+        el.addEventListener('click', handler);
+        el.addEventListener('pointerdown', (e) => {
+          if (e.pointerType === 'touch') handler(e);
         });
       });
     }
 
-    function initRiskTable(){
+    let currentRiskFilter = 'all';
+    function initRiskTable(filter = 'all'){
+      currentRiskFilter = filter;
       const tbody = document.getElementById('risk-table-body');
-      if(!tbody) return;
-      tbody.innerHTML = sortedProjections.map((p, idx) => `
-        <tr>
-          <td><span class="risk-rank">#${idx + 1}</span></td>
-          <td><strong>${p.name}</strong> <span style="color:var(--muted);font-size:.76rem">with ${p.pro}</span></td>
-          <td><b>${p.avg}</b> <small style="color:var(--muted)">/30</small></td>
-          <td><b>${p.judgesShare}</b></td>
-          <td><b>${p.fanShare}</b> <small style="color:${p.cushionStr.startsWith('+') ? 'var(--green)' : 'var(--red)'};font-weight:700">(${p.cushionStr})</small></td>
-          <td><strong>${p.combined}</strong></td>
-          <td><span class="risk-badge ${p.riskTier}">${p.riskLabel} (${p.survivalPct}%)</span></td>
-        </tr>
-      `).join('');
+      const cardsContainer = document.getElementById('risk-cards-body');
+      if(!tbody && !cardsContainer) return;
+
+      const items = sortedProjections.filter(p => filter === 'all' || p.riskTier === filter);
+
+      // Desktop Table Body (Full-row color highlight: green for safe, gold for bubble, red for danger)
+      if (tbody) {
+        tbody.innerHTML = items.map((p) => `
+          <tr class="risk-row ${p.riskTier}">
+            <td><span class="risk-rank">#${p.projRank}</span></td>
+            <td><strong>${p.name}</strong> <span style="color:var(--muted);font-size:.76rem">with ${p.pro}</span></td>
+            <td><b>${p.avg}</b> <small style="color:var(--muted)">/30</small></td>
+            <td><b>${p.judgesShare}</b></td>
+            <td><b>${p.fanShare}</b> <small style="color:${p.cushionStr.startsWith('+') ? 'var(--green)' : 'var(--red)'};font-weight:700">(${p.cushionStr})</small></td>
+            <td><strong>${p.combined}</strong></td>
+            <td><span class="risk-badge ${p.riskTier}">${p.riskLabel} (${p.survivalPct}%)</span></td>
+          </tr>
+        `).join('');
+      }
+
+      // Mobile Cards Body (Zero horizontal scroll, full-card color tint, 50/50 dual split meter)
+      if (cardsContainer) {
+        cardsContainer.innerHTML = items.map((p) => `
+          <div class="risk-card ${p.riskTier}" tabindex="0" role="button" aria-expanded="false">
+            <div class="rc-header">
+              <div class="rc-couple-wrap">
+                <span class="rc-rank">#${p.projRank}</span>
+                <div class="rc-names">
+                  <strong>${p.name}</strong>
+                  <span>with ${p.pro}</span>
+                </div>
+              </div>
+              <span class="rc-badge ${p.riskTier}">${p.riskLabel} (${p.survivalPct}%)</span>
+            </div>
+            <div class="rc-stats-row">
+              <div class="rc-stat">
+                <span class="rc-stat-label">50/50 Power</span>
+                <span class="rc-stat-val">${p.combined}</span>
+              </div>
+              <div class="rc-stat">
+                <span class="rc-stat-label">Judges' Avg</span>
+                <span class="rc-stat-val">${p.avg} <small>/30</small></span>
+              </div>
+              <div class="rc-stat">
+                <span class="rc-stat-label">Fan Cushion</span>
+                <span class="rc-stat-val" style="color:${p.cushionStr.startsWith('+') ? 'var(--green)' : 'var(--red)'}">${p.cushionStr}</span>
+              </div>
+            </div>
+            <div class="rc-split-bar-wrap">
+              <div class="rc-split-labels">
+                <span>Judges 50%: <b>${p.judgesShare}</b></span>
+                <span>Implied Fan 50%: <b>${p.fanShare}</b></span>
+              </div>
+              <div class="rc-split-bar">
+                <div class="rc-bar-judges" style="width:${p.judgesShare}"></div>
+                <div class="rc-bar-fan ${p.riskTier}" style="width:${p.fanShare}"></div>
+              </div>
+            </div>
+            <div class="rc-expand-detail">
+              <span>💡 <b>50/50 Projection Model:</b> Cumulative judges' average of ${p.avg}/30 gives ${p.judgesShare} judge share. Kalshi odds of ${p.odds}% model ${p.fanShare} implied public voting share (${p.cushionStr} cushion). Overall 50/50 power is <b>${p.combined}</b> (Projected #${p.projRank}).</span>
+            </div>
+          </div>
+        `).join('');
+
+        // Tap card to expand extra insights
+        cardsContainer.querySelectorAll('.risk-card').forEach(card => {
+          card.addEventListener('click', () => {
+            const isExpanded = card.classList.toggle('expanded');
+            card.setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
+          });
+        });
+      }
     }
 
     // Initialize Analytics
     initQuadrantChart();
     initTrajectoryChart('all');
-    initRiskTable();
+    initRiskTable('all');
 
     document.querySelectorAll('.chart-filter').forEach(btn => {
       btn.addEventListener('click', () => {
         document.querySelectorAll('.chart-filter').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
         initTrajectoryChart(btn.dataset.traj);
+      });
+    });
+
+    // Risk Filter Buttons
+    document.querySelectorAll('.risk-filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.risk-filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        initRiskTable(btn.dataset.riskFilter);
+      });
+    });
+
+    // View Toggle Buttons (Table vs Cards on Desktop)
+    document.querySelectorAll('.view-toggle-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.view-toggle-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const view = btn.dataset.view;
+        const tableWrap = document.querySelector('.risk-table-wrap');
+        const cardsBody = document.getElementById('risk-cards-body');
+        if (view === 'cards') {
+          if (tableWrap) tableWrap.style.display = 'none';
+          if (cardsBody) cardsBody.style.display = 'flex';
+        } else {
+          if (tableWrap) tableWrap.style.display = 'block';
+          if (cardsBody) cardsBody.style.display = 'none';
+        }
       });
     });
 
