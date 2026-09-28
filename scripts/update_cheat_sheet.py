@@ -284,6 +284,7 @@ COUPLE_REGISTRY = {
         "age": 25,
         "mirrorballs": 0,
         "photo": "sarah-jane-nader-hailey-bills.jpg",
+        "photo_position": "center 40%",
         "baseline_market_prob": 1,
         "bio": "The <i>Love Thy Nader</i> star was eliminated after a jive to “Sk8er Boi” by Avril Lavigne that scored 14.",
         "vote_code": "Sarah",
@@ -861,9 +862,10 @@ def update_index_html(wiki_data, market_odds=None):
         
         score_weeks_html = "".join([f'<div class="score-week"><span>Week {w_i+1} · {p["dance"]}</span><strong>{p["score"]}/30</strong></div>' for w_i, p in enumerate(scored_weeks)])
         
+        img_style = f' style="object-position: {meta["photo_position"]};"' if "photo_position" in meta else ""
         card = (
             f'        <article class="eliminated-card">\n'
-            f'          <img src="assets/{meta["photo"]}" alt="{name} and professional partner {meta["proName"]} in their Season 35 cast portrait">\n'
+            f'          <img src="assets/{meta["photo"]}"{img_style} alt="{name} and professional partner {meta["proName"]} in their Season 35 cast portrait">\n'
             f'          <div class="eliminated-copy">\n'
             f'            <time class="eliminated-date" datetime="{datetime_str}">{ord_label} · {date_str}</time>\n'
             f'            <h3>{name}</h3>\n'
