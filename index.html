@@ -512,7 +512,7 @@
           </div>
           <div class="bottom2-alert">
             <span class="alert-pulse"></span>
-            <strong>Projected Bottom 2:</strong> Taylor Hanson &amp; Julia Stiles (Ciara Miller on bubble)
+            <span id="bottom2-alert-text"><strong>Projected Bottom 2:</strong> Taylor Hanson &amp; Tatyana Ali (Ciara Miller on bubble)</span>
           </div>
         </div>
 
@@ -1234,15 +1234,15 @@
     }
 
     function computeProjections(dancerList){
-      const totalJudgesScore = dancerList.reduce((sum, d) => {
-        const lastWeek = d.weeks && d.weeks.length ? d.weeks[d.weeks.length - 1].score : 15;
-        return sum + (lastWeek || 15);
+      const totalAvgScore = dancerList.reduce((sum, d) => {
+        const avg = d.weeks && d.weeks.length ? (d.total / d.weeks.length) : 15;
+        return sum + avg;
       }, 0) || 1;
       const totalMarket = dancerList.reduce((sum, d) => sum + (d.marketProb || 1), 0) || 1;
       const data = dancerList.map(d => {
         const latestScore = d.weeks && d.weeks.length ? d.weeks[d.weeks.length - 1].score : 15;
         const avgScore = d.weeks && d.weeks.length ? (d.total / d.weeks.length) : 15;
-        const judgesShare = (latestScore / totalJudgesScore) * 100;
+        const judgesShare = (avgScore / totalAvgScore) * 100;
         const marketShare = ((d.marketProb || 1) / totalMarket) * 100;
         const proBoost = (d.mirrorballs || 0) * 2.5;
         const rawFan = marketShare * 0.65 + proBoost * 0.35 + 1.0;
@@ -1832,6 +1832,14 @@
     initQuadrantChart();
     initTrajectoryChart('all');
     initRiskTable('all');
+
+    const b2AlertEl = document.getElementById('bottom2-alert-text');
+    if (b2AlertEl && sortedProjections.length >= 2) {
+      const bottom1 = sortedProjections[sortedProjections.length - 1].name;
+      const bottom2 = sortedProjections[sortedProjections.length - 2].name;
+      const bubble = sortedProjections.length >= 3 ? sortedProjections[sortedProjections.length - 3].name : '';
+      b2AlertEl.innerHTML = `<strong>Projected Bottom 2:</strong> ${bottom2} &amp; ${bottom1}${bubble ? ` (${bubble} on bubble)` : ''}`;
+    }
 
     document.querySelectorAll('.chart-filter').forEach(btn => {
       btn.addEventListener('click', () => {
