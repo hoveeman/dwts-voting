@@ -882,13 +882,13 @@ def update_index_html(wiki_data, market_odds=None):
             )
             leaderboard_items.append(item)
 
-        head_kicker = f'{day_of_week_date} · Official Week {lineup_week_num} Scores'
+        head_kicker = f'{day_of_week_date} · Week {lineup_week_num} Scores'
         head_title = f'{theme_title}: Scores &amp; Songs'
         head_desc = f'Final judges’ standings and complete music lineup for all {len(active_in_lineup)} couples in Week {lineup_week_num}.'
         
         lineup_content_html = (
             f'        <div class="lineup-group">\n'
-            f'          <h4 class="lineup-group-title">Official Week {lineup_week_num} Leaderboard</h4>\n'
+            f'          <h4 class="lineup-group-title">Week {lineup_week_num} Leaderboard</h4>\n'
             f'          <div class="lineup-list">\n' +
             "\n".join(leaderboard_items) + "\n"
             f'          </div>\n'
@@ -991,7 +991,7 @@ def update_index_html(wiki_data, market_odds=None):
 
         lineup_content_html = (
             f'        <div class="lineup-group">\n'
-            f'          <h4 class="lineup-group-title">Official Week {lineup_week_num} Performance Lineup</h4>\n'
+            f'          <h4 class="lineup-group-title">Confirmed Week {lineup_week_num} Performance Lineup</h4>\n'
             f'          <div class="lineup-list">\n' +
             "\n".join(scheduled_items) + "\n"
             f'          </div>\n'
@@ -1114,11 +1114,11 @@ def update_index_html(wiki_data, market_odds=None):
         f'      <div class="spot-copy">\n'
         f'        <p class="kicker">Live Kalshi market favorite</p>\n'
         f'        <h2>{top_market_name} surged to {top_prob}% to win it all.</h2>\n'
-        f'        <p>Following back-to-back 20+ judges’ marks and viral social momentum, Paralympic champion {top_market_name} has taken over as the leading favorite on Kalshi’s official Season 35 winner market with a {top_prob}% implied win probability, followed by Harry Shum Jr. (16%), Jenna Dewan (15%), and Maura Higgins (12%).</p>\n'
+        f'        <p>Following back-to-back 20+ judges’ marks and viral social momentum, Paralympic champion {top_market_name} has taken over as the leading favorite on Kalshi’s Season 35 winner market with a {top_prob}% implied win probability, followed by Harry Shum Jr. (16%), Jenna Dewan (15%), and Maura Higgins (12%).</p>\n'
         f'        <div class="market-actions">\n'
         f'          <a class="market-btn" href="https://kalshi.com/markets/kxdancingwiththestars/who-will-win-dancing-with-the-stars/kxdancingwiththestars-26dec31" target="_blank" rel="noopener noreferrer">Trade on Kalshi (Who Will Win) ↗</a>\n'
         f'        </div>\n'
-        f'        <p class="signal">Live prediction markets track implied win probabilities; contracts update continuously on Kalshi and are not official ABC/Disney projections.</p>\n'
+        f'        <p class="signal">Live prediction markets track implied win probabilities; contracts update continuously on Kalshi and are not affiliated with or endorsed by ABC or Disney.</p>\n'
         f'      </div>\n'
         f'      <div class="market"><div><strong>{top_prob}%</strong><span>Kalshi Market Favorite</span></div></div>\n'
         f'    </aside>'
@@ -1127,7 +1127,7 @@ def update_index_html(wiki_data, market_odds=None):
 
     # 8. Update citations timestamp in method paragraph
     today_str = datetime.now(timezone.utc).strftime("%b. %d, %Y")
-    method_new = f'<p class="method">Week {lineup_week_num} lineup updated {today_str} with confirmed songs and dance styles for the {short_date} broadcast. The ranking and tier tags are dynamically calculated from verified scoring data, backgrounds, pro records, and audience reach—not official DWTS projections.</p>'
+    method_new = f'<p class="method">Week {lineup_week_num} lineup updated {today_str} with confirmed songs and dance styles for the {short_date} broadcast. The ranking and tier tags are dynamically calculated from verified scoring data, backgrounds, pro records, and audience reach—not affiliated with or endorsed by DWTS or ABC.</p>'
     content = re.sub(r'<p class="method">.*?</p>', method_new, content)
 
     with open(HTML_FILE, 'w', encoding='utf-8') as f:

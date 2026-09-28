@@ -212,7 +212,7 @@ A headless GitHub Actions runner executes [`scripts/update_cheat_sheet.py`](scri
 
 ### 📈 Kalshi Prediction Market Integration
 
-The cheat sheet pulls real-time implied win probabilities directly from **Kalshi’s official Season 35 Winner Market**:
+The cheat sheet pulls real-time implied win probabilities directly from **Kalshi’s Season 35 Winner Market**:
 
 - **Market Name**: *Who will win Dancing with the Stars?*
 - **Series Ticker**: `KXDANCINGWITHTHESTARS`
@@ -238,7 +238,7 @@ $$\text{Power Index} = (0.45 \times \text{Scores \& Momentum}) + (0.25 \times \t
 3. **15% Pro Partner Championship Pedigree**:
    - Pro title weighting: 3 Mirrorballs = 100 pts, 2 = 85 pts, 1 = 70 pts, 0 = 50 pts (e.g. Mark Ballas 3x, Val Chmerkovskiy 3x, Witney Carson 2x, Jenna Johnson 2x, Daniella Karagach 1x).
 4. **15% Audience Voting Reach & Background Buffer**:
-   - Combined public follower reach across official Instagram and TikTok accounts for both the celebrity and pro.
+   - Combined public follower reach across verified Instagram and TikTok accounts for both the celebrity and pro.
    - Athletic discipline and professional dance training bonuses.
 
 ---
@@ -255,4 +255,28 @@ Every active contestant card displays three real-time rating pills in the header
 ### 🔄 Automatic Shortcut Synchronization
 
 Whenever the automated updater runs, it re-sorts [`dancers.json`](dancers.json) and [`dancers.txt`](dancers.txt) according to the new Power Index standings and removes eliminated contestants. Apple Shortcuts users automatically receive the updated, highest-leverage roster in their multi-vote menu with zero manual intervention.
+
+---
+
+## 📸 Photography Attribution
+
+All contestant and host promotional portraits (`assets/*.jpg`) are copyright **© American Broadcasting Companies, Inc. (ABC) / Disney**. 
+- Sourced via the Disney/ABC Press Room and Parade media gallery.
+- Images are used strictly for non-commercial identification, commentary, and editorial review under fair use principles.
+
+---
+
+## ⚖️ Legal & Non-Affiliation Disclaimer
+
+This repository, website, and accompanying Apple iOS Shortcut are independent fan-created projects and fantasy draft resources.
+- They are **not** affiliated with, endorsed by, sponsored by, or associated with *Dancing with the Stars*, American Broadcasting Companies, Inc. (ABC), Disney, BBC Studios, or any of their parent companies or subsidiaries.
+- *Dancing with the Stars*, *DWTS*, *Mirrorball*, and all related titles, logos, and marks are registered trademarks of BBC Studios and/or American Broadcasting Companies, Inc.
+- Prediction market odds are fetched from Kalshi’s public API and do not represent official broadcast forecasts.
+
+---
+
+## 📄 License
+
+The software source code, automation scripts, and website markup in this repository are licensed under the open-source [MIT License](LICENSE). Third-party trademarks and copyrighted photography remain the property of their respective owners.
+
 
