@@ -469,7 +469,7 @@
           <div class="card-header">
             <div>
               <h3>Judges vs. Public Quadrant</h3>
-              <p class="card-subtitle">Technical scoring floor (X) vs. Implied fan vote share &amp; market odds (Y)</p>
+              <p class="card-subtitle">Technical scoring floor (X) vs. Implied fan vote share &amp; market odds (Y) · Circle numbers indicate Season Power Rank</p>
             </div>
           </div>
           <div class="chart-couple-pills" id="quadrant-pills" role="toolbar" aria-label="Tap couple to spotlight on quadrant"></div>
@@ -508,7 +508,7 @@
         <div class="card-header">
           <div>
             <h3>Tuesday Night Elimination Risk Matrix</h3>
-            <p class="card-subtitle">Projected combined standings for the upcoming live show under the 50/50 scoring system</p>
+            <p class="card-subtitle">Projected combined standings for the upcoming live show under ABC's 50/50 scoring system (isolates single-night survival vs. season-long power)</p>
           </div>
           <div class="bottom2-alert">
             <span class="alert-pulse"></span>
@@ -1288,6 +1288,8 @@
           riskLabel,
           cushionStr,
           projRank: index + 1,
+          powerRank: item.d.rank,
+          powerIndex: item.d.powerIndex,
           isLive: item.isLive,
           tonightScore: item.tonightScore
         };
@@ -1540,7 +1542,8 @@
                 <div class="qd-metrics">
                   <span>Scoring Avg: <b>${avg.toFixed(1)}/30</b></span>
                   <span>Kalshi Win Odds: <b>${odds}%</b></span>
-                  <span>Survival Outlook: <b class="risk-text-${p.riskTier}">${p.riskLabel} (${p.survivalPct}%)</b></span>
+                  <span>Season Power: <b>#${dancer.rank} (${dancer.powerIndex}/100)</b></span>
+                  <span>Tonight's Survival: <b class="risk-text-${p.riskTier}">${p.riskLabel} (${p.survivalPct}%)</b></span>
                 </div>
               </div>
             </div>
@@ -1777,7 +1780,10 @@
       if (tbody) {
         tbody.innerHTML = items.map((p) => `
           <tr class="risk-row ${p.riskTier}">
-            <td><span class="risk-rank">#${p.projRank}</span></td>
+            <td>
+              <span class="risk-rank">#${p.projRank}</span>
+              <span style="display:block;font-size:0.65rem;color:var(--muted);white-space:nowrap;margin-top:2px" title="Season-long Power Index Rank">Power #${p.powerRank}</span>
+            </td>
             <td>
               <strong>${p.name}</strong> <span style="color:var(--muted);font-size:.76rem">with ${p.pro}</span>
               ${anyLiveTonight ? (p.isLive ? `<div style="font-size:0.68rem;color:var(--green);font-weight:700;margin-top:2px"><span class="live-dot-inline" style="width:6px;height:6px"></span>Danced Tonight: ${p.tonightScore}/30</div>` : `<div style="font-size:0.68rem;color:var(--muted);font-weight:600;margin-top:2px">⏳ Pending Tonight (Baseline)</div>`) : ''}
@@ -1797,7 +1803,10 @@
           <div class="risk-card ${p.riskTier}" tabindex="0" role="button" aria-expanded="false">
             <div class="rc-header">
               <div class="rc-couple-wrap">
-                <span class="rc-rank">#${p.projRank}</span>
+                <div style="text-align:center;min-width:34px">
+                  <span class="rc-rank">#${p.projRank}</span>
+                  <span style="display:block;font-size:0.62rem;color:var(--muted);white-space:nowrap" title="Season-long Power Index Rank">Power #${p.powerRank}</span>
+                </div>
                 <div class="rc-names">
                   <strong>${p.name}</strong>
                   <span>with ${p.pro}</span>
@@ -1831,7 +1840,7 @@
               </div>
             </div>
             <div class="rc-expand-detail">
-              <span>💡 <b>50/50 Projection Model:</b> Cumulative judges' average of ${p.avg}/30 gives ${p.judgesShare} judge share${anyLiveTonight ? (p.isLive ? ' (includes tonight’s live score)' : ' (evaluated on pre-show baseline until live score arrives)') : ''}. Kalshi odds of ${p.odds}% model ${p.fanShare} implied public voting share (${p.cushionStr} cushion). Overall 50/50 power is <b>${p.combined}</b> (Projected #${p.projRank}).</span>
+              <span>💡 <b>50/50 Survival vs. Season Power:</b> Projected #${p.projRank} for tonight’s live elimination under 50% judges’ points (${p.avg}/30 → ${p.judgesShare}) + 50% fan vote (${p.odds}% odds → ${p.fanShare}). Overall Season Power is <b>#${p.powerRank}</b> (${p.powerIndex}/100 Power Index).</span>
             </div>
           </div>
         `).join('');
