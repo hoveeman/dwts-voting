@@ -796,7 +796,7 @@ def update_index_html(wiki_data, market_odds=None):
         cats_js = json.dumps(d['cats']).replace('"', "'")
         tags_js = json.dumps(d['tags']).replace('"', "'")
         case_escaped = d['case'].replace("'", "\\'")
-        line = f"      {{rank:{d['rank']},name:'{d['name']}',age:{d['age']},proName:'{d['proName']}',mirrorballs:{d['mirrorballs']},photo:'{d['photo']}',weeks:{weeks_js},total:{d['total']},powerIndex:{d['powerIndex']},marketProb:{d['marketProb']},cats:{cats_js},tags:{tags_js},case:'{case_escaped}'}}"
+        line = f"      {{rank:{d['rank']},name:'{d['name']}',age:{d['age']},proName:'{d['proName']}',mirrorballs:{d['mirrorballs']},photo:'{d['photo']}',weeks:{weeks_js},total:{d['total']},powerIndex:{d['powerIndex']},marketProb:{d['marketProb']},wow:{d['wow']},cats:{cats_js},tags:{tags_js},case:'{case_escaped}'}}"
         dancer_lines.append(line)
     
     new_dancers_block = "const dancers = [\n" + ",\n".join(dancer_lines) + "\n    ];"
