@@ -111,7 +111,7 @@ COUPLE_REGISTRY = {
         "is_athlete": True,
         "is_dancer": False,
         "baseline_market_prob": 14,
-        "outlook": "Figure-skating musicality, rotational speed, and Olympic visibility provide a reliable fantasy scoring floor.",
+        "outlook": "Figure-skating musicality, rotational speed, and Olympic visibility provide a reliable scoring floor.",
         "bio": "The U.S. champion figure skater",
         "vote_code": "Amber",
         "initial_rank": 5
@@ -651,7 +651,7 @@ def compute_dynamic_attributes(name, valid_weeks, total_score, rank, active_coun
     elif wow_delta <= -3:
         scoring_lead = f"Overcame a temporary scoring dip ({wow_delta} WoW), bolstered by a {p_idx}/100 Power Index."
     elif avg_score >= 20.0:
-        scoring_lead = f"Fantasy anchor averaging {avg_score:.1f}/30 through {num_weeks} completed weeks ({p_idx}/100 Power Index)."
+        scoring_lead = f"Ballroom anchor averaging {avg_score:.1f}/30 through {num_weeks} completed weeks ({p_idx}/100 Power Index)."
     elif rank <= 4:
         scoring_lead = f"Top-tier contender holding rank #{rank} on the Power Board ({p_idx}/100)."
     else:
@@ -720,7 +720,7 @@ def update_index_html(wiki_data, market_odds=None):
 
     # 2. Update intro paragraph for the Power Board
     board_intro_new = (
-        f'<p>A composite fantasy draft order—not the show’s raw standings. '
+        f'<p>A composite power ranking—not just the show’s raw standings. '
         f'Couples are ranked by a weighted <strong>Power Index (0–100)</strong> integrating four core pillars: '
         f'<strong>45%</strong> verified judges’ scores &amp; week-over-week momentum, '
         f'<strong>25%</strong> live <a href="https://kalshi.com/markets/kxdancingwiththestars/who-will-win-dancing-with-the-stars/kxdancingwiththestars-26dec31" target="_blank" rel="noopener noreferrer">Kalshi Season 35 winner market odds</a>, '

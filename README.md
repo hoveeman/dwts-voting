@@ -1,6 +1,6 @@
-# DWTS Voting Shortcut Backend & Season 35 Cheat Sheet
+# DWTS Voting Shortcut Backend & Season 35 Ballroom Companion
 
-Backend JSON configurations, auto-update manifest for the **DWTS Voting** iOS Shortcut, and the live interactive **DWTS Season 35 Fantasy Draft Cheat Sheet**.
+Backend JSON configurations, auto-update manifest for the **DWTS Voting** iOS Shortcut, and the live interactive **DWTS Season 35 Ballroom Companion**.
 
 🌐 **Live Website**: [https://dwts.hoverhobbies.com](https://dwts.hoverhobbies.com) (or [GitHub Pages](https://hoveeman.github.io/dwts-voting/))  
 📥 **iOS Shortcut**: [Install Shortcut (v1.6 iCloud Link)](https://www.icloud.com/shortcuts/3e951e5ba20b49dc82f5abded923b179)
@@ -184,9 +184,9 @@ To easily follow the exact math on any screen size:
 
 ---
 
-## 🪩 Season 35 Cheat Sheet & Automated Worker
+## 🪩 Season 35 Ballroom Companion & Automated Worker
 
-The repository includes the full interactive web application for the **DWTS Season 35 Fantasy Draft & Voting Cheat Sheet**:
+The repository includes the full interactive web application for the **DWTS Season 35 Ballroom Companion**:
 
 - 🌐 **Live Website**: [https://dwts.hoverhobbies.com](https://dwts.hoverhobbies.com) (or [https://hoveeman.github.io/dwts-voting/](https://hoveeman.github.io/dwts-voting/))
 - ⚙️ **Workflow File**: [`.github/workflows/daily-update.yml`](.github/workflows/daily-update.yml)
