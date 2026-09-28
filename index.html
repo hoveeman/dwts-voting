@@ -909,9 +909,7 @@
       if(lens==='judges'){
         list.sort((a,b)=>(b.total-a.total)||(b.powerIndex-a.powerIndex)||(a.rank-b.rank));
       }else if(lens==='kalshi'){
-        const aProb=a.marketProb!==undefined?a.marketProb:0;
-        const bProb=b.marketProb!==undefined?b.marketProb:0;
-        list.sort((a,b)=>(bProb-aProb)||(b.powerIndex-a.powerIndex)||(a.rank-b.rank));
+        list.sort((a,b)=>((b.marketProb || 0) - (a.marketProb || 0)) || (b.powerIndex - a.powerIndex) || (a.rank - b.rank));
       }else if(lens==='momentum'){
         list.sort((a,b)=>{
           const deltaA=getWoW(a);
