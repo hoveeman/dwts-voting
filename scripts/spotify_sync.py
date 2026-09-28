@@ -347,53 +347,62 @@ def ensure_cover_image(wk_num, theme_title):
     if os.path.exists(out_path):
         return filename
 
-    t_lower = (theme_title or '').lower()
-    if 'mariah' in t_lower or 'diva' in t_lower:
-        c_top, c_bot, accent = (102, 16, 50), (26, 4, 13), (255, 215, 0)
-    elif 'horror' in t_lower or 'halloween' in t_lower:
-        c_top, c_bot, accent = (85, 12, 12), (10, 10, 10), (220, 38, 38)
-    elif 'disney' in t_lower:
-        c_top, c_bot, accent = (18, 24, 78), (6, 8, 30), (250, 204, 21)
-    elif 'dedication' in t_lower:
-        c_top, c_bot, accent = (15, 32, 67), (5, 12, 28), (247, 216, 137)
-    elif 'grammy' in t_lower or 'semi' in t_lower:
-        c_top, c_bot, accent = (35, 30, 20), (10, 10, 10), (239, 206, 130)
-    elif 'finale' in t_lower:
-        c_top, c_bot, accent = (50, 40, 15), (12, 10, 5), (255, 223, 100)
-    else:
-        c_top, c_bot, accent = (30, 20, 45), (10, 8, 16), (239, 206, 130)
+    accent = (239, 206, 130)
+    template_path = os.path.join(COVERS_DIR, 'template_ballroom_mirrorball.jpg')
 
     try:
         from PIL import Image, ImageDraw, ImageFont
-        img = Image.new('RGB', (640, 640), c_bot)
-        draw = ImageDraw.Draw(img)
-        for y in range(640):
-            ratio = y / 640.0
-            r = int(c_top[0] * (1 - ratio) + c_bot[0] * ratio)
-            g = int(c_top[1] * (1 - ratio) + c_bot[1] * ratio)
-            b = int(c_top[2] * (1 - ratio) + c_bot[2] * ratio)
-            draw.line([(0, y), (640, y)], fill=(r, g, b))
 
+        FONT_SERIF_BOLD = '/usr/share/fonts/truetype/liberation/LiberationSerif-Bold.ttf'
+        FONT_SANS_BOLD = '/usr/share/fonts/truetype/liberation/LiberationSans-Bold.ttf'
+
+        if os.path.exists(template_path):
+            img = Image.open(template_path).resize((640, 640)).convert('RGBA')
+            overlay = Image.new('RGBA', (640, 640), (10, 10, 14, 160))
+            img = Image.alpha_composite(img, overlay)
+            draw = ImageDraw.Draw(img)
+        else:
+            img = Image.new('RGB', (640, 640), (15, 15, 16))
+            draw = ImageDraw.Draw(img)
+            for y in range(640):
+                ratio = y / 640.0
+                r = int(35 * (1 - ratio) + 15 * ratio)
+                g = int(30 * (1 - ratio) + 15 * ratio)
+                b = int(20 * (1 - ratio) + 16 * ratio)
+                draw.line([(0, y), (640, y)], fill=(r, g, b))
+
+        # Border & corner diamonds
         draw.rectangle([(24, 24), (616, 616)], outline=accent, width=2)
         draw.rectangle([(32, 32), (608, 608)], outline=(accent[0]//2, accent[1]//2, accent[2]//2), width=1)
         for cx, cy in [(24, 24), (616, 24), (24, 616), (616, 616)]:
             draw.polygon([(cx, cy-6), (cx+6, cy), (cx, cy+6), (cx-6, cy)], fill=accent)
 
-        font_kicker = ImageFont.load_default(size=20)
-        font_show = ImageFont.load_default(size=26)
-        font_title = ImageFont.load_default(size=44)
-        font_sub = ImageFont.load_default(size=16)
+        if os.path.exists(FONT_SERIF_BOLD):
+            font_top = ImageFont.truetype(FONT_SERIF_BOLD, 22)
+            font_kicker = ImageFont.truetype(FONT_SANS_BOLD, 17)
+            font_title = ImageFont.truetype(FONT_SERIF_BOLD, 46)
+            font_sub = ImageFont.truetype(FONT_SANS_BOLD, 16)
+        else:
+            font_top = ImageFont.load_default(size=22)
+            font_kicker = ImageFont.load_default(size=17)
+            font_title = ImageFont.load_default(size=44)
+            font_sub = ImageFont.load_default(size=16)
 
         show_text = 'DANCING WITH THE STARS'
-        bbox_show = draw.textbbox((0, 0), show_text, font=font_show)
-        draw.text(((640 - (bbox_show[2] - bbox_show[0]))//2, 70), show_text, fill=(255, 255, 255), font=font_show)
+        bbox_show = draw.textbbox((0, 0), show_text, font=font_top)
+        draw.text(((640 - (bbox_show[2] - bbox_show[0]))//2 + 2, 72), show_text, fill=(0, 0, 0), font=font_top)
+        draw.text(((640 - (bbox_show[2] - bbox_show[0]))//2, 70), show_text, fill=(255, 255, 255), font=font_top)
 
-        kicker_text = f'SEASON 35 · WEEK {wk_num}' if isinstance(wk_num, int) else 'DANCING WITH THE STARS'
-        bbox_k = draw.textbbox((0, 0), kicker_text, font=font_kicker)
-        draw.text(((640 - (bbox_k[2] - bbox_k[0]))//2, 115), kicker_text, fill=accent, font=font_kicker)
+        kicker_text = f'SEASON 35 · WEEK {wk_num}' if isinstance(wk_num, int) else None
+        y_divider = 112
+        if kicker_text:
+            bbox_k = draw.textbbox((0, 0), kicker_text, font=font_kicker)
+            draw.text(((640 - (bbox_k[2] - bbox_k[0]))//2 + 1, 107), kicker_text, fill=(0, 0, 0), font=font_kicker)
+            draw.text(((640 - (bbox_k[2] - bbox_k[0]))//2, 106), kicker_text, fill=accent, font=font_kicker)
+            y_divider = 138
 
-        draw.line([(120, 160), (520, 160)], fill=accent, width=2)
-        draw.polygon([(320, 154), (326, 160), (320, 166), (314, 160)], fill=accent)
+        draw.line([(140, y_divider), (500, y_divider)], fill=accent, width=2)
+        draw.polygon([(320, y_divider-6), (326, y_divider), (320, y_divider+6), (314, y_divider)], fill=accent)
 
         title_upper = (theme_title or f'Week {wk_num}').upper()
         words = title_upper.split()
@@ -401,7 +410,7 @@ def ensure_cover_image(wk_num, theme_title):
         cur_line = []
         for w in words:
             cur_line.append(w)
-            if len(' '.join(cur_line)) > 15:
+            if len(' '.join(cur_line)) > 14:
                 lines.append(' '.join(cur_line))
                 cur_line = []
         if cur_line:
@@ -409,21 +418,21 @@ def ensure_cover_image(wk_num, theme_title):
         if not lines:
             lines = [title_upper]
 
-        y_text = 250 if len(lines) > 1 else 280
+        y_text = 240 if len(lines) > 1 else 275
         for l in lines:
             bbox_l = draw.textbbox((0, 0), l, font=font_title)
             w_l = bbox_l[2] - bbox_l[0]
-            draw.text(((640 - w_l)//2 + 2, y_text + 2), l, fill=(0, 0, 0), font=font_title)
+            draw.text(((640 - w_l)//2 + 3, y_text + 3), l, fill=(0, 0, 0), font=font_title)
             draw.text(((640 - w_l)//2, y_text), l, fill=(255, 255, 255), font=font_title)
-            y_text += 55
+            y_text += 58
 
-        draw.line([(160, 480), (480, 480)], fill=(accent[0]//2, accent[1]//2, accent[2]//2), width=1)
-        sub_text = 'OFFICIAL SHOW SOUNDTRACK'
+        draw.line([(170, 480), (470, 480)], fill=(accent[0]//2, accent[1]//2, accent[2]//2), width=1)
+        sub_text = 'COMPLETE SOUNDTRACK'
         bbox_sub = draw.textbbox((0, 0), sub_text, font=font_sub)
         draw.text(((640 - (bbox_sub[2] - bbox_sub[0]))//2, 510), sub_text, fill=accent, font=font_sub)
 
-        img.save(out_path, format='JPEG', quality=90, optimize=True)
-        print(f"[Spotify] Generated new cover artwork for Week {wk_num} ({theme_title}) -> {out_path}")
+        img.convert('RGB').save(out_path, format='JPEG', quality=92, optimize=True)
+        print(f"[Spotify] Generated new mirrorball cover artwork for Week {wk_num} ({theme_title}) -> {out_path}")
         return filename
     except Exception as e:
         print(f"[Spotify] Could not generate cover for {theme_title}: {e}")
