@@ -28,6 +28,35 @@ from validate_cheat_sheet import validate
 
 ET_TZ = ZoneInfo("America/New_York")
 
+# Force line-buffering on stdout/stderr so Unraid and background cron logs stream in real time
+try:
+    sys.stdout.reconfigure(line_buffering=True)
+    sys.stderr.reconfigure(line_buffering=True)
+except Exception:
+    pass
+
+LOG_FILE_PATH = os.path.join(WORKSPACE_DIR, "live_watcher.log")
+
+
+def set_log_file(path):
+    global LOG_FILE_PATH
+    LOG_FILE_PATH = path
+
+
+def log(msg, level="INFO"):
+    now_et = get_current_et()
+    time_str = now_et.strftime("%I:%M:%S %p ET")
+    formatted = f"[{time_str}] [{level}] {msg}"
+    print(formatted, flush=True)
+
+    if LOG_FILE_PATH:
+        try:
+            date_time_str = now_et.strftime("%Y-%m-%d %H:%M:%S ET")
+            with open(LOG_FILE_PATH, "a", encoding="utf-8") as f:
+                f.write(f"[{date_time_str}] [{level}] {msg}\n")
+        except Exception:
+            pass
+
 
 def get_current_et():
     return datetime.now(ET_TZ)
@@ -44,17 +73,18 @@ def git_has_changes():
 
 
 def push_updates(scored_count, total_count, leader_name, leader_score):
-    print("Formatting validation check...")
+    log("Running validation check on index.html formatting...")
     if validate() != 0:
-        print("Validation failed! Aborting commit to protect site integrity.")
+        log("Validation FAILED! Aborting commit to protect site integrity.", level="ERROR")
         return False
+    log("Validation PASSED: All formatting rules and required sections verified.")
 
     run_cmd("git config user.name 'github-actions[bot]'")
     run_cmd("git config user.email 'github-actions[bot]@users.noreply.github.com'")
     run_cmd("git add index.html dancers.json dancers.txt")
 
     if not git_has_changes():
-        print("No file changes detected after update.")
+        log("No file changes detected after update.")
         return False
 
     summary = f"{scored_count}/{total_count} danced"
@@ -64,33 +94,33 @@ def push_updates(scored_count, total_count, leader_name, leader_score):
     commit_msg = f"chore(live): update show scores ({summary})"
     code, out, err = run_cmd(f'git commit -m "{commit_msg}"')
     if code != 0:
-        print(f"Git commit failed: {err}")
+        log(f"Git commit failed: {err}", level="ERROR")
         return False
 
-    print(f"Committed: {commit_msg}")
-    print("Pushing to origin main...")
+    log(f"Committed: {commit_msg}")
+    log("Pushing updates to origin main...")
     code, out, err = run_cmd("git push origin main")
     if code != 0:
-        print(f"Initial push rejected ({err}). Pulling remote changes with rebase and retrying...")
+        log(f"Initial push rejected ({err}). Pulling remote changes with rebase and retrying...", level="WARN")
         run_cmd("git pull --rebase origin main")
         code, out, err = run_cmd("git push origin main")
 
     if code == 0:
-        print("Successfully pushed live update to main!")
+        log("Successfully pushed live update to main! (GitHub Pages deploying)", level="SUCCESS")
         return True
     else:
-        print(f"Git push failed: {err}")
+        log(f"Git push failed: {err}", level="ERROR")
         return False
 
 
-def poll_cycle(last_snapshot=None, market_odds=None, dry_run=False):
+def poll_cycle(last_snapshot=None, market_odds=None, dry_run=False, interval_secs=75, poll_index=1):
     wiki_html = fetch_wiki_html()
     data = parse_wikipedia_data(wiki_html)
 
     # Determine current week
     week_lineups = data.get('week_lineups', {})
     if not week_lineups:
-        print("No week lineup data found.")
+        log("No week lineup data found on Wikipedia.", level="WARN")
         return 0, 0, False, last_snapshot
 
     current_week = max(week_lineups.keys())
@@ -122,23 +152,25 @@ def poll_cycle(last_snapshot=None, market_odds=None, dry_run=False):
             all_done = True
 
     if last_snapshot is not None and current_snapshot == last_snapshot:
-        print(f"[{now_et.strftime('%I:%M:%S %p ET')}] No changes detected ({len(scored)}/{total} scored). Waiting for next poll...")
+        recent_str = f" · Leader: {leader_name} ({leader_score}/30)" if leader_name else ""
+        log(f"Check #{poll_index}: No changes detected ({len(scored)}/{total} scored{recent_str}). Next check in {interval_secs}s.")
         return len(scored), total, all_done, current_snapshot
 
-    print(f"[{now_et.strftime('%I:%M:%S %p ET')}] Update detected: {len(scored)} of {total} couples scored.")
+    scored_summary = ", ".join([f"{c['name']} ({c['score']}/30)" for c in scored]) if scored else "None yet"
+    log(f"Check #{poll_index}: SCORE UPDATE DETECTED! {len(scored)} of {total} couples scored [{scored_summary}].", level="UPDATE")
 
     if dry_run:
-        print("Dry run mode: Skipping file modifications and git push.")
+        log("Dry run mode: Skipping file modifications and git push.")
         return len(scored), total, all_done, current_snapshot
 
     # Update index.html, dancers.json, dancers.txt
     update_index_html(data, market_odds)
 
     if git_has_changes():
-        print("Detected changes to index.html/dancers.json/dancers.txt!")
+        log("Detected changes to index.html/dancers.json/dancers.txt!")
         push_updates(len(scored), total, leader_name, leader_score)
     else:
-        print("Files already up to date.")
+        log("Files already up to date.")
 
     return len(scored), total, all_done, current_snapshot
 
@@ -158,9 +190,9 @@ def wait_until_tuesday_show():
     diff_seconds = (target - now).total_seconds()
     if diff_seconds > 0:
         hours = diff_seconds / 3600
-        print(f"Waiting for live show start at {target.strftime('%A, %b. %d at %I:%M %p ET')} (~{hours:.1f} hours away)...")
+        log(f"Waiting for live show start at {target.strftime('%A, %b. %d at %I:%M %p ET')} (~{hours:.1f} hours away)...")
         time.sleep(diff_seconds)
-        print("Live show window reached! Starting live polling loop...")
+        log("Live show window reached! Starting live polling loop...")
 
 
 def main():
@@ -170,57 +202,70 @@ def main():
     parser.add_argument("--once", action="store_true", help="Run a single check now and exit")
     parser.add_argument("--wait-until-show", action="store_true", help="Sleep until Tuesday 8:00 PM ET before running")
     parser.add_argument("--max-hours", type=float, default=3.5, help="Max hours to run before exiting (default: 3.5h, accommodates 3h specials)")
+    parser.add_argument("--log-file", type=str, default=os.path.join(WORKSPACE_DIR, "live_watcher.log"), help="Path to write log output (default: live_watcher.log)")
+    parser.add_argument("--no-log-file", action="store_true", help="Disable writing to log file (stdout only)")
     args = parser.parse_args()
 
-    print("=== DWTS Season 35 Live Show Watcher ===")
-    print(f"Current Time (ET): {get_current_et().strftime('%A, %b. %d, %Y %I:%M:%S %p ET')}")
+    if args.no_log_file:
+        set_log_file(None)
+    else:
+        set_log_file(args.log_file)
+
+    log("=== DWTS Season 35 Live Show Watcher Started ===")
+    log(f"Current Time (ET): {get_current_et().strftime('%A, %b. %d, %Y %I:%M:%S %p ET')}")
+    if LOG_FILE_PATH:
+        log(f"Persistent log file: {LOG_FILE_PATH}")
 
     if args.wait_until_show:
         wait_until_tuesday_show()
 
     # Pre-fetch Kalshi odds once at startup
-    print("Fetching prediction market baseline...")
+    log("Fetching prediction market baseline from Kalshi...")
     market_odds = fetch_prediction_market_data()
-    print(f"Kalshi odds loaded for {len(market_odds)} couples.")
+    log(f"Kalshi odds loaded for {len(market_odds)} couples.")
 
     last_snapshot = None
 
     if args.once:
-        print("Running single live check...")
-        poll_cycle(last_snapshot=None, market_odds=market_odds, dry_run=args.dry_run)
-        print("Check completed.")
+        log("Running single check mode (--once)...")
+        poll_cycle(last_snapshot=None, market_odds=market_odds, dry_run=args.dry_run, interval_secs=args.interval, poll_index=1)
+        log("Check completed successfully.")
         return 0
 
-    print(f"Starting live monitoring loop (polling every {args.interval}s, max runtime {args.max_hours}h)...")
+    log(f"Starting live monitoring loop (polling every {args.interval}s, max runtime {args.max_hours}h)...")
     start_time = time.time()
     max_seconds = args.max_hours * 3600
+    poll_count = 0
 
     last_market_refresh = time.time()
 
     while True:
         elapsed = time.time() - start_time
         if elapsed > max_seconds:
-            print(f"Reached maximum runtime ({args.max_hours} hours). Exiting watcher.")
+            log(f"Reached maximum runtime ({args.max_hours} hours). Exiting watcher.")
             break
 
         # Refresh Kalshi odds every 15 minutes during the show
         if time.time() - last_market_refresh > 900:
-            print("Refreshing Kalshi market odds...")
+            log("Refreshing Kalshi market odds...")
             market_odds = fetch_prediction_market_data()
             last_market_refresh = time.time()
 
+        poll_count += 1
         try:
             scored, total, all_done, last_snapshot = poll_cycle(
                 last_snapshot=last_snapshot,
                 market_odds=market_odds,
-                dry_run=args.dry_run
+                dry_run=args.dry_run,
+                interval_secs=args.interval,
+                poll_index=poll_count
             )
             if all_done:
-                print(f"All {total} couples have completed their routines and scores are recorded!")
-                print("Show complete. Exiting live watcher cleanly.")
+                log(f"All {total} couples have completed their routines and scores/results are recorded!", level="SUCCESS")
+                log("Show complete. Exiting live watcher cleanly.")
                 break
         except Exception as e:
-            print(f"Error during poll cycle: {e}")
+            log(f"Error during poll cycle #{poll_count}: {e}", level="ERROR")
 
         time.sleep(args.interval)
 

@@ -8,3 +8,4 @@ __pycache__/
 credentials.json
 client_secret*.json
 .spotify_track_cache.json
+*.log
