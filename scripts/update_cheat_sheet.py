@@ -1178,18 +1178,27 @@ def update_index_html(wiki_data, market_odds=None):
     # 7. Update spotlight market card
     top_market_name = "Ezra Frech"
     top_prob = 33
+    runners_up_str = "Harry Shum Jr. (12%), Maura Higgins (12%), and Jenna Dewan (11%)"
     if market_odds:
-        top_from_api = max(market_odds.keys(), key=lambda k: market_odds[k])
-        if market_odds[top_from_api] > 0:
-            top_market_name = top_from_api
-            top_prob = market_odds[top_from_api]
+        sorted_market = sorted([(k, v) for k, v in market_odds.items() if k in active_couples], key=lambda x: -x[1])
+        if sorted_market and sorted_market[0][1] > 0:
+            top_market_name, top_prob = sorted_market[0]
+            runners_up = sorted_market[1:4]
+            if runners_up:
+                runners_up_parts = [f"{name} ({prob}%)" for name, prob in runners_up]
+                if len(runners_up_parts) == 1:
+                    runners_up_str = runners_up_parts[0]
+                elif len(runners_up_parts) == 2:
+                    runners_up_str = f"{runners_up_parts[0]} and {runners_up_parts[1]}"
+                else:
+                    runners_up_str = f"{', '.join(runners_up_parts[:-1])}, and {runners_up_parts[-1]}"
 
     spotlight_html = (
         f'    <aside class="spotlight" aria-label="Market spotlight">\n'
         f'      <div class="spot-copy">\n'
         f'        <p class="kicker">Live Kalshi market favorite</p>\n'
         f'        <h2>{top_market_name} surged to {top_prob}% to win it all.</h2>\n'
-        f'        <p>Following back-to-back 20+ judges’ marks and viral social momentum, Paralympic champion {top_market_name} has taken over as the leading favorite on Kalshi’s Season 35 winner market with a {top_prob}% implied win probability, followed by Harry Shum Jr. (16%), Jenna Dewan (15%), and Maura Higgins (12%).</p>\n'
+        f'        <p>Following back-to-back 20+ judges’ marks and viral social momentum, Paralympic champion {top_market_name} has taken over as the leading favorite on Kalshi’s Season 35 winner market with a {top_prob}% implied win probability, followed by {runners_up_str}.</p>\n'
         f'        <div class="market-actions">\n'
         f'          <a class="market-btn" href="https://kalshi.com/markets/kxdancingwiththestars/who-will-win-dancing-with-the-stars/kxdancingwiththestars-26dec31" target="_blank" rel="noopener noreferrer">Trade on Kalshi (Who Will Win) ↗</a>\n'
         f'        </div>\n'
