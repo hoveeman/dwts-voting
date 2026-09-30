@@ -325,6 +325,15 @@ def ordinal(n):
 def mirrorball_label(count):
     return f"{count} Mirrorball{'s' if count != 1 else ''}"
 
+def count_to_word(n):
+    words = {
+        16: "Sixteen", 15: "Fifteen", 14: "Fourteen", 13: "Thirteen",
+        12: "Twelve", 11: "Eleven", 10: "Ten", 9: "Nine",
+        8: "Eight", 7: "Seven", 6: "Six", 5: "Five", 4: "Four",
+        3: "Three", 2: "Two", 1: "One"
+    }
+    return words.get(n, str(n))
+
 def get_spotify_track_url(song):
     if not song:
         return None
@@ -705,10 +714,27 @@ def update_index_html(wiki_data, market_odds=None):
     theme_title = theme_title.strip('"').strip()
     short_date = target_date_str.replace("September", "Sept.").replace("October", "Oct.").replace("November", "Nov.")
 
-    # 1. Update subtle timestamp & quick meta
+    # 1. Update subtle timestamp, kicker, board title, hero subtitle & quick meta
     now_et = datetime.now(ZoneInfo("America/New_York")).strftime("%b. %-d, %-I:%M %p ET")
     subtle_update_new = f'<span class="subtle-update"><span class="subtle-dot"></span>Updated {now_et}</span>'
     content = re.sub(r'<span class="subtle-update">.*?(?=\s*</div>)', subtle_update_new, content, flags=re.DOTALL)
+
+    content = re.sub(
+        r'<span class="kicker">Power rankings\s*·\s*Week \d+\s*·\s*[^<]+</span>',
+        f'<span class="kicker">Power rankings · Week {lineup_week_num} · {short_date}</span>',
+        content
+    )
+    content = re.sub(
+        r'<h1>The Week \d+ board</h1>',
+        f'<h1>The Week {lineup_week_num} board</h1>',
+        content
+    )
+    hero_sub_new = f'<p class="hero-sub">{count_to_word(len(active_couples))} couples remain. Track proven technique against fandom, momentum, and the one thing fans can’t ignore: theme-night fit.</p>'
+    content = re.sub(
+        r'<p class="hero-sub">\w+ couples remain\..*?</p>',
+        hero_sub_new,
+        content
+    )
 
     quick_meta_new = (
         f'<div class="quick-meta">\n'
@@ -722,24 +748,6 @@ def update_index_html(wiki_data, market_odds=None):
         f'          </div>'
     )
     content = re.sub(r'<div class="quick-meta">.*?</div>', quick_meta_new, content, flags=re.DOTALL)
-
-    # 2. Update intro paragraph for the Power Board
-    board_intro_new = (
-        f'<p>A composite power ranking—not just the show’s raw standings. '
-        f'Couples are ranked by a weighted <strong>Power Index (0–100)</strong> integrating four core pillars: '
-        f'<strong>45%</strong> verified judges’ scores &amp; week-over-week momentum, '
-        f'<strong>25%</strong> live <a href="https://kalshi.com/markets/kxdancingwiththestars/who-will-win-dancing-with-the-stars/kxdancingwiththestars-26dec31" target="_blank" rel="noopener noreferrer">Kalshi Season 35 winner market odds</a>, '
-        f'<strong>15%</strong> pro partner Mirrorball pedigree, and '
-        f'<strong>15%</strong> audience voting reach. '
-        f'Each card displays their Power Index, Kalshi win odds, judges’ scores, and social profiles. '
-        f'Tap a lens to reshape the board. <a href="https://abc.com/news/98f4bab4-757f-4f1a-a2e9-d392ff248d56/category/1138628">Season 35 portraits: Disney / ABC</a>.</p>'
-    )
-    content = re.sub(
-        r'<div class="section-head">\s*<div><p class="kicker">Power rankings</p><h2>The Week \d+ board</h2></div>\s*<p>.*?</p>',
-        f'<div class="section-head">\n        <div><p class="kicker">Power rankings</p><h2>The Week {lineup_week_num} board</h2></div>\n        {board_intro_new}',
-        content,
-        flags=re.DOTALL
-    )
 
     # Guardrail 1: Round-Completion Gate for Leaderboard & Composite Power Index
     # A week is only considered "completed" if all currently active couples have a valid score recorded.
