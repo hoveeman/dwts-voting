@@ -304,7 +304,7 @@ COUPLE_REGISTRY = {
         "proName": "Adele Zaikman",
         "age": 29,
         "mirrorballs": 0,
-        "photo": "connor-leavitt-adele-zaikman.jpg",
+        "photo": "conner-leavitt-adele-zaikman.jpg",
         "baseline_market_prob": 1,
         "bio": "The <i>Secret Lives of Mormon Wives</i> cast member was eliminated after a salsa to “Whoomp! (There It Is)” by Tag Team that scored 12.",
         "vote_code": "Conner",
