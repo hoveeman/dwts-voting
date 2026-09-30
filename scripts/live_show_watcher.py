@@ -137,18 +137,22 @@ def poll_cycle(last_snapshot=None, market_odds=None, dry_run=False, interval_sec
         tuple(sorted(data.get('eliminated_info', {}).keys()))
     )
 
-    has_results = any(bool(c.get('result')) for c in couples)
+    has_elimination = any('eliminated' in str(c.get('result', '')).lower() for c in couples) or any(v.get('week') == current_week for v in data.get('eliminated_info', {}).values())
+    all_have_results = (len(couples) > 0 and all(bool(c.get('result')) for c in couples))
     all_scored = (len(scored) == total and total > 0)
 
     # Show is done if all routines have scores AND either:
-    # 1. Elimination/results are recorded on Wikipedia, OR
-    # 2. It is past 10:10 PM ET for a normal show (or past 11:10 PM ET for a 3-hour finale)
+    # 1. An official elimination is recorded on Wikipedia, OR
+    # 2. All couples have results marked AND it is past 10:05 PM ET (e.g. non-elimination episode), OR
+    # 3. Safety time cutoff: past 10:20 PM ET for a normal show (or past 11:20 PM ET for a finale)
     now_et = get_current_et()
     all_done = False
     if all_scored:
-        if has_results:
+        if has_elimination:
             all_done = True
-        elif (now_et.hour == 22 and now_et.minute >= 10) or (now_et.hour >= 23 and now_et.minute >= 10):
+        elif all_have_results and ((now_et.hour == 22 and now_et.minute >= 5) or now_et.hour >= 23):
+            all_done = True
+        elif (now_et.hour == 22 and now_et.minute >= 20) or (now_et.hour >= 23 and now_et.minute >= 20):
             all_done = True
 
     if last_snapshot is not None and current_snapshot == last_snapshot:

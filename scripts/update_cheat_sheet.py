@@ -182,11 +182,15 @@ COUPLE_REGISTRY = {
         "social_reach_num": 0.5,
         "is_athlete": False,
         "is_dancer": False,
-        "baseline_market_prob": 5,
+        "baseline_market_prob": 1,
         "outlook": "Natural musical rhythm and a dedicated multi-decade fan community provide durability into themed music weeks.",
-        "bio": "The Hanson musician and singer-songwriter",
+        "bio": "The Hanson musician and singer-songwriter was eliminated after a foxtrot to “What a Fool Believes” by The Doobie Brothers that scored 18.",
         "vote_code": "Taylor",
-        "initial_rank": 9
+        "initial_rank": 9,
+        "eliminated_date": "September 29, 2026",
+        "eliminated_datetime": "2026-09-29",
+        "eliminated_order": "4th eliminated",
+        "eliminated_week_theme": "Week 3, Yacht Rock Night"
     },
     "Connor Wood": {
         "short": "Connor & Rylee",
@@ -675,7 +679,8 @@ def update_index_html(wiki_data, market_odds=None):
     known_eliminated = [
         "Conner Leavitt",
         "Sarah Jane Nader",
-        "Giada De Laurentiis"
+        "Giada De Laurentiis",
+        "Taylor Hanson"
     ]
     all_eliminated = list(known_eliminated)
     for name in eliminated_info:
@@ -854,9 +859,9 @@ def update_index_html(wiki_data, market_odds=None):
         total_score = sum(p['score'] for p in scored_weeks)
         max_total = len(scored_weeks) * 30 if scored_weeks else 30
         
-        ord_label = ordinal(idx) + " eliminated"
+        ord_label = meta.get('eliminated_order', ordinal(idx) + " eliminated")
         date_str = meta.get('eliminated_date', target_date_str)
-        datetime_str = meta.get('eliminated_datetime', '2026-09-25')
+        datetime_str = meta.get('eliminated_datetime', '2026-09-29')
         week_theme_str = meta.get('eliminated_week_theme', f"Week {lineup_week_num}, {theme_title}")
         exit_note = meta.get('bio', '')
         
@@ -879,11 +884,11 @@ def update_index_html(wiki_data, market_odds=None):
         eliminated_cards.append(card)
 
     new_eliminated_list = (
-        f'<div class="eliminated-list" id="voted-off">\n' +
+        f'<div class="eliminated-list">\n' +
         "\n".join(eliminated_cards) +
         '\n      </div>'
     )
-    content = re.sub(r'<div class="eliminated-list" id="voted-off">.*?</div>\s*</section>', new_eliminated_list + '\n    </section>', content, flags=re.DOTALL)
+    content = re.sub(r'<div class="eliminated-list">.*?</div>\s*</section>', new_eliminated_list + '\n    </section>', content, flags=re.DOTALL)
 
     # 5. Update .week-lineup / Scores & Songs section
     target_lineup = week_lineups.get(lineup_week_num, {'couples': []})['couples']
