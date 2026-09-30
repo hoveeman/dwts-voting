@@ -181,15 +181,20 @@ def poll_cycle(last_snapshot=None, market_odds=None, dry_run=False, interval_sec
 
 def wait_until_tuesday_show():
     now = get_current_et()
-    # Target Tuesday 20:00:00 (8:00 PM ET)
-    days_ahead = (1 - now.weekday()) % 7  # 1 is Tuesday in Python (0=Mon, 1=Tue)
-    if days_ahead == 0 and (now.hour > 22 or (now.hour == 22 and now.minute > 5)):
-        days_ahead = 7  # show passed today, target next Tuesday
+    from datetime import datetime, timedelta
+    # Check special Monday Nov 2 show (Disney Night due to Election Day)
+    special_date = datetime(2026, 11, 2, 20, 0, 0, tzinfo=ET_TZ)
+    if now < special_date and (special_date - now).total_seconds() <= 86400 * 3:
+        target = special_date
+    else:
+        # Target Tuesday 20:00:00 (8:00 PM ET)
+        days_ahead = (1 - now.weekday()) % 7  # 1 is Tuesday in Python (0=Mon, 1=Tue)
+        if days_ahead == 0 and (now.hour > 22 or (now.hour == 22 and now.minute > 5)):
+            days_ahead = 7  # show passed today, target next Tuesday
 
-    target = now.replace(hour=20, minute=0, second=0, microsecond=0)
-    if days_ahead > 0:
-        from datetime import timedelta
-        target += timedelta(days=days_ahead)
+        target = now.replace(hour=20, minute=0, second=0, microsecond=0)
+        if days_ahead > 0:
+            target += timedelta(days=days_ahead)
 
     diff_seconds = (target - now).total_seconds()
     if diff_seconds > 0:

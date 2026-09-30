@@ -1247,7 +1247,7 @@
         <div class="cal-row"><b>Week 5</b><time>Oct 13</time><span>TBA <small class="tba">Dolly Parton speculation is unconfirmed</small></span></div>
         <div class="cal-row"><b>Week 6</b><time>Oct 20</time><span>Dedication Night</span></div>
         <div class="cal-row"><b>Week 7</b><time>Oct 27</time><span>Horror Movie Night</span></div>
-        <div class="cal-row"><b>Week 8</b><time>Nov 3</time><span>Disney Night</span></div>
+        <div class="cal-row"><b>Week 8</b><time>Nov 2 (Mon)</time><span>Disney Night <small class="tba">Special Monday airdate due to Election Day</small></span></div>
         <div class="cal-row"><b>Week 9</b><time>Nov 10</time><span>Grammy Night</span></div>
         <div class="cal-row"><b>Week 10</b><time>Nov 17</time><span>Semi-Finals</span></div>
         <div class="cal-row"><b>Week 11</b><time>Nov 24</time><span>Finale</span></div>
@@ -2052,20 +2052,23 @@
         const formatter=new Intl.DateTimeFormat("en-US",{
           timeZone:"America/New_York",
           weekday:"short",
+          month:"short",
+          day:"numeric",
           hour:"numeric",
           minute:"numeric",
           hourCycle:"h23"
         });
         const parts=formatter.formatToParts(new Date()).reduce((acc,p)=>({...acc,[p.type]:p.value}),{});
-        const day=parts.weekday; // "Tue"
+        const day=parts.weekday; // "Tue" or "Mon"
         const hour=parseInt(parts.hour,10);
         const min=parseInt(parts.minute,10);
 
-        // Tuesday 8:00 PM (20:00) to 10:05 PM (22:05) Eastern Time
-        const isTuesdayLive=(day==="Tue" && (hour===20 || hour===21 || (hour===22 && min<=5)));
+        // Tuesday 8:00 PM (20:00) to 10:05 PM (22:05) Eastern Time, plus Monday Nov 2 for Disney Night (Election Day shift)
+        const isShowNight=(day==="Tue" || (day==="Mon" && parts.month==="Nov" && parts.day==="2"));
+        const isLiveWindow=isShowNight && (hour===20 || hour===21 || (hour===22 && min<=5));
         const hasLiveScores=!!document.querySelector('.week-lineup .live-dot-inline');
 
-        if(isTuesdayLive||hasLiveScores){
+        if(isLiveWindow||hasLiveScores){
           showLiveBanner(true);
         }
       }catch(e){}
