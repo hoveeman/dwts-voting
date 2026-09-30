@@ -869,9 +869,33 @@ def update_index_html(wiki_data, market_odds=None):
         
         ord_label = meta.get('eliminated_order', ordinal(idx) + " eliminated")
         date_str = meta.get('eliminated_date', target_date_str)
-        datetime_str = meta.get('eliminated_datetime', '2026-09-29')
-        week_theme_str = meta.get('eliminated_week_theme', f"Week {lineup_week_num}, {theme_title}")
-        exit_note = meta.get('bio', '')
+        if 'eliminated_datetime' in meta:
+            datetime_str = meta['eliminated_datetime']
+        else:
+            try:
+                datetime_str = datetime.strptime(date_str, "%B %d, %Y").strftime("%Y-%m-%d")
+            except Exception:
+                datetime_str = datetime.now().strftime("%Y-%m-%d")
+
+        if 'eliminated_week_theme' in meta:
+            week_theme_str = meta['eliminated_week_theme']
+        elif name in eliminated_info:
+            e_w = eliminated_info[name].get('week', lineup_week_num)
+            e_t = eliminated_info[name].get('theme', theme_title)
+            week_theme_str = f"Week {e_w}, {e_t}"
+        else:
+            week_theme_str = f"Week {lineup_week_num}, {theme_title}"
+
+        if 'eliminated_note' in meta:
+            exit_note = meta['eliminated_note']
+        elif name in eliminated_info and eliminated_info[name].get('dance'):
+            e_info = eliminated_info[name]
+            dance_str = e_info['dance'].lower() if e_info['dance'] else 'routine'
+            music_str = f" to {e_info['music']}" if e_info['music'] else ""
+            score_str = f" that scored {e_info['score']}" if e_info.get('score') else ""
+            exit_note = f"{meta.get('bio', name)} was eliminated after a {dance_str}{music_str}{score_str}."
+        else:
+            exit_note = meta.get('bio', '')
         
         score_weeks_html = "".join([f'<div class="score-week"><span>Week {w_i+1} · {p["dance"]}</span><strong>{p["score"]}/30</strong></div>' for w_i, p in enumerate(scored_weeks)])
         
