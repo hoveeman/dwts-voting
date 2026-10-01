@@ -1689,6 +1689,7 @@
       list.forEach((d,idx)=>{
         const card=document.createElement('article');card.className='card';
         const displayRank=idx+1;
+        const maxTotal=d.weeks.length*30;
         const scoreHistory=d.weeks.map((week,index)=>{
           let badge = '';
           if (week.judges && week.judges.length) {
