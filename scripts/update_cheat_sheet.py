@@ -484,10 +484,16 @@ def parse_wikipedia_data(raw_html):
                     if not matched_name:
                         continue
                     
-                    score_match = re.search(r'^(\d+)', raw_score)
-                    score = int(score_match.group(1)) if score_match else None
-                    if score is not None and not (0 <= score <= 40):
+                    score_match = re.search(r'^(\d+)(?:\s*\(([\d\s,]+)\))?', raw_score)
+                    if score_match:
+                        score = int(score_match.group(1))
+                        if not (0 <= score <= 40):
+                            score = None
+                        breakdown_str = score_match.group(2)
+                        judge_scores = [int(x.strip()) for x in breakdown_str.split(',') if x.strip().isdigit()] if breakdown_str else []
+                    else:
                         score = None
+                        judge_scores = []
                     
                     music_clean = re.sub(r'\[.*?\]', '', music).strip()
                     music_fmt = music_clean
@@ -504,6 +510,7 @@ def parse_wikipedia_data(raw_html):
                         'dance': dance,
                         'music': music_fmt,
                         'score': score,
+                        'judge_scores': judge_scores,
                         'result': result
                     })
 
@@ -512,6 +519,7 @@ def parse_wikipedia_data(raw_html):
                         'dance': dance,
                         'song': music_fmt,
                         'score': score,
+                        'judge_scores': judge_scores,
                         'result': result
                     })
 
@@ -521,7 +529,8 @@ def parse_wikipedia_data(raw_html):
                             'theme': w_theme,
                             'dance': dance,
                             'music': music_fmt,
-                            'score': score
+                            'score': score,
+                            'judge_scores': judge_scores
                         }
 
     return {
@@ -674,6 +683,41 @@ def compute_dynamic_attributes(name, valid_weeks, total_score, rank, active_coun
     case_blurb = f"{scoring_lead} Paired with {pro} ({mb_str}), {outlook}"
 
     return cats, tags, case_blurb, avg_score, wow_delta
+
+def get_judge_meta_list(num_judges):
+    if num_judges == 3:
+        return [('CA', 'Carrie Ann Inaba'), ('D', 'Derek Hough'), ('B', 'Bruno Tonioli')]
+    elif num_judges == 4:
+        return [('CA', 'Carrie Ann Inaba'), ('D', 'Derek Hough'), ('G', 'Guest Judge'), ('B', 'Bruno Tonioli')]
+    else:
+        return [(f'J{i+1}', f'Judge {i+1}') for i in range(num_judges)]
+
+def render_score_box_html(score, judge_scores=None, is_leader=False, max_score=30, indent="            "):
+    score_class = 'lineup-score-box leader' if is_leader else 'lineup-score-box'
+    if not judge_scores:
+        return (
+            f'{indent}<div class="{score_class}">\n'
+            f'{indent}  <div class="score-total"><strong>{score}</strong><span>/{max_score}</span></div>\n'
+            f'{indent}</div>'
+        )
+    
+    judge_meta = get_judge_meta_list(len(judge_scores))
+    tooltip_parts = [f"{name}: {val}" for (_, name), val in zip(judge_meta, judge_scores)]
+    box_tooltip = " · ".join(tooltip_parts)
+    
+    cols_html = "".join([
+        f'<div class="judge-col"><span class="judge-abbr" title="{name}">{abbr}</span><span class="judge-val">{val}</span></div>'
+        for (abbr, name), val in zip(judge_meta, judge_scores)
+    ])
+    
+    return (
+        f'{indent}<div class="{score_class}">\n'
+        f'{indent}  <div class="score-total"><strong>{score}</strong><span>/{max_score}</span></div>\n'
+        f'{indent}  <div class="score-judges" title="{box_tooltip}">\n'
+        f'{indent}    {cols_html}\n'
+        f'{indent}  </div>\n'
+        f'{indent}</div>'
+    )
 
 def update_index_html(wiki_data, market_odds=None):
     with open(HTML_FILE, 'r', encoding='utf-8') as f:
@@ -848,7 +892,7 @@ def update_index_html(wiki_data, market_odds=None):
 
     dancer_lines = []
     for d in active_dancers_data:
-        weeks_js = json.dumps([{'dance': w['dance'], 'score': w['score'], 'isLive': w.get('is_live', False)} for w in d['weeks']]).replace('"', "'")
+        weeks_js = json.dumps([{'dance': w['dance'], 'score': w['score'], 'isLive': w.get('is_live', False), 'judges': w.get('judge_scores', [])} for w in d['weeks']]).replace('"', "'")
         cats_js = json.dumps(d['cats']).replace('"', "'")
         tags_js = json.dumps(d['tags']).replace('"', "'")
         case_escaped = d['case'].replace("'", "\\'")
@@ -888,6 +932,8 @@ def update_index_html(wiki_data, market_odds=None):
 
         if 'eliminated_note' in meta:
             exit_note = meta['eliminated_note']
+        elif "was eliminated" in meta.get('bio', ''):
+            exit_note = meta['bio']
         elif name in eliminated_info and eliminated_info[name].get('dance'):
             e_info = eliminated_info[name]
             dance_str = e_info['dance'].lower() if e_info['dance'] else 'routine'
@@ -897,7 +943,16 @@ def update_index_html(wiki_data, market_odds=None):
         else:
             exit_note = meta.get('bio', '')
         
-        score_weeks_html = "".join([f'<div class="score-week"><span>Week {w_i+1} · {p["dance"]}</span><strong>{p["score"]}/30</strong></div>' for w_i, p in enumerate(scored_weeks)])
+        score_weeks_items = []
+        for w_i, p in enumerate(scored_weeks):
+            js = p.get('judge_scores', [])
+            badge = ""
+            if js:
+                meta_j = get_judge_meta_list(len(js))
+                tip = " · ".join([f"{n}: {val}" for (_, n), val in zip(meta_j, js)])
+                badge = f' <span class="score-judges-badge" title="{tip}">({",".join(map(str, js))})</span>'
+            score_weeks_items.append(f'<div class="score-week"><span>Week {w_i+1} · {p["dance"]}</span><strong>{p["score"]}/30{badge}</strong></div>')
+        score_weeks_html = "".join(score_weeks_items)
         
         img_style = f' style="object-position: {meta["photo_position"]};"' if "photo_position" in meta else ""
         card = (
@@ -948,8 +1003,8 @@ def update_index_html(wiki_data, market_odds=None):
             is_leader = (score == top_score)
             leader_badge = '<span class="leader-tag">High Score</span>' if is_leader else ''
             elim_badge = '<span class="elim-tag">Eliminated</span>' if ('eliminated' in c.get('result', '').lower()) else ''
-            score_class = 'lineup-score-box leader' if is_leader else 'lineup-score-box'
             music_links = make_music_links_html(song, indent="              ")
+            score_box = render_score_box_html(score, c.get('judge_scores', []), is_leader=is_leader, indent="            ")
             
             item = (
                 f'          <div class="lineup-item">\n'
@@ -959,7 +1014,7 @@ def update_index_html(wiki_data, market_odds=None):
                 f'              <span class="lineup-dance">{dance}</span>\n'
                 f'              <span class="lineup-song">{song}</span>{music_links}\n'
                 f'            </div>\n'
-                f'            <div class="{score_class}"><strong>{score}</strong><span>/30</span></div>\n'
+                f'{score_box}\n'
                 f'          </div>'
             )
             leaderboard_items.append(item)
@@ -991,8 +1046,8 @@ def update_index_html(wiki_data, market_odds=None):
             score = c.get('score', 0)
             is_leader = (score == top_score)
             leader_badge = '<span class="leader-tag">Leader</span>' if is_leader else ''
-            score_class = 'lineup-score-box leader' if is_leader else 'lineup-score-box'
             music_links = make_music_links_html(song, indent="              ")
+            score_box = render_score_box_html(score, c.get('judge_scores', []), is_leader=is_leader, indent="            ")
             
             item = (
                 f'          <div class="lineup-item">\n'
@@ -1002,7 +1057,7 @@ def update_index_html(wiki_data, market_odds=None):
                 f'              <span class="lineup-dance">{dance}</span>\n'
                 f'              <span class="lineup-song">{song}</span>{music_links}\n'
                 f'            </div>\n'
-                f'            <div class="{score_class}"><strong>{score}</strong><span>/30</span></div>\n'
+                f'{score_box}\n'
                 f'          </div>'
             )
             danced_items.append(item)
@@ -1123,8 +1178,8 @@ def update_index_html(wiki_data, market_odds=None):
             is_leader = (score == pw_top_score)
             leader_badge = '<span class="leader-tag">High Score</span>' if is_leader else ''
             elim_badge = '<span class="elim-tag">Eliminated</span>' if ('eliminated' in c.get('result', '').lower()) else ''
-            score_class = 'lineup-score-box leader' if is_leader else 'lineup-score-box'
             music_links = make_music_links_html(song, indent="                  ")
+            score_box = render_score_box_html(score, c.get('judge_scores', []), is_leader=is_leader, indent="                ")
             
             item = (
                 f'              <div class="lineup-item">\n'
@@ -1134,7 +1189,7 @@ def update_index_html(wiki_data, market_odds=None):
                 f'                  <span class="lineup-dance">{dance}</span>\n'
                 f'                  <span class="lineup-song">{song}</span>{music_links}\n'
                 f'                </div>\n'
-                f'                <div class="{score_class}"><strong>{score}</strong><span>/30</span></div>\n'
+                f'{score_box}\n'
                 f'              </div>'
             )
             pw_items.append(item)

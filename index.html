@@ -177,10 +177,19 @@
     .playlist-btn.spotify-playlist-btn:hover{border-color:#1ed760;color:#1ed760}
     .playlist-btn.master-playlist-btn{background:rgba(239,206,130,.12);border-color:rgba(239,206,130,.35);color:#efce82}
     .playlist-btn.master-playlist-btn:hover{background:rgba(239,206,130,.22);border-color:#efce82;color:#fff}
-    .lineup-score-box{text-align:right;background:rgba(255,255,255,.07);padding:5px 10px;border-radius:4px;border:1px solid rgba(255,255,255,.12);min-width:60px}
-    .lineup-score-box.leader{background:rgba(239,206,130,.18);border-color:#efce82}
-    .lineup-score-box strong{font-family:var(--font-display);font-size:1.25rem;color:#efce82;line-height:1}
-    .lineup-score-box span{font-size:.72rem;color:#d4d6d8}
+    .lineup-score-box{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;background:rgba(255,255,255,.07);padding:6px 9px;border-radius:4px;border:1px solid rgba(255,255,255,.12);min-width:78px;flex-shrink:0;box-sizing:border-box}
+    .lineup-score-box.leader{background:rgba(239,206,130,.18);border-color:#efce82;box-shadow:0 0 10px rgba(239,206,130,.12)}
+    .score-total{display:flex;align-items:baseline;justify-content:center;gap:1px;line-height:1}
+    .lineup-score-box strong,.score-total strong{font-family:var(--font-display);font-size:1.25rem;color:#efce82;line-height:1;font-weight:700}
+    .lineup-score-box span,.score-total span{font-size:.72rem;color:#d4d6d8}
+    .score-judges{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;gap:4px;width:100%;margin-top:4px;padding-top:4px;border-top:1px solid rgba(255,255,255,.12)}
+    .lineup-score-box.leader .score-judges{border-top-color:rgba(239,206,130,.28)}
+    .judge-col{display:flex;flex-direction:column;align-items:center;line-height:1}
+    .judge-abbr{font-size:.56rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:#a0a4a8;margin-bottom:2px;cursor:help}
+    .lineup-score-box.leader .judge-abbr{color:#dfc68b}
+    .judge-val{font-size:.78rem;font-weight:800;color:#fff;font-variant-numeric:tabular-nums}
+    .lineup-score-box.leader .judge-val{color:#fff7dc}
+    .score-judges-badge{font-size:.72rem;color:#d9bf80;font-weight:600;margin-left:4px;cursor:help}
     .lineup-pending-box{font-size:.7rem;font-weight:600;color:#9ea2a6;text-transform:uppercase;letter-spacing:.06em;background:rgba(255,255,255,.04);padding:4px 8px;border-radius:4px;border:1px solid rgba(255,255,255,.08);white-space:nowrap}
     .leader-tag{display:inline-block;font-size:.65rem;text-transform:uppercase;letter-spacing:.06em;background:#efce82;color:#1d1f21;font-weight:800;padding:2px 6px;border-radius:3px;margin-left:6px;vertical-align:middle}
     .elim-tag{display:inline-block;font-size:.65rem;text-transform:uppercase;letter-spacing:.06em;background:var(--red);color:#fff;font-weight:800;padding:2px 6px;border-radius:3px;margin-left:6px;vertical-align:middle}
@@ -427,7 +436,7 @@
         <div>
           <div class="kicker-wrap">
             <span class="kicker">Power rankings · Week 4 · Oct. 6, 2026</span>
-            <span class="subtle-update"><span class="subtle-dot"></span>Updated Sep. 30, 6:30 AM ET</span>
+            <span class="subtle-update"><span class="subtle-dot"></span>Updated Oct. 1, 1:37 AM ET</span>
           </div>
           <h1>The Week 4 board</h1>
           <p class="hero-sub">Twelve couples remain. Track proven technique against fandom, momentum, and the one thing fans can’t ignore: theme-night fit.</p>
@@ -570,8 +579,8 @@
             <h3>Conner Leavitt</h3>
             <p class="partner">with Adele Zaikman · 0 Mirrorballs · Week 1, Premiere Night 1</p>
             <div class="final-score" aria-label="Final season score: 12 out of 30"><span>Final total</span><strong>12/30</strong></div>
-            <div class="score-history" aria-label="Weekly judges' scores"><div class="score-week"><span>Week 1 · Salsa</span><strong>12/30</strong></div></div>
-            <p class="exit-note">The <i>Secret Lives of Mormon Wives</i> cast member was eliminated after a salsa to “Whoomp! (There It Is)” by Tag Team that scored 12. was eliminated after a salsa to “Whoomp! (There It Is)” · Tag Team that scored 12.</p>
+            <div class="score-history" aria-label="Weekly judges' scores"><div class="score-week"><span>Week 1 · Salsa</span><strong>12/30 <span class="score-judges-badge" title="Carrie Ann Inaba: 4 · Derek Hough: 4 · Bruno Tonioli: 4">(4,4,4)</span></strong></div></div>
+            <p class="exit-note">The <i>Secret Lives of Mormon Wives</i> cast member was eliminated after a salsa to “Whoomp! (There It Is)” by Tag Team that scored 12.</p>
           </div>
         </article>
         <article class="eliminated-card">
@@ -581,8 +590,8 @@
             <h3>Sarah Jane Nader</h3>
             <p class="partner">with Hailey Bills · 0 Mirrorballs · Week 1, Premiere Night 2</p>
             <div class="final-score" aria-label="Final season score: 14 out of 30"><span>Final total</span><strong>14/30</strong></div>
-            <div class="score-history" aria-label="Weekly judges' scores"><div class="score-week"><span>Week 1 · Jive</span><strong>14/30</strong></div></div>
-            <p class="exit-note">The <i>Love Thy Nader</i> star was eliminated after a jive to “Sk8er Boi” by Avril Lavigne that scored 14. was eliminated after a jive to “Sk8er Boi” · Avril Lavigne that scored 14.</p>
+            <div class="score-history" aria-label="Weekly judges' scores"><div class="score-week"><span>Week 1 · Jive</span><strong>14/30 <span class="score-judges-badge" title="Carrie Ann Inaba: 5 · Derek Hough: 4 · Bruno Tonioli: 5">(5,4,5)</span></strong></div></div>
+            <p class="exit-note">The <i>Love Thy Nader</i> star was eliminated after a jive to “Sk8er Boi” by Avril Lavigne that scored 14.</p>
           </div>
         </article>
         <article class="eliminated-card">
@@ -592,8 +601,8 @@
             <h3>Giada De Laurentiis</h3>
             <p class="partner">with Alan Bersten · 1 Mirrorball · Week 2, Viral Hits Night</p>
             <div class="final-score" aria-label="Final season score: 28 out of 60"><span>Final total</span><strong>28/60</strong></div>
-            <div class="score-history" aria-label="Weekly judges' scores"><div class="score-week"><span>Week 1 · Tango</span><strong>16/30</strong></div><div class="score-week"><span>Week 2 · Salsa</span><strong>12/30</strong></div></div>
-            <p class="exit-note">The celebrity chef was eliminated after a salsa to “Bella Ciao” by Becky G that scored 12. was eliminated after a salsa to “Bella Ciao” · Becky G that scored 12.</p>
+            <div class="score-history" aria-label="Weekly judges' scores"><div class="score-week"><span>Week 1 · Tango</span><strong>16/30 <span class="score-judges-badge" title="Carrie Ann Inaba: 6 · Derek Hough: 5 · Bruno Tonioli: 5">(6,5,5)</span></strong></div><div class="score-week"><span>Week 2 · Salsa</span><strong>12/30 <span class="score-judges-badge" title="Carrie Ann Inaba: 4 · Derek Hough: 4 · Bruno Tonioli: 4">(4,4,4)</span></strong></div></div>
+            <p class="exit-note">The celebrity chef was eliminated after a salsa to “Bella Ciao” by Becky G that scored 12.</p>
           </div>
         </article>
         <article class="eliminated-card">
@@ -603,27 +612,27 @@
             <h3>Taylor Hanson</h3>
             <p class="partner">with Britt Stewart · 0 Mirrorballs · Week 3, Yacht Rock Night</p>
             <div class="final-score" aria-label="Final season score: 49 out of 90"><span>Final total</span><strong>49/90</strong></div>
-            <div class="score-history" aria-label="Weekly judges' scores"><div class="score-week"><span>Week 1 · Quickstep</span><strong>16/30</strong></div><div class="score-week"><span>Week 2 · Cha-cha-cha</span><strong>15/30</strong></div><div class="score-week"><span>Week 3 · Foxtrot</span><strong>18/30</strong></div></div>
-            <p class="exit-note">The Hanson musician and singer-songwriter was eliminated after a foxtrot to “What a Fool Believes” by The Doobie Brothers that scored 18. was eliminated after a foxtrot to “What a Fool Believes” · The Doobie Brothers that scored 18.</p>
+            <div class="score-history" aria-label="Weekly judges' scores"><div class="score-week"><span>Week 1 · Quickstep</span><strong>16/30 <span class="score-judges-badge" title="Carrie Ann Inaba: 6 · Derek Hough: 5 · Bruno Tonioli: 5">(6,5,5)</span></strong></div><div class="score-week"><span>Week 2 · Cha-cha-cha</span><strong>15/30 <span class="score-judges-badge" title="Carrie Ann Inaba: 5 · Derek Hough: 5 · Bruno Tonioli: 5">(5,5,5)</span></strong></div><div class="score-week"><span>Week 3 · Foxtrot</span><strong>18/30 <span class="score-judges-badge" title="Carrie Ann Inaba: 6 · Derek Hough: 6 · Bruno Tonioli: 6">(6,6,6)</span></strong></div></div>
+            <p class="exit-note">The Hanson musician and singer-songwriter was eliminated after a foxtrot to “What a Fool Believes” by The Doobie Brothers that scored 18.</p>
           </div>
         </article>
       </div>
     </section>
 
-                                                                                            <aside class="spotlight" aria-label="Market spotlight">
+                                                                                                <aside class="spotlight" aria-label="Market spotlight">
       <div class="spot-copy">
         <p class="kicker">Live Kalshi market favorite</p>
-        <h2>Ezra Frech surged to 47% to win it all.</h2>
-        <p>Following back-to-back 20+ judges’ marks and viral social momentum, Paralympic champion Ezra Frech has taken over as the leading favorite on Kalshi’s Season 35 winner market with a 47% implied win probability, followed by Harry Shum Jr. (14%), Maura Higgins (13%), and Jenna Dewan (11%).</p>
+        <h2>Ezra Frech surged to 46% to win it all.</h2>
+        <p>Following back-to-back 20+ judges’ marks and viral social momentum, Paralympic champion Ezra Frech has taken over as the leading favorite on Kalshi’s Season 35 winner market with a 46% implied win probability, followed by Amber Glenn (14%), Maura Higgins (12%), and Jenna Dewan (11%).</p>
         <div class="market-actions">
           <a class="market-btn" href="https://kalshi.com/markets/kxdancingwiththestars/who-will-win-dancing-with-the-stars/kxdancingwiththestars-26dec31" target="_blank" rel="noopener noreferrer">Trade on Kalshi (Who Will Win) ↗</a>
         </div>
         <p class="signal">Live prediction markets track implied win probabilities; contracts update continuously on Kalshi and are not affiliated with or endorsed by ABC or Disney.</p>
       </div>
-      <div class="market"><div><strong>47%</strong><span>Kalshi Market Favorite</span></div></div>
+      <div class="market"><div><strong>46%</strong><span>Kalshi Market Favorite</span></div></div>
     </aside>
 
-                                                                                                                                        <div class="week-lineup" id="scores" aria-labelledby="week-lineup-title">
+                                                                                                                                              <div class="week-lineup" id="scores" aria-labelledby="week-lineup-title">
         <span id="songs" style="scroll-margin-top:60px"></span>
         <div class="lineup-head">
           <div><p class="kicker" style="color:#efce82">Tuesday, October 6 · Live at 8/7c</p><h3 id="week-lineup-title">Mariah Carey Night: Scores &amp; Songs</h3></div>
@@ -774,7 +783,12 @@
                   <span class="lineup-song">“Hold the Line” · Toto</span>
                   <div class="music-links"><a href="https://open.spotify.com/track/4aVuWgvD0X63hcOCnZtNFA" target="_blank" rel="noopener noreferrer" class="music-btn spotify-btn" title="Listen to Hold the Line Toto on Spotify" aria-label="Listen to Hold the Line Toto on Spotify"><svg viewBox="0 0 24 24" class="music-icon" aria-hidden="true"><path fill="currentColor" d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.503 17.308c-.218.357-.681.472-1.038.254-2.853-1.743-6.444-2.138-10.673-1.171-.408.093-.812-.162-.905-.57-.093-.408.162-.812.57-.905 4.634-1.059 8.604-.614 11.792 1.354.357.218.472.681.254 1.038zm1.47-3.267c-.275.447-.862.59-1.309.315-3.265-2.008-8.243-2.59-12.106-1.417-.502.152-1.034-.136-1.186-.638-.152-.502.136-1.034.638-1.186 4.417-1.341 9.907-.7 13.648 1.603.447.275.59.862.315 1.309zm.126-3.41c-3.916-2.325-10.374-2.54-14.116-1.403-.6.182-1.24-.165-1.422-.765-.182-.6.165-1.24.765-1.422 4.301-1.306 11.431-1.057 15.932 1.616.54.321.716 1.02.395 1.56-.321.54-1.02.716-1.56.395z"/></svg><span>Spotify</span></a></div>
                 </div>
-                <div class="lineup-score-box leader"><strong>24</strong><span>/30</span></div>
+                <div class="lineup-score-box leader">
+                  <div class="score-total"><strong>24</strong><span>/30</span></div>
+                  <div class="score-judges" title="Carrie Ann Inaba: 8 · Derek Hough: 8 · Bruno Tonioli: 8">
+                    <div class="judge-col"><span class="judge-abbr" title="Carrie Ann Inaba">CA</span><span class="judge-val">8</span></div><div class="judge-col"><span class="judge-abbr" title="Derek Hough">D</span><span class="judge-val">8</span></div><div class="judge-col"><span class="judge-abbr" title="Bruno Tonioli">B</span><span class="judge-val">8</span></div>
+                  </div>
+                </div>
               </div>
               <div class="lineup-item">
                 <span class="lineup-no">#2</span>
@@ -784,7 +798,12 @@
                   <span class="lineup-song">“You Make My Dreams (Come True)” · Hall & Oates</span>
                   <div class="music-links"><a href="https://open.spotify.com/track/4o6BgsqLIBViaGVbx5rbRk" target="_blank" rel="noopener noreferrer" class="music-btn spotify-btn" title="Listen to You Make My Dreams (Come True) Hall &amp; Oates on Spotify" aria-label="Listen to You Make My Dreams (Come True) Hall &amp; Oates on Spotify"><svg viewBox="0 0 24 24" class="music-icon" aria-hidden="true"><path fill="currentColor" d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.503 17.308c-.218.357-.681.472-1.038.254-2.853-1.743-6.444-2.138-10.673-1.171-.408.093-.812-.162-.905-.57-.093-.408.162-.812.57-.905 4.634-1.059 8.604-.614 11.792 1.354.357.218.472.681.254 1.038zm1.47-3.267c-.275.447-.862.59-1.309.315-3.265-2.008-8.243-2.59-12.106-1.417-.502.152-1.034-.136-1.186-.638-.152-.502.136-1.034.638-1.186 4.417-1.341 9.907-.7 13.648 1.603.447.275.59.862.315 1.309zm.126-3.41c-3.916-2.325-10.374-2.54-14.116-1.403-.6.182-1.24-.165-1.422-.765-.182-.6.165-1.24.765-1.422 4.301-1.306 11.431-1.057 15.932 1.616.54.321.716 1.02.395 1.56-.321.54-1.02.716-1.56.395z"/></svg><span>Spotify</span></a></div>
                 </div>
-                <div class="lineup-score-box leader"><strong>24</strong><span>/30</span></div>
+                <div class="lineup-score-box leader">
+                  <div class="score-total"><strong>24</strong><span>/30</span></div>
+                  <div class="score-judges" title="Carrie Ann Inaba: 8 · Derek Hough: 8 · Bruno Tonioli: 8">
+                    <div class="judge-col"><span class="judge-abbr" title="Carrie Ann Inaba">CA</span><span class="judge-val">8</span></div><div class="judge-col"><span class="judge-abbr" title="Derek Hough">D</span><span class="judge-val">8</span></div><div class="judge-col"><span class="judge-abbr" title="Bruno Tonioli">B</span><span class="judge-val">8</span></div>
+                  </div>
+                </div>
               </div>
               <div class="lineup-item">
                 <span class="lineup-no">#3</span>
@@ -794,7 +813,12 @@
                   <span class="lineup-song">“Turn Your Love Around” · George Benson</span>
                   <div class="music-links"><a href="https://open.spotify.com/track/6a899bXlCuViXW2Qs8Rdqo" target="_blank" rel="noopener noreferrer" class="music-btn spotify-btn" title="Listen to Turn Your Love Around George Benson on Spotify" aria-label="Listen to Turn Your Love Around George Benson on Spotify"><svg viewBox="0 0 24 24" class="music-icon" aria-hidden="true"><path fill="currentColor" d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.503 17.308c-.218.357-.681.472-1.038.254-2.853-1.743-6.444-2.138-10.673-1.171-.408.093-.812-.162-.905-.57-.093-.408.162-.812.57-.905 4.634-1.059 8.604-.614 11.792 1.354.357.218.472.681.254 1.038zm1.47-3.267c-.275.447-.862.59-1.309.315-3.265-2.008-8.243-2.59-12.106-1.417-.502.152-1.034-.136-1.186-.638-.152-.502.136-1.034.638-1.186 4.417-1.341 9.907-.7 13.648 1.603.447.275.59.862.315 1.309zm.126-3.41c-3.916-2.325-10.374-2.54-14.116-1.403-.6.182-1.24-.165-1.422-.765-.182-.6.165-1.24.765-1.422 4.301-1.306 11.431-1.057 15.932 1.616.54.321.716 1.02.395 1.56-.321.54-1.02.716-1.56.395z"/></svg><span>Spotify</span></a></div>
                 </div>
-                <div class="lineup-score-box"><strong>22</strong><span>/30</span></div>
+                <div class="lineup-score-box">
+                  <div class="score-total"><strong>22</strong><span>/30</span></div>
+                  <div class="score-judges" title="Carrie Ann Inaba: 7 · Derek Hough: 7 · Bruno Tonioli: 8">
+                    <div class="judge-col"><span class="judge-abbr" title="Carrie Ann Inaba">CA</span><span class="judge-val">7</span></div><div class="judge-col"><span class="judge-abbr" title="Derek Hough">D</span><span class="judge-val">7</span></div><div class="judge-col"><span class="judge-abbr" title="Bruno Tonioli">B</span><span class="judge-val">8</span></div>
+                  </div>
+                </div>
               </div>
               <div class="lineup-item">
                 <span class="lineup-no">#4</span>
@@ -804,7 +828,12 @@
                   <span class="lineup-song">“Just the Two of Us” · Grover Washington Jr. feat. Bill Withers</span>
                   <div class="music-links"><a href="https://open.spotify.com/track/2tH28YyKYOldxhuBHoI79M" target="_blank" rel="noopener noreferrer" class="music-btn spotify-btn" title="Listen to Just the Two of Us Grover Washington Jr. feat. Bill Withers on Spotify" aria-label="Listen to Just the Two of Us Grover Washington Jr. feat. Bill Withers on Spotify"><svg viewBox="0 0 24 24" class="music-icon" aria-hidden="true"><path fill="currentColor" d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.503 17.308c-.218.357-.681.472-1.038.254-2.853-1.743-6.444-2.138-10.673-1.171-.408.093-.812-.162-.905-.57-.093-.408.162-.812.57-.905 4.634-1.059 8.604-.614 11.792 1.354.357.218.472.681.254 1.038zm1.47-3.267c-.275.447-.862.59-1.309.315-3.265-2.008-8.243-2.59-12.106-1.417-.502.152-1.034-.136-1.186-.638-.152-.502.136-1.034.638-1.186 4.417-1.341 9.907-.7 13.648 1.603.447.275.59.862.315 1.309zm.126-3.41c-3.916-2.325-10.374-2.54-14.116-1.403-.6.182-1.24-.165-1.422-.765-.182-.6.165-1.24.765-1.422 4.301-1.306 11.431-1.057 15.932 1.616.54.321.716 1.02.395 1.56-.321.54-1.02.716-1.56.395z"/></svg><span>Spotify</span></a></div>
                 </div>
-                <div class="lineup-score-box"><strong>21</strong><span>/30</span></div>
+                <div class="lineup-score-box">
+                  <div class="score-total"><strong>21</strong><span>/30</span></div>
+                  <div class="score-judges" title="Carrie Ann Inaba: 7 · Derek Hough: 7 · Bruno Tonioli: 7">
+                    <div class="judge-col"><span class="judge-abbr" title="Carrie Ann Inaba">CA</span><span class="judge-val">7</span></div><div class="judge-col"><span class="judge-abbr" title="Derek Hough">D</span><span class="judge-val">7</span></div><div class="judge-col"><span class="judge-abbr" title="Bruno Tonioli">B</span><span class="judge-val">7</span></div>
+                  </div>
+                </div>
               </div>
               <div class="lineup-item">
                 <span class="lineup-no">#5</span>
@@ -814,7 +843,12 @@
                   <span class="lineup-song">“Africa” · Toto</span>
                   <div class="music-links"><a href="https://open.spotify.com/track/6QZo2TgclkUMwJgggi8QSQ" target="_blank" rel="noopener noreferrer" class="music-btn spotify-btn" title="Listen to Africa Toto on Spotify" aria-label="Listen to Africa Toto on Spotify"><svg viewBox="0 0 24 24" class="music-icon" aria-hidden="true"><path fill="currentColor" d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.503 17.308c-.218.357-.681.472-1.038.254-2.853-1.743-6.444-2.138-10.673-1.171-.408.093-.812-.162-.905-.57-.093-.408.162-.812.57-.905 4.634-1.059 8.604-.614 11.792 1.354.357.218.472.681.254 1.038zm1.47-3.267c-.275.447-.862.59-1.309.315-3.265-2.008-8.243-2.59-12.106-1.417-.502.152-1.034-.136-1.186-.638-.152-.502.136-1.034.638-1.186 4.417-1.341 9.907-.7 13.648 1.603.447.275.59.862.315 1.309zm.126-3.41c-3.916-2.325-10.374-2.54-14.116-1.403-.6.182-1.24-.165-1.422-.765-.182-.6.165-1.24.765-1.422 4.301-1.306 11.431-1.057 15.932 1.616.54.321.716 1.02.395 1.56-.321.54-1.02.716-1.56.395z"/></svg><span>Spotify</span></a></div>
                 </div>
-                <div class="lineup-score-box"><strong>21</strong><span>/30</span></div>
+                <div class="lineup-score-box">
+                  <div class="score-total"><strong>21</strong><span>/30</span></div>
+                  <div class="score-judges" title="Carrie Ann Inaba: 7 · Derek Hough: 7 · Bruno Tonioli: 7">
+                    <div class="judge-col"><span class="judge-abbr" title="Carrie Ann Inaba">CA</span><span class="judge-val">7</span></div><div class="judge-col"><span class="judge-abbr" title="Derek Hough">D</span><span class="judge-val">7</span></div><div class="judge-col"><span class="judge-abbr" title="Bruno Tonioli">B</span><span class="judge-val">7</span></div>
+                  </div>
+                </div>
               </div>
               <div class="lineup-item">
                 <span class="lineup-no">#6</span>
@@ -824,7 +858,12 @@
                   <span class="lineup-song">“Maneater” · Hall & Oates</span>
                   <div class="music-links"><a href="https://open.spotify.com/track/3DRQ0wNkszkRXblLdc2Mze" target="_blank" rel="noopener noreferrer" class="music-btn spotify-btn" title="Listen to Maneater Hall &amp; Oates on Spotify" aria-label="Listen to Maneater Hall &amp; Oates on Spotify"><svg viewBox="0 0 24 24" class="music-icon" aria-hidden="true"><path fill="currentColor" d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.503 17.308c-.218.357-.681.472-1.038.254-2.853-1.743-6.444-2.138-10.673-1.171-.408.093-.812-.162-.905-.57-.093-.408.162-.812.57-.905 4.634-1.059 8.604-.614 11.792 1.354.357.218.472.681.254 1.038zm1.47-3.267c-.275.447-.862.59-1.309.315-3.265-2.008-8.243-2.59-12.106-1.417-.502.152-1.034-.136-1.186-.638-.152-.502.136-1.034.638-1.186 4.417-1.341 9.907-.7 13.648 1.603.447.275.59.862.315 1.309zm.126-3.41c-3.916-2.325-10.374-2.54-14.116-1.403-.6.182-1.24-.165-1.422-.765-.182-.6.165-1.24.765-1.422 4.301-1.306 11.431-1.057 15.932 1.616.54.321.716 1.02.395 1.56-.321.54-1.02.716-1.56.395z"/></svg><span>Spotify</span></a></div>
                 </div>
-                <div class="lineup-score-box"><strong>21</strong><span>/30</span></div>
+                <div class="lineup-score-box">
+                  <div class="score-total"><strong>21</strong><span>/30</span></div>
+                  <div class="score-judges" title="Carrie Ann Inaba: 7 · Derek Hough: 7 · Bruno Tonioli: 7">
+                    <div class="judge-col"><span class="judge-abbr" title="Carrie Ann Inaba">CA</span><span class="judge-val">7</span></div><div class="judge-col"><span class="judge-abbr" title="Derek Hough">D</span><span class="judge-val">7</span></div><div class="judge-col"><span class="judge-abbr" title="Bruno Tonioli">B</span><span class="judge-val">7</span></div>
+                  </div>
+                </div>
               </div>
               <div class="lineup-item">
                 <span class="lineup-no">#7</span>
@@ -834,7 +873,12 @@
                   <span class="lineup-song">“Everywhere” · Fleetwood Mac</span>
                   <div class="music-links"><a href="https://open.spotify.com/track/1prZ0pr6XoRCxcrC3MCL0M" target="_blank" rel="noopener noreferrer" class="music-btn spotify-btn" title="Listen to Everywhere Fleetwood Mac on Spotify" aria-label="Listen to Everywhere Fleetwood Mac on Spotify"><svg viewBox="0 0 24 24" class="music-icon" aria-hidden="true"><path fill="currentColor" d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.503 17.308c-.218.357-.681.472-1.038.254-2.853-1.743-6.444-2.138-10.673-1.171-.408.093-.812-.162-.905-.57-.093-.408.162-.812.57-.905 4.634-1.059 8.604-.614 11.792 1.354.357.218.472.681.254 1.038zm1.47-3.267c-.275.447-.862.59-1.309.315-3.265-2.008-8.243-2.59-12.106-1.417-.502.152-1.034-.136-1.186-.638-.152-.502.136-1.034.638-1.186 4.417-1.341 9.907-.7 13.648 1.603.447.275.59.862.315 1.309zm.126-3.41c-3.916-2.325-10.374-2.54-14.116-1.403-.6.182-1.24-.165-1.422-.765-.182-.6.165-1.24.765-1.422 4.301-1.306 11.431-1.057 15.932 1.616.54.321.716 1.02.395 1.56-.321.54-1.02.716-1.56.395z"/></svg><span>Spotify</span></a></div>
                 </div>
-                <div class="lineup-score-box"><strong>20</strong><span>/30</span></div>
+                <div class="lineup-score-box">
+                  <div class="score-total"><strong>20</strong><span>/30</span></div>
+                  <div class="score-judges" title="Carrie Ann Inaba: 7 · Derek Hough: 6 · Bruno Tonioli: 7">
+                    <div class="judge-col"><span class="judge-abbr" title="Carrie Ann Inaba">CA</span><span class="judge-val">7</span></div><div class="judge-col"><span class="judge-abbr" title="Derek Hough">D</span><span class="judge-val">6</span></div><div class="judge-col"><span class="judge-abbr" title="Bruno Tonioli">B</span><span class="judge-val">7</span></div>
+                  </div>
+                </div>
               </div>
               <div class="lineup-item">
                 <span class="lineup-no">#8</span>
@@ -844,7 +888,12 @@
                   <span class="lineup-song">“I Can't Go for That (No Can Do)” · Hall & Oates</span>
                   <div class="music-links"><a href="https://open.spotify.com/track/41dDygR3r7e926oGUXfrLt" target="_blank" rel="noopener noreferrer" class="music-btn spotify-btn" title="Listen to I Can&#x27;t Go for That (No Can Do) Hall &amp; Oates on Spotify" aria-label="Listen to I Can&#x27;t Go for That (No Can Do) Hall &amp; Oates on Spotify"><svg viewBox="0 0 24 24" class="music-icon" aria-hidden="true"><path fill="currentColor" d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.503 17.308c-.218.357-.681.472-1.038.254-2.853-1.743-6.444-2.138-10.673-1.171-.408.093-.812-.162-.905-.57-.093-.408.162-.812.57-.905 4.634-1.059 8.604-.614 11.792 1.354.357.218.472.681.254 1.038zm1.47-3.267c-.275.447-.862.59-1.309.315-3.265-2.008-8.243-2.59-12.106-1.417-.502.152-1.034-.136-1.186-.638-.152-.502.136-1.034.638-1.186 4.417-1.341 9.907-.7 13.648 1.603.447.275.59.862.315 1.309zm.126-3.41c-3.916-2.325-10.374-2.54-14.116-1.403-.6.182-1.24-.165-1.422-.765-.182-.6.165-1.24.765-1.422 4.301-1.306 11.431-1.057 15.932 1.616.54.321.716 1.02.395 1.56-.321.54-1.02.716-1.56.395z"/></svg><span>Spotify</span></a></div>
                 </div>
-                <div class="lineup-score-box"><strong>19</strong><span>/30</span></div>
+                <div class="lineup-score-box">
+                  <div class="score-total"><strong>19</strong><span>/30</span></div>
+                  <div class="score-judges" title="Carrie Ann Inaba: 6 · Derek Hough: 7 · Bruno Tonioli: 6">
+                    <div class="judge-col"><span class="judge-abbr" title="Carrie Ann Inaba">CA</span><span class="judge-val">6</span></div><div class="judge-col"><span class="judge-abbr" title="Derek Hough">D</span><span class="judge-val">7</span></div><div class="judge-col"><span class="judge-abbr" title="Bruno Tonioli">B</span><span class="judge-val">6</span></div>
+                  </div>
+                </div>
               </div>
               <div class="lineup-item">
                 <span class="lineup-no">#9</span>
@@ -854,7 +903,12 @@
                   <span class="lineup-song">“Never Too Much” · Luther Vandross</span>
                   <div class="music-links"><a href="https://open.spotify.com/track/3F80WmM7uMh01JjRhVlW6C" target="_blank" rel="noopener noreferrer" class="music-btn spotify-btn" title="Listen to Never Too Much Luther Vandross on Spotify" aria-label="Listen to Never Too Much Luther Vandross on Spotify"><svg viewBox="0 0 24 24" class="music-icon" aria-hidden="true"><path fill="currentColor" d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.503 17.308c-.218.357-.681.472-1.038.254-2.853-1.743-6.444-2.138-10.673-1.171-.408.093-.812-.162-.905-.57-.093-.408.162-.812.57-.905 4.634-1.059 8.604-.614 11.792 1.354.357.218.472.681.254 1.038zm1.47-3.267c-.275.447-.862.59-1.309.315-3.265-2.008-8.243-2.59-12.106-1.417-.502.152-1.034-.136-1.186-.638-.152-.502.136-1.034.638-1.186 4.417-1.341 9.907-.7 13.648 1.603.447.275.59.862.315 1.309zm.126-3.41c-3.916-2.325-10.374-2.54-14.116-1.403-.6.182-1.24-.165-1.422-.765-.182-.6.165-1.24.765-1.422 4.301-1.306 11.431-1.057 15.932 1.616.54.321.716 1.02.395 1.56-.321.54-1.02.716-1.56.395z"/></svg><span>Spotify</span></a></div>
                 </div>
-                <div class="lineup-score-box"><strong>18</strong><span>/30</span></div>
+                <div class="lineup-score-box">
+                  <div class="score-total"><strong>18</strong><span>/30</span></div>
+                  <div class="score-judges" title="Carrie Ann Inaba: 6 · Derek Hough: 6 · Bruno Tonioli: 6">
+                    <div class="judge-col"><span class="judge-abbr" title="Carrie Ann Inaba">CA</span><span class="judge-val">6</span></div><div class="judge-col"><span class="judge-abbr" title="Derek Hough">D</span><span class="judge-val">6</span></div><div class="judge-col"><span class="judge-abbr" title="Bruno Tonioli">B</span><span class="judge-val">6</span></div>
+                  </div>
+                </div>
               </div>
               <div class="lineup-item">
                 <span class="lineup-no">#10</span>
@@ -864,7 +918,12 @@
                   <span class="lineup-song">“Easy Lover” · Phillip Bailey & Phil Collins</span>
                   <div class="music-links"><a href="https://open.spotify.com/track/6Ig2MgU5DLxZx5CphIWHbX" target="_blank" rel="noopener noreferrer" class="music-btn spotify-btn" title="Listen to Easy Lover Phillip Bailey &amp; Phil Collins on Spotify" aria-label="Listen to Easy Lover Phillip Bailey &amp; Phil Collins on Spotify"><svg viewBox="0 0 24 24" class="music-icon" aria-hidden="true"><path fill="currentColor" d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.503 17.308c-.218.357-.681.472-1.038.254-2.853-1.743-6.444-2.138-10.673-1.171-.408.093-.812-.162-.905-.57-.093-.408.162-.812.57-.905 4.634-1.059 8.604-.614 11.792 1.354.357.218.472.681.254 1.038zm1.47-3.267c-.275.447-.862.59-1.309.315-3.265-2.008-8.243-2.59-12.106-1.417-.502.152-1.034-.136-1.186-.638-.152-.502.136-1.034.638-1.186 4.417-1.341 9.907-.7 13.648 1.603.447.275.59.862.315 1.309zm.126-3.41c-3.916-2.325-10.374-2.54-14.116-1.403-.6.182-1.24-.165-1.422-.765-.182-.6.165-1.24.765-1.422 4.301-1.306 11.431-1.057 15.932 1.616.54.321.716 1.02.395 1.56-.321.54-1.02.716-1.56.395z"/></svg><span>Spotify</span></a></div>
                 </div>
-                <div class="lineup-score-box"><strong>18</strong><span>/30</span></div>
+                <div class="lineup-score-box">
+                  <div class="score-total"><strong>18</strong><span>/30</span></div>
+                  <div class="score-judges" title="Carrie Ann Inaba: 6 · Derek Hough: 6 · Bruno Tonioli: 6">
+                    <div class="judge-col"><span class="judge-abbr" title="Carrie Ann Inaba">CA</span><span class="judge-val">6</span></div><div class="judge-col"><span class="judge-abbr" title="Derek Hough">D</span><span class="judge-val">6</span></div><div class="judge-col"><span class="judge-abbr" title="Bruno Tonioli">B</span><span class="judge-val">6</span></div>
+                  </div>
+                </div>
               </div>
               <div class="lineup-item">
                 <span class="lineup-no">#11</span>
@@ -874,7 +933,12 @@
                   <span class="lineup-song">“What a Fool Believes” · The Doobie Brothers</span>
                   <div class="music-links"><a href="https://open.spotify.com/track/444gZtuI9MbKvWYlWRSn3S" target="_blank" rel="noopener noreferrer" class="music-btn spotify-btn" title="Listen to What a Fool Believes The Doobie Brothers on Spotify" aria-label="Listen to What a Fool Believes The Doobie Brothers on Spotify"><svg viewBox="0 0 24 24" class="music-icon" aria-hidden="true"><path fill="currentColor" d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.503 17.308c-.218.357-.681.472-1.038.254-2.853-1.743-6.444-2.138-10.673-1.171-.408.093-.812-.162-.905-.57-.093-.408.162-.812.57-.905 4.634-1.059 8.604-.614 11.792 1.354.357.218.472.681.254 1.038zm1.47-3.267c-.275.447-.862.59-1.309.315-3.265-2.008-8.243-2.59-12.106-1.417-.502.152-1.034-.136-1.186-.638-.152-.502.136-1.034.638-1.186 4.417-1.341 9.907-.7 13.648 1.603.447.275.59.862.315 1.309zm.126-3.41c-3.916-2.325-10.374-2.54-14.116-1.403-.6.182-1.24-.165-1.422-.765-.182-.6.165-1.24.765-1.422 4.301-1.306 11.431-1.057 15.932 1.616.54.321.716 1.02.395 1.56-.321.54-1.02.716-1.56.395z"/></svg><span>Spotify</span></a></div>
                 </div>
-                <div class="lineup-score-box"><strong>18</strong><span>/30</span></div>
+                <div class="lineup-score-box">
+                  <div class="score-total"><strong>18</strong><span>/30</span></div>
+                  <div class="score-judges" title="Carrie Ann Inaba: 6 · Derek Hough: 6 · Bruno Tonioli: 6">
+                    <div class="judge-col"><span class="judge-abbr" title="Carrie Ann Inaba">CA</span><span class="judge-val">6</span></div><div class="judge-col"><span class="judge-abbr" title="Derek Hough">D</span><span class="judge-val">6</span></div><div class="judge-col"><span class="judge-abbr" title="Bruno Tonioli">B</span><span class="judge-val">6</span></div>
+                  </div>
+                </div>
               </div>
               <div class="lineup-item">
                 <span class="lineup-no">#12</span>
@@ -884,7 +948,12 @@
                   <span class="lineup-song">“Still the One” · Orleans</span>
                   <div class="music-links"><a href="https://open.spotify.com/track/74va8wQ7R7hI5xXAu02TqM" target="_blank" rel="noopener noreferrer" class="music-btn spotify-btn" title="Listen to Still the One Orleans on Spotify" aria-label="Listen to Still the One Orleans on Spotify"><svg viewBox="0 0 24 24" class="music-icon" aria-hidden="true"><path fill="currentColor" d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.503 17.308c-.218.357-.681.472-1.038.254-2.853-1.743-6.444-2.138-10.673-1.171-.408.093-.812-.162-.905-.57-.093-.408.162-.812.57-.905 4.634-1.059 8.604-.614 11.792 1.354.357.218.472.681.254 1.038zm1.47-3.267c-.275.447-.862.59-1.309.315-3.265-2.008-8.243-2.59-12.106-1.417-.502.152-1.034-.136-1.186-.638-.152-.502.136-1.034.638-1.186 4.417-1.341 9.907-.7 13.648 1.603.447.275.59.862.315 1.309zm.126-3.41c-3.916-2.325-10.374-2.54-14.116-1.403-.6.182-1.24-.165-1.422-.765-.182-.6.165-1.24.765-1.422 4.301-1.306 11.431-1.057 15.932 1.616.54.321.716 1.02.395 1.56-.321.54-1.02.716-1.56.395z"/></svg><span>Spotify</span></a></div>
                 </div>
-                <div class="lineup-score-box"><strong>17</strong><span>/30</span></div>
+                <div class="lineup-score-box">
+                  <div class="score-total"><strong>17</strong><span>/30</span></div>
+                  <div class="score-judges" title="Carrie Ann Inaba: 5 · Derek Hough: 6 · Bruno Tonioli: 6">
+                    <div class="judge-col"><span class="judge-abbr" title="Carrie Ann Inaba">CA</span><span class="judge-val">5</span></div><div class="judge-col"><span class="judge-abbr" title="Derek Hough">D</span><span class="judge-val">6</span></div><div class="judge-col"><span class="judge-abbr" title="Bruno Tonioli">B</span><span class="judge-val">6</span></div>
+                  </div>
+                </div>
               </div>
               <div class="lineup-item">
                 <span class="lineup-no">#13</span>
@@ -894,7 +963,12 @@
                   <span class="lineup-song">“Escape (The Piña Colada Song)” · Rupert Holmes</span>
                   <div class="music-links"><a href="https://open.spotify.com/track/2OodgrQjx6Ggn3yRA2Nvei" target="_blank" rel="noopener noreferrer" class="music-btn spotify-btn" title="Listen to Escape (The Piña Colada Song) Rupert Holmes on Spotify" aria-label="Listen to Escape (The Piña Colada Song) Rupert Holmes on Spotify"><svg viewBox="0 0 24 24" class="music-icon" aria-hidden="true"><path fill="currentColor" d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.503 17.308c-.218.357-.681.472-1.038.254-2.853-1.743-6.444-2.138-10.673-1.171-.408.093-.812-.162-.905-.57-.093-.408.162-.812.57-.905 4.634-1.059 8.604-.614 11.792 1.354.357.218.472.681.254 1.038zm1.47-3.267c-.275.447-.862.59-1.309.315-3.265-2.008-8.243-2.59-12.106-1.417-.502.152-1.034-.136-1.186-.638-.152-.502.136-1.034.638-1.186 4.417-1.341 9.907-.7 13.648 1.603.447.275.59.862.315 1.309zm.126-3.41c-3.916-2.325-10.374-2.54-14.116-1.403-.6.182-1.24-.165-1.422-.765-.182-.6.165-1.24.765-1.422 4.301-1.306 11.431-1.057 15.932 1.616.54.321.716 1.02.395 1.56-.321.54-1.02.716-1.56.395z"/></svg><span>Spotify</span></a></div>
                 </div>
-                <div class="lineup-score-box"><strong>15</strong><span>/30</span></div>
+                <div class="lineup-score-box">
+                  <div class="score-total"><strong>15</strong><span>/30</span></div>
+                  <div class="score-judges" title="Carrie Ann Inaba: 5 · Derek Hough: 5 · Bruno Tonioli: 5">
+                    <div class="judge-col"><span class="judge-abbr" title="Carrie Ann Inaba">CA</span><span class="judge-val">5</span></div><div class="judge-col"><span class="judge-abbr" title="Derek Hough">D</span><span class="judge-val">5</span></div><div class="judge-col"><span class="judge-abbr" title="Bruno Tonioli">B</span><span class="judge-val">5</span></div>
+                  </div>
+                </div>
               </div>
               </div>
             </div>
@@ -920,7 +994,12 @@
                   <span class="lineup-song">“All the Things She Said” · Harrison</span>
                   <div class="music-links"><a href="https://open.spotify.com/track/2ihHDb5epUtpn97W0pOsOA" target="_blank" rel="noopener noreferrer" class="music-btn spotify-btn" title="Listen to All the Things She Said Harrison on Spotify" aria-label="Listen to All the Things She Said Harrison on Spotify"><svg viewBox="0 0 24 24" class="music-icon" aria-hidden="true"><path fill="currentColor" d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.503 17.308c-.218.357-.681.472-1.038.254-2.853-1.743-6.444-2.138-10.673-1.171-.408.093-.812-.162-.905-.57-.093-.408.162-.812.57-.905 4.634-1.059 8.604-.614 11.792 1.354.357.218.472.681.254 1.038zm1.47-3.267c-.275.447-.862.59-1.309.315-3.265-2.008-8.243-2.59-12.106-1.417-.502.152-1.034-.136-1.186-.638-.152-.502.136-1.034.638-1.186 4.417-1.341 9.907-.7 13.648 1.603.447.275.59.862.315 1.309zm.126-3.41c-3.916-2.325-10.374-2.54-14.116-1.403-.6.182-1.24-.165-1.422-.765-.182-.6.165-1.24.765-1.422 4.301-1.306 11.431-1.057 15.932 1.616.54.321.716 1.02.395 1.56-.321.54-1.02.716-1.56.395z"/></svg><span>Spotify</span></a></div>
                 </div>
-                <div class="lineup-score-box leader"><strong>21</strong><span>/30</span></div>
+                <div class="lineup-score-box leader">
+                  <div class="score-total"><strong>21</strong><span>/30</span></div>
+                  <div class="score-judges" title="Carrie Ann Inaba: 7 · Derek Hough: 7 · Bruno Tonioli: 7">
+                    <div class="judge-col"><span class="judge-abbr" title="Carrie Ann Inaba">CA</span><span class="judge-val">7</span></div><div class="judge-col"><span class="judge-abbr" title="Derek Hough">D</span><span class="judge-val">7</span></div><div class="judge-col"><span class="judge-abbr" title="Bruno Tonioli">B</span><span class="judge-val">7</span></div>
+                  </div>
+                </div>
               </div>
               <div class="lineup-item">
                 <span class="lineup-no">#2</span>
@@ -930,7 +1009,12 @@
                   <span class="lineup-song">“Low” · Flo Rida</span>
                   <div class="music-links"><a href="https://open.spotify.com/track/5YglDyAzDsnpDa6hlGzltg" target="_blank" rel="noopener noreferrer" class="music-btn spotify-btn" title="Listen to Low Flo Rida on Spotify" aria-label="Listen to Low Flo Rida on Spotify"><svg viewBox="0 0 24 24" class="music-icon" aria-hidden="true"><path fill="currentColor" d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.503 17.308c-.218.357-.681.472-1.038.254-2.853-1.743-6.444-2.138-10.673-1.171-.408.093-.812-.162-.905-.57-.093-.408.162-.812.57-.905 4.634-1.059 8.604-.614 11.792 1.354.357.218.472.681.254 1.038zm1.47-3.267c-.275.447-.862.59-1.309.315-3.265-2.008-8.243-2.59-12.106-1.417-.502.152-1.034-.136-1.186-.638-.152-.502.136-1.034.638-1.186 4.417-1.341 9.907-.7 13.648 1.603.447.275.59.862.315 1.309zm.126-3.41c-3.916-2.325-10.374-2.54-14.116-1.403-.6.182-1.24-.165-1.422-.765-.182-.6.165-1.24.765-1.422 4.301-1.306 11.431-1.057 15.932 1.616.54.321.716 1.02.395 1.56-.321.54-1.02.716-1.56.395z"/></svg><span>Spotify</span></a></div>
                 </div>
-                <div class="lineup-score-box leader"><strong>21</strong><span>/30</span></div>
+                <div class="lineup-score-box leader">
+                  <div class="score-total"><strong>21</strong><span>/30</span></div>
+                  <div class="score-judges" title="Carrie Ann Inaba: 7 · Derek Hough: 7 · Bruno Tonioli: 7">
+                    <div class="judge-col"><span class="judge-abbr" title="Carrie Ann Inaba">CA</span><span class="judge-val">7</span></div><div class="judge-col"><span class="judge-abbr" title="Derek Hough">D</span><span class="judge-val">7</span></div><div class="judge-col"><span class="judge-abbr" title="Bruno Tonioli">B</span><span class="judge-val">7</span></div>
+                  </div>
+                </div>
               </div>
               <div class="lineup-item">
                 <span class="lineup-no">#3</span>
@@ -940,7 +1024,12 @@
                   <span class="lineup-song">“Animal” · Katseye</span>
                   <div class="music-links"><a href="https://open.spotify.com/track/3ouNEk0tv5TTi8VWMe1xbX" target="_blank" rel="noopener noreferrer" class="music-btn spotify-btn" title="Listen to Animal Katseye on Spotify" aria-label="Listen to Animal Katseye on Spotify"><svg viewBox="0 0 24 24" class="music-icon" aria-hidden="true"><path fill="currentColor" d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.503 17.308c-.218.357-.681.472-1.038.254-2.853-1.743-6.444-2.138-10.673-1.171-.408.093-.812-.162-.905-.57-.093-.408.162-.812.57-.905 4.634-1.059 8.604-.614 11.792 1.354.357.218.472.681.254 1.038zm1.47-3.267c-.275.447-.862.59-1.309.315-3.265-2.008-8.243-2.59-12.106-1.417-.502.152-1.034-.136-1.186-.638-.152-.502.136-1.034.638-1.186 4.417-1.341 9.907-.7 13.648 1.603.447.275.59.862.315 1.309zm.126-3.41c-3.916-2.325-10.374-2.54-14.116-1.403-.6.182-1.24-.165-1.422-.765-.182-.6.165-1.24.765-1.422 4.301-1.306 11.431-1.057 15.932 1.616.54.321.716 1.02.395 1.56-.321.54-1.02.716-1.56.395z"/></svg><span>Spotify</span></a></div>
                 </div>
-                <div class="lineup-score-box leader"><strong>21</strong><span>/30</span></div>
+                <div class="lineup-score-box leader">
+                  <div class="score-total"><strong>21</strong><span>/30</span></div>
+                  <div class="score-judges" title="Carrie Ann Inaba: 7 · Derek Hough: 7 · Bruno Tonioli: 7">
+                    <div class="judge-col"><span class="judge-abbr" title="Carrie Ann Inaba">CA</span><span class="judge-val">7</span></div><div class="judge-col"><span class="judge-abbr" title="Derek Hough">D</span><span class="judge-val">7</span></div><div class="judge-col"><span class="judge-abbr" title="Bruno Tonioli">B</span><span class="judge-val">7</span></div>
+                  </div>
+                </div>
               </div>
               <div class="lineup-item">
                 <span class="lineup-no">#4</span>
@@ -950,7 +1039,12 @@
                   <span class="lineup-song">“September” · Earth, Wind & Fire</span>
                   <div class="music-links"><a href="https://open.spotify.com/track/748uyF14KEMCplV2CPAua7" target="_blank" rel="noopener noreferrer" class="music-btn spotify-btn" title="Listen to September Earth, Wind &amp; Fire on Spotify" aria-label="Listen to September Earth, Wind &amp; Fire on Spotify"><svg viewBox="0 0 24 24" class="music-icon" aria-hidden="true"><path fill="currentColor" d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.503 17.308c-.218.357-.681.472-1.038.254-2.853-1.743-6.444-2.138-10.673-1.171-.408.093-.812-.162-.905-.57-.093-.408.162-.812.57-.905 4.634-1.059 8.604-.614 11.792 1.354.357.218.472.681.254 1.038zm1.47-3.267c-.275.447-.862.59-1.309.315-3.265-2.008-8.243-2.59-12.106-1.417-.502.152-1.034-.136-1.186-.638-.152-.502.136-1.034.638-1.186 4.417-1.341 9.907-.7 13.648 1.603.447.275.59.862.315 1.309zm.126-3.41c-3.916-2.325-10.374-2.54-14.116-1.403-.6.182-1.24-.165-1.422-.765-.182-.6.165-1.24.765-1.422 4.301-1.306 11.431-1.057 15.932 1.616.54.321.716 1.02.395 1.56-.321.54-1.02.716-1.56.395z"/></svg><span>Spotify</span></a></div>
                 </div>
-                <div class="lineup-score-box"><strong>19</strong><span>/30</span></div>
+                <div class="lineup-score-box">
+                  <div class="score-total"><strong>19</strong><span>/30</span></div>
+                  <div class="score-judges" title="Carrie Ann Inaba: 6 · Derek Hough: 6 · Bruno Tonioli: 7">
+                    <div class="judge-col"><span class="judge-abbr" title="Carrie Ann Inaba">CA</span><span class="judge-val">6</span></div><div class="judge-col"><span class="judge-abbr" title="Derek Hough">D</span><span class="judge-val">6</span></div><div class="judge-col"><span class="judge-abbr" title="Bruno Tonioli">B</span><span class="judge-val">7</span></div>
+                  </div>
+                </div>
               </div>
               <div class="lineup-item">
                 <span class="lineup-no">#5</span>
@@ -960,7 +1054,12 @@
                   <span class="lineup-song">“No Broke Boys” · Disco Lines & Tinashe</span>
                   <div class="music-links"><a href="https://open.spotify.com/track/16Ax7oN3LttFyzUYASu85B" target="_blank" rel="noopener noreferrer" class="music-btn spotify-btn" title="Listen to No Broke Boys Disco Lines &amp; Tinashe on Spotify" aria-label="Listen to No Broke Boys Disco Lines &amp; Tinashe on Spotify"><svg viewBox="0 0 24 24" class="music-icon" aria-hidden="true"><path fill="currentColor" d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.503 17.308c-.218.357-.681.472-1.038.254-2.853-1.743-6.444-2.138-10.673-1.171-.408.093-.812-.162-.905-.57-.093-.408.162-.812.57-.905 4.634-1.059 8.604-.614 11.792 1.354.357.218.472.681.254 1.038zm1.47-3.267c-.275.447-.862.59-1.309.315-3.265-2.008-8.243-2.59-12.106-1.417-.502.152-1.034-.136-1.186-.638-.152-.502.136-1.034.638-1.186 4.417-1.341 9.907-.7 13.648 1.603.447.275.59.862.315 1.309zm.126-3.41c-3.916-2.325-10.374-2.54-14.116-1.403-.6.182-1.24-.165-1.422-.765-.182-.6.165-1.24.765-1.422 4.301-1.306 11.431-1.057 15.932 1.616.54.321.716 1.02.395 1.56-.321.54-1.02.716-1.56.395z"/></svg><span>Spotify</span></a></div>
                 </div>
-                <div class="lineup-score-box"><strong>18</strong><span>/30</span></div>
+                <div class="lineup-score-box">
+                  <div class="score-total"><strong>18</strong><span>/30</span></div>
+                  <div class="score-judges" title="Carrie Ann Inaba: 6 · Derek Hough: 6 · Bruno Tonioli: 6">
+                    <div class="judge-col"><span class="judge-abbr" title="Carrie Ann Inaba">CA</span><span class="judge-val">6</span></div><div class="judge-col"><span class="judge-abbr" title="Derek Hough">D</span><span class="judge-val">6</span></div><div class="judge-col"><span class="judge-abbr" title="Bruno Tonioli">B</span><span class="judge-val">6</span></div>
+                  </div>
+                </div>
               </div>
               <div class="lineup-item">
                 <span class="lineup-no">#6</span>
@@ -970,7 +1069,12 @@
                   <span class="lineup-song">“Iris” · Goo Goo Dolls</span>
                   <div class="music-links"><a href="https://open.spotify.com/track/6Qyc6fS4DsZjB2mRW9DsQs" target="_blank" rel="noopener noreferrer" class="music-btn spotify-btn" title="Listen to Iris Goo Goo Dolls on Spotify" aria-label="Listen to Iris Goo Goo Dolls on Spotify"><svg viewBox="0 0 24 24" class="music-icon" aria-hidden="true"><path fill="currentColor" d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.503 17.308c-.218.357-.681.472-1.038.254-2.853-1.743-6.444-2.138-10.673-1.171-.408.093-.812-.162-.905-.57-.093-.408.162-.812.57-.905 4.634-1.059 8.604-.614 11.792 1.354.357.218.472.681.254 1.038zm1.47-3.267c-.275.447-.862.59-1.309.315-3.265-2.008-8.243-2.59-12.106-1.417-.502.152-1.034-.136-1.186-.638-.152-.502.136-1.034.638-1.186 4.417-1.341 9.907-.7 13.648 1.603.447.275.59.862.315 1.309zm.126-3.41c-3.916-2.325-10.374-2.54-14.116-1.403-.6.182-1.24-.165-1.422-.765-.182-.6.165-1.24.765-1.422 4.301-1.306 11.431-1.057 15.932 1.616.54.321.716 1.02.395 1.56-.321.54-1.02.716-1.56.395z"/></svg><span>Spotify</span></a></div>
                 </div>
-                <div class="lineup-score-box"><strong>18</strong><span>/30</span></div>
+                <div class="lineup-score-box">
+                  <div class="score-total"><strong>18</strong><span>/30</span></div>
+                  <div class="score-judges" title="Carrie Ann Inaba: 6 · Derek Hough: 6 · Bruno Tonioli: 6">
+                    <div class="judge-col"><span class="judge-abbr" title="Carrie Ann Inaba">CA</span><span class="judge-val">6</span></div><div class="judge-col"><span class="judge-abbr" title="Derek Hough">D</span><span class="judge-val">6</span></div><div class="judge-col"><span class="judge-abbr" title="Bruno Tonioli">B</span><span class="judge-val">6</span></div>
+                  </div>
+                </div>
               </div>
               <div class="lineup-item">
                 <span class="lineup-no">#7</span>
@@ -980,7 +1084,12 @@
                   <span class="lineup-song">“That's So True” · Gracie Abrams</span>
                   <div class="music-links"><a href="https://open.spotify.com/track/7ne4VBA60CxGM75vw0EYad" target="_blank" rel="noopener noreferrer" class="music-btn spotify-btn" title="Listen to That&#x27;s So True Gracie Abrams on Spotify" aria-label="Listen to That&#x27;s So True Gracie Abrams on Spotify"><svg viewBox="0 0 24 24" class="music-icon" aria-hidden="true"><path fill="currentColor" d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.503 17.308c-.218.357-.681.472-1.038.254-2.853-1.743-6.444-2.138-10.673-1.171-.408.093-.812-.162-.905-.57-.093-.408.162-.812.57-.905 4.634-1.059 8.604-.614 11.792 1.354.357.218.472.681.254 1.038zm1.47-3.267c-.275.447-.862.59-1.309.315-3.265-2.008-8.243-2.59-12.106-1.417-.502.152-1.034-.136-1.186-.638-.152-.502.136-1.034.638-1.186 4.417-1.341 9.907-.7 13.648 1.603.447.275.59.862.315 1.309zm.126-3.41c-3.916-2.325-10.374-2.54-14.116-1.403-.6.182-1.24-.165-1.422-.765-.182-.6.165-1.24.765-1.422 4.301-1.306 11.431-1.057 15.932 1.616.54.321.716 1.02.395 1.56-.321.54-1.02.716-1.56.395z"/></svg><span>Spotify</span></a></div>
                 </div>
-                <div class="lineup-score-box"><strong>18</strong><span>/30</span></div>
+                <div class="lineup-score-box">
+                  <div class="score-total"><strong>18</strong><span>/30</span></div>
+                  <div class="score-judges" title="Carrie Ann Inaba: 6 · Derek Hough: 6 · Bruno Tonioli: 6">
+                    <div class="judge-col"><span class="judge-abbr" title="Carrie Ann Inaba">CA</span><span class="judge-val">6</span></div><div class="judge-col"><span class="judge-abbr" title="Derek Hough">D</span><span class="judge-val">6</span></div><div class="judge-col"><span class="judge-abbr" title="Bruno Tonioli">B</span><span class="judge-val">6</span></div>
+                  </div>
+                </div>
               </div>
               <div class="lineup-item">
                 <span class="lineup-no">#8</span>
@@ -990,7 +1099,12 @@
                   <span class="lineup-song">“What Was I Made For?” · Billie Eilish</span>
                   <div class="music-links"><a href="https://open.spotify.com/track/6wf7Yu7cxBSPrRlWeSeK0Q" target="_blank" rel="noopener noreferrer" class="music-btn spotify-btn" title="Listen to What Was I Made For? Billie Eilish on Spotify" aria-label="Listen to What Was I Made For? Billie Eilish on Spotify"><svg viewBox="0 0 24 24" class="music-icon" aria-hidden="true"><path fill="currentColor" d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.503 17.308c-.218.357-.681.472-1.038.254-2.853-1.743-6.444-2.138-10.673-1.171-.408.093-.812-.162-.905-.57-.093-.408.162-.812.57-.905 4.634-1.059 8.604-.614 11.792 1.354.357.218.472.681.254 1.038zm1.47-3.267c-.275.447-.862.59-1.309.315-3.265-2.008-8.243-2.59-12.106-1.417-.502.152-1.034-.136-1.186-.638-.152-.502.136-1.034.638-1.186 4.417-1.341 9.907-.7 13.648 1.603.447.275.59.862.315 1.309zm.126-3.41c-3.916-2.325-10.374-2.54-14.116-1.403-.6.182-1.24-.165-1.422-.765-.182-.6.165-1.24.765-1.422 4.301-1.306 11.431-1.057 15.932 1.616.54.321.716 1.02.395 1.56-.321.54-1.02.716-1.56.395z"/></svg><span>Spotify</span></a></div>
                 </div>
-                <div class="lineup-score-box"><strong>18</strong><span>/30</span></div>
+                <div class="lineup-score-box">
+                  <div class="score-total"><strong>18</strong><span>/30</span></div>
+                  <div class="score-judges" title="Carrie Ann Inaba: 6 · Derek Hough: 6 · Bruno Tonioli: 6">
+                    <div class="judge-col"><span class="judge-abbr" title="Carrie Ann Inaba">CA</span><span class="judge-val">6</span></div><div class="judge-col"><span class="judge-abbr" title="Derek Hough">D</span><span class="judge-val">6</span></div><div class="judge-col"><span class="judge-abbr" title="Bruno Tonioli">B</span><span class="judge-val">6</span></div>
+                  </div>
+                </div>
               </div>
               <div class="lineup-item">
                 <span class="lineup-no">#9</span>
@@ -1000,7 +1114,12 @@
                   <span class="lineup-song">“The Door” · Teddy Swims</span>
                   <div class="music-links"><a href="https://open.spotify.com/track/3dj4wgM3cPeuLwMNHDuBon" target="_blank" rel="noopener noreferrer" class="music-btn spotify-btn" title="Listen to The Door Teddy Swims on Spotify" aria-label="Listen to The Door Teddy Swims on Spotify"><svg viewBox="0 0 24 24" class="music-icon" aria-hidden="true"><path fill="currentColor" d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.503 17.308c-.218.357-.681.472-1.038.254-2.853-1.743-6.444-2.138-10.673-1.171-.408.093-.812-.162-.905-.57-.093-.408.162-.812.57-.905 4.634-1.059 8.604-.614 11.792 1.354.357.218.472.681.254 1.038zm1.47-3.267c-.275.447-.862.59-1.309.315-3.265-2.008-8.243-2.59-12.106-1.417-.502.152-1.034-.136-1.186-.638-.152-.502.136-1.034.638-1.186 4.417-1.341 9.907-.7 13.648 1.603.447.275.59.862.315 1.309zm.126-3.41c-3.916-2.325-10.374-2.54-14.116-1.403-.6.182-1.24-.165-1.422-.765-.182-.6.165-1.24.765-1.422 4.301-1.306 11.431-1.057 15.932 1.616.54.321.716 1.02.395 1.56-.321.54-1.02.716-1.56.395z"/></svg><span>Spotify</span></a></div>
                 </div>
-                <div class="lineup-score-box"><strong>16</strong><span>/30</span></div>
+                <div class="lineup-score-box">
+                  <div class="score-total"><strong>16</strong><span>/30</span></div>
+                  <div class="score-judges" title="Carrie Ann Inaba: 5 · Derek Hough: 6 · Bruno Tonioli: 5">
+                    <div class="judge-col"><span class="judge-abbr" title="Carrie Ann Inaba">CA</span><span class="judge-val">5</span></div><div class="judge-col"><span class="judge-abbr" title="Derek Hough">D</span><span class="judge-val">6</span></div><div class="judge-col"><span class="judge-abbr" title="Bruno Tonioli">B</span><span class="judge-val">5</span></div>
+                  </div>
+                </div>
               </div>
               <div class="lineup-item">
                 <span class="lineup-no">#10</span>
@@ -1010,7 +1129,12 @@
                   <span class="lineup-song">“Girls” · The Kid Laroi</span>
                   <div class="music-links"><a href="https://open.spotify.com/track/6WhwHYd38f4ZB2CefpDgLo" target="_blank" rel="noopener noreferrer" class="music-btn spotify-btn" title="Listen to Girls The Kid Laroi on Spotify" aria-label="Listen to Girls The Kid Laroi on Spotify"><svg viewBox="0 0 24 24" class="music-icon" aria-hidden="true"><path fill="currentColor" d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.503 17.308c-.218.357-.681.472-1.038.254-2.853-1.743-6.444-2.138-10.673-1.171-.408.093-.812-.162-.905-.57-.093-.408.162-.812.57-.905 4.634-1.059 8.604-.614 11.792 1.354.357.218.472.681.254 1.038zm1.47-3.267c-.275.447-.862.59-1.309.315-3.265-2.008-8.243-2.59-12.106-1.417-.502.152-1.034-.136-1.186-.638-.152-.502.136-1.034.638-1.186 4.417-1.341 9.907-.7 13.648 1.603.447.275.59.862.315 1.309zm.126-3.41c-3.916-2.325-10.374-2.54-14.116-1.403-.6.182-1.24-.165-1.422-.765-.182-.6.165-1.24.765-1.422 4.301-1.306 11.431-1.057 15.932 1.616.54.321.716 1.02.395 1.56-.321.54-1.02.716-1.56.395z"/></svg><span>Spotify</span></a></div>
                 </div>
-                <div class="lineup-score-box"><strong>16</strong><span>/30</span></div>
+                <div class="lineup-score-box">
+                  <div class="score-total"><strong>16</strong><span>/30</span></div>
+                  <div class="score-judges" title="Carrie Ann Inaba: 6 · Derek Hough: 5 · Bruno Tonioli: 5">
+                    <div class="judge-col"><span class="judge-abbr" title="Carrie Ann Inaba">CA</span><span class="judge-val">6</span></div><div class="judge-col"><span class="judge-abbr" title="Derek Hough">D</span><span class="judge-val">5</span></div><div class="judge-col"><span class="judge-abbr" title="Bruno Tonioli">B</span><span class="judge-val">5</span></div>
+                  </div>
+                </div>
               </div>
               <div class="lineup-item">
                 <span class="lineup-no">#11</span>
@@ -1020,7 +1144,12 @@
                   <span class="lineup-song">“12 to 12” · Sombr</span>
                   <div class="music-links"><a href="https://open.spotify.com/track/05od2qm2MTSKCHxy1GBp5W" target="_blank" rel="noopener noreferrer" class="music-btn spotify-btn" title="Listen to 12 to 12 Sombr on Spotify" aria-label="Listen to 12 to 12 Sombr on Spotify"><svg viewBox="0 0 24 24" class="music-icon" aria-hidden="true"><path fill="currentColor" d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.503 17.308c-.218.357-.681.472-1.038.254-2.853-1.743-6.444-2.138-10.673-1.171-.408.093-.812-.162-.905-.57-.093-.408.162-.812.57-.905 4.634-1.059 8.604-.614 11.792 1.354.357.218.472.681.254 1.038zm1.47-3.267c-.275.447-.862.59-1.309.315-3.265-2.008-8.243-2.59-12.106-1.417-.502.152-1.034-.136-1.186-.638-.152-.502.136-1.034.638-1.186 4.417-1.341 9.907-.7 13.648 1.603.447.275.59.862.315 1.309zm.126-3.41c-3.916-2.325-10.374-2.54-14.116-1.403-.6.182-1.24-.165-1.422-.765-.182-.6.165-1.24.765-1.422 4.301-1.306 11.431-1.057 15.932 1.616.54.321.716 1.02.395 1.56-.321.54-1.02.716-1.56.395z"/></svg><span>Spotify</span></a></div>
                 </div>
-                <div class="lineup-score-box"><strong>15</strong><span>/30</span></div>
+                <div class="lineup-score-box">
+                  <div class="score-total"><strong>15</strong><span>/30</span></div>
+                  <div class="score-judges" title="Carrie Ann Inaba: 5 · Derek Hough: 5 · Bruno Tonioli: 5">
+                    <div class="judge-col"><span class="judge-abbr" title="Carrie Ann Inaba">CA</span><span class="judge-val">5</span></div><div class="judge-col"><span class="judge-abbr" title="Derek Hough">D</span><span class="judge-val">5</span></div><div class="judge-col"><span class="judge-abbr" title="Bruno Tonioli">B</span><span class="judge-val">5</span></div>
+                  </div>
+                </div>
               </div>
               <div class="lineup-item">
                 <span class="lineup-no">#12</span>
@@ -1030,7 +1159,12 @@
                   <span class="lineup-song">“Cake by the Ocean” · DNCE</span>
                   <div class="music-links"><a href="https://open.spotify.com/track/76hfruVvmfQbw0eYn1nmeC" target="_blank" rel="noopener noreferrer" class="music-btn spotify-btn" title="Listen to Cake by the Ocean DNCE on Spotify" aria-label="Listen to Cake by the Ocean DNCE on Spotify"><svg viewBox="0 0 24 24" class="music-icon" aria-hidden="true"><path fill="currentColor" d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.503 17.308c-.218.357-.681.472-1.038.254-2.853-1.743-6.444-2.138-10.673-1.171-.408.093-.812-.162-.905-.57-.093-.408.162-.812.57-.905 4.634-1.059 8.604-.614 11.792 1.354.357.218.472.681.254 1.038zm1.47-3.267c-.275.447-.862.59-1.309.315-3.265-2.008-8.243-2.59-12.106-1.417-.502.152-1.034-.136-1.186-.638-.152-.502.136-1.034.638-1.186 4.417-1.341 9.907-.7 13.648 1.603.447.275.59.862.315 1.309zm.126-3.41c-3.916-2.325-10.374-2.54-14.116-1.403-.6.182-1.24-.165-1.422-.765-.182-.6.165-1.24.765-1.422 4.301-1.306 11.431-1.057 15.932 1.616.54.321.716 1.02.395 1.56-.321.54-1.02.716-1.56.395z"/></svg><span>Spotify</span></a></div>
                 </div>
-                <div class="lineup-score-box"><strong>15</strong><span>/30</span></div>
+                <div class="lineup-score-box">
+                  <div class="score-total"><strong>15</strong><span>/30</span></div>
+                  <div class="score-judges" title="Carrie Ann Inaba: 5 · Derek Hough: 5 · Bruno Tonioli: 5">
+                    <div class="judge-col"><span class="judge-abbr" title="Carrie Ann Inaba">CA</span><span class="judge-val">5</span></div><div class="judge-col"><span class="judge-abbr" title="Derek Hough">D</span><span class="judge-val">5</span></div><div class="judge-col"><span class="judge-abbr" title="Bruno Tonioli">B</span><span class="judge-val">5</span></div>
+                  </div>
+                </div>
               </div>
               <div class="lineup-item">
                 <span class="lineup-no">#13</span>
@@ -1040,7 +1174,12 @@
                   <span class="lineup-song">“Bella Ciao” · Becky G</span>
                   <div class="music-links"><a href="https://open.spotify.com/track/1bHhB1E62CqbM3uVZVvaEl" target="_blank" rel="noopener noreferrer" class="music-btn spotify-btn" title="Listen to Bella Ciao Becky G on Spotify" aria-label="Listen to Bella Ciao Becky G on Spotify"><svg viewBox="0 0 24 24" class="music-icon" aria-hidden="true"><path fill="currentColor" d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.503 17.308c-.218.357-.681.472-1.038.254-2.853-1.743-6.444-2.138-10.673-1.171-.408.093-.812-.162-.905-.57-.093-.408.162-.812.57-.905 4.634-1.059 8.604-.614 11.792 1.354.357.218.472.681.254 1.038zm1.47-3.267c-.275.447-.862.59-1.309.315-3.265-2.008-8.243-2.59-12.106-1.417-.502.152-1.034-.136-1.186-.638-.152-.502.136-1.034.638-1.186 4.417-1.341 9.907-.7 13.648 1.603.447.275.59.862.315 1.309zm.126-3.41c-3.916-2.325-10.374-2.54-14.116-1.403-.6.182-1.24-.165-1.422-.765-.182-.6.165-1.24.765-1.422 4.301-1.306 11.431-1.057 15.932 1.616.54.321.716 1.02.395 1.56-.321.54-1.02.716-1.56.395z"/></svg><span>Spotify</span></a></div>
                 </div>
-                <div class="lineup-score-box"><strong>12</strong><span>/30</span></div>
+                <div class="lineup-score-box">
+                  <div class="score-total"><strong>12</strong><span>/30</span></div>
+                  <div class="score-judges" title="Carrie Ann Inaba: 4 · Derek Hough: 4 · Bruno Tonioli: 4">
+                    <div class="judge-col"><span class="judge-abbr" title="Carrie Ann Inaba">CA</span><span class="judge-val">4</span></div><div class="judge-col"><span class="judge-abbr" title="Derek Hough">D</span><span class="judge-val">4</span></div><div class="judge-col"><span class="judge-abbr" title="Bruno Tonioli">B</span><span class="judge-val">4</span></div>
+                  </div>
+                </div>
               </div>
               <div class="lineup-item">
                 <span class="lineup-no">#14</span>
@@ -1050,7 +1189,12 @@
                   <span class="lineup-song">“Where Have You Been” · Rihanna</span>
                   <div class="music-links"><a href="https://open.spotify.com/track/5WQQIDU3HRaMyPkob8mpFb" target="_blank" rel="noopener noreferrer" class="music-btn spotify-btn" title="Listen to Where Have You Been Rihanna on Spotify" aria-label="Listen to Where Have You Been Rihanna on Spotify"><svg viewBox="0 0 24 24" class="music-icon" aria-hidden="true"><path fill="currentColor" d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.503 17.308c-.218.357-.681.472-1.038.254-2.853-1.743-6.444-2.138-10.673-1.171-.408.093-.812-.162-.905-.57-.093-.408.162-.812.57-.905 4.634-1.059 8.604-.614 11.792 1.354.357.218.472.681.254 1.038zm1.47-3.267c-.275.447-.862.59-1.309.315-3.265-2.008-8.243-2.59-12.106-1.417-.502.152-1.034-.136-1.186-.638-.152-.502.136-1.034.638-1.186 4.417-1.341 9.907-.7 13.648 1.603.447.275.59.862.315 1.309zm.126-3.41c-3.916-2.325-10.374-2.54-14.116-1.403-.6.182-1.24-.165-1.422-.765-.182-.6.165-1.24.765-1.422 4.301-1.306 11.431-1.057 15.932 1.616.54.321.716 1.02.395 1.56-.321.54-1.02.716-1.56.395z"/></svg><span>Spotify</span></a></div>
                 </div>
-                <div class="lineup-score-box"><strong>12</strong><span>/30</span></div>
+                <div class="lineup-score-box">
+                  <div class="score-total"><strong>12</strong><span>/30</span></div>
+                  <div class="score-judges" title="Carrie Ann Inaba: 4 · Derek Hough: 4 · Bruno Tonioli: 4">
+                    <div class="judge-col"><span class="judge-abbr" title="Carrie Ann Inaba">CA</span><span class="judge-val">4</span></div><div class="judge-col"><span class="judge-abbr" title="Derek Hough">D</span><span class="judge-val">4</span></div><div class="judge-col"><span class="judge-abbr" title="Bruno Tonioli">B</span><span class="judge-val">4</span></div>
+                  </div>
+                </div>
               </div>
               </div>
             </div>
@@ -1076,7 +1220,12 @@
                   <span class="lineup-song">“Let's Groove” · Earth, Wind & Fire</span>
                   <div class="music-links"><a href="https://open.spotify.com/track/3mbXR77q1sq2MdeqdPHwJs" target="_blank" rel="noopener noreferrer" class="music-btn spotify-btn" title="Listen to Let&#x27;s Groove Earth, Wind &amp; Fire on Spotify" aria-label="Listen to Let&#x27;s Groove Earth, Wind &amp; Fire on Spotify"><svg viewBox="0 0 24 24" class="music-icon" aria-hidden="true"><path fill="currentColor" d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.503 17.308c-.218.357-.681.472-1.038.254-2.853-1.743-6.444-2.138-10.673-1.171-.408.093-.812-.162-.905-.57-.093-.408.162-.812.57-.905 4.634-1.059 8.604-.614 11.792 1.354.357.218.472.681.254 1.038zm1.47-3.267c-.275.447-.862.59-1.309.315-3.265-2.008-8.243-2.59-12.106-1.417-.502.152-1.034-.136-1.186-.638-.152-.502.136-1.034.638-1.186 4.417-1.341 9.907-.7 13.648 1.603.447.275.59.862.315 1.309zm.126-3.41c-3.916-2.325-10.374-2.54-14.116-1.403-.6.182-1.24-.165-1.422-.765-.182-.6.165-1.24.765-1.422 4.301-1.306 11.431-1.057 15.932 1.616.54.321.716 1.02.395 1.56-.321.54-1.02.716-1.56.395z"/></svg><span>Spotify</span></a></div>
                 </div>
-                <div class="lineup-score-box leader"><strong>21</strong><span>/30</span></div>
+                <div class="lineup-score-box leader">
+                  <div class="score-total"><strong>21</strong><span>/30</span></div>
+                  <div class="score-judges" title="Carrie Ann Inaba: 7 · Derek Hough: 7 · Bruno Tonioli: 7">
+                    <div class="judge-col"><span class="judge-abbr" title="Carrie Ann Inaba">CA</span><span class="judge-val">7</span></div><div class="judge-col"><span class="judge-abbr" title="Derek Hough">D</span><span class="judge-val">7</span></div><div class="judge-col"><span class="judge-abbr" title="Bruno Tonioli">B</span><span class="judge-val">7</span></div>
+                  </div>
+                </div>
               </div>
               <div class="lineup-item">
                 <span class="lineup-no">#2</span>
@@ -1086,7 +1235,12 @@
                   <span class="lineup-song">“Black Velvet” · Alannah Myles</span>
                   <div class="music-links"><a href="https://open.spotify.com/track/4JAdT8gwSrGIXIEhSy1ATj" target="_blank" rel="noopener noreferrer" class="music-btn spotify-btn" title="Listen to Black Velvet Alannah Myles on Spotify" aria-label="Listen to Black Velvet Alannah Myles on Spotify"><svg viewBox="0 0 24 24" class="music-icon" aria-hidden="true"><path fill="currentColor" d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.503 17.308c-.218.357-.681.472-1.038.254-2.853-1.743-6.444-2.138-10.673-1.171-.408.093-.812-.162-.905-.57-.093-.408.162-.812.57-.905 4.634-1.059 8.604-.614 11.792 1.354.357.218.472.681.254 1.038zm1.47-3.267c-.275.447-.862.59-1.309.315-3.265-2.008-8.243-2.59-12.106-1.417-.502.152-1.034-.136-1.186-.638-.152-.502.136-1.034.638-1.186 4.417-1.341 9.907-.7 13.648 1.603.447.275.59.862.315 1.309zm.126-3.41c-3.916-2.325-10.374-2.54-14.116-1.403-.6.182-1.24-.165-1.422-.765-.182-.6.165-1.24.765-1.422 4.301-1.306 11.431-1.057 15.932 1.616.54.321.716 1.02.395 1.56-.321.54-1.02.716-1.56.395z"/></svg><span>Spotify</span></a></div>
                 </div>
-                <div class="lineup-score-box leader"><strong>21</strong><span>/30</span></div>
+                <div class="lineup-score-box leader">
+                  <div class="score-total"><strong>21</strong><span>/30</span></div>
+                  <div class="score-judges" title="Carrie Ann Inaba: 7 · Derek Hough: 7 · Bruno Tonioli: 7">
+                    <div class="judge-col"><span class="judge-abbr" title="Carrie Ann Inaba">CA</span><span class="judge-val">7</span></div><div class="judge-col"><span class="judge-abbr" title="Derek Hough">D</span><span class="judge-val">7</span></div><div class="judge-col"><span class="judge-abbr" title="Bruno Tonioli">B</span><span class="judge-val">7</span></div>
+                  </div>
+                </div>
               </div>
               <div class="lineup-item">
                 <span class="lineup-no">#3</span>
@@ -1096,7 +1250,12 @@
                   <span class="lineup-song">“Since U Been Gone” · Kelly Clarkson</span>
                   <div class="music-links"><a href="https://open.spotify.com/track/3xrn9i8zhNZsTtcoWgQEAd" target="_blank" rel="noopener noreferrer" class="music-btn spotify-btn" title="Listen to Since U Been Gone Kelly Clarkson on Spotify" aria-label="Listen to Since U Been Gone Kelly Clarkson on Spotify"><svg viewBox="0 0 24 24" class="music-icon" aria-hidden="true"><path fill="currentColor" d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.503 17.308c-.218.357-.681.472-1.038.254-2.853-1.743-6.444-2.138-10.673-1.171-.408.093-.812-.162-.905-.57-.093-.408.162-.812.57-.905 4.634-1.059 8.604-.614 11.792 1.354.357.218.472.681.254 1.038zm1.47-3.267c-.275.447-.862.59-1.309.315-3.265-2.008-8.243-2.59-12.106-1.417-.502.152-1.034-.136-1.186-.638-.152-.502.136-1.034.638-1.186 4.417-1.341 9.907-.7 13.648 1.603.447.275.59.862.315 1.309zm.126-3.41c-3.916-2.325-10.374-2.54-14.116-1.403-.6.182-1.24-.165-1.422-.765-.182-.6.165-1.24.765-1.422 4.301-1.306 11.431-1.057 15.932 1.616.54.321.716 1.02.395 1.56-.321.54-1.02.716-1.56.395z"/></svg><span>Spotify</span></a></div>
                 </div>
-                <div class="lineup-score-box"><strong>20</strong><span>/30</span></div>
+                <div class="lineup-score-box">
+                  <div class="score-total"><strong>20</strong><span>/30</span></div>
+                  <div class="score-judges" title="Carrie Ann Inaba: 7 · Derek Hough: 6 · Bruno Tonioli: 7">
+                    <div class="judge-col"><span class="judge-abbr" title="Carrie Ann Inaba">CA</span><span class="judge-val">7</span></div><div class="judge-col"><span class="judge-abbr" title="Derek Hough">D</span><span class="judge-val">6</span></div><div class="judge-col"><span class="judge-abbr" title="Bruno Tonioli">B</span><span class="judge-val">7</span></div>
+                  </div>
+                </div>
               </div>
               <div class="lineup-item">
                 <span class="lineup-no">#4</span>
@@ -1106,7 +1265,12 @@
                   <span class="lineup-song">“Call Me” · Blondie</span>
                   <div class="music-links"><a href="https://open.spotify.com/track/7HKxTNVlkHsfMLhigmhC0I" target="_blank" rel="noopener noreferrer" class="music-btn spotify-btn" title="Listen to Call Me Blondie on Spotify" aria-label="Listen to Call Me Blondie on Spotify"><svg viewBox="0 0 24 24" class="music-icon" aria-hidden="true"><path fill="currentColor" d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.503 17.308c-.218.357-.681.472-1.038.254-2.853-1.743-6.444-2.138-10.673-1.171-.408.093-.812-.162-.905-.57-.093-.408.162-.812.57-.905 4.634-1.059 8.604-.614 11.792 1.354.357.218.472.681.254 1.038zm1.47-3.267c-.275.447-.862.59-1.309.315-3.265-2.008-8.243-2.59-12.106-1.417-.502.152-1.034-.136-1.186-.638-.152-.502.136-1.034.638-1.186 4.417-1.341 9.907-.7 13.648 1.603.447.275.59.862.315 1.309zm.126-3.41c-3.916-2.325-10.374-2.54-14.116-1.403-.6.182-1.24-.165-1.422-.765-.182-.6.165-1.24.765-1.422 4.301-1.306 11.431-1.057 15.932 1.616.54.321.716 1.02.395 1.56-.321.54-1.02.716-1.56.395z"/></svg><span>Spotify</span></a></div>
                 </div>
-                <div class="lineup-score-box"><strong>19</strong><span>/30</span></div>
+                <div class="lineup-score-box">
+                  <div class="score-total"><strong>19</strong><span>/30</span></div>
+                  <div class="score-judges" title="Carrie Ann Inaba: 6 · Derek Hough: 6 · Bruno Tonioli: 7">
+                    <div class="judge-col"><span class="judge-abbr" title="Carrie Ann Inaba">CA</span><span class="judge-val">6</span></div><div class="judge-col"><span class="judge-abbr" title="Derek Hough">D</span><span class="judge-val">6</span></div><div class="judge-col"><span class="judge-abbr" title="Bruno Tonioli">B</span><span class="judge-val">7</span></div>
+                  </div>
+                </div>
               </div>
               <div class="lineup-item">
                 <span class="lineup-no">#5</span>
@@ -1116,7 +1280,12 @@
                   <span class="lineup-song">“Smooth” · Santana feat. Rob Thomas</span>
                   <div class="music-links"><a href="https://open.spotify.com/track/2pX4FpOgwItRVPPUFdRcxA" target="_blank" rel="noopener noreferrer" class="music-btn spotify-btn" title="Listen to Smooth Santana feat. Rob Thomas on Spotify" aria-label="Listen to Smooth Santana feat. Rob Thomas on Spotify"><svg viewBox="0 0 24 24" class="music-icon" aria-hidden="true"><path fill="currentColor" d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.503 17.308c-.218.357-.681.472-1.038.254-2.853-1.743-6.444-2.138-10.673-1.171-.408.093-.812-.162-.905-.57-.093-.408.162-.812.57-.905 4.634-1.059 8.604-.614 11.792 1.354.357.218.472.681.254 1.038zm1.47-3.267c-.275.447-.862.59-1.309.315-3.265-2.008-8.243-2.59-12.106-1.417-.502.152-1.034-.136-1.186-.638-.152-.502.136-1.034.638-1.186 4.417-1.341 9.907-.7 13.648 1.603.447.275.59.862.315 1.309zm.126-3.41c-3.916-2.325-10.374-2.54-14.116-1.403-.6.182-1.24-.165-1.422-.765-.182-.6.165-1.24.765-1.422 4.301-1.306 11.431-1.057 15.932 1.616.54.321.716 1.02.395 1.56-.321.54-1.02.716-1.56.395z"/></svg><span>Spotify</span></a></div>
                 </div>
-                <div class="lineup-score-box"><strong>18</strong><span>/30</span></div>
+                <div class="lineup-score-box">
+                  <div class="score-total"><strong>18</strong><span>/30</span></div>
+                  <div class="score-judges" title="Carrie Ann Inaba: 6 · Derek Hough: 6 · Bruno Tonioli: 6">
+                    <div class="judge-col"><span class="judge-abbr" title="Carrie Ann Inaba">CA</span><span class="judge-val">6</span></div><div class="judge-col"><span class="judge-abbr" title="Derek Hough">D</span><span class="judge-val">6</span></div><div class="judge-col"><span class="judge-abbr" title="Bruno Tonioli">B</span><span class="judge-val">6</span></div>
+                  </div>
+                </div>
               </div>
               <div class="lineup-item">
                 <span class="lineup-no">#6</span>
@@ -1126,7 +1295,12 @@
                   <span class="lineup-song">“9 to 5” · Dolly Parton</span>
                   <div class="music-links"><a href="https://open.spotify.com/track/4w3tQBXhn5345eUXDGBWZG" target="_blank" rel="noopener noreferrer" class="music-btn spotify-btn" title="Listen to 9 to 5 Dolly Parton on Spotify" aria-label="Listen to 9 to 5 Dolly Parton on Spotify"><svg viewBox="0 0 24 24" class="music-icon" aria-hidden="true"><path fill="currentColor" d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.503 17.308c-.218.357-.681.472-1.038.254-2.853-1.743-6.444-2.138-10.673-1.171-.408.093-.812-.162-.905-.57-.093-.408.162-.812.57-.905 4.634-1.059 8.604-.614 11.792 1.354.357.218.472.681.254 1.038zm1.47-3.267c-.275.447-.862.59-1.309.315-3.265-2.008-8.243-2.59-12.106-1.417-.502.152-1.034-.136-1.186-.638-.152-.502.136-1.034.638-1.186 4.417-1.341 9.907-.7 13.648 1.603.447.275.59.862.315 1.309zm.126-3.41c-3.916-2.325-10.374-2.54-14.116-1.403-.6.182-1.24-.165-1.422-.765-.182-.6.165-1.24.765-1.422 4.301-1.306 11.431-1.057 15.932 1.616.54.321.716 1.02.395 1.56-.321.54-1.02.716-1.56.395z"/></svg><span>Spotify</span></a></div>
                 </div>
-                <div class="lineup-score-box"><strong>18</strong><span>/30</span></div>
+                <div class="lineup-score-box">
+                  <div class="score-total"><strong>18</strong><span>/30</span></div>
+                  <div class="score-judges" title="Carrie Ann Inaba: 6 · Derek Hough: 6 · Bruno Tonioli: 6">
+                    <div class="judge-col"><span class="judge-abbr" title="Carrie Ann Inaba">CA</span><span class="judge-val">6</span></div><div class="judge-col"><span class="judge-abbr" title="Derek Hough">D</span><span class="judge-val">6</span></div><div class="judge-col"><span class="judge-abbr" title="Bruno Tonioli">B</span><span class="judge-val">6</span></div>
+                  </div>
+                </div>
               </div>
               <div class="lineup-item">
                 <span class="lineup-no">#7</span>
@@ -1136,7 +1310,12 @@
                   <span class="lineup-song">“Are You Gonna Go My Way” · Lenny Kravitz</span>
                   <div class="music-links"><a href="https://open.spotify.com/track/45Ia1U4KtIjAPPU7Wv1Sea" target="_blank" rel="noopener noreferrer" class="music-btn spotify-btn" title="Listen to Are You Gonna Go My Way Lenny Kravitz on Spotify" aria-label="Listen to Are You Gonna Go My Way Lenny Kravitz on Spotify"><svg viewBox="0 0 24 24" class="music-icon" aria-hidden="true"><path fill="currentColor" d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.503 17.308c-.218.357-.681.472-1.038.254-2.853-1.743-6.444-2.138-10.673-1.171-.408.093-.812-.162-.905-.57-.093-.408.162-.812.57-.905 4.634-1.059 8.604-.614 11.792 1.354.357.218.472.681.254 1.038zm1.47-3.267c-.275.447-.862.59-1.309.315-3.265-2.008-8.243-2.59-12.106-1.417-.502.152-1.034-.136-1.186-.638-.152-.502.136-1.034.638-1.186 4.417-1.341 9.907-.7 13.648 1.603.447.275.59.862.315 1.309zm.126-3.41c-3.916-2.325-10.374-2.54-14.116-1.403-.6.182-1.24-.165-1.422-.765-.182-.6.165-1.24.765-1.422 4.301-1.306 11.431-1.057 15.932 1.616.54.321.716 1.02.395 1.56-.321.54-1.02.716-1.56.395z"/></svg><span>Spotify</span></a></div>
                 </div>
-                <div class="lineup-score-box"><strong>17</strong><span>/30</span></div>
+                <div class="lineup-score-box">
+                  <div class="score-total"><strong>17</strong><span>/30</span></div>
+                  <div class="score-judges" title="Carrie Ann Inaba: 6 · Derek Hough: 5 · Bruno Tonioli: 6">
+                    <div class="judge-col"><span class="judge-abbr" title="Carrie Ann Inaba">CA</span><span class="judge-val">6</span></div><div class="judge-col"><span class="judge-abbr" title="Derek Hough">D</span><span class="judge-val">5</span></div><div class="judge-col"><span class="judge-abbr" title="Bruno Tonioli">B</span><span class="judge-val">6</span></div>
+                  </div>
+                </div>
               </div>
               <div class="lineup-item">
                 <span class="lineup-no">#8</span>
@@ -1146,7 +1325,12 @@
                   <span class="lineup-song">“I Like It, I Love It” · Tim McGraw</span>
                   <div class="music-links"><a href="https://open.spotify.com/track/3IvcWWehbBcBR4YZxlGM9R" target="_blank" rel="noopener noreferrer" class="music-btn spotify-btn" title="Listen to I Like It, I Love It Tim McGraw on Spotify" aria-label="Listen to I Like It, I Love It Tim McGraw on Spotify"><svg viewBox="0 0 24 24" class="music-icon" aria-hidden="true"><path fill="currentColor" d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.503 17.308c-.218.357-.681.472-1.038.254-2.853-1.743-6.444-2.138-10.673-1.171-.408.093-.812-.162-.905-.57-.093-.408.162-.812.57-.905 4.634-1.059 8.604-.614 11.792 1.354.357.218.472.681.254 1.038zm1.47-3.267c-.275.447-.862.59-1.309.315-3.265-2.008-8.243-2.59-12.106-1.417-.502.152-1.034-.136-1.186-.638-.152-.502.136-1.034.638-1.186 4.417-1.341 9.907-.7 13.648 1.603.447.275.59.862.315 1.309zm.126-3.41c-3.916-2.325-10.374-2.54-14.116-1.403-.6.182-1.24-.165-1.422-.765-.182-.6.165-1.24.765-1.422 4.301-1.306 11.431-1.057 15.932 1.616.54.321.716 1.02.395 1.56-.321.54-1.02.716-1.56.395z"/></svg><span>Spotify</span></a></div>
                 </div>
-                <div class="lineup-score-box"><strong>16</strong><span>/30</span></div>
+                <div class="lineup-score-box">
+                  <div class="score-total"><strong>16</strong><span>/30</span></div>
+                  <div class="score-judges" title="Carrie Ann Inaba: 6 · Derek Hough: 5 · Bruno Tonioli: 5">
+                    <div class="judge-col"><span class="judge-abbr" title="Carrie Ann Inaba">CA</span><span class="judge-val">6</span></div><div class="judge-col"><span class="judge-abbr" title="Derek Hough">D</span><span class="judge-val">5</span></div><div class="judge-col"><span class="judge-abbr" title="Bruno Tonioli">B</span><span class="judge-val">5</span></div>
+                  </div>
+                </div>
               </div>
               <div class="lineup-item">
                 <span class="lineup-no">#9</span>
@@ -1156,7 +1340,12 @@
                   <span class="lineup-song">“Venus” · Shocking Blue</span>
                   <div class="music-links"><a href="https://open.spotify.com/track/5Zi5WxBEBRkucpP79iRjGR" target="_blank" rel="noopener noreferrer" class="music-btn spotify-btn" title="Listen to Venus Shocking Blue on Spotify" aria-label="Listen to Venus Shocking Blue on Spotify"><svg viewBox="0 0 24 24" class="music-icon" aria-hidden="true"><path fill="currentColor" d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.503 17.308c-.218.357-.681.472-1.038.254-2.853-1.743-6.444-2.138-10.673-1.171-.408.093-.812-.162-.905-.57-.093-.408.162-.812.57-.905 4.634-1.059 8.604-.614 11.792 1.354.357.218.472.681.254 1.038zm1.47-3.267c-.275.447-.862.59-1.309.315-3.265-2.008-8.243-2.59-12.106-1.417-.502.152-1.034-.136-1.186-.638-.152-.502.136-1.034.638-1.186 4.417-1.341 9.907-.7 13.648 1.603.447.275.59.862.315 1.309zm.126-3.41c-3.916-2.325-10.374-2.54-14.116-1.403-.6.182-1.24-.165-1.422-.765-.182-.6.165-1.24.765-1.422 4.301-1.306 11.431-1.057 15.932 1.616.54.321.716 1.02.395 1.56-.321.54-1.02.716-1.56.395z"/></svg><span>Spotify</span></a></div>
                 </div>
-                <div class="lineup-score-box"><strong>16</strong><span>/30</span></div>
+                <div class="lineup-score-box">
+                  <div class="score-total"><strong>16</strong><span>/30</span></div>
+                  <div class="score-judges" title="Carrie Ann Inaba: 6 · Derek Hough: 5 · Bruno Tonioli: 5">
+                    <div class="judge-col"><span class="judge-abbr" title="Carrie Ann Inaba">CA</span><span class="judge-val">6</span></div><div class="judge-col"><span class="judge-abbr" title="Derek Hough">D</span><span class="judge-val">5</span></div><div class="judge-col"><span class="judge-abbr" title="Bruno Tonioli">B</span><span class="judge-val">5</span></div>
+                  </div>
+                </div>
               </div>
               <div class="lineup-item">
                 <span class="lineup-no">#10</span>
@@ -1166,7 +1355,12 @@
                   <span class="lineup-song">“Tell Her About It” · Billy Joel</span>
                   <div class="music-links"><a href="https://open.spotify.com/track/6kCJMxv445L2okuTiou1fR" target="_blank" rel="noopener noreferrer" class="music-btn spotify-btn" title="Listen to Tell Her About It Billy Joel on Spotify" aria-label="Listen to Tell Her About It Billy Joel on Spotify"><svg viewBox="0 0 24 24" class="music-icon" aria-hidden="true"><path fill="currentColor" d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.503 17.308c-.218.357-.681.472-1.038.254-2.853-1.743-6.444-2.138-10.673-1.171-.408.093-.812-.162-.905-.57-.093-.408.162-.812.57-.905 4.634-1.059 8.604-.614 11.792 1.354.357.218.472.681.254 1.038zm1.47-3.267c-.275.447-.862.59-1.309.315-3.265-2.008-8.243-2.59-12.106-1.417-.502.152-1.034-.136-1.186-.638-.152-.502.136-1.034.638-1.186 4.417-1.341 9.907-.7 13.648 1.603.447.275.59.862.315 1.309zm.126-3.41c-3.916-2.325-10.374-2.54-14.116-1.403-.6.182-1.24-.165-1.422-.765-.182-.6.165-1.24.765-1.422 4.301-1.306 11.431-1.057 15.932 1.616.54.321.716 1.02.395 1.56-.321.54-1.02.716-1.56.395z"/></svg><span>Spotify</span></a></div>
                 </div>
-                <div class="lineup-score-box"><strong>16</strong><span>/30</span></div>
+                <div class="lineup-score-box">
+                  <div class="score-total"><strong>16</strong><span>/30</span></div>
+                  <div class="score-judges" title="Carrie Ann Inaba: 6 · Derek Hough: 5 · Bruno Tonioli: 5">
+                    <div class="judge-col"><span class="judge-abbr" title="Carrie Ann Inaba">CA</span><span class="judge-val">6</span></div><div class="judge-col"><span class="judge-abbr" title="Derek Hough">D</span><span class="judge-val">5</span></div><div class="judge-col"><span class="judge-abbr" title="Bruno Tonioli">B</span><span class="judge-val">5</span></div>
+                  </div>
+                </div>
               </div>
               <div class="lineup-item">
                 <span class="lineup-no">#11</span>
@@ -1176,7 +1370,12 @@
                   <span class="lineup-song">“Exhale (Shoop Shoop)” · Whitney Houston</span>
                   <div class="music-links"><a href="https://open.spotify.com/track/1X3ypzPnyerpZuMqrDFK29" target="_blank" rel="noopener noreferrer" class="music-btn spotify-btn" title="Listen to Exhale (Shoop Shoop) Whitney Houston on Spotify" aria-label="Listen to Exhale (Shoop Shoop) Whitney Houston on Spotify"><svg viewBox="0 0 24 24" class="music-icon" aria-hidden="true"><path fill="currentColor" d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.503 17.308c-.218.357-.681.472-1.038.254-2.853-1.743-6.444-2.138-10.673-1.171-.408.093-.812-.162-.905-.57-.093-.408.162-.812.57-.905 4.634-1.059 8.604-.614 11.792 1.354.357.218.472.681.254 1.038zm1.47-3.267c-.275.447-.862.59-1.309.315-3.265-2.008-8.243-2.59-12.106-1.417-.502.152-1.034-.136-1.186-.638-.152-.502.136-1.034.638-1.186 4.417-1.341 9.907-.7 13.648 1.603.447.275.59.862.315 1.309zm.126-3.41c-3.916-2.325-10.374-2.54-14.116-1.403-.6.182-1.24-.165-1.422-.765-.182-.6.165-1.24.765-1.422 4.301-1.306 11.431-1.057 15.932 1.616.54.321.716 1.02.395 1.56-.321.54-1.02.716-1.56.395z"/></svg><span>Spotify</span></a></div>
                 </div>
-                <div class="lineup-score-box"><strong>15</strong><span>/30</span></div>
+                <div class="lineup-score-box">
+                  <div class="score-total"><strong>15</strong><span>/30</span></div>
+                  <div class="score-judges" title="Carrie Ann Inaba: 5 · Derek Hough: 5 · Bruno Tonioli: 5">
+                    <div class="judge-col"><span class="judge-abbr" title="Carrie Ann Inaba">CA</span><span class="judge-val">5</span></div><div class="judge-col"><span class="judge-abbr" title="Derek Hough">D</span><span class="judge-val">5</span></div><div class="judge-col"><span class="judge-abbr" title="Bruno Tonioli">B</span><span class="judge-val">5</span></div>
+                  </div>
+                </div>
               </div>
               <div class="lineup-item">
                 <span class="lineup-no">#12</span>
@@ -1186,7 +1385,12 @@
                   <span class="lineup-song">“Wannabe” · Spice Girls</span>
                   <div class="music-links"><a href="https://open.spotify.com/track/2HTXBDRi0bcYl1NLyCxtNw" target="_blank" rel="noopener noreferrer" class="music-btn spotify-btn" title="Listen to Wannabe Spice Girls on Spotify" aria-label="Listen to Wannabe Spice Girls on Spotify"><svg viewBox="0 0 24 24" class="music-icon" aria-hidden="true"><path fill="currentColor" d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.503 17.308c-.218.357-.681.472-1.038.254-2.853-1.743-6.444-2.138-10.673-1.171-.408.093-.812-.162-.905-.57-.093-.408.162-.812.57-.905 4.634-1.059 8.604-.614 11.792 1.354.357.218.472.681.254 1.038zm1.47-3.267c-.275.447-.862.59-1.309.315-3.265-2.008-8.243-2.59-12.106-1.417-.502.152-1.034-.136-1.186-.638-.152-.502.136-1.034.638-1.186 4.417-1.341 9.907-.7 13.648 1.603.447.275.59.862.315 1.309zm.126-3.41c-3.916-2.325-10.374-2.54-14.116-1.403-.6.182-1.24-.165-1.422-.765-.182-.6.165-1.24.765-1.422 4.301-1.306 11.431-1.057 15.932 1.616.54.321.716 1.02.395 1.56-.321.54-1.02.716-1.56.395z"/></svg><span>Spotify</span></a></div>
                 </div>
-                <div class="lineup-score-box"><strong>15</strong><span>/30</span></div>
+                <div class="lineup-score-box">
+                  <div class="score-total"><strong>15</strong><span>/30</span></div>
+                  <div class="score-judges" title="Carrie Ann Inaba: 5 · Derek Hough: 5 · Bruno Tonioli: 5">
+                    <div class="judge-col"><span class="judge-abbr" title="Carrie Ann Inaba">CA</span><span class="judge-val">5</span></div><div class="judge-col"><span class="judge-abbr" title="Derek Hough">D</span><span class="judge-val">5</span></div><div class="judge-col"><span class="judge-abbr" title="Bruno Tonioli">B</span><span class="judge-val">5</span></div>
+                  </div>
+                </div>
               </div>
               <div class="lineup-item">
                 <span class="lineup-no">#13</span>
@@ -1196,7 +1400,12 @@
                   <span class="lineup-song">“Sk8er Boi” · Avril Lavigne</span>
                   <div class="music-links"><a href="https://open.spotify.com/track/00Mb3DuaIH1kjrwOku9CGU" target="_blank" rel="noopener noreferrer" class="music-btn spotify-btn" title="Listen to Sk8er Boi Avril Lavigne on Spotify" aria-label="Listen to Sk8er Boi Avril Lavigne on Spotify"><svg viewBox="0 0 24 24" class="music-icon" aria-hidden="true"><path fill="currentColor" d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.503 17.308c-.218.357-.681.472-1.038.254-2.853-1.743-6.444-2.138-10.673-1.171-.408.093-.812-.162-.905-.57-.093-.408.162-.812.57-.905 4.634-1.059 8.604-.614 11.792 1.354.357.218.472.681.254 1.038zm1.47-3.267c-.275.447-.862.59-1.309.315-3.265-2.008-8.243-2.59-12.106-1.417-.502.152-1.034-.136-1.186-.638-.152-.502.136-1.034.638-1.186 4.417-1.341 9.907-.7 13.648 1.603.447.275.59.862.315 1.309zm.126-3.41c-3.916-2.325-10.374-2.54-14.116-1.403-.6.182-1.24-.165-1.422-.765-.182-.6.165-1.24.765-1.422 4.301-1.306 11.431-1.057 15.932 1.616.54.321.716 1.02.395 1.56-.321.54-1.02.716-1.56.395z"/></svg><span>Spotify</span></a></div>
                 </div>
-                <div class="lineup-score-box"><strong>14</strong><span>/30</span></div>
+                <div class="lineup-score-box">
+                  <div class="score-total"><strong>14</strong><span>/30</span></div>
+                  <div class="score-judges" title="Carrie Ann Inaba: 5 · Derek Hough: 4 · Bruno Tonioli: 5">
+                    <div class="judge-col"><span class="judge-abbr" title="Carrie Ann Inaba">CA</span><span class="judge-val">5</span></div><div class="judge-col"><span class="judge-abbr" title="Derek Hough">D</span><span class="judge-val">4</span></div><div class="judge-col"><span class="judge-abbr" title="Bruno Tonioli">B</span><span class="judge-val">5</span></div>
+                  </div>
+                </div>
               </div>
               <div class="lineup-item">
                 <span class="lineup-no">#14</span>
@@ -1206,7 +1415,12 @@
                   <span class="lineup-song">“Whoomp! (There It Is)” · Tag Team</span>
                   <div class="music-links"><a href="https://open.spotify.com/track/3oWXoSkjdbTlQlteizN7Hb" target="_blank" rel="noopener noreferrer" class="music-btn spotify-btn" title="Listen to Whoomp! (There It Is) Tag Team on Spotify" aria-label="Listen to Whoomp! (There It Is) Tag Team on Spotify"><svg viewBox="0 0 24 24" class="music-icon" aria-hidden="true"><path fill="currentColor" d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.503 17.308c-.218.357-.681.472-1.038.254-2.853-1.743-6.444-2.138-10.673-1.171-.408.093-.812-.162-.905-.57-.093-.408.162-.812.57-.905 4.634-1.059 8.604-.614 11.792 1.354.357.218.472.681.254 1.038zm1.47-3.267c-.275.447-.862.59-1.309.315-3.265-2.008-8.243-2.59-12.106-1.417-.502.152-1.034-.136-1.186-.638-.152-.502.136-1.034.638-1.186 4.417-1.341 9.907-.7 13.648 1.603.447.275.59.862.315 1.309zm.126-3.41c-3.916-2.325-10.374-2.54-14.116-1.403-.6.182-1.24-.165-1.422-.765-.182-.6.165-1.24.765-1.422 4.301-1.306 11.431-1.057 15.932 1.616.54.321.716 1.02.395 1.56-.321.54-1.02.716-1.56.395z"/></svg><span>Spotify</span></a></div>
                 </div>
-                <div class="lineup-score-box"><strong>12</strong><span>/30</span></div>
+                <div class="lineup-score-box">
+                  <div class="score-total"><strong>12</strong><span>/30</span></div>
+                  <div class="score-judges" title="Carrie Ann Inaba: 4 · Derek Hough: 4 · Bruno Tonioli: 4">
+                    <div class="judge-col"><span class="judge-abbr" title="Carrie Ann Inaba">CA</span><span class="judge-val">4</span></div><div class="judge-col"><span class="judge-abbr" title="Derek Hough">D</span><span class="judge-val">4</span></div><div class="judge-col"><span class="judge-abbr" title="Bruno Tonioli">B</span><span class="judge-val">4</span></div>
+                  </div>
+                </div>
               </div>
               <div class="lineup-item">
                 <span class="lineup-no">#15</span>
@@ -1216,7 +1430,12 @@
                   <span class="lineup-song">“Knock on Wood” · Amii Stewart</span>
                   <div class="music-links"><a href="https://open.spotify.com/track/6hG8HM8AqD5wIJTQH37sIV" target="_blank" rel="noopener noreferrer" class="music-btn spotify-btn" title="Listen to Knock on Wood Amii Stewart on Spotify" aria-label="Listen to Knock on Wood Amii Stewart on Spotify"><svg viewBox="0 0 24 24" class="music-icon" aria-hidden="true"><path fill="currentColor" d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.503 17.308c-.218.357-.681.472-1.038.254-2.853-1.743-6.444-2.138-10.673-1.171-.408.093-.812-.162-.905-.57-.093-.408.162-.812.57-.905 4.634-1.059 8.604-.614 11.792 1.354.357.218.472.681.254 1.038zm1.47-3.267c-.275.447-.862.59-1.309.315-3.265-2.008-8.243-2.59-12.106-1.417-.502.152-1.034-.136-1.186-.638-.152-.502.136-1.034.638-1.186 4.417-1.341 9.907-.7 13.648 1.603.447.275.59.862.315 1.309zm.126-3.41c-3.916-2.325-10.374-2.54-14.116-1.403-.6.182-1.24-.165-1.422-.765-.182-.6.165-1.24.765-1.422 4.301-1.306 11.431-1.057 15.932 1.616.54.321.716 1.02.395 1.56-.321.54-1.02.716-1.56.395z"/></svg><span>Spotify</span></a></div>
                 </div>
-                <div class="lineup-score-box"><strong>12</strong><span>/30</span></div>
+                <div class="lineup-score-box">
+                  <div class="score-total"><strong>12</strong><span>/30</span></div>
+                  <div class="score-judges" title="Carrie Ann Inaba: 4 · Derek Hough: 4 · Bruno Tonioli: 4">
+                    <div class="judge-col"><span class="judge-abbr" title="Carrie Ann Inaba">CA</span><span class="judge-val">4</span></div><div class="judge-col"><span class="judge-abbr" title="Derek Hough">D</span><span class="judge-val">4</span></div><div class="judge-col"><span class="judge-abbr" title="Bruno Tonioli">B</span><span class="judge-val">4</span></div>
+                  </div>
+                </div>
               </div>
               <div class="lineup-item">
                 <span class="lineup-no">#16</span>
@@ -1226,7 +1445,12 @@
                   <span class="lineup-song">“Mr. Big Stuff” · Jean Knight</span>
                   <div class="music-links"><a href="https://open.spotify.com/track/2Bls0igCm79XQQ95IoUbhq" target="_blank" rel="noopener noreferrer" class="music-btn spotify-btn" title="Listen to Mr. Big Stuff Jean Knight on Spotify" aria-label="Listen to Mr. Big Stuff Jean Knight on Spotify"><svg viewBox="0 0 24 24" class="music-icon" aria-hidden="true"><path fill="currentColor" d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.503 17.308c-.218.357-.681.472-1.038.254-2.853-1.743-6.444-2.138-10.673-1.171-.408.093-.812-.162-.905-.57-.093-.408.162-.812.57-.905 4.634-1.059 8.604-.614 11.792 1.354.357.218.472.681.254 1.038zm1.47-3.267c-.275.447-.862.59-1.309.315-3.265-2.008-8.243-2.59-12.106-1.417-.502.152-1.034-.136-1.186-.638-.152-.502.136-1.034.638-1.186 4.417-1.341 9.907-.7 13.648 1.603.447.275.59.862.315 1.309zm.126-3.41c-3.916-2.325-10.374-2.54-14.116-1.403-.6.182-1.24-.165-1.422-.765-.182-.6.165-1.24.765-1.422 4.301-1.306 11.431-1.057 15.932 1.616.54.321.716 1.02.395 1.56-.321.54-1.02.716-1.56.395z"/></svg><span>Spotify</span></a></div>
                 </div>
-                <div class="lineup-score-box"><strong>10</strong><span>/30</span></div>
+                <div class="lineup-score-box">
+                  <div class="score-total"><strong>10</strong><span>/30</span></div>
+                  <div class="score-judges" title="Carrie Ann Inaba: 4 · Derek Hough: 3 · Bruno Tonioli: 3">
+                    <div class="judge-col"><span class="judge-abbr" title="Carrie Ann Inaba">CA</span><span class="judge-val">4</span></div><div class="judge-col"><span class="judge-abbr" title="Derek Hough">D</span><span class="judge-val">3</span></div><div class="judge-col"><span class="judge-abbr" title="Bruno Tonioli">B</span><span class="judge-val">3</span></div>
+                  </div>
+                </div>
               </div>
               </div>
             </div>
@@ -1244,7 +1468,7 @@
         <div class="cal-row"><b>Week 2</b><time>Sep 22</time><span>Viral Hits Night</span></div>
         <div class="cal-row"><b>Week 3</b><time>Sep 29</time><span>Yacht Rock Night</span></div>
         <div class="cal-row current"><b>Week 4</b><time>Oct 6</time><span>Mariah Carey Night</span></div>
-        <div class="cal-row"><b>Week 5</b><time>Oct 13</time><span>TBA <small class="tba">Dolly Parton speculation is unconfirmed</small></span></div>
+        <div class="cal-row"><b>Week 5</b><time>Oct 13</time><span>Super Bowl Night</span></div>
         <div class="cal-row"><b>Week 6</b><time>Oct 20</time><span>Dedication Night</span></div>
         <div class="cal-row"><b>Week 7</b><time>Oct 27</time><span>Horror Movie Night</span></div>
         <div class="cal-row"><b>Week 8</b><time>Nov 2 (Mon)</time><span>Disney Night <small class="tba">Special Monday airdate due to Election Day</small></span></div>
@@ -1263,7 +1487,7 @@
       </div>
     </section>
 
-    <p class="method">Week 4 lineup updated Sep. 30, 2026 with confirmed songs and dance styles for the Oct. 6, 2026 broadcast. The ranking and tier tags are dynamically calculated from verified scoring data, backgrounds, pro records, and audience reach—not affiliated with or endorsed by DWTS or ABC.</p>
+    <p class="method">Week 4 lineup updated Oct. 01, 2026 with confirmed songs and dance styles for the Oct. 6, 2026 broadcast. The ranking and tier tags are dynamically calculated from verified scoring data, backgrounds, pro records, and audience reach—not affiliated with or endorsed by DWTS or ABC.</p>
   </main>
   <footer>
     <p>Season 35 airs live Tuesdays at 8/7c on ABC and Disney+, hosted by Alfonso Ribeiro and Julianne Hough.</p>
@@ -1276,18 +1500,18 @@
 
   <script>
     const dancers = [
-      {rank:1,name:'Ezra Frech',age:21,proName:'Daniella Karagach',mirrorballs:1,photo:'ezra-frech-daniella-karagach.jpg',weeks:[{'dance': 'Tango', 'score': 20, 'isLive': false}, {'dance': 'Cha-cha-cha', 'score': 21, 'isLive': false}, {'dance': 'Foxtrot', 'score': 21, 'isLive': false}],total:62,powerIndex:76.2,marketProb:47,wow:0,cats:['anchor', 'athlete', 'social'],tags:['Paralympic champion', '47% Market', '20+ avg'],case:'Ranks #1 on the composite Power Board (76.2/100) with a 20.7/30 scoring average and 47% market win odds. Paired with Daniella Karagach (1 Mirrorball), Elite athletic body awareness combined with a pro renowned for unlocking dynamic, unconventional choreography.'},
-      {rank:2,name:'Harry Shum Jr.',age:44,proName:'Jenna Johnson',mirrorballs:2,photo:'harry-shum-jr-jenna-johnson.jpg',weeks:[{'dance': 'Cha-cha-cha', 'score': 21, 'isLive': false}, {'dance': 'Viennese waltz', 'score': 18, 'isLive': false}, {'dance': 'Jive', 'score': 24, 'isLive': false}],total:63,powerIndex:71.5,marketProb:14,wow:6,cats:['anchor', 'dance', 'social'],tags:['Pro dance background', '14% Market', 'Surging (+6)'],case:'Surged +6 points in the latest round (24/30 Jive) with a 71.5/100 Power Index. Paired with Jenna Johnson (2 Mirrorballs), Possesses the highest technical ceiling in the cast; the only obvious challenge is overcoming ringer perception.'},
-      {rank:3,name:'Maura Higgins',age:35,proName:'Mark Ballas',mirrorballs:3,photo:'maura-higgins-mark-ballas.jpg',weeks:[{'dance': 'Foxtrot', 'score': 21, 'isLive': false}, {'dance': 'Cha-cha-cha', 'score': 19, 'isLive': false}, {'dance': 'Quickstep', 'score': 22, 'isLive': false}],total:62,powerIndex:70.6,marketProb:13,wow:3,cats:['anchor', 'social'],tags:['No dance experience', '13% Market', 'Riser (+3)'],case:'Surged +3 points in the latest round (22/30 Quickstep) with a 70.6/100 Power Index. Paired with Mark Ballas (3 Mirrorballs), Mark’s three Mirrorballs and their immense reality fandom make the partnership built for a deep finale run.'},
-      {rank:4,name:'Jenna Dewan',age:45,proName:'Val Chmerkovskiy',mirrorballs:3,photo:'jenna-dewan-val-chmerkovskiy.jpg',weeks:[{'dance': 'Tango', 'score': 19, 'isLive': false}, {'dance': 'Jive', 'score': 21, 'isLive': false}, {'dance': 'Samba', 'score': 21, 'isLive': false}],total:61,powerIndex:68.8,marketProb:11,wow:0,cats:['anchor', 'dance', 'social'],tags:['Pro dance background', '11% Market', '20+ avg'],case:'Consistent scorer averaging 20.3/30 through 3 completed weeks (68.8/100 Power Index). Paired with Val Chmerkovskiy (3 Mirrorballs), A true professional dancer paired with a three-time champion. Her high scoring floor makes her an elite anchor.'},
-      {rank:5,name:'Amber Glenn',age:26,proName:'Pasha Pashkov',mirrorballs:0,photo:'amber-glenn-pasha-pashkov.jpg',weeks:[{'dance': 'Cha-cha-cha', 'score': 18, 'isLive': false}, {'dance': 'Tango', 'score': 21, 'isLive': false}, {'dance': 'Foxtrot', 'score': 24, 'isLive': false}],total:63,powerIndex:62.9,marketProb:11,wow:3,cats:['sleeper', 'athlete', 'social'],tags:['U.S. figure skater', '11% Market', 'Riser (+3)'],case:'Surged +3 points in the latest round (24/30 Foxtrot) with a 62.9/100 Power Index. Paired with Pasha Pashkov (0 Mirrorballs), Figure-skating musicality, rotational speed, and Olympic visibility provide a reliable scoring floor.'},
-      {rank:6,name:'Jackson Olson',age:28,proName:'Emma Slater',mirrorballs:1,photo:'jackson-olson-emma-slater.jpg',weeks:[{'dance': 'Cha-cha-cha', 'score': 15, 'isLive': false}, {'dance': 'Foxtrot', 'score': 18, 'isLive': false}, {'dance': 'Paso doble', 'score': 18, 'isLive': false}],total:51,powerIndex:50.6,marketProb:4,wow:0,cats:['sleeper', 'athlete', 'social'],tags:['3M+ social reach', '4% Market', 'Steady'],case:'Holding steady with a 17.0/30 scoring average and 4% market win probability. Paired with Emma Slater (1 Mirrorball), Elite social reach and Banana Ball entertainment value give him an exceptional public voting cushion.'},
-      {rank:7,name:'Tyler Cameron',age:33,proName:'Sharna Burgess',mirrorballs:1,photo:'tyler-cameron-sharna-burgess.jpg',weeks:[{'dance': 'Tango', 'score': 17, 'isLive': false}, {'dance': 'Salsa', 'score': 16, 'isLive': false}, {'dance': 'Jive', 'score': 17, 'isLive': false}],total:50,powerIndex:48.5,marketProb:1,wow:1,cats:['sleeper', 'athlete', 'social'],tags:['Bachelor Nation', '1% Market', 'Steady'],case:'Holding steady with a 16.7/30 scoring average and 1% market win probability. Paired with Sharna Burgess (1 Mirrorball), Athletic frame, broad reality fanbase, and a returning champion pro give him higher upside than middle-pack scores suggest.'},
-      {rank:8,name:'Julia Stiles',age:45,proName:'Ezra Sosa',mirrorballs:0,photo:'julia-stiles-ezra-sosa.jpg',weeks:[{'dance': 'Quickstep', 'score': 18, 'isLive': false}, {'dance': 'Tango', 'score': 16, 'isLive': false}, {'dance': 'Salsa', 'score': 19, 'isLive': false}],total:53,powerIndex:47.7,marketProb:2,wow:3,cats:['sleeper', 'dance', 'social'],tags:['Nostalgia icon', '2% Market', 'Riser (+3)'],case:'Surged +3 points in the latest round (19/30 Salsa) with a 47.7/100 Power Index. Paired with Ezra Sosa (0 Mirrorballs), Deep cross-generational nostalgia, screen dance memory, and the season’s cleanest motivational storyline.'},
-      {rank:9,name:'Tatyana Ali',age:47,proName:'Jan Ravnik',mirrorballs:0,photo:'tatyana-ali-jan-ravnik.jpg',weeks:[{'dance': 'Jive', 'score': 12, 'isLive': false}, {'dance': 'Foxtrot', 'score': 18, 'isLive': false}, {'dance': 'Quickstep', 'score': 21, 'isLive': false}],total:51,powerIndex:46.6,marketProb:1,wow:3,cats:['social'],tags:['Fresh Prince icon', '1% Market', 'Riser (+3)'],case:'Surged +3 points in the latest round (21/30 Quickstep) with a 46.6/100 Power Index. Paired with Jan Ravnik (0 Mirrorballs), The Alfonso Ribeiro reunion and cross-generational warmth generate huge audience affection and voting momentum.'},
-      {rank:10,name:'Connor Wood',age:31,proName:'Rylee Arnold',mirrorballs:0,photo:'connor-wood-rylee-arnold.jpg',weeks:[{'dance': 'Cha-cha-cha', 'score': 16, 'isLive': false}, {'dance': 'Tango', 'score': 15, 'isLive': false}, {'dance': 'Foxtrot', 'score': 20, 'isLive': false}],total:51,powerIndex:46.2,marketProb:2,wow:5,cats:['social'],tags:['Comedy podcast', '2% Market', 'Surging (+5)'],case:'Surged +5 points in the latest round (20/30 Foxtrot) with a 46.2/100 Power Index. Paired with Rylee Arnold (0 Mirrorballs), Rapidly growing digital following and podcast listener loyalty keep him safe while his technique develops.'},
-      {rank:11,name:'Ciara Miller',age:30,proName:'Brandon Armstrong',mirrorballs:0,photo:'ciara-miller-brandon-armstrong.jpg',weeks:[{'dance': 'Foxtrot', 'score': 15, 'isLive': false}, {'dance': 'Tango', 'score': 18, 'isLive': false}, {'dance': 'Cha-cha-cha', 'score': 18, 'isLive': false}],total:51,powerIndex:42.8,marketProb:1,wow:0,cats:['social'],tags:['Bravo fandom', '1% Market', 'Steady'],case:'Holding steady with a 17.0/30 scoring average and 1% market win probability. Paired with Brandon Armstrong (0 Mirrorballs), Bravo and Traitors viewers are notoriously reliable voters; steady technical growth can push her deep into the bracket.'},
-      {rank:12,name:'Guillermo Rodriguez',age:55,proName:'Witney Carson',mirrorballs:2,photo:'guillermo-rodriguez-witney-carson.jpg',weeks:[{'dance': 'Cha-cha-cha', 'score': 10, 'isLive': false}, {'dance': 'Paso doble', 'score': 12, 'isLive': false}, {'dance': 'Foxtrot', 'score': 15, 'isLive': false}],total:37,powerIndex:42.0,marketProb:2,wow:3,cats:[],tags:['Fan favorite', '2% Market', 'Riser (+3)'],case:'Surged +3 points in the latest round (15/30 Foxtrot) with a 42.0/100 Power Index. Paired with Witney Carson (2 Mirrorballs), Carries the lowest scoring average, but reigning champion Witney Carson and Jimmy Kimmel viewers protect him from the bottom.'}
+      {rank:1,name:'Ezra Frech',age:21,proName:'Daniella Karagach',mirrorballs:1,photo:'ezra-frech-daniella-karagach.jpg',weeks:[{'dance': 'Tango', 'score': 20, 'isLive': false, 'judges': [7, 6, 7]}, {'dance': 'Cha-cha-cha', 'score': 21, 'isLive': false, 'judges': [7, 7, 7]}, {'dance': 'Foxtrot', 'score': 21, 'isLive': false, 'judges': [7, 7, 7]}],total:62,powerIndex:76.2,marketProb:46,wow:0,cats:['anchor', 'athlete', 'social'],tags:['Paralympic champion', '46% Market', '20+ avg'],case:'Ranks #1 on the composite Power Board (76.2/100) with a 20.7/30 scoring average and 46% market win odds. Paired with Daniella Karagach (1 Mirrorball), Elite athletic body awareness combined with a pro renowned for unlocking dynamic, unconventional choreography.'},
+      {rank:2,name:'Maura Higgins',age:35,proName:'Mark Ballas',mirrorballs:3,photo:'maura-higgins-mark-ballas.jpg',weeks:[{'dance': 'Foxtrot', 'score': 21, 'isLive': false, 'judges': [7, 7, 7]}, {'dance': 'Cha-cha-cha', 'score': 19, 'isLive': false, 'judges': [6, 6, 7]}, {'dance': 'Quickstep', 'score': 22, 'isLive': false, 'judges': [7, 7, 8]}],total:62,powerIndex:69.9,marketProb:12,wow:3,cats:['anchor', 'social'],tags:['No dance experience', '12% Market', 'Riser (+3)'],case:'Surged +3 points in the latest round (22/30 Quickstep) with a 69.9/100 Power Index. Paired with Mark Ballas (3 Mirrorballs), Mark’s three Mirrorballs and their immense reality fandom make the partnership built for a deep finale run.'},
+      {rank:3,name:'Harry Shum Jr.',age:44,proName:'Jenna Johnson',mirrorballs:2,photo:'harry-shum-jr-jenna-johnson.jpg',weeks:[{'dance': 'Cha-cha-cha', 'score': 21, 'isLive': false, 'judges': [7, 7, 7]}, {'dance': 'Viennese waltz', 'score': 18, 'isLive': false, 'judges': [6, 6, 6]}, {'dance': 'Jive', 'score': 24, 'isLive': false, 'judges': [8, 8, 8]}],total:63,powerIndex:69.2,marketProb:11,wow:6,cats:['anchor', 'dance', 'social'],tags:['Pro dance background', '11% Market', 'Surging (+6)'],case:'Surged +6 points in the latest round (24/30 Jive) with a 69.2/100 Power Index. Paired with Jenna Johnson (2 Mirrorballs), Possesses the highest technical ceiling in the cast; the only obvious challenge is overcoming ringer perception.'},
+      {rank:4,name:'Jenna Dewan',age:45,proName:'Val Chmerkovskiy',mirrorballs:3,photo:'jenna-dewan-val-chmerkovskiy.jpg',weeks:[{'dance': 'Tango', 'score': 19, 'isLive': false, 'judges': [6, 6, 7]}, {'dance': 'Jive', 'score': 21, 'isLive': false, 'judges': [7, 7, 7]}, {'dance': 'Samba', 'score': 21, 'isLive': false, 'judges': [7, 7, 7]}],total:61,powerIndex:68.8,marketProb:11,wow:0,cats:['anchor', 'dance', 'social'],tags:['Pro dance background', '11% Market', '20+ avg'],case:'Consistent scorer averaging 20.3/30 through 3 completed weeks (68.8/100 Power Index). Paired with Val Chmerkovskiy (3 Mirrorballs), A true professional dancer paired with a three-time champion. Her high scoring floor makes her an elite anchor.'},
+      {rank:5,name:'Amber Glenn',age:26,proName:'Pasha Pashkov',mirrorballs:0,photo:'amber-glenn-pasha-pashkov.jpg',weeks:[{'dance': 'Cha-cha-cha', 'score': 18, 'isLive': false, 'judges': [6, 6, 6]}, {'dance': 'Tango', 'score': 21, 'isLive': false, 'judges': [7, 7, 7]}, {'dance': 'Foxtrot', 'score': 24, 'isLive': false, 'judges': [8, 8, 8]}],total:63,powerIndex:65.1,marketProb:14,wow:3,cats:['sleeper', 'athlete', 'social'],tags:['U.S. figure skater', '14% Market', 'Riser (+3)'],case:'Surged +3 points in the latest round (24/30 Foxtrot) with a 65.1/100 Power Index. Paired with Pasha Pashkov (0 Mirrorballs), Figure-skating musicality, rotational speed, and Olympic visibility provide a reliable scoring floor.'},
+      {rank:6,name:'Jackson Olson',age:28,proName:'Emma Slater',mirrorballs:1,photo:'jackson-olson-emma-slater.jpg',weeks:[{'dance': 'Cha-cha-cha', 'score': 15, 'isLive': false, 'judges': [5, 5, 5]}, {'dance': 'Foxtrot', 'score': 18, 'isLive': false, 'judges': [6, 6, 6]}, {'dance': 'Paso doble', 'score': 18, 'isLive': false, 'judges': [6, 6, 6]}],total:51,powerIndex:49.1,marketProb:2,wow:0,cats:['sleeper', 'athlete', 'social'],tags:['3M+ social reach', '2% Market', 'Steady'],case:'Holding steady with a 17.0/30 scoring average and 2% market win probability. Paired with Emma Slater (1 Mirrorball), Elite social reach and Banana Ball entertainment value give him an exceptional public voting cushion.'},
+      {rank:7,name:'Tyler Cameron',age:33,proName:'Sharna Burgess',mirrorballs:1,photo:'tyler-cameron-sharna-burgess.jpg',weeks:[{'dance': 'Tango', 'score': 17, 'isLive': false, 'judges': [6, 5, 6]}, {'dance': 'Salsa', 'score': 16, 'isLive': false, 'judges': [6, 5, 5]}, {'dance': 'Jive', 'score': 17, 'isLive': false, 'judges': [5, 6, 6]}],total:50,powerIndex:48.5,marketProb:1,wow:1,cats:['sleeper', 'athlete', 'social'],tags:['Bachelor Nation', '1% Market', 'Steady'],case:'Holding steady with a 16.7/30 scoring average and 1% market win probability. Paired with Sharna Burgess (1 Mirrorball), Athletic frame, broad reality fanbase, and a returning champion pro give him higher upside than middle-pack scores suggest.'},
+      {rank:8,name:'Julia Stiles',age:45,proName:'Ezra Sosa',mirrorballs:0,photo:'julia-stiles-ezra-sosa.jpg',weeks:[{'dance': 'Quickstep', 'score': 18, 'isLive': false, 'judges': [6, 6, 6]}, {'dance': 'Tango', 'score': 16, 'isLive': false, 'judges': [5, 6, 5]}, {'dance': 'Salsa', 'score': 19, 'isLive': false, 'judges': [6, 7, 6]}],total:53,powerIndex:47.0,marketProb:1,wow:3,cats:['sleeper', 'dance', 'social'],tags:['Nostalgia icon', '1% Market', 'Riser (+3)'],case:'Surged +3 points in the latest round (19/30 Salsa) with a 47.0/100 Power Index. Paired with Ezra Sosa (0 Mirrorballs), Deep cross-generational nostalgia, screen dance memory, and the season’s cleanest motivational storyline.'},
+      {rank:9,name:'Connor Wood',age:31,proName:'Rylee Arnold',mirrorballs:0,photo:'connor-wood-rylee-arnold.jpg',weeks:[{'dance': 'Cha-cha-cha', 'score': 16, 'isLive': false, 'judges': [6, 5, 5]}, {'dance': 'Tango', 'score': 15, 'isLive': false, 'judges': [5, 5, 5]}, {'dance': 'Foxtrot', 'score': 20, 'isLive': false, 'judges': [7, 6, 7]}],total:51,powerIndex:47.0,marketProb:3,wow:5,cats:['social'],tags:['Comedy podcast', '3% Market', 'Surging (+5)'],case:'Surged +5 points in the latest round (20/30 Foxtrot) with a 47.0/100 Power Index. Paired with Rylee Arnold (0 Mirrorballs), Rapidly growing digital following and podcast listener loyalty keep him safe while his technique develops.'},
+      {rank:10,name:'Tatyana Ali',age:47,proName:'Jan Ravnik',mirrorballs:0,photo:'tatyana-ali-jan-ravnik.jpg',weeks:[{'dance': 'Jive', 'score': 12, 'isLive': false, 'judges': [4, 4, 4]}, {'dance': 'Foxtrot', 'score': 18, 'isLive': false, 'judges': [6, 6, 6]}, {'dance': 'Quickstep', 'score': 21, 'isLive': false, 'judges': [7, 7, 7]}],total:51,powerIndex:46.6,marketProb:1,wow:3,cats:['social'],tags:['Fresh Prince icon', '1% Market', 'Riser (+3)'],case:'Surged +3 points in the latest round (21/30 Quickstep) with a 46.6/100 Power Index. Paired with Jan Ravnik (0 Mirrorballs), The Alfonso Ribeiro reunion and cross-generational warmth generate huge audience affection and voting momentum.'},
+      {rank:11,name:'Ciara Miller',age:30,proName:'Brandon Armstrong',mirrorballs:0,photo:'ciara-miller-brandon-armstrong.jpg',weeks:[{'dance': 'Foxtrot', 'score': 15, 'isLive': false, 'judges': [5, 5, 5]}, {'dance': 'Tango', 'score': 18, 'isLive': false, 'judges': [6, 6, 6]}, {'dance': 'Cha-cha-cha', 'score': 18, 'isLive': false, 'judges': [6, 6, 6]}],total:51,powerIndex:42.8,marketProb:1,wow:0,cats:['social'],tags:['Bravo fandom', '1% Market', 'Steady'],case:'Holding steady with a 17.0/30 scoring average and 1% market win probability. Paired with Brandon Armstrong (0 Mirrorballs), Bravo and Traitors viewers are notoriously reliable voters; steady technical growth can push her deep into the bracket.'},
+      {rank:12,name:'Guillermo Rodriguez',age:55,proName:'Witney Carson',mirrorballs:2,photo:'guillermo-rodriguez-witney-carson.jpg',weeks:[{'dance': 'Cha-cha-cha', 'score': 10, 'isLive': false, 'judges': [4, 3, 3]}, {'dance': 'Paso doble', 'score': 12, 'isLive': false, 'judges': [4, 4, 4]}, {'dance': 'Foxtrot', 'score': 15, 'isLive': false, 'judges': [5, 5, 5]}],total:37,powerIndex:42.7,marketProb:3,wow:3,cats:[],tags:['Fan favorite', '3% Market', 'Riser (+3)'],case:'Surged +3 points in the latest round (15/30 Foxtrot) with a 42.7/100 Power Index. Paired with Witney Carson (2 Mirrorballs), Carries the lowest scoring average, but reigning champion Witney Carson and Jimmy Kimmel viewers protect him from the bottom.'}
     ];
     const socialByName = {
       "Maura Higgins": {
@@ -1465,8 +1689,16 @@
       list.forEach((d,idx)=>{
         const card=document.createElement('article');card.className='card';
         const displayRank=idx+1;
-        const maxTotal=d.weeks.length*30;
-        const scoreHistory=d.weeks.map((week,index)=>`<div class="score-week ${week.isLive?'live-score':''}"><span>Week ${index+1} · ${week.dance}${week.isLive?' <span class="live-dot-inline" style="margin-left:4px" title="Live score tonight"></span>':''}</span><strong>${week.score}/30</strong></div>`).join('');
+        const scoreHistory=d.weeks.map((week,index)=>{
+          let badge = '';
+          if (week.judges && week.judges.length) {
+            const tip = week.judges.length === 3
+              ? `Carrie Ann: ${week.judges[0]} · Derek: ${week.judges[1]} · Bruno: ${week.judges[2]}`
+              : `Judges: ${week.judges.join(' · ')}`;
+            badge = ` <span class="score-judges-badge" title="${tip}">(${week.judges.join(',')})</span>`;
+          }
+          return `<div class="score-week ${week.isLive?'live-score':''}"><span>Week ${index+1} · ${week.dance}${week.isLive?' <span class="live-dot-inline" style="margin-left:4px" title="Live score tonight"></span>':''}</span><strong>${week.score}/30${badge}</strong></div>`;
+        }).join('');
         const powerIndex = d.powerIndex !== undefined ? d.powerIndex : Math.round((d.total / (maxTotal || 60)) * 100);
         const marketProb = d.marketProb !== undefined ? d.marketProb : 5;
         const wow = getWoW(d);
