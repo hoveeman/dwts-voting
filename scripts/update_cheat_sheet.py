@@ -351,6 +351,16 @@ def get_spotify_track_url(song):
                     return mapping[k1]
                 if k2 in mapping:
                     return mapping[k2]
+                title_clean = title.strip().lower()
+                if title_clean in mapping:
+                    return mapping[title_clean]
+            else:
+                k = raw.lower().replace('&', 'and').replace('feat.', '').replace('  ', ' ').strip()
+                if k in mapping:
+                    return mapping[k]
+                for mk, url in mapping.items():
+                    if mk == k or mk.startswith(f"{k} ---") or mk.startswith(f"{k} "):
+                        return url
         except Exception:
             pass
     return None
@@ -462,6 +472,13 @@ def parse_wikipedia_data(raw_html):
     for i, m in enumerate(weeks_matches):
         w_num = int(m.group(1))
         w_theme = m.group(2).strip()
+        theme_artist = None
+        if w_theme.lower().endswith(' night'):
+            cand = w_theme[:-6].strip()
+            non_artist_themes = {'premiere', 'opening', 'viral hits', 'yacht rock', 'disney', 'halloween', 'most memorable year', 'latin', 'semifinals', 'finals', 'finale', 'quarterfinals'}
+            if cand.lower() not in non_artist_themes:
+                theme_artist = cand
+
         start_pos = m.start()
         end_pos = weeks_matches[i+1].start() if i+1 < len(weeks_matches) else clean_html.find('id="Dance_chart"', start_pos)
         if end_pos == -1:
@@ -473,6 +490,15 @@ def parse_wikipedia_data(raw_html):
 
         for t in tables:
             rows = re.findall(r'<tr[^>]*>(.*?)</tr>', t, re.DOTALL)
+            table_artist = theme_artist
+            if rows:
+                h_cells = re.findall(r'<t[hd][^>]*>(.*?)</t[hd]>', rows[0], re.DOTALL)
+                if len(h_cells) >= 4:
+                    h_text = html.unescape(re.sub(r'<[^>]+>', '', h_cells[3])).strip()
+                    m_artist = re.search(r'^(.*?)\s+(?:music|songs)$', h_text, re.IGNORECASE)
+                    if m_artist:
+                        table_artist = m_artist.group(1).strip()
+
             for r in rows[1:]:
                 cells = re.findall(r'<t[hd][^>]*>(.*?)</t[hd]>', r, re.DOTALL)
                 clean_cells = [html.unescape(re.sub(r'<[^>]+>', '', c).strip()) for c in cells]
@@ -503,6 +529,10 @@ def parse_wikipedia_data(raw_html):
                     elif ' - ' in music_clean:
                         parts = music_clean.split(' - ', 1)
                         music_fmt = f'“{parts[0].strip(chr(34)).strip(chr(8220)).strip(chr(8221))}” · {parts[1].strip()}'
+                    elif table_artist and music_clean and music_clean.upper() != 'TBA':
+                        clean_title = music_clean.strip(chr(34)).strip(chr(8220)).strip(chr(8221)).strip("'\" \t")
+                        if clean_title:
+                            music_fmt = f'“{clean_title}” · {table_artist}'
 
                     couple_history[matched_name].append({
                         'week': w_num,
@@ -1331,17 +1361,20 @@ def main():
     print("Fetching prediction market data from Kalshi & Polymarket public APIs...")
     market_odds = fetch_prediction_market_data()
 
-    print("Updating index.html, dancers.json, and dancers.txt with dynamic scoring & market data...")
-    update_index_html(wiki_data, market_odds)
-
-    # 10. Automatically sync Spotify playlists with latest show order, songs, and cover artwork
+    # Automatically sync Spotify playlists with latest show order, songs, and cover artwork
+    # Runs before update_index_html so spotify_playlists.json and spotify_tracks.json
+    # have the latest week playlist URL and direct song links ready to be embedded into index.html
     try:
         sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
         from spotify_sync import sync_all_dwts_playlists
         print("Syncing Spotify playlists with latest show sequence...")
-        sync_all_dwts_playlists(wiki_data['week_lineups'], wiki_data.get('lineup_week_num', 3))
+        current_wk = max(wiki_data['week_lineups'].keys()) if wiki_data.get('week_lineups') else 4
+        sync_all_dwts_playlists(wiki_data['week_lineups'], current_wk)
     except Exception as e:
         print(f"[Spotify Sync Note]: {e}")
+
+    print("Updating index.html, dancers.json, and dancers.txt with dynamic scoring & market data...")
+    update_index_html(wiki_data, market_odds)
 
     print("Running formatting validation check...")
     res = os.system(f"python3 {VALIDATE_SCRIPT}")

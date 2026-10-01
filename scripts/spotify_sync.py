@@ -184,6 +184,9 @@ def save_track_cache(cache):
             title, artist = parts[0], parts[1]
             simple_key = f"{title} {artist}".replace('&', 'and').replace('feat.', '').replace('  ', ' ').strip()
             tracks[simple_key] = track_url
+            title_only = title.strip().lower()
+            if title_only not in tracks:
+                tracks[title_only] = track_url
     with open(TRACKS_FILE, 'w', encoding='utf-8') as f:
         json.dump(tracks, f, indent=2)
 
@@ -323,23 +326,6 @@ def parse_song_string(song_raw):
         return parts[0].strip(), parts[1].strip()
     return s.strip(), ''
 
-
-def sync_all_dwts_playlists(week_lineups, current_week_num=3):
-    """
-    Called by update_cheat_sheet.py or standalone to sync all playlists.
-    """
-    token = get_valid_access_token()
-    if not token:
-        print("[Spotify Sync] No valid Spotify authorization token found. Skipping playlist sync.")
-        return False
-
-    try:
-        me = spotify_api('/me', token)
-        user_id = me['id']
-    except Exception as e:
-        print(f"[Spotify Sync] Authentication check failed: {e}")
-        return False
-
 def ensure_cover_image(wk_num, theme_title):
     os.makedirs(COVERS_DIR, exist_ok=True)
     filename = f"week_{wk_num}.jpg" if isinstance(wk_num, int) else f"{wk_num}.jpg"
@@ -470,6 +456,11 @@ def sync_all_dwts_playlists(week_lineups, current_week_num=3):
             'name': 'DWTS Season 35 · Week 3: Yacht Rock Night',
             'desc': 'All songs from Dancing with the Stars Season 35 Week 3 (Yacht Rock Night), synced in performance order.',
             'cover': 'week_3.jpg'
+        },
+        4: {
+            'name': 'DWTS Season 35 · Week 4: Mariah Carey Night',
+            'desc': 'All songs from Dancing with the Stars Season 35 Week 4 (Mariah Carey Night), synced in performance order.',
+            'cover': 'week_4.jpg'
         }
     }
 
