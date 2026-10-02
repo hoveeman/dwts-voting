@@ -4,7 +4,20 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="color-scheme" content="light dark" />
-  <link rel="icon" href="data:," />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="DWTS S35" />
+  <meta name="application-name" content="DWTS S35" />
+  <meta name="theme-color" content="#191a1c" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#090a0b" media="(prefers-color-scheme: dark)" />
+
+  <!-- PWA Manifest & App Icons -->
+  <link rel="manifest" href="/manifest.webmanifest" />
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png" />
   <title>DWTS Season 35 Ballroom Companion</title>
   <meta name="description" content="Live scores, power rankings, weekly music lineups, and voting companion for Dancing with the Stars Season 35." />
 
@@ -50,10 +63,10 @@
     body{margin:0;background:var(--bg);color:var(--ink);font-family:"IBM Plex Sans",sans-serif;line-height:1.52;overflow-x:hidden}
     a{color:inherit}
     button,input{font:inherit}
-    .tabs{position:sticky;top:0;z-index:10;background:rgba(25,26,28,.97);border-bottom:1px solid #34373a;display:flex;justify-content:center;gap:3px;padding:7px 12px;overflow:auto;scrollbar-width:none}
+    .tabs{position:sticky;top:0;z-index:10;background:rgba(25,26,28,.97);border-bottom:1px solid #34373a;display:flex;justify-content:center;align-items:center;gap:3px;padding:max(7px,env(safe-area-inset-top)) max(12px,env(safe-area-inset-right)) 7px max(12px,env(safe-area-inset-left));overflow:auto;scrollbar-width:none}
     .tabs a{color:#e9e9e5;text-decoration:none;padding:10px 14px;font-size:.82rem;font-weight:700;white-space:nowrap}
     .tabs a:hover,.tabs a:focus{background:#343638;color:#fff;outline:none}
-    main{max-width:1240px;margin:0 auto;padding:clamp(28px,4vw,56px) clamp(18px,4vw,54px) 80px;min-width:0;overflow-x:hidden}
+    main{max-width:1240px;margin:0 auto;padding:clamp(28px,4vw,56px) clamp(18px,4vw,54px) max(80px,calc(40px + env(safe-area-inset-bottom)));min-width:0;overflow-x:hidden}
     .section-head{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(260px,440px);gap:30px;align-items:end;margin-bottom:28px}
     .kicker-wrap{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:10px}
     .kicker{color:var(--red);font-weight:700;font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;margin:0}
@@ -382,29 +395,54 @@
       .live-banner-actions{grid-template-columns:1fr;gap:8px}
     }
     @media(max-width:560px){
-      main{padding:18px 14px 60px}
+      main{padding:18px 14px max(60px,calc(30px + env(safe-area-inset-bottom)))}
       h1{font-size:2.15rem;letter-spacing:-.04em;line-height:.96}
       .hero-sub{font-size:.88rem;margin-top:8px}
       .quick-meta{gap:6px;font-size:.73rem;margin-top:10px}
       .section-head{gap:14px;margin-bottom:18px}
       .section-head>p{font-size:.84rem;line-height:1.42}
-      .tabs{justify-content:flex-start;flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;padding:6px 10px;scrollbar-width:none}.tabs::-webkit-scrollbar{display:none}.tabs a{padding:6px 9px;font-size:.74rem;flex:0 0 auto}
+      .tabs{justify-content:flex-start;flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;padding:max(6px,env(safe-area-inset-top)) max(10px,env(safe-area-inset-right)) 6px max(10px,env(safe-area-inset-left));scrollbar-width:none}.tabs::-webkit-scrollbar{display:none}.tabs a{padding:6px 9px;font-size:.74rem;flex:0 0 auto}
       section,.week-lineup,.calendar{scroll-margin-top:46px}
       .card{grid-template-columns:50px 1fr}.rank{grid-row:1 / 3;font-size:1.72rem;padding-top:17px}.couple-photo{grid-column:2;height:auto}.card-body{grid-column:2;padding:15px 13px}.name{font-size:1.28rem}.score{min-width:44px;padding:3px 6px}.score-history{grid-template-columns:1fr}.score-week{padding-block:6px}
       .lineup-list{grid-template-columns:1fr}.eliminated-card{grid-template-columns:1fr}.eliminated-card img{min-height:0;height:auto;aspect-ratio:3/2}.eliminated-copy{padding:22px 18px 25px}.cal-row{grid-template-columns:50px 86px 1fr;gap:8px}.cal-row span{font-size:1rem}.spotlight{margin-inline:-14px}.week-lineup,.vote{margin-inline:-14px}.lens-wrap{margin:16px 0 22px}.lens-meta{gap:4px 8px;margin-bottom:8px}.lens-desc{font-size:.78rem}.controls{gap:6px}.filter{padding:7px 11px;font-size:.78rem}
       .analytics-card{padding:16px 14px}
       .risk-table th,.risk-table td{padding:8px 9px;font-size:.75rem}
+      .pwa-nav-btn{padding:4px 8px;font-size:.72rem}
     }
-    .live-toast{position:fixed;top:16px;left:50%;transform:translateX(-50%) translateY(-20px);background:rgba(18,20,26,.95);color:#fff;border:1px solid rgba(74,222,128,.4);box-shadow:0 10px 30px rgba(0,0,0,.6),0 0 14px rgba(74,222,128,.25);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);padding:10px 18px;border-radius:9999px;font-family:var(--font-body,system-ui);font-size:.82rem;font-weight:600;display:flex;align-items:center;gap:8px;z-index:9999;opacity:0;pointer-events:none;transition:opacity .3s cubic-bezier(.16,1,.3,1),transform .3s cubic-bezier(.16,1,.3,1)}
+    .live-toast{position:fixed;top:16px;left:50%;transform:translateX(-50%) translateY(-20px);background:rgba(18,20,26,.95);color:#fff;border:1px solid rgba(74,222,128,.4);box-shadow:0 10px 30px rgba(0,0,0,.6),0 0 14px rgba(74,222,128,.25);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);padding:10px 18px;border-radius:9999px;font-family:var(--font-body,system-ui);font-size:.82rem;font-weight:600;display:flex;align-items:center;gap:8px;z-index:9999;opacity:0;pointer-events:none;transition:opacity .3s cubic-bezier(.16,1,.3,1),transform .3s cubic-bezier(.16,1,.3,1);cursor:pointer}
     .live-toast.show{opacity:1;pointer-events:auto;transform:translateX(-50%) translateY(0)}
     .live-toast .toast-dot{width:8px;height:8px;border-radius:50%;background:#4ade80;box-shadow:0 0 8px #4ade80;animation:toast-pulse 1.5s infinite}
     @keyframes toast-pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.85)}}
+
+    /* PWA Navigation & Modal Styling */
+    .offline-bar{display:none;background:#8b1c28;color:#fff;font-size:.76rem;font-weight:600;padding:6px 12px;text-align:center;align-items:center;justify-content:center;gap:7px;position:relative;z-index:11}
+    .offline-bar svg{width:14px;height:14px;flex-shrink:0}
+    .pwa-nav-btn{background:rgba(232,181,80,.12);color:var(--gold);border:1px solid rgba(232,181,80,.4);border-radius:999px;padding:6px 12px;font-size:.76rem;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:5px;margin-left:4px;white-space:nowrap;transition:all .15s ease;flex-shrink:0}
+    .pwa-nav-btn:hover{background:var(--gold);color:#111416}
+    .pwa-nav-btn.active{background:var(--green);color:#fff;border-color:var(--green);box-shadow:0 0 8px rgba(35,99,79,.4)}
+    .pwa-modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.75);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);z-index:10000;display:none;align-items:flex-end;justify-content:center}
+    .pwa-modal-backdrop.show{display:flex}
+    .pwa-modal{background:var(--paper);color:var(--ink);width:100%;max-width:480px;border-radius:20px 20px 0 0;padding:24px 20px calc(24px + env(safe-area-inset-bottom));box-shadow:0 -10px 40px rgba(0,0,0,.5);border:1px solid var(--line);position:relative;animation:pwa-slide-up .25s ease-out}
+    @keyframes pwa-slide-up{from{transform:translateY(100%)}to{transform:translateY(0)}}
+    .pwa-modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+    .pwa-modal-title{font-family:var(--font-display);font-size:1.3rem;font-weight:700;margin:0}
+    .pwa-modal-close{background:none;border:none;font-size:1.4rem;cursor:pointer;color:var(--muted);padding:4px 8px;line-height:1}
+    .pwa-modal-steps{display:flex;flex-direction:column;gap:12px;font-size:.88rem;color:var(--ink)}
+    .pwa-step-row{display:flex;align-items:center;gap:12px;background:var(--bg);padding:10px 14px;border-radius:10px}
+    .pwa-step-num{width:26px;height:26px;border-radius:50%;background:var(--gold);color:#111416;font-weight:800;display:flex;align-items:center;justify-content:center;font-size:.78rem;flex-shrink:0}
     @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
   </style>
 </head>
 <body>
+  <div id="offline-bar" class="offline-bar" role="status">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="1" y1="1" x2="23" y2="23"></line><path d="M16.72 11.06A10.94 10.94 0 0 1 19 12.55"></path><path d="M5 12.55a10.94 10.94 0 0 1 5.17-2.39"></path><path d="M10.71 5.05A16 16 0 0 1 22.58 9"></path><path d="M1.42 9a15.91 15.91 0 0 1 4.7-2.88"></path><path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path><line x1="12" y1="20" x2="12.01" y2="20"></line></svg>
+    <span>Offline Mode · Showing cached ballroom standings &amp; music</span>
+  </div>
+
   <nav class="tabs" aria-label="Ballroom companion sections">
     <a href="#board">Power board</a><a href="#analytics">Analytics</a><a href="#scores">Scores &amp; songs</a><a href="#schedule">Schedule</a><a href="#voted-off">Voted off</a><a href="#voting">Voting</a>
+    <button id="pwa-wake-btn" class="pwa-nav-btn" type="button" aria-label="Toggle Screen Awake during broadcast" title="Keep screen awake while watching live"><span>⚡ Keep Awake</span></button>
+    <button id="pwa-install-btn" class="pwa-nav-btn" type="button" style="display:none;" aria-label="Install DWTS Companion App"><span>📲 Install App</span></button>
   </nav>
 
   <div id="live-banner" class="live-banner" style="display:none" role="region" aria-label="Live show quick actions">
@@ -2330,7 +2368,7 @@
     let lastSeenUpdate = document.querySelector('.subtle-update')?.textContent?.trim() || '';
     let isLiveUpdating = false;
 
-    function showLiveToast(message){
+    function showLiveToast(message, onClick){
       let toast = document.getElementById('live-toast');
       if(!toast){
         toast = document.createElement('div');
@@ -2339,11 +2377,12 @@
         document.body.appendChild(toast);
       }
       toast.innerHTML = `<span class="toast-dot"></span><span>${message}</span>`;
+      toast.onclick = onClick ? () => { onClick(); toast.classList.remove('show'); } : null;
       toast.classList.add('show');
       clearTimeout(toast._timeout);
       toast._timeout = setTimeout(()=>{
         toast.classList.remove('show');
-      }, 4500);
+      }, onClick ? 8000 : 4500);
     }
 
     async function checkLiveUpdates(){
@@ -2471,6 +2510,203 @@
       }
     });
     window.addEventListener('focus', checkLiveUpdates);
+
+    // --- Progressive Web App (PWA) Features ---
+
+    // 1. Service Worker Registration & Update Notification
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js', { updateViaCache: 'none' })
+          .then((reg) => {
+            console.log('[PWA] Service Worker registered with scope:', reg.scope);
+            reg.onupdatefound = () => {
+              const installingWorker = reg.installing;
+              if (!installingWorker) return;
+              installingWorker.onstatechange = () => {
+                if (installingWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                  showLiveToast('✨ App update ready · Tap to reload', () => {
+                    installingWorker.postMessage({ type: 'SKIP_WAITING' });
+                    window.location.reload();
+                  });
+                }
+              };
+            };
+          })
+          .catch((err) => {
+            console.warn('[PWA] Service Worker registration failed:', err);
+          });
+      });
+    }
+
+    // 2. Offline / Online Status Synchronization
+    function updatePwaOnlineStatus() {
+      const bar = document.getElementById('offline-bar');
+      if (bar) {
+        bar.style.display = navigator.onLine ? 'none' : 'flex';
+      }
+      if (navigator.onLine) {
+        showLiveToast('🟢 Connected · Syncing latest ballroom scores');
+        if (typeof checkLiveUpdates === 'function') checkLiveUpdates();
+      }
+    }
+    window.addEventListener('online', updatePwaOnlineStatus);
+    window.addEventListener('offline', updatePwaOnlineStatus);
+    updatePwaOnlineStatus();
+
+    // 3. Screen Wake Lock (Keep phone awake during Tuesday night broadcast)
+    let pwaWakeLock = null;
+    const wakeBtn = document.getElementById('pwa-wake-btn');
+
+    async function requestWakeLock() {
+      try {
+        if ('wakeLock' in navigator) {
+          pwaWakeLock = await navigator.wakeLock.request('screen');
+          if (wakeBtn) {
+            wakeBtn.classList.add('active');
+            wakeBtn.innerHTML = '<span>⚡ Screen Locked On</span>';
+          }
+          showLiveToast('⚡ Screen Wake Lock active for live show');
+          pwaWakeLock.addEventListener('release', () => {
+            pwaWakeLock = null;
+            if (wakeBtn) {
+              wakeBtn.classList.remove('active');
+              wakeBtn.innerHTML = '<span>⚡ Keep Awake</span>';
+            }
+          });
+        } else {
+          showLiveToast('Screen Wake Lock not supported on this device');
+        }
+      } catch (err) {
+        console.warn('[PWA] Wake Lock error:', err);
+        if (wakeBtn) {
+          wakeBtn.classList.remove('active');
+          wakeBtn.innerHTML = '<span>⚡ Keep Awake</span>';
+        }
+      }
+    }
+
+    async function releaseWakeLock() {
+      if (pwaWakeLock) {
+        await pwaWakeLock.release();
+        pwaWakeLock = null;
+      }
+      if (wakeBtn) {
+        wakeBtn.classList.remove('active');
+        wakeBtn.innerHTML = '<span>⚡ Keep Awake</span>';
+      }
+      showLiveToast('Screen sleep restored to system settings');
+    }
+
+    if (wakeBtn) {
+      wakeBtn.addEventListener('click', () => {
+        if (pwaWakeLock) {
+          releaseWakeLock();
+        } else {
+          requestWakeLock();
+        }
+      });
+    }
+
+    document.addEventListener('visibilitychange', () => {
+      if (wakeBtn && wakeBtn.classList.contains('active') && document.visibilityState === 'visible' && !pwaWakeLock) {
+        requestWakeLock();
+      }
+    });
+
+    // 4. Install App Prompts (Android/Chrome beforeinstallprompt & iOS Guide)
+    let pwaDeferredPrompt = null;
+    const installBtn = document.getElementById('pwa-install-btn');
+    const isIosDevice = /iphone|ipad|ipod/.test(window.navigator.userAgent.toLowerCase());
+    const isStandaloneMode = ('standalone' in window.navigator && window.navigator.standalone) || window.matchMedia('(display-mode: standalone)').matches;
+
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      pwaDeferredPrompt = e;
+      if (installBtn && !isStandaloneMode) {
+        installBtn.style.display = 'inline-flex';
+      }
+    });
+
+    window.addEventListener('appinstalled', () => {
+      pwaDeferredPrompt = null;
+      if (installBtn) installBtn.style.display = 'none';
+      showLiveToast('🎉 DWTS Ballroom Companion installed to Home Screen!');
+    });
+
+    // On iOS Safari (non-standalone), show install button to open the guide
+    if (isIosDevice && !isStandaloneMode && installBtn) {
+      installBtn.style.display = 'inline-flex';
+    }
+
+    const iosModal = document.getElementById('ios-install-modal');
+    const iosClose = document.getElementById('ios-modal-close');
+    const iosDone = document.getElementById('ios-modal-done');
+
+    function closeIosModal() {
+      if (iosModal) iosModal.classList.remove('show');
+    }
+
+    if (installBtn) {
+      installBtn.addEventListener('click', async () => {
+        if (pwaDeferredPrompt) {
+          pwaDeferredPrompt.prompt();
+          const choice = await pwaDeferredPrompt.userChoice;
+          if (choice.outcome === 'accepted') {
+            installBtn.style.display = 'none';
+          }
+          pwaDeferredPrompt = null;
+        } else if (isIosDevice) {
+          if (iosModal) iosModal.classList.add('show');
+        } else {
+          showLiveToast('To install, open browser menu and select "Install app"');
+        }
+      });
+    }
+
+    if (iosClose) iosClose.addEventListener('click', closeIosModal);
+    if (iosDone) iosDone.addEventListener('click', closeIosModal);
+    if (iosModal) {
+      iosModal.addEventListener('click', (e) => {
+        if (e.target === iosModal) closeIosModal();
+      });
+    }
+
+    // 5. Haptic Feedback on interactive clicks
+    document.addEventListener('click', (e) => {
+      if (e.target.closest('.filter, .pwa-nav-btn, .live-btn, #ios-modal-done')) {
+        if ('vibrate' in navigator) {
+          try { navigator.vibrate(10); } catch (_) {}
+        }
+      }
+    });
   </script>
+
+  <!-- iOS PWA Add to Home Screen Modal -->
+  <div id="ios-install-modal" class="pwa-modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="ios-modal-title">
+    <div class="pwa-modal">
+      <div class="pwa-modal-head">
+        <h3 id="ios-modal-title" class="pwa-modal-title">Install Companion App</h3>
+        <button id="ios-modal-close" class="pwa-modal-close" type="button" aria-label="Close dialog">&times;</button>
+      </div>
+      <p style="margin:0 0 14px;font-size:0.84rem;color:var(--muted);line-height:1.45;">Install the DWTS Ballroom Companion on your iPhone or iPad for 1-tap voting, instant offline access, and a full-screen app experience:</p>
+      <div class="pwa-modal-steps">
+        <div class="pwa-step-row">
+          <span class="pwa-step-num">1</span>
+          <span>Tap the <strong>Share</strong> button in Safari's bottom toolbar (<svg style="width:16px;height:16px;vertical-align:-3px;display:inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path><polyline points="16 6 12 2 8 6"></polyline><line x1="12" y1="2" x2="12" y2="15"></line></svg>).</span>
+        </div>
+        <div class="pwa-step-row">
+          <span class="pwa-step-num">2</span>
+          <span>Scroll down the share sheet and tap <strong>Add to Home Screen</strong>.</span>
+        </div>
+        <div class="pwa-step-row">
+          <span class="pwa-step-num">3</span>
+          <span>Tap <strong>Add</strong> in the top-right corner. The DWTS icon appears on your home screen!</span>
+        </div>
+      </div>
+      <div style="margin-top:16px;text-align:center;">
+        <button id="ios-modal-done" class="filter" type="button" style="width:100%;justify-content:center;padding:10px 16px;">Got it</button>
+      </div>
+    </div>
+  </div>
 </body>
 </html>

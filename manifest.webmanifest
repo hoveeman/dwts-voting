@@ -1,0 +1,88 @@
+{
+  "id": "dwts-s35-companion",
+  "name": "DWTS Season 35 Ballroom Companion",
+  "short_name": "DWTS S35",
+  "description": "Live scores, power rankings, weekly music lineups, and voting companion for Dancing with the Stars Season 35.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#111416",
+  "theme_color": "#191a1c",
+  "lang": "en-US",
+  "categories": [
+    "entertainment",
+    "sports",
+    "music"
+  ],
+  "icons": [
+    {
+      "src": "/assets/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/icon-maskable-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/assets/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/assets/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Live Voting & SMS",
+      "short_name": "Vote",
+      "url": "/#voting",
+      "description": "Cast 10 SMS votes or launch Trent's iOS shortcut",
+      "icons": [
+        {
+          "src": "/assets/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Power Rankings & Board",
+      "short_name": "Rankings",
+      "url": "/#board",
+      "description": "View current draft board and composite Power Index",
+      "icons": [
+        {
+          "src": "/assets/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Weekly Music Lineup",
+      "short_name": "Music",
+      "url": "/#music",
+      "description": "View weekly theme songs and Spotify playlists",
+      "icons": [
+        {
+          "src": "/assets/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    }
+  ]
+}

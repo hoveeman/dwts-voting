@@ -11,3 +11,4 @@ client_secret*.json
 *.log
 gemini.md
 GEMINI.md
+.DS_Store
