@@ -420,7 +420,7 @@
     .pwa-nav-btn{background:rgba(232,181,80,.12);color:var(--gold);border:1px solid rgba(232,181,80,.4);border-radius:999px;padding:6px 12px;font-size:.76rem;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:5px;margin-left:4px;white-space:nowrap;transition:all .15s ease;flex-shrink:0}
     .pwa-nav-btn:hover{background:var(--gold);color:#111416}
     .pwa-nav-btn.active{background:var(--green);color:#fff;border-color:var(--green);box-shadow:0 0 8px rgba(35,99,79,.4)}
-    .pwa-modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.75);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);z-index:10000;display:none;align-items:flex-end;justify-content:center}
+    .pwa-modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.75);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);z-index:99999;display:none;align-items:flex-end;justify-content:center}
     .pwa-modal-backdrop.show{display:flex}
     .pwa-modal{background:var(--paper);color:var(--ink);width:100%;max-width:480px;border-radius:20px 20px 0 0;padding:24px 20px calc(24px + env(safe-area-inset-bottom));box-shadow:0 -10px 40px rgba(0,0,0,.5);border:1px solid var(--line);position:relative;animation:pwa-slide-up .25s ease-out}
     @keyframes pwa-slide-up{from{transform:translateY(100%)}to{transform:translateY(0)}}
@@ -2638,38 +2638,45 @@
       installBtn.style.display = 'inline-flex';
     }
 
-    const iosModal = document.getElementById('ios-install-modal');
-    const iosClose = document.getElementById('ios-modal-close');
-    const iosDone = document.getElementById('ios-modal-done');
+    function openIosModal() {
+      const modal = document.getElementById('ios-install-modal');
+      if (modal) {
+        modal.classList.add('show');
+        document.body.style.overflow = 'hidden';
+      }
+    }
 
     function closeIosModal() {
-      if (iosModal) iosModal.classList.remove('show');
+      const modal = document.getElementById('ios-install-modal');
+      if (modal) {
+        modal.classList.remove('show');
+        document.body.style.overflow = '';
+      }
     }
 
     if (installBtn) {
-      installBtn.addEventListener('click', async () => {
+      installBtn.addEventListener('click', (e) => {
+        e.preventDefault();
         if (pwaDeferredPrompt) {
           pwaDeferredPrompt.prompt();
-          const choice = await pwaDeferredPrompt.userChoice;
-          if (choice.outcome === 'accepted') {
-            installBtn.style.display = 'none';
-          }
-          pwaDeferredPrompt = null;
-        } else if (isIosDevice) {
-          if (iosModal) iosModal.classList.add('show');
+          pwaDeferredPrompt.userChoice.then((choice) => {
+            if (choice.outcome === 'accepted') {
+              installBtn.style.display = 'none';
+            }
+            pwaDeferredPrompt = null;
+          });
         } else {
-          showLiveToast('To install, open browser menu and select "Install app"');
+          // On iOS Safari (or browsers without native install prompt API), show guided modal
+          openIosModal();
         }
       });
     }
 
-    if (iosClose) iosClose.addEventListener('click', closeIosModal);
-    if (iosDone) iosDone.addEventListener('click', closeIosModal);
-    if (iosModal) {
-      iosModal.addEventListener('click', (e) => {
-        if (e.target === iosModal) closeIosModal();
-      });
-    }
+    document.addEventListener('click', (e) => {
+      if (e.target.closest('#ios-modal-close, #ios-modal-done') || e.target.id === 'ios-install-modal') {
+        closeIosModal();
+      }
+    });
 
     // 5. Haptic Feedback on interactive clicks
     document.addEventListener('click', (e) => {
@@ -2696,7 +2703,7 @@
         </div>
         <div class="pwa-step-row">
           <span class="pwa-step-num">2</span>
-          <span>Scroll down the share sheet and tap <strong>Add to Home Screen</strong>.</span>
+          <span>Scroll down the share sheet and tap <strong>Add to Home Screen</strong> (<svg style="width:16px;height:16px;vertical-align:-3px;display:inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>).</span>
         </div>
         <div class="pwa-step-row">
           <span class="pwa-step-num">3</span>
@@ -2704,7 +2711,7 @@
         </div>
       </div>
       <div style="margin-top:16px;text-align:center;">
-        <button id="ios-modal-done" class="filter" type="button" style="width:100%;justify-content:center;padding:10px 16px;">Got it</button>
+        <button id="ios-modal-done" class="filter" type="button" style="width:100%;justify-content:center;padding:12px 16px;font-size:0.92rem;background:var(--gold);color:#111416;border-color:var(--gold);font-weight:700;">Got it</button>
       </div>
     </div>
   </div>
