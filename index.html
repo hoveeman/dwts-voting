@@ -63,7 +63,8 @@
     body{margin:0;background:var(--bg);color:var(--ink);font-family:"IBM Plex Sans",sans-serif;line-height:1.52;overflow-x:hidden}
     a{color:inherit}
     button,input{font:inherit}
-    .tabs{position:sticky;top:0;z-index:10;background:rgba(25,26,28,.97);border-bottom:1px solid #34373a;display:flex;justify-content:center;align-items:center;gap:3px;padding:max(7px,env(safe-area-inset-top)) max(12px,env(safe-area-inset-right)) 7px max(12px,env(safe-area-inset-left));overflow:auto;scrollbar-width:none}
+    .tabs{position:sticky;top:0;z-index:10;background:transparent;border-bottom:1px solid transparent;display:flex;justify-content:center;align-items:center;gap:3px;padding:max(12px,calc(env(safe-area-inset-top) + 8px)) max(12px,env(safe-area-inset-right)) 10px max(12px,env(safe-area-inset-left));overflow:auto;scrollbar-width:none;transition:background .25s ease,border-color .25s ease,backdrop-filter .25s ease,-webkit-backdrop-filter .25s ease}
+    .tabs.scrolled{background:rgba(25,26,28,.95);border-bottom:1px solid #34373a;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 4px 20px rgba(0,0,0,.25)}
     .tabs a{color:#e9e9e5;text-decoration:none;padding:10px 14px;font-size:.82rem;font-weight:700;white-space:nowrap}
     .tabs a:hover,.tabs a:focus{background:#343638;color:#fff;outline:none}
     main{max-width:1240px;margin:0 auto;padding:clamp(28px,4vw,56px) clamp(18px,4vw,54px) max(80px,calc(40px + env(safe-area-inset-bottom)));min-width:0;overflow-x:hidden}
@@ -401,17 +402,17 @@
       .quick-meta{gap:6px;font-size:.73rem;margin-top:10px}
       .section-head{gap:14px;margin-bottom:18px}
       .section-head>p{font-size:.84rem;line-height:1.42}
-      .tabs{justify-content:flex-start;flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;padding:max(6px,env(safe-area-inset-top)) max(10px,env(safe-area-inset-right)) 6px max(10px,env(safe-area-inset-left));scrollbar-width:none}.tabs::-webkit-scrollbar{display:none}.tabs a{padding:6px 9px;font-size:.74rem;flex:0 0 auto}
-      section,.week-lineup,.calendar{scroll-margin-top:46px}
+      .tabs{justify-content:flex-start;flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;padding:max(12px,calc(env(safe-area-inset-top) + 8px)) max(10px,env(safe-area-inset-right)) 8px max(10px,env(safe-area-inset-left));scrollbar-width:none}.tabs::-webkit-scrollbar{display:none}.tabs a{padding:6px 9px;font-size:.74rem;flex:0 0 auto}
+      section,.week-lineup,.calendar{scroll-margin-top:calc(56px + env(safe-area-inset-top))}
       .card{grid-template-columns:50px 1fr}.rank{grid-row:1 / 3;font-size:1.72rem;padding-top:17px}.couple-photo{grid-column:2;height:auto}.card-body{grid-column:2;padding:15px 13px}.name{font-size:1.28rem}.score{min-width:44px;padding:3px 6px}.score-history{grid-template-columns:1fr}.score-week{padding-block:6px}
       .lineup-list{grid-template-columns:1fr}.eliminated-card{grid-template-columns:1fr}.eliminated-card img{min-height:0;height:auto;aspect-ratio:3/2}.eliminated-copy{padding:22px 18px 25px}.cal-row{grid-template-columns:50px 86px 1fr;gap:8px}.cal-row span{font-size:1rem}.spotlight{margin-inline:-14px}.week-lineup,.vote{margin-inline:-14px}.lens-wrap{margin:16px 0 22px}.lens-meta{gap:4px 8px;margin-bottom:8px}.lens-desc{font-size:.78rem}.controls{gap:6px}.filter{padding:7px 11px;font-size:.78rem}
       .analytics-card{padding:16px 14px}
       .risk-table th,.risk-table td{padding:8px 9px;font-size:.75rem}
       .pwa-nav-btn{padding:4px 8px;font-size:.72rem}
     }
-    .live-toast{position:fixed;top:16px;left:50%;transform:translateX(-50%) translateY(-20px);background:rgba(18,20,26,.95);color:#fff;border:1px solid rgba(74,222,128,.4);box-shadow:0 10px 30px rgba(0,0,0,.6),0 0 14px rgba(74,222,128,.25);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);padding:10px 18px;border-radius:9999px;font-family:var(--font-body,system-ui);font-size:.82rem;font-weight:600;display:flex;align-items:center;gap:8px;z-index:9999;opacity:0;pointer-events:none;transition:opacity .3s cubic-bezier(.16,1,.3,1),transform .3s cubic-bezier(.16,1,.3,1);cursor:pointer}
+    .live-toast{position:fixed;top:max(20px,calc(env(safe-area-inset-top) + 54px));left:50%;transform:translateX(-50%) translateY(-12px);background:rgba(18,20,26,.96);color:#fff;border:1px solid rgba(74,222,128,.4);box-shadow:0 8px 24px rgba(0,0,0,.6),0 0 10px rgba(74,222,128,.2);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);padding:7px 16px;border-radius:9999px;font-family:var(--font-body,system-ui);font-size:.76rem;font-weight:600;display:inline-flex;align-items:center;gap:7px;white-space:nowrap;max-width:calc(100vw - 32px);z-index:9999;opacity:0;pointer-events:none;transition:opacity .25s cubic-bezier(.16,1,.3,1),transform .25s cubic-bezier(.16,1,.3,1);cursor:pointer}
     .live-toast.show{opacity:1;pointer-events:auto;transform:translateX(-50%) translateY(0)}
-    .live-toast .toast-dot{width:8px;height:8px;border-radius:50%;background:#4ade80;box-shadow:0 0 8px #4ade80;animation:toast-pulse 1.5s infinite}
+    .live-toast .toast-dot{width:6px;height:6px;border-radius:50%;background:#4ade80;box-shadow:0 0 6px #4ade80;animation:toast-pulse 1.5s infinite;flex-shrink:0}
     @keyframes toast-pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.85)}}
 
     /* PWA Navigation & Modal Styling */
@@ -2538,20 +2539,38 @@
       });
     }
 
-    // 2. Offline / Online Status Synchronization
-    function updatePwaOnlineStatus() {
+    // 2. Offline / Online Status Synchronization & Frosted Scroll Header
+    let hadOfflineEvent = false;
+    function updatePwaOnlineStatus(isEvent) {
       const bar = document.getElementById('offline-bar');
       if (bar) {
         bar.style.display = navigator.onLine ? 'none' : 'flex';
       }
-      if (navigator.onLine) {
-        showLiveToast('🟢 Connected · Syncing latest ballroom scores');
+      if (navigator.onLine && isEvent && hadOfflineEvent) {
+        hadOfflineEvent = false;
+        showLiveToast('🟢 Reconnected · Scores synced');
         if (typeof checkLiveUpdates === 'function') checkLiveUpdates();
       }
     }
-    window.addEventListener('online', updatePwaOnlineStatus);
-    window.addEventListener('offline', updatePwaOnlineStatus);
-    updatePwaOnlineStatus();
+    window.addEventListener('online', () => updatePwaOnlineStatus(true));
+    window.addEventListener('offline', () => {
+      hadOfflineEvent = true;
+      updatePwaOnlineStatus(true);
+    });
+    updatePwaOnlineStatus(false);
+
+    function updateNavScroll() {
+      const tabs = document.querySelector('.tabs');
+      if (tabs) {
+        if (window.scrollY > 12) {
+          tabs.classList.add('scrolled');
+        } else {
+          tabs.classList.remove('scrolled');
+        }
+      }
+    }
+    window.addEventListener('scroll', updateNavScroll, { passive: true });
+    updateNavScroll();
 
     // 3. Screen Wake Lock (Keep phone awake during Tuesday night broadcast)
     let pwaWakeLock = null;
