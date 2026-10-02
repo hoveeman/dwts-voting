@@ -9,3 +9,5 @@ credentials.json
 client_secret*.json
 .spotify_track_cache.json
 *.log
+gemini.md
+GEMINI.md
