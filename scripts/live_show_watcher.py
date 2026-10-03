@@ -177,6 +177,25 @@ def poll_cycle(last_snapshot=None, market_odds=None, dry_run=False, interval_sec
     # Update index.html, dancers.json, dancers.txt
     update_index_html(data, market_odds)
 
+    # Check for newly eliminated couples and broadcast push notification
+    if has_elimination:
+        try:
+            eliminated_names = []
+            for c in couples:
+                if 'eliminated' in str(c.get('result', '')).lower():
+                    eliminated_names.append(c.get('name'))
+            for name, info in data.get('eliminated_info', {}).items():
+                if info.get('week') == current_week and name not in eliminated_names:
+                    eliminated_names.append(name)
+            
+            if eliminated_names:
+                from send_push_notification import broadcast_elimination
+                for name in eliminated_names:
+                    log(f"Broadcasting elimination push notification for {name}...", level="PUSH")
+                    broadcast_elimination(name, week_num=current_week)
+        except Exception as e:
+            log(f"[Push Elimination Warning]: {e}", level="WARN")
+
     if git_has_changes():
         log("Detected changes to index.html/dancers.json/dancers.txt/spotify_playlists.json!")
         push_updates(len(scored), total, leader_name, leader_score)

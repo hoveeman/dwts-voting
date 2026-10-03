@@ -1,0 +1,25 @@
+{
+  "appId": "com.hoverstone.ballroomcompanion",
+  "appName": "Ballroom Companion",
+  "webDir": "www",
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 1500,
+      "backgroundColor": "#111416",
+      "showSpinner": false
+    },
+    "StatusBar": {
+      "style": "DARK",
+      "backgroundColor": "#111416"
+    },
+    "SystemBars": {
+      "style": "DARK"
+    },
+    "PushNotifications": {
+      "presentationOptions": ["badge", "sound", "alert"]
+    }
+  },
+  "server": {
+    "androidScheme": "https"
+  }
+}

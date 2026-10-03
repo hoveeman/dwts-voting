@@ -12,3 +12,13 @@ client_secret*.json
 gemini.md
 GEMINI.md
 .DS_Store
+node_modules/
+www/
+.capacitor/
+# Firebase & Push Notification Keys
+*google-services.json
+*GoogleService-Info.plist
+*firebase*.json
+*service_account*.json
+AuthKey_*.p8
+*.p8

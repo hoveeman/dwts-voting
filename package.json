@@ -1,0 +1,42 @@
+{
+  "name": "dwts-voting",
+  "version": "1.0.0",
+  "description": "Backend JSON configurations, auto-update manifest for the **DWTS Voting** iOS Shortcut, and the live interactive **DWTS Season 35 Ballroom Companion**.",
+  "main": "sw.js",
+  "scripts": {
+    "build": "node scripts/build_app.js",
+    "cap:add:ios": "npx cap add ios",
+    "cap:add:android": "npx cap add android",
+    "cap:sync": "npm run build && npx cap sync",
+    "cap:copy": "npm run build && npx cap copy",
+    "cap:open:ios": "npx cap open ios",
+    "cap:open:android": "npx cap open android",
+    "icons:generate": "python3 scripts/generate_native_icons.py",
+    "generate:assets": "npx @capacitor/assets generate --iconBackgroundColor '#191a1c' --splashBackgroundColor '#191a1c'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hoveeman/dwts-voting.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/hoveeman/dwts-voting/issues"
+  },
+  "homepage": "https://github.com/hoveeman/dwts-voting#readme",
+  "dependencies": {
+    "@capacitor/android": "^8.5.2",
+    "@capacitor/core": "^8.5.2",
+    "@capacitor/haptics": "^8.0.2",
+    "@capacitor/ios": "^8.5.2",
+    "@capacitor/push-notifications": "^8.1.3",
+    "@capacitor/splash-screen": "^8.0.2",
+    "@capacitor/status-bar": "^8.0.4"
+  },
+  "devDependencies": {
+    "@capacitor/assets": "^3.0.5",
+    "@capacitor/cli": "^8.5.2"
+  }
+}

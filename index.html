@@ -3,14 +3,13 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="color-scheme" content="light dark" />
+  <meta name="color-scheme" content="dark" />
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <meta name="apple-mobile-web-app-title" content="DWTS S35" />
-  <meta name="application-name" content="DWTS S35" />
-  <meta name="theme-color" content="#191a1c" media="(prefers-color-scheme: light)" />
-  <meta name="theme-color" content="#090a0b" media="(prefers-color-scheme: dark)" />
+  <meta name="apple-mobile-web-app-title" content="Ballroom Companion" />
+  <meta name="application-name" content="Ballroom Companion" />
+  <meta name="theme-color" content="#111416" />
 
   <!-- PWA Manifest & App Icons -->
   <link rel="manifest" href="/manifest.webmanifest?v=3.5" />
@@ -44,31 +43,41 @@
   <link rel="image_src" href="https://dwts.hoverhobbies.com/assets/dwts-hosts.jpg" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;0,900;1,600;1,700&display=swap" rel="stylesheet">
+  <script>
+    (function() {
+      try {
+        var isAndroid = /android/i.test(navigator.userAgent) || (window.Capacitor && window.Capacitor.getPlatform && window.Capacitor.getPlatform() === 'android');
+        if (isAndroid) {
+          document.documentElement.classList.add('is-android');
+        }
+      } catch (_) {}
+    })();
+  </script>
   <style>
     :root {
-      color-scheme: light dark;
-      --bg:#f3f5f6; --paper:#ffffff; --ink:#151719; --muted:#5d6368; --line:#d8dde0;
-      --red:#9f1e2d; --red-dark:#731521; --gold:#c38b25; --gold-soft:#f3e3bb; --nav:#191a1c;
-      --green:#23634f; --blue:#245d78; --shadow:0 15px 34px rgba(14,18,20,.10);
+      color-scheme: dark;
+      --bg:#111416; --paper:#1a1e21; --ink:#f4f3ee; --muted:#b9bec1; --line:#343a3e;
+      --red:#df5261; --red-dark:#f06a78; --gold:#e8b550; --gold-soft:#483b22; --nav:#090a0b;
+      --green:#65b798; --blue:#6eb3d6; --shadow:0 18px 44px rgba(0,0,0,.28);
       --font-display:"Playfair Display",Georgia,serif;
     }
-    @media (prefers-color-scheme: dark) {
-      :root { --bg:#111416; --paper:#1a1e21; --ink:#f4f3ee; --muted:#b9bec1; --line:#343a3e; --red:#df5261; --red-dark:#f06a78; --gold:#e8b550; --gold-soft:#483b22; --nav:#090a0b; --green:#65b798; --blue:#6eb3d6; --shadow:0 18px 44px rgba(0,0,0,.28); }
-      .score.power{background:rgba(101,183,152,.12);border-color:rgba(101,183,152,.35)}
-      .score.power b{color:var(--green)}
-      .score.power small{color:#88c7ad}
-    }
+    .score.power{background:rgba(101,183,152,.12);border-color:rgba(101,183,152,.35)}
+    .score.power b{color:var(--green)}
+    .score.power small{color:#88c7ad}
     *{box-sizing:border-box}
-    html{scroll-behavior:smooth;overflow-x:hidden}
-    section,.week-lineup,.calendar{scroll-margin-top:56px}
-    body{margin:0;background:var(--bg);color:var(--ink);font-family:"IBM Plex Sans",sans-serif;line-height:1.52;overflow-x:hidden}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--bg);color:var(--ink);font-family:"IBM Plex Sans",sans-serif;line-height:1.52}
     a{color:inherit}
     button,input{font:inherit}
-    .tabs{position:sticky;top:0;z-index:10;background:transparent;border-bottom:1px solid transparent;display:flex;justify-content:center;align-items:center;gap:3px;padding:max(12px,calc(env(safe-area-inset-top) + 8px)) max(12px,env(safe-area-inset-right)) 10px max(12px,env(safe-area-inset-left));overflow:auto;scrollbar-width:none;transition:background .25s ease,border-color .25s ease,backdrop-filter .25s ease,-webkit-backdrop-filter .25s ease}
-    .tabs.scrolled{background:rgba(25,26,28,.95);border-bottom:1px solid #34373a;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 4px 20px rgba(0,0,0,.25)}
-    .tabs a{color:#e9e9e5;text-decoration:none;padding:10px 14px;font-size:.82rem;font-weight:700;white-space:nowrap}
+    .site-header{position:fixed;top:0;left:0;right:0;width:100%;z-index:1000;background:rgba(21,23,26,.94);border-bottom:1px solid #34373a;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);box-shadow:0 4px 20px rgba(0,0,0,.35)}
+    .tabs{position:relative;display:flex;justify-content:center;align-items:center;gap:3px;padding:max(10px,calc(env(safe-area-inset-top) + 6px)) max(12px,env(safe-area-inset-right)) 9px max(12px,env(safe-area-inset-left));overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+    .tabs::-webkit-scrollbar{display:none}
+    .tabs.scrolled{background:transparent;box-shadow:none}
+    .tabs a{color:#e9e9e5;text-decoration:none;padding:8px 12px;font-size:.82rem;font-weight:700;white-space:nowrap;border-radius:6px;transition:background .15s ease,color .15s ease}
     .tabs a:hover,.tabs a:focus{background:#343638;color:#fff;outline:none}
-    main{max-width:1240px;margin:0 auto;padding:clamp(28px,4vw,56px) clamp(18px,4vw,54px) max(80px,calc(40px + env(safe-area-inset-bottom)));min-width:0;overflow-x:hidden}
+    .tabs a.active{background:rgba(232,181,80,.16);color:var(--gold);box-shadow:inset 0 0 0 1px rgba(232,181,80,.38)}
+    main{max-width:1240px;margin:0 auto;padding:calc(max(10px,env(safe-area-inset-top)) + 60px) clamp(18px,4vw,54px) max(80px,calc(40px + env(safe-area-inset-bottom)));min-width:0}
+    section,.week-lineup,.calendar,aside{scroll-margin-top:calc(64px + env(safe-area-inset-top))}
     .section-head{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(260px,440px);gap:30px;align-items:end;margin-bottom:28px}
     .kicker-wrap{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:10px}
     .kicker{color:var(--red);font-weight:700;font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;margin:0}
@@ -245,10 +254,14 @@
     .vote{margin-top:72px;display:grid;grid-template-columns:1.25fr .75fr;background:var(--red);color:#fff}
     .vote-main{padding:clamp(26px,5vw,54px)}
     .vote h2{color:white}.vote p{color:#f0d8dc;max-width:700px}
-    .shortcut-link{display:inline-flex;align-items:center;gap:12px;margin-top:9px;padding:11px 15px;background:#fff;color:#731521;text-decoration:none;font-weight:700;box-shadow:0 3px 0 rgba(0,0,0,.18)}
-    .shortcut-link:hover,.shortcut-link:focus-visible{background:#f7d889;outline:3px solid rgba(255,255,255,.5);outline-offset:3px}
-    .shortcut-link svg{width:21px;height:21px;flex:0 0 auto}
-    .shortcut-link small{display:block;font-size:.69rem;font-weight:500;color:#5e232a;margin-top:1px}
+    .shortcut-link,.android-vote-link{display:inline-flex;align-items:center;gap:12px;margin-top:9px;padding:11px 15px;background:#fff;color:#731521;text-decoration:none;font-weight:700;box-shadow:0 3px 0 rgba(0,0,0,.18)}
+    .shortcut-link:hover,.shortcut-link:focus-visible,.android-vote-link:hover,.android-vote-link:focus-visible{background:#f7d889;outline:3px solid rgba(255,255,255,.5);outline-offset:3px}
+    .shortcut-link svg,.android-vote-link svg{width:21px;height:21px;flex:0 0 auto}
+    .shortcut-link small,.android-vote-link small{display:block;font-size:.69rem;font-weight:500;color:#5e232a;margin-top:1px}
+    .android-only{display:none!important}
+    .ios-only{display:inline-flex}
+    .is-android .ios-only{display:none!important}
+    .is-android .android-only{display:inline-flex!important}
     .vote-steps{background:rgba(0,0,0,.2);padding:28px;display:flex;flex-direction:column;justify-content:center;gap:13px}
     .vote-step{display:flex;gap:12px;align-items:center;font-size:.86rem}.vote-step b{font-family:var(--font-display);font-size:1.7rem;color:#f7d889;min-width:26px}
     .vote-step a{color:#f7d889;text-decoration:underline;text-underline-offset:3px;font-weight:600}
@@ -406,14 +419,15 @@
       .live-banner-actions{grid-template-columns:1fr;gap:8px}
     }
     @media(max-width:560px){
-      main{padding:18px 14px max(60px,calc(30px + env(safe-area-inset-bottom)))}
+      main{padding:calc(max(8px,env(safe-area-inset-top)) + 52px) 14px max(60px,calc(30px + env(safe-area-inset-bottom)))}
       h1{font-size:2.15rem;letter-spacing:-.04em;line-height:.96}
       .hero-sub{font-size:.88rem;margin-top:8px}
       .quick-meta{gap:6px;font-size:.73rem;margin-top:10px}
       .section-head{gap:14px;margin-bottom:18px}
       .section-head>p{font-size:.84rem;line-height:1.42}
-      .tabs{justify-content:flex-start;flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;padding:max(12px,calc(env(safe-area-inset-top) + 8px)) max(10px,env(safe-area-inset-right)) 8px max(10px,env(safe-area-inset-left));scrollbar-width:none}.tabs::-webkit-scrollbar{display:none}.tabs a{padding:6px 9px;font-size:.74rem;flex:0 0 auto}
-      section,.week-lineup,.calendar{scroll-margin-top:calc(56px + env(safe-area-inset-top))}
+      .tabs{justify-content:flex-start;flex-wrap:nowrap;padding:max(8px,calc(env(safe-area-inset-top) + 6px)) max(10px,env(safe-area-inset-right)) 8px max(10px,env(safe-area-inset-left))}
+      .tabs a{padding:6px 9px;font-size:.74rem;flex:0 0 auto}
+      section,.week-lineup,.calendar,aside{scroll-margin-top:calc(56px + env(safe-area-inset-top))}
       .card{grid-template-columns:50px 1fr}.rank{grid-row:1 / 3;font-size:1.72rem;padding-top:17px}.couple-photo{grid-column:2;height:auto}.card-body{grid-column:2;padding:15px 13px}.name{font-size:1.28rem}.score{min-width:44px;padding:3px 6px}.score-history{grid-template-columns:1fr}.score-week{padding-block:6px}
       .lineup-list{grid-template-columns:1fr}.eliminated-card{grid-template-columns:1fr}.eliminated-card img{min-height:0;height:auto;aspect-ratio:3/2}.eliminated-copy{padding:22px 18px 25px}.cal-row{grid-template-columns:50px 86px 1fr;gap:8px}.cal-row span{font-size:1rem}.spotlight{margin-inline:-14px}.week-lineup,.vote{margin-inline:-14px}.lens-wrap{margin:16px 0 22px}.lens-meta{gap:4px 8px;margin-bottom:8px}.lens-desc{font-size:.78rem}.controls{gap:6px}.filter{padding:7px 11px;font-size:.78rem}
       .analytics-card{padding:16px 14px}
@@ -445,16 +459,19 @@
   </style>
 </head>
 <body>
-  <div id="offline-bar" class="offline-bar" role="status">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="1" y1="1" x2="23" y2="23"></line><path d="M16.72 11.06A10.94 10.94 0 0 1 19 12.55"></path><path d="M5 12.55a10.94 10.94 0 0 1 5.17-2.39"></path><path d="M10.71 5.05A16 16 0 0 1 22.58 9"></path><path d="M1.42 9a15.91 15.91 0 0 1 4.7-2.88"></path><path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path><line x1="12" y1="20" x2="12.01" y2="20"></line></svg>
-    <span>Offline Mode · Showing cached ballroom standings &amp; music</span>
-  </div>
+  <header id="site-header" class="site-header">
+    <div id="offline-bar" class="offline-bar" role="status">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="1" y1="1" x2="23" y2="23"></line><path d="M16.72 11.06A10.94 10.94 0 0 1 19 12.55"></path><path d="M5 12.55a10.94 10.94 0 0 1 5.17-2.39"></path><path d="M10.71 5.05A16 16 0 0 1 22.58 9"></path><path d="M1.42 9a15.91 15.91 0 0 1 4.7-2.88"></path><path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path><line x1="12" y1="20" x2="12.01" y2="20"></line></svg>
+      <span>Offline Mode · Showing cached ballroom standings &amp; music</span>
+    </div>
 
-  <nav class="tabs" aria-label="Ballroom companion sections">
-    <a href="#board">Power board</a><a href="#analytics">Analytics</a><a href="#scores">Scores &amp; songs</a><a href="#schedule">Schedule</a><a href="#voted-off">Voted off</a><a href="#voting">Voting</a>
-    <button id="pwa-wake-btn" class="pwa-nav-btn" type="button" aria-label="Toggle Screen Awake during broadcast" title="Keep screen awake while watching live"><span>⚡ Keep Awake</span></button>
-    <button id="pwa-install-btn" class="pwa-nav-btn" type="button" style="display:none;" aria-label="Install DWTS Companion App"><span>📲 Install App</span></button>
-  </nav>
+    <nav class="tabs" aria-label="Ballroom companion sections">
+      <a href="#board">Power board</a><a href="#analytics">Analytics</a><a href="#voted-off">Voted off</a><a href="#scores">Scores &amp; songs</a><a href="#schedule">Schedule</a><a href="#voting">Voting</a>
+      <button id="notif-settings-btn" class="pwa-nav-btn" type="button" aria-label="Notification Preferences" title="Configure live show &amp; elimination alerts"><span>🔔 Alerts</span></button>
+      <button id="pwa-wake-btn" class="pwa-nav-btn" type="button" aria-label="Toggle Screen Awake during broadcast" title="Keep screen awake while watching live"><span>⚡ Keep Awake</span></button>
+      <button id="pwa-install-btn" class="pwa-nav-btn" type="button" style="display:none;" aria-label="Install DWTS Companion App"><span>📲 Install App</span></button>
+    </nav>
+  </header>
 
   <div id="live-banner" class="live-banner" style="display:none" role="region" aria-label="Live show quick actions">
     <div class="live-banner-content">
@@ -473,9 +490,13 @@
           <span>Live Scores &amp; Lineup</span>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="7" x2="17" y2="17"></line><polyline points="17 7 17 17 7 17"></polyline></svg>
         </a>
-        <a href="https://www.icloud.com/shortcuts/3e951e5ba20b49dc82f5abded923b179" target="_blank" rel="noopener noreferrer" class="live-btn live-btn-vote">
+        <a href="https://www.icloud.com/shortcuts/3e951e5ba20b49dc82f5abded923b179" target="_blank" rel="noopener noreferrer" class="live-btn live-btn-vote ios-only">
           <span>Quick SMS Vote</span>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+        </a>
+        <a href="https://dwtsvote.abc.com" target="_blank" rel="noopener noreferrer" class="live-btn live-btn-vote android-only">
+          <span>Vote Online (ABC)</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
         </a>
       </div>
     </div>
@@ -1544,7 +1565,7 @@
     </section>
 
     <section class="vote" id="voting">
-      <div class="vote-main"><p class="kicker" style="color:#f7d889">Voting rulebook</p><h2>Bank the votes before the last dance.</h2><p>Voting opens at 8 p.m. ET during the live broadcast and closes shortly after the final competitive dance. Judges’ scores and viewer votes are reported as a 50/50 combination.</p><a class="shortcut-link" href="https://www.icloud.com/shortcuts/3e951e5ba20b49dc82f5abded923b179" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg><span>Download the iOS Shortcut<small>Quick and easy SMS voting</small></span></a><p class="status-note">Night 1’s online crash was a one-off incident, not a permanent rule change.</p></div>
+      <div class="vote-main"><p class="kicker" style="color:#f7d889">Voting rulebook</p><h2>Bank the votes before the last dance.</h2><p>Voting opens at 8 p.m. ET during the live broadcast and closes shortly after the final competitive dance. Judges’ scores and viewer votes are reported as a 50/50 combination.</p><a class="shortcut-link ios-only" href="https://www.icloud.com/shortcuts/3e951e5ba20b49dc82f5abded923b179" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg><span>Download the iOS Shortcut<small>Quick and easy SMS voting</small></span></a><a class="android-vote-link android-only" href="https://dwtsvote.abc.com" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg><span>Vote Online at ABC<small>Official voting portal · dwtsvote.abc.com</small></span></a><p class="status-note">Night 1’s online crash was a one-off incident, not a permanent rule change.</p></div>
       <div class="vote-steps">
         <div class="vote-step"><b>1</b><span>Up to 10 online votes per couple at <a href="https://dwtsvote.abc.com" target="_blank" rel="noopener noreferrer">dwtsvote.abc.com</a>; sign in and save them.</span></div>
         <div class="vote-step"><b>2</b><span>Up to 10 SMS votes per couple to 21523; text votes can’t be changed.</span></div>
@@ -1559,7 +1580,7 @@
     <div class="disclaimer-box">
       <p><strong>Photography Attribution:</strong> Cast portraits and promotional photography &copy; American Broadcasting Companies, Inc. (ABC) / Disney. Sourced via the Disney/ABC Press Room and Parade. Used strictly for non-commercial identification, commentary, and editorial review under fair use principles.</p>
       <p><strong>Non-Affiliation &amp; Trademark Disclaimer:</strong> This website is an independent fan project and ballroom companion. It is not affiliated with, endorsed by, sponsored by, or associated with <em>Dancing with the Stars</em>, American Broadcasting Companies, Inc. (ABC), Disney, BBC Studios, or any of their parent companies or subsidiaries. <em>Dancing with the Stars</em>, DWTS, Mirrorball, and all associated logos, marks, and names are registered trademarks of BBC Studios and/or American Broadcasting Companies, Inc.</p>
-      <p><strong>Open Source:</strong> Website source code and ranking scripts are released under the <a href="https://github.com/hoveeman/dwts-voting/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">MIT License</a>.</p>
+      <p><strong>Open Source:</strong> Website source code and ranking scripts are released under the <a href="https://github.com/hoveeman/dwts-voting/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">MIT License</a>. Built by Hoverstone LLC &bull; <a href="/privacy.html">Privacy Policy</a>.</p>
     </div>
   </footer>
 
@@ -2656,18 +2677,83 @@
     });
     updatePwaOnlineStatus(false);
 
-    function updateNavScroll() {
-      const tabs = document.querySelector('.tabs');
-      if (tabs) {
-        if (window.scrollY > 12) {
-          tabs.classList.add('scrolled');
-        } else {
-          tabs.classList.remove('scrolled');
+    // Active section highlight & scrollspy for fixed navigation
+    const navLinks = document.querySelectorAll('.tabs a[href^="#"]');
+    const trackedSections = Array.from(navLinks).map((link) => {
+      const targetId = link.getAttribute('href').slice(1);
+      return { link, target: document.getElementById(targetId) };
+    }).filter((item) => item.target !== null);
+
+    // Sort strictly by actual vertical position in the document
+    trackedSections.sort((a, b) => a.target.offsetTop - b.target.offsetTop);
+
+    let isClickScrolling = false;
+    let clickScrollTimer = null;
+
+    function updateActiveNavTab() {
+      if (isClickScrolling) return;
+
+      let currentActive = null;
+
+      // Identify which section occupies the reading zone below the fixed header
+      for (const item of trackedSections) {
+        const rect = item.target.getBoundingClientRect();
+        if (rect.top <= 180 && rect.bottom > 90) {
+          currentActive = item;
+          break;
         }
       }
+
+      // Default to first section when at top
+      if (!currentActive && window.scrollY < 200 && trackedSections.length > 0) {
+        currentActive = trackedSections[0];
+      }
+
+      // Default to last section when scrolled to bottom of page
+      if ((window.innerHeight + window.scrollY) >= (document.documentElement.scrollHeight - 60)) {
+        currentActive = trackedSections[trackedSections.length - 1];
+      }
+
+      if (currentActive) {
+        navLinks.forEach((l) => l.classList.remove('active'));
+        currentActive.link.classList.add('active');
+        try {
+          currentActive.link.scrollIntoView({ behavior: 'smooth', inline: 'nearest', block: 'nearest' });
+        } catch (_) {}
+      }
     }
-    window.addEventListener('scroll', updateNavScroll, { passive: true });
-    updateNavScroll();
+
+    window.addEventListener('scroll', updateActiveNavTab, { passive: true });
+
+    navLinks.forEach((link) => {
+      link.addEventListener('click', () => {
+        isClickScrolling = true;
+        clearTimeout(clickScrollTimer);
+
+        navLinks.forEach((l) => l.classList.remove('active'));
+        link.classList.add('active');
+        try {
+          link.scrollIntoView({ behavior: 'smooth', inline: 'nearest', block: 'nearest' });
+        } catch (_) {}
+
+        // Lock scroll listener during smooth scroll animation
+        clickScrollTimer = setTimeout(() => {
+          isClickScrolling = false;
+        }, 800);
+      });
+    });
+
+    if ('onscrollend' in window) {
+      window.addEventListener('scrollend', () => {
+        if (isClickScrolling) {
+          clearTimeout(clickScrollTimer);
+          isClickScrolling = false;
+          updateActiveNavTab();
+        }
+      });
+    }
+
+    updateActiveNavTab();
 
     // 3. Screen Wake Lock (Keep phone awake during Tuesday night broadcast)
     let pwaWakeLock = null;
@@ -2794,15 +2880,213 @@
       }
     });
 
-    // 5. Haptic Feedback on interactive clicks
+    // 5. Haptic Feedback on interactive clicks (Web vibrate + Capacitor Native Haptics)
     document.addEventListener('click', (e) => {
       if (e.target.closest('.filter, .pwa-nav-btn, .live-btn, #ios-modal-done')) {
-        if ('vibrate' in navigator) {
+        if (window.Capacitor && window.Capacitor.Plugins && window.Capacitor.Plugins.Haptics) {
+          try {
+            window.Capacitor.Plugins.Haptics.impact({ style: 'LIGHT' });
+          } catch (_) {}
+        } else if ('vibrate' in navigator) {
           try { navigator.vibrate(10); } catch (_) {}
         }
       }
     });
+
+    // 6. Capacitor Native App Bridge (iOS & Android)
+    if (window.Capacitor && window.Capacitor.isNativePlatform()) {
+      console.log('[Native App] Running in Capacitor native shell on', window.Capacitor.getPlatform());
+      
+      // Ensure platform class is set
+      if (window.Capacitor.getPlatform() === 'android') {
+        document.documentElement.classList.add('is-android');
+      }
+
+      // Hide PWA install button since already inside native app
+      if (installBtn) installBtn.style.display = 'none';
+
+      // Status Bar styling
+      if (window.Capacitor.Plugins && window.Capacitor.Plugins.StatusBar) {
+        try {
+          window.Capacitor.Plugins.StatusBar.setStyle({ style: 'DARK' });
+          if (window.Capacitor.getPlatform() === 'android') {
+            window.Capacitor.Plugins.StatusBar.setBackgroundColor({ color: '#111416' });
+          }
+        } catch (_) {}
+      }
+
+      // Push Notifications setup (iOS & Android)
+      const notifBtn = document.getElementById('notif-settings-btn');
+      const notifModal = document.getElementById('notif-settings-modal');
+      const notifClose = document.getElementById('notif-modal-close');
+      const notifDone = document.getElementById('notif-modal-done');
+
+      // Preference keys
+      const NOTIF_PREFS = {
+        showReminder: 'dwts_notif_show_reminder',
+        votingWindow: 'dwts_notif_voting_window',
+        elimination: 'dwts_notif_elimination',
+        hideSpoilers: 'dwts_notif_hide_spoilers'
+      };
+
+      // Load saved preferences (defaults to enabled for reminders & results)
+      const loadNotifPrefs = () => ({
+        showReminder: localStorage.getItem(NOTIF_PREFS.showReminder) !== 'false',
+        votingWindow: localStorage.getItem(NOTIF_PREFS.votingWindow) !== 'false',
+        elimination: localStorage.getItem(NOTIF_PREFS.elimination) !== 'false',
+        hideSpoilers: localStorage.getItem(NOTIF_PREFS.hideSpoilers) === 'true'
+      });
+
+      const applyPrefsToUI = () => {
+        const p = loadNotifPrefs();
+        const toggleReminder = document.getElementById('pref-show-reminder');
+        const toggleVoting = document.getElementById('pref-voting-window');
+        const toggleElim = document.getElementById('pref-elimination');
+        const toggleSpoilers = document.getElementById('pref-hide-spoilers');
+        if (toggleReminder) toggleReminder.checked = p.showReminder;
+        if (toggleVoting) toggleVoting.checked = p.votingWindow;
+        if (toggleElim) toggleElim.checked = p.elimination;
+        if (toggleSpoilers) toggleSpoilers.checked = p.hideSpoilers;
+      };
+
+      if (notifBtn && notifModal) {
+        notifBtn.addEventListener('click', () => {
+          applyPrefsToUI();
+          notifModal.classList.add('show');
+        });
+        if (notifClose) notifClose.addEventListener('click', () => notifModal.classList.remove('show'));
+        if (notifDone) notifDone.addEventListener('click', () => notifModal.classList.remove('show'));
+        notifModal.addEventListener('click', (e) => {
+          if (e.target === notifModal) notifModal.classList.remove('show');
+        });
+      }
+
+      // Wire up toggle changes to localStorage
+      ['pref-show-reminder', 'pref-voting-window', 'pref-elimination', 'pref-hide-spoilers'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) {
+          el.addEventListener('change', () => {
+            if (id === 'pref-show-reminder') localStorage.setItem(NOTIF_PREFS.showReminder, el.checked);
+            if (id === 'pref-voting-window') localStorage.setItem(NOTIF_PREFS.votingWindow, el.checked);
+            if (id === 'pref-elimination') localStorage.setItem(NOTIF_PREFS.elimination, el.checked);
+            if (id === 'pref-hide-spoilers') localStorage.setItem(NOTIF_PREFS.hideSpoilers, el.checked);
+            
+            // If native Capacitor push is available, request permissions if enabling
+            if (el.checked && window.Capacitor && window.Capacitor.Plugins && window.Capacitor.Plugins.PushNotifications) {
+              window.Capacitor.Plugins.PushNotifications.requestPermissions().then(result => {
+                if (result.receive === 'granted') {
+                  window.Capacitor.Plugins.PushNotifications.register();
+                }
+              }).catch(() => {});
+            }
+          });
+        }
+      });
+
+      // Register Capacitor Push Notifications across iOS and Android
+      if (window.Capacitor && window.Capacitor.Plugins && window.Capacitor.Plugins.PushNotifications) {
+        const Push = window.Capacitor.Plugins.PushNotifications;
+
+        // Create default notification channel on Android
+        if (window.Capacitor.getPlatform() === 'android' && Push.createChannel) {
+          Push.createChannel({
+            id: 'dwts_broadcasts',
+            name: 'DWTS Broadcasts & Eliminations',
+            description: 'Alerts for live shows, voting, and weekly elimination results',
+            importance: 5,
+            visibility: 1,
+            vibration: true
+          }).catch((err) => console.warn('[Push] Channel creation note:', err));
+        }
+
+        // Check and request permissions
+        const initPush = async () => {
+          try {
+            let perm = await Push.checkPermissions();
+            if (perm.receive === 'prompt' || perm.receive === 'prompt-with-rationale') {
+              perm = await Push.requestPermissions();
+            }
+            if (perm.receive === 'granted') {
+              await Push.register();
+            }
+          } catch (err) {
+            console.warn('[Push] Registration error:', err);
+          }
+        };
+        initPush();
+
+        Push.addListener('registration', (token) => {
+          console.log('[Push] Device registered token:', token.value);
+        });
+
+        Push.addListener('pushNotificationReceived', (notification) => {
+          console.log('[Push] Received in foreground:', notification);
+          if (notification.title && notification.body) {
+            showLiveToast(`🔔 ${notification.title}: ${notification.body}`);
+          }
+        });
+
+        Push.addListener('pushNotificationActionPerformed', (action) => {
+          console.log('[Push] Action performed:', action);
+          const data = action.notification.data || {};
+          if (data.url) {
+            window.location.hash = data.url.replace(/^.*#/, '#');
+          } else if (data.type === 'elimination') {
+            window.location.hash = '#voted-off';
+          }
+        });
+      }
+    }
   </script>
+
+  <!-- Notification Preferences Modal -->
+  <div id="notif-settings-modal" class="pwa-modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="notif-modal-title">
+    <div class="pwa-modal">
+      <div class="pwa-modal-head">
+        <h3 id="notif-modal-title" class="pwa-modal-title">Notification Alerts</h3>
+        <button id="notif-modal-close" class="pwa-modal-close" type="button" aria-label="Close dialog">&times;</button>
+      </div>
+      <p style="margin:0 0 16px;font-size:0.84rem;color:var(--muted);line-height:1.45;">Customize live broadcast alerts and elimination updates:</p>
+      
+      <div style="display:flex;flex-direction:column;gap:14px;">
+        <label style="display:flex;align-items:flex-start;justify-content:space-between;gap:14px;cursor:pointer;padding:10px 12px;background:rgba(255,255,255,0.03);border:1px solid var(--line);border-radius:8px;">
+          <div>
+            <div style="font-weight:700;font-size:0.9rem;color:var(--ink);">Show Start Reminders</div>
+            <div style="font-size:0.76rem;color:var(--muted);margin-top:2px;">Alert 15 mins before Tuesday 8:00 PM ET with theme &amp; song lineup</div>
+          </div>
+          <input type="checkbox" id="pref-show-reminder" checked style="width:20px;height:20px;accent-color:var(--gold);cursor:pointer;margin-top:2px;">
+        </label>
+
+        <label style="display:flex;align-items:flex-start;justify-content:space-between;gap:14px;cursor:pointer;padding:10px 12px;background:rgba(255,255,255,0.03);border:1px solid var(--line);border-radius:8px;">
+          <div>
+            <div style="font-weight:700;font-size:0.9rem;color:var(--ink);">Voting Window Open</div>
+            <div style="font-size:0.76rem;color:var(--muted);margin-top:2px;">Alert when live SMS voting starts at 8:00 PM ET</div>
+          </div>
+          <input type="checkbox" id="pref-voting-window" checked style="width:20px;height:20px;accent-color:var(--gold);cursor:pointer;margin-top:2px;">
+        </label>
+
+        <label style="display:flex;align-items:flex-start;justify-content:space-between;gap:14px;cursor:pointer;padding:10px 12px;background:rgba(255,255,255,0.03);border:1px solid var(--line);border-radius:8px;">
+          <div>
+            <div style="font-weight:700;font-size:0.9rem;color:var(--ink);">Elimination Results</div>
+            <div style="font-size:0.76rem;color:var(--muted);margin-top:2px;">Instant notification when a couple is officially voted off</div>
+          </div>
+          <input type="checkbox" id="pref-elimination" checked style="width:20px;height:20px;accent-color:var(--gold);cursor:pointer;margin-top:2px;">
+        </label>
+
+        <label style="display:flex;align-items:flex-start;justify-content:space-between;gap:14px;cursor:pointer;padding:10px 12px;background:rgba(255,255,255,0.03);border:1px solid var(--line);border-radius:8px;">
+          <div>
+            <div style="font-weight:700;font-size:0.9rem;color:var(--ink);">Hide Spoilers in Alert</div>
+            <div style="font-size:0.76rem;color:var(--muted);margin-top:2px;">Hides contestant names until you tap to open the app</div>
+          </div>
+          <input type="checkbox" id="pref-hide-spoilers" style="width:20px;height:20px;accent-color:var(--gold);cursor:pointer;margin-top:2px;">
+        </label>
+      </div>
+
+      <div style="margin-top:20px;text-align:center;">
+        <button id="notif-modal-done" class="filter" type="button" style="width:100%;justify-content:center;padding:12px 16px;font-size:0.92rem;background:var(--gold);color:#111416;border-color:var(--gold);font-weight:700;">Save Preferences</button>
+      </div>
+    </div>
+  </div>
 
   <!-- iOS PWA Add to Home Screen Modal -->
   <div id="ios-install-modal" class="pwa-modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="ios-modal-title">

@@ -1,0 +1,34 @@
+name: Pre-Show Push Notification
+
+on:
+  schedule:
+    # Runs Tuesdays at 23:45 UTC (7:45 PM EDT / 6:45 PM EST)
+    - cron: '45 23 * * 2'
+  workflow_dispatch:
+    inputs:
+      theme:
+        description: 'Episode Theme (e.g., Disney Night, Rock Night)'
+        required: false
+        default: 'Live Show'
+
+jobs:
+  send-reminder:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install google-auth requests
+
+      - name: Broadcast Pre-Show Push Notification
+        env:
+          FIREBASE_SERVICE_ACCOUNT_KEY: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_KEY }}
+        run: |
+          THEME="${{ github.event.inputs.theme || 'Live Show' }}"
+          python3 scripts/send_push_notification.py --type reminder --theme "$THEME"
