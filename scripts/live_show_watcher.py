@@ -238,7 +238,9 @@ def main():
     # Pre-fetch Kalshi odds once at startup
     log("Fetching prediction market baseline from Kalshi...")
     market_odds = fetch_prediction_market_data()
-    log(f"Kalshi odds loaded for {len(market_odds)} couples.")
+    w_count = len(market_odds.get('winner', {})) if isinstance(market_odds, dict) and 'winner' in market_odds else len(market_odds)
+    e_count = len(market_odds.get('elimination', {})) if isinstance(market_odds, dict) and 'elimination' in market_odds else 0
+    log(f"Kalshi odds loaded: {w_count} winner contracts, {e_count} weekly elimination contracts.")
 
     last_snapshot = None
 

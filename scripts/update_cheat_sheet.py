@@ -255,11 +255,11 @@ COUPLE_REGISTRY = {
         "mirrorballs": 2,
         "photo": "guillermo-rodriguez-witney-carson.jpg",
         "trait": "Fan favorite",
-        "social_reach_num": 0.65,
+        "social_reach_num": 4.5,
         "is_athlete": False,
         "is_dancer": False,
         "baseline_market_prob": 2,
-        "outlook": "Carries the lowest scoring average, but reigning champion Witney Carson and Jimmy Kimmel viewers protect him from the bottom.",
+        "outlook": "Carries a modest scoring floor, but reigning champion Witney Carson and Jimmy Kimmel's nightly ABC audience provide an impenetrable fan voting shield.",
         "bio": "The <i>Jimmy Kimmel Live!</i> personality",
         "vote_code": "Guillermo",
         "initial_rank": 13
@@ -398,16 +398,23 @@ def match_couple(raw_text):
 
 def fetch_prediction_market_data():
     """
-    Queries open, unauthenticated public REST API of Kalshi for the official DWTS Season 35 Winner series:
-    https://kalshi.com/markets/kxdancingwiththestars/who-will-win-dancing-with-the-stars/kxdancingwiththestars-26dec31
-    Series ticker: KXDANCINGWITHTHESTARS
+    Queries open, unauthenticated public REST API of Kalshi for:
+    1. Official DWTS Season 35 Winner series:
+       https://kalshi.com/markets/kxdancingwiththestars/who-will-win-dancing-with-the-stars/kxdancingwiththestars-26dec31
+       Series ticker: KXDANCINGWITHTHESTARS
+    2. Official DWTS Season 35 Weekly Elimination series:
+       https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXDWTSELIMINATION&status=open
+       Series ticker: KXDWTSELIMINATION
+    Returns dict: {'winner': winner_odds, 'elimination': elim_odds}
     """
-    odds_by_couple = {}
-    
+    winner_odds = {}
+    elim_odds = {}
+    headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)'}
+
     # 1. Query official Kalshi series contract for Season 35 winner
     try:
         url = 'https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXDANCINGWITHTHESTARS'
-        req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)'})
+        req = urllib.request.Request(url, headers=headers)
         with urllib.request.urlopen(req, timeout=5) as resp:
             data = json.loads(resp.read().decode('utf-8'))
             for m in data.get('markets', []):
@@ -415,21 +422,42 @@ def fetch_prediction_market_data():
                 matched_name = match_couple(participant)
                 if not matched_name:
                     for name in COUPLE_REGISTRY:
-                        if name.lower() in participant.lower():
+                        if name.lower() in participant.lower() or COUPLE_REGISTRY[name]['celeb_first'].lower() in participant.lower():
                             matched_name = name
                             break
                 if matched_name:
                     price_str = m.get('last_price_dollars') or m.get('yes_ask_dollars') or m.get('yes_bid_dollars')
                     if price_str and float(price_str) >= 0.01:
-                        odds_by_couple[matched_name] = round(float(price_str) * 100)
+                        winner_odds[matched_name] = round(float(price_str) * 100)
     except Exception as e:
         print(f"Note: Kalshi winner series query: {e}")
 
-    if odds_by_couple:
-        print(f"Live Kalshi winner contract probabilities retrieved: {odds_by_couple}")
+    # 2. Query official Kalshi series contract for Weekly Elimination
+    try:
+        url = 'https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXDWTSELIMINATION&status=open'
+        req = urllib.request.Request(url, headers=headers)
+        with urllib.request.urlopen(req, timeout=5) as resp:
+            data = json.loads(resp.read().decode('utf-8'))
+            for m in data.get('markets', []):
+                participant = m.get('custom_strike', {}).get('Participant') or m.get('yes_sub_title') or m.get('title', '')
+                matched_name = match_couple(participant)
+                if not matched_name:
+                    for name in COUPLE_REGISTRY:
+                        if name.lower() in participant.lower() or COUPLE_REGISTRY[name]['celeb_first'].lower() in participant.lower():
+                            matched_name = name
+                            break
+                if matched_name:
+                    price_str = m.get('last_price_dollars') or m.get('yes_ask_dollars') or m.get('yes_bid_dollars')
+                    if price_str:
+                        elim_odds[matched_name] = round(float(price_str) * 100)
+    except Exception as e:
+        print(f"Note: Kalshi elimination series query: {e}")
+
+    if winner_odds or elim_odds:
+        print(f"Live Kalshi contracts retrieved: {len(winner_odds)} winner ({winner_odds}), {len(elim_odds)} weekly elimination ({elim_odds})")
     else:
-        print("Note: No live contracts retrieved; using baseline calibration.")
-    return odds_by_couple
+        print("Note: No live Kalshi contracts retrieved; using baseline calibration.")
+    return {'winner': winner_odds, 'elimination': elim_odds}
 
 def fetch_wiki_html():
     req = urllib.request.Request(WIKI_URL, headers={'User-Agent': 'DWTSVotingCheatSheet/1.0 (contact: admin@example.com)'})
@@ -753,6 +781,17 @@ def update_index_html(wiki_data, market_odds=None):
     with open(HTML_FILE, 'r', encoding='utf-8') as f:
         content = f.read()
 
+    # Extract winner and weekly elimination odds dictionaries
+    if isinstance(market_odds, dict) and ('winner' in market_odds or 'elimination' in market_odds):
+        winner_odds = market_odds.get('winner', {})
+        elim_odds = market_odds.get('elimination', {})
+    elif isinstance(market_odds, dict):
+        winner_odds = market_odds
+        elim_odds = {}
+    else:
+        winner_odds = {}
+        elim_odds = {}
+
     couple_history = wiki_data['couple_history']
     eliminated_info = wiki_data['eliminated_info']
     week_lineups = wiki_data['week_lineups']
@@ -860,7 +899,8 @@ def update_index_html(wiki_data, market_odds=None):
         avg_score = total_score / len(valid_weeks) if valid_weeks else 0
 
         base_market = meta.get('baseline_market_prob', 5)
-        market_prob = market_odds.get(name, base_market) if market_odds else base_market
+        market_prob = winner_odds.get(name, base_market) if winner_odds else base_market
+        elim_risk = elim_odds.get(name, None) if elim_odds else None
 
         power_index = compute_power_index(
             avg_score=avg_score,
@@ -881,6 +921,7 @@ def update_index_html(wiki_data, market_odds=None):
             'avg_score': avg_score,
             'wow_delta': wow_delta,
             'market_prob': market_prob,
+            'elim_risk': elim_risk,
             'power_index': power_index,
             'initial_rank': meta.get('initial_rank', 99)
         })
@@ -896,6 +937,7 @@ def update_index_html(wiki_data, market_odds=None):
         valid_weeks = d['valid_weeks']
         total_score = d['total_score']
         market_prob = d['market_prob']
+        elim_risk = d.get('elim_risk')
         power_index = d['power_index']
 
         cats, tags, case_blurb, avg_score, wow_delta = compute_dynamic_attributes(
@@ -908,6 +950,7 @@ def update_index_html(wiki_data, market_odds=None):
             'age': meta['age'],
             'proName': meta['proName'],
             'mirrorballs': meta['mirrorballs'],
+            'socialReach': meta.get('social_reach_num', 1.0),
             'photo': meta['photo'],
             'weeks': valid_weeks,
             'total': total_score,
@@ -915,6 +958,7 @@ def update_index_html(wiki_data, market_odds=None):
             'wow': wow_delta,
             'powerIndex': power_index,
             'marketProb': market_prob,
+            'elimRisk': elim_risk,
             'cats': cats,
             'tags': tags,
             'case': case_blurb
@@ -926,11 +970,69 @@ def update_index_html(wiki_data, market_odds=None):
         cats_js = json.dumps(d['cats']).replace('"', "'")
         tags_js = json.dumps(d['tags']).replace('"', "'")
         case_escaped = d['case'].replace("'", "\\'")
-        line = f"      {{rank:{d['rank']},name:'{d['name']}',age:{d['age']},proName:'{d['proName']}',mirrorballs:{d['mirrorballs']},photo:'{d['photo']}',weeks:{weeks_js},total:{d['total']},powerIndex:{d['powerIndex']},marketProb:{d['marketProb']},wow:{d['wow']},cats:{cats_js},tags:{tags_js},case:'{case_escaped}'}}"
+        elim_js = f"{d['elimRisk']}" if d.get('elimRisk') is not None else "null"
+        line = f"      {{rank:{d['rank']},name:'{d['name']}',age:{d['age']},proName:'{d['proName']}',mirrorballs:{d['mirrorballs']},socialReach:{d.get('socialReach', 1.0)},photo:'{d['photo']}',weeks:{weeks_js},total:{d['total']},powerIndex:{d['powerIndex']},marketProb:{d['marketProb']},elimRisk:{elim_js},wow:{d['wow']},cats:{cats_js},tags:{tags_js},case:'{case_escaped}'}}"
         dancer_lines.append(line)
     
     new_dancers_block = "const dancers = [\n" + ",\n".join(dancer_lines) + "\n    ];"
     content = re.sub(r'const dancers = \[.*?\];', new_dancers_block, content, flags=re.DOTALL)
+
+    # 3b. Update static projected bottom 2 and risk filter count
+    def calc_proj_order(d_list):
+        has_elim = any(d.get('elimRisk') is not None for d in d_list)
+        items = []
+        for d in d_list:
+            scored = [w['score'] for w in d['weeks'] if w.get('score') is not None]
+            if not scored:
+                w_score = 15.0
+            else:
+                n = len(scored)
+                total_w = n * (n + 1) / 2
+                w_score = sum(((i + 1) / total_w) * s for i, s in enumerate(scored))
+            items.append({
+                'name': d['name'],
+                'w_score': w_score,
+                'market_prob': d['marketProb'],
+                'elim_risk': d.get('elimRisk'),
+                'mirrorballs': d['mirrorballs'],
+                'social_reach': d.get('socialReach', 1.0)
+            })
+        total_w_score = sum(x['w_score'] for x in items) or 1.0
+        if has_elim:
+            total_safety = sum(max(5.0, 100.0 - (x['elim_risk'] if x['elim_risk'] is not None else 10.0) * 2.0) for x in items) or 1.0
+            for x in items:
+                j_share = (x['w_score'] / total_w_score) * 100.0
+                e_risk = x['elim_risk'] if x['elim_risk'] is not None else 10.0
+                safety = max(5.0, 100.0 - e_risk * 2.0)
+                m_share = (safety / total_safety) * 100.0
+                p_boost = x['mirrorballs'] * 1.5
+                s_boost = min(x['social_reach'] * 1.5, 12.0)
+                x['raw_fan'] = (m_share * 0.45) + (s_boost * 0.35) + (p_boost * 0.20) + 1.0
+                x['j_share'] = j_share
+        else:
+            total_mkt = sum(x['market_prob'] for x in items) or 1.0
+            for x in items:
+                j_share = (x['w_score'] / total_w_score) * 100.0
+                m_share = (x['market_prob'] / total_mkt) * 100.0
+                p_boost = x['mirrorballs'] * 1.5
+                s_boost = min(x['social_reach'] * 1.5, 12.0)
+                x['raw_fan'] = (m_share * 0.45) + (s_boost * 0.35) + (p_boost * 0.20) + 1.0
+                x['j_share'] = j_share
+        total_fan = sum(x['raw_fan'] for x in items) or 1.0
+        for x in items:
+            f_share = (x['raw_fan'] / total_fan) * 100.0
+            x['combined'] = 0.5 * x['j_share'] + 0.5 * f_share
+        items.sort(key=lambda x: x['combined'], reverse=True)
+        return items
+
+    proj_sorted = calc_proj_order(active_dancers_data)
+    if len(proj_sorted) >= 2:
+        b1 = proj_sorted[-1]['name']
+        b2 = proj_sorted[-2]['name']
+        bubble = proj_sorted[-3]['name'] if len(proj_sorted) >= 3 else ''
+        b2_html = f'<span id="bottom2-alert-text"><strong>Projected Bottom 2:</strong> {b2} &amp; {b1}{f" ({bubble} on bubble)" if bubble else ""}</span>'
+        content = re.sub(r'<span id="bottom2-alert-text">.*?</span>', b2_html, content)
+    content = re.sub(r'<button class="risk-filter-btn active" data-risk-filter="all">All \d+ Couples</button>', f'<button class="risk-filter-btn active" data-risk-filter="all">All {len(active_dancers_data)} Couples</button>', content)
 
     # 4. Update #voted-off section
     eliminated_cards = []
@@ -1301,8 +1403,8 @@ def update_index_html(wiki_data, market_odds=None):
     top_market_name = "Ezra Frech"
     top_prob = 33
     runners_up_str = "Harry Shum Jr. (12%), Maura Higgins (12%), and Jenna Dewan (11%)"
-    if market_odds:
-        sorted_market = sorted([(k, v) for k, v in market_odds.items() if k in active_couples], key=lambda x: -x[1])
+    if winner_odds:
+        sorted_market = sorted([(k, v) for k, v in winner_odds.items() if k in active_couples], key=lambda x: -x[1])
         if sorted_market and sorted_market[0][1] > 0:
             top_market_name, top_prob = sorted_market[0]
             runners_up = sorted_market[1:4]
@@ -1323,6 +1425,7 @@ def update_index_html(wiki_data, market_odds=None):
         f'        <p>Following back-to-back 20+ judges’ marks and viral social momentum, Paralympic champion {top_market_name} has taken over as the leading favorite on Kalshi’s Season 35 winner market with a {top_prob}% implied win probability, followed by {runners_up_str}.</p>\n'
         f'        <div class="market-actions">\n'
         f'          <a class="market-btn" href="https://kalshi.com/markets/kxdancingwiththestars/who-will-win-dancing-with-the-stars/kxdancingwiththestars-26dec31" target="_blank" rel="noopener noreferrer">Trade on Kalshi (Who Will Win) ↗</a>\n'
+        f'          <a class="market-btn" href="https://kalshi.com/markets/kxdwtselimination" target="_blank" rel="noopener noreferrer" style="background:transparent;border:1px solid var(--line);color:var(--ink)">Weekly Elimination Market ↗</a>\n'
         f'        </div>\n'
         f'        <p class="signal">Live prediction markets track implied win probabilities; contracts update continuously on Kalshi and are not affiliated with or endorsed by ABC or Disney.</p>\n'
         f'      </div>\n'

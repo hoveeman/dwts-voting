@@ -139,6 +139,15 @@
     .survival-bar-fill.danger{background:var(--red)}
     .survival-meta{display:flex;justify-content:space-between;align-items:center;font-size:.68rem;color:var(--muted);margin-top:4px}
     .survival-meta b{color:var(--ink);font-weight:600}
+    .survival-insight{margin-top:8px;font-size:.73rem;line-height:1.36;color:var(--muted);background:var(--bg);border:1px solid var(--line);border-left:3px solid var(--line);border-radius:3px;padding:6px 9px}
+    .survival-insight.safe{border-left-color:var(--green)}
+    .survival-insight.bubble{border-left-color:var(--gold)}
+    .survival-insight.danger{border-left-color:var(--red)}
+    .insight-pill{font-size:.60rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;padding:1px 5px;border-radius:2px;margin-right:5px;display:inline-block;vertical-align:baseline}
+    .insight-pill.safe{background:rgba(35,99,79,.15);color:var(--green)}
+    .insight-pill.bubble{background:var(--gold-soft);color:var(--gold)}
+    .insight-pill.danger{background:rgba(159,30,45,.15);color:var(--red)}
+    .table-survival-insight{font-size:0.71rem;color:var(--muted);line-height:1.3;margin-top:3px}
     .signal{font-size:.72rem;color:var(--muted);margin-top:10px;padding-top:9px;border-top:1px solid var(--line)}
     .social-presence{margin-top:10px;padding-top:9px;border-top:1px solid var(--line);display:grid;gap:7px}
     .social-row{display:grid;grid-template-columns:46px minmax(0,1fr);gap:8px;align-items:start;font-size:.7rem;line-height:1.35}
@@ -355,7 +364,7 @@
     .rc-badge.safe{background:rgba(35,99,79,.14);color:var(--green)}
     .rc-badge.bubble{background:var(--gold-soft);color:var(--gold)}
     .rc-badge.danger{background:rgba(159,30,45,.14);color:var(--red)}
-    .rc-stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;font-size:.76rem;background:rgba(0,0,0,.03);padding:7px 10px;border-radius:4px}
+    .rc-stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;font-size:.74rem;background:rgba(0,0,0,.03);padding:7px 8px;border-radius:4px}
     .rc-stat{display:flex;flex-direction:column}
     .rc-stat-label{font-size:.64rem;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;margin-bottom:2px}
     .rc-stat-val{font-weight:700;font-size:.82rem}
@@ -478,7 +487,7 @@
         <div>
           <div class="kicker-wrap">
             <span class="kicker">Power rankings · Week 4 · Oct. 6, 2026</span>
-            <span class="subtle-update"><span class="subtle-dot"></span>Updated Oct. 3, 5:53 AM ET</span>
+            <span class="subtle-update"><span class="subtle-dot"></span>Updated Oct. 3, 11:23 AM ET</span>
           </div>
           <h1>The Week 4 board</h1>
           <p class="hero-sub">Twelve couples remain. Track proven technique against fandom, momentum, and the one thing fans can’t ignore: theme-night fit.</p>
@@ -568,13 +577,13 @@
           </div>
           <div class="bottom2-alert">
             <span class="alert-pulse"></span>
-            <span id="bottom2-alert-text"><strong>Projected Bottom 2:</strong> Taylor Hanson &amp; Tatyana Ali (Ciara Miller on bubble)</span>
+            <span id="bottom2-alert-text"><strong>Projected Bottom 2:</strong> Tyler Cameron &amp; Ciara Miller (Jackson Olson on bubble)</span>
           </div>
         </div>
 
         <div class="risk-matrix-controls">
           <div class="risk-filters" role="group" aria-label="Filter risk matrix by survival outlook">
-            <button class="risk-filter-btn active" data-risk-filter="all">All 13 Couples</button>
+            <button class="risk-filter-btn active" data-risk-filter="all">All 12 Couples</button>
             <button class="risk-filter-btn" data-risk-filter="danger">⚠️ Bottom 2 Danger</button>
             <button class="risk-filter-btn" data-risk-filter="bubble">🟡 On Bubble</button>
             <button class="risk-filter-btn" data-risk-filter="safe">🟢 Safe Tier</button>
@@ -594,6 +603,7 @@
                 <th>Couple</th>
                 <th>Avg. Score</th>
                 <th>Judges' Share (50%)</th>
+                <th>Kalshi Elim. Risk</th>
                 <th>Implied Fan Share (50%)</th>
                 <th>Combined 50/50 Power</th>
                 <th>Survival Outlook</th>
@@ -661,20 +671,21 @@
       </div>
     </section>
 
-                                                                                                                                <aside class="spotlight" aria-label="Market spotlight">
+                                                                                                                                            <aside class="spotlight" aria-label="Market spotlight">
       <div class="spot-copy">
         <p class="kicker">Live Kalshi market favorite</p>
         <h2>Ezra Frech surged to 46% to win it all.</h2>
-        <p>Following back-to-back 20+ judges’ marks and viral social momentum, Paralympic champion Ezra Frech has taken over as the leading favorite on Kalshi’s Season 35 winner market with a 46% implied win probability, followed by Amber Glenn (14%), Maura Higgins (11%), and Jenna Dewan (11%).</p>
+        <p>Following back-to-back 20+ judges’ marks and viral social momentum, Paralympic champion Ezra Frech has taken over as the leading favorite on Kalshi’s Season 35 winner market with a 46% implied win probability, followed by Amber Glenn (13%), Maura Higgins (10%), and Jenna Dewan (10%).</p>
         <div class="market-actions">
           <a class="market-btn" href="https://kalshi.com/markets/kxdancingwiththestars/who-will-win-dancing-with-the-stars/kxdancingwiththestars-26dec31" target="_blank" rel="noopener noreferrer">Trade on Kalshi (Who Will Win) ↗</a>
+          <a class="market-btn" href="https://kalshi.com/markets/kxdwtselimination" target="_blank" rel="noopener noreferrer" style="background:transparent;border:1px solid var(--line);color:var(--ink)">Weekly Elimination Market ↗</a>
         </div>
         <p class="signal">Live prediction markets track implied win probabilities; contracts update continuously on Kalshi and are not affiliated with or endorsed by ABC or Disney.</p>
       </div>
       <div class="market"><div><strong>46%</strong><span>Kalshi Market Favorite</span></div></div>
     </aside>
 
-                                                                                                                                                                                              <div class="week-lineup" id="scores" aria-labelledby="week-lineup-title">
+                                                                                                                                                                                                                <div class="week-lineup" id="scores" aria-labelledby="week-lineup-title">
         <span id="songs" style="scroll-margin-top:60px"></span>
         <div class="lineup-head">
           <div><p class="kicker" style="color:#efce82">Tuesday, October 6 · Live at 8/7c</p><h3 id="week-lineup-title">Mariah Carey Night: Scores &amp; Songs</h3></div>
@@ -1554,18 +1565,18 @@
 
   <script>
     const dancers = [
-      {rank:1,name:'Ezra Frech',age:21,proName:'Daniella Karagach',mirrorballs:1,photo:'ezra-frech-daniella-karagach.jpg',weeks:[{'dance': 'Tango', 'score': 20, 'isLive': false, 'judges': [7, 6, 7]}, {'dance': 'Cha-cha-cha', 'score': 21, 'isLive': false, 'judges': [7, 7, 7]}, {'dance': 'Foxtrot', 'score': 21, 'isLive': false, 'judges': [7, 7, 7]}],total:62,powerIndex:76.2,marketProb:46,wow:0,cats:['anchor', 'athlete', 'social'],tags:['Paralympic champion', '46% Market', '20+ avg'],case:'Ranks #1 on the composite Power Board (76.2/100) with a 20.7/30 scoring average and 46% market win odds. Paired with Daniella Karagach (1 Mirrorball), Elite athletic body awareness combined with a pro renowned for unlocking dynamic, unconventional choreography.'},
-      {rank:2,name:'Maura Higgins',age:35,proName:'Mark Ballas',mirrorballs:3,photo:'maura-higgins-mark-ballas.jpg',weeks:[{'dance': 'Foxtrot', 'score': 21, 'isLive': false, 'judges': [7, 7, 7]}, {'dance': 'Cha-cha-cha', 'score': 19, 'isLive': false, 'judges': [6, 6, 7]}, {'dance': 'Quickstep', 'score': 22, 'isLive': false, 'judges': [7, 7, 8]}],total:62,powerIndex:69.1,marketProb:11,wow:3,cats:['anchor', 'social'],tags:['No dance experience', '11% Market', 'Riser (+3)'],case:'Surged +3 points in the latest round (22/30 Quickstep) with a 69.1/100 Power Index. Paired with Mark Ballas (3 Mirrorballs), Mark’s three Mirrorballs and their immense reality fandom make the partnership built for a deep finale run.'},
-      {rank:3,name:'Jenna Dewan',age:45,proName:'Val Chmerkovskiy',mirrorballs:3,photo:'jenna-dewan-val-chmerkovskiy.jpg',weeks:[{'dance': 'Tango', 'score': 19, 'isLive': false, 'judges': [6, 6, 7]}, {'dance': 'Jive', 'score': 21, 'isLive': false, 'judges': [7, 7, 7]}, {'dance': 'Samba', 'score': 21, 'isLive': false, 'judges': [7, 7, 7]}],total:61,powerIndex:68.8,marketProb:11,wow:0,cats:['anchor', 'dance', 'social'],tags:['Pro dance background', '11% Market', '20+ avg'],case:'Consistent scorer averaging 20.3/30 through 3 completed weeks (68.8/100 Power Index). Paired with Val Chmerkovskiy (3 Mirrorballs), A true professional dancer paired with a three-time champion. Her high scoring floor makes her an elite anchor.'},
-      {rank:4,name:'Harry Shum Jr.',age:44,proName:'Jenna Johnson',mirrorballs:2,photo:'harry-shum-jr-jenna-johnson.jpg',weeks:[{'dance': 'Cha-cha-cha', 'score': 21, 'isLive': false, 'judges': [7, 7, 7]}, {'dance': 'Viennese waltz', 'score': 18, 'isLive': false, 'judges': [6, 6, 6]}, {'dance': 'Jive', 'score': 24, 'isLive': false, 'judges': [8, 8, 8]}],total:63,powerIndex:68.5,marketProb:10,wow:6,cats:['anchor', 'dance', 'social'],tags:['Pro dance background', '10% Market', 'Surging (+6)'],case:'Surged +6 points in the latest round (24/30 Jive) with a 68.5/100 Power Index. Paired with Jenna Johnson (2 Mirrorballs), Possesses the highest technical ceiling in the cast; the only obvious challenge is overcoming ringer perception.'},
-      {rank:5,name:'Amber Glenn',age:26,proName:'Pasha Pashkov',mirrorballs:0,photo:'amber-glenn-pasha-pashkov.jpg',weeks:[{'dance': 'Cha-cha-cha', 'score': 18, 'isLive': false, 'judges': [6, 6, 6]}, {'dance': 'Tango', 'score': 21, 'isLive': false, 'judges': [7, 7, 7]}, {'dance': 'Foxtrot', 'score': 24, 'isLive': false, 'judges': [8, 8, 8]}],total:63,powerIndex:65.1,marketProb:14,wow:3,cats:['sleeper', 'athlete', 'social'],tags:['U.S. figure skater', '14% Market', 'Riser (+3)'],case:'Surged +3 points in the latest round (24/30 Foxtrot) with a 65.1/100 Power Index. Paired with Pasha Pashkov (0 Mirrorballs), Figure-skating musicality, rotational speed, and Olympic visibility provide a reliable scoring floor.'},
-      {rank:6,name:'Jackson Olson',age:28,proName:'Emma Slater',mirrorballs:1,photo:'jackson-olson-emma-slater.jpg',weeks:[{'dance': 'Cha-cha-cha', 'score': 15, 'isLive': false, 'judges': [5, 5, 5]}, {'dance': 'Foxtrot', 'score': 18, 'isLive': false, 'judges': [6, 6, 6]}, {'dance': 'Paso doble', 'score': 18, 'isLive': false, 'judges': [6, 6, 6]}],total:51,powerIndex:49.8,marketProb:3,wow:0,cats:['sleeper', 'athlete', 'social'],tags:['3M+ social reach', '3% Market', 'Steady'],case:'Holding steady with a 17.0/30 scoring average and 3% market win probability. Paired with Emma Slater (1 Mirrorball), Elite social reach and Banana Ball entertainment value give him an exceptional public voting cushion.'},
-      {rank:7,name:'Tyler Cameron',age:33,proName:'Sharna Burgess',mirrorballs:1,photo:'tyler-cameron-sharna-burgess.jpg',weeks:[{'dance': 'Tango', 'score': 17, 'isLive': false, 'judges': [6, 5, 6]}, {'dance': 'Salsa', 'score': 16, 'isLive': false, 'judges': [6, 5, 5]}, {'dance': 'Jive', 'score': 17, 'isLive': false, 'judges': [5, 6, 6]}],total:50,powerIndex:48.5,marketProb:1,wow:1,cats:['sleeper', 'athlete', 'social'],tags:['Bachelor Nation', '1% Market', 'Steady'],case:'Holding steady with a 16.7/30 scoring average and 1% market win probability. Paired with Sharna Burgess (1 Mirrorball), Athletic frame, broad reality fanbase, and a returning champion pro give him higher upside than middle-pack scores suggest.'},
-      {rank:8,name:'Julia Stiles',age:45,proName:'Ezra Sosa',mirrorballs:0,photo:'julia-stiles-ezra-sosa.jpg',weeks:[{'dance': 'Quickstep', 'score': 18, 'isLive': false, 'judges': [6, 6, 6]}, {'dance': 'Tango', 'score': 16, 'isLive': false, 'judges': [5, 6, 5]}, {'dance': 'Salsa', 'score': 19, 'isLive': false, 'judges': [6, 7, 6]}],total:53,powerIndex:47.0,marketProb:1,wow:3,cats:['sleeper', 'dance', 'social'],tags:['Nostalgia icon', '1% Market', 'Riser (+3)'],case:'Surged +3 points in the latest round (19/30 Salsa) with a 47.0/100 Power Index. Paired with Ezra Sosa (0 Mirrorballs), Deep cross-generational nostalgia, screen dance memory, and the season’s cleanest motivational storyline.'},
-      {rank:9,name:'Connor Wood',age:31,proName:'Rylee Arnold',mirrorballs:0,photo:'connor-wood-rylee-arnold.jpg',weeks:[{'dance': 'Cha-cha-cha', 'score': 16, 'isLive': false, 'judges': [6, 5, 5]}, {'dance': 'Tango', 'score': 15, 'isLive': false, 'judges': [5, 5, 5]}, {'dance': 'Foxtrot', 'score': 20, 'isLive': false, 'judges': [7, 6, 7]}],total:51,powerIndex:47.0,marketProb:3,wow:5,cats:['social'],tags:['Comedy podcast', '3% Market', 'Surging (+5)'],case:'Surged +5 points in the latest round (20/30 Foxtrot) with a 47.0/100 Power Index. Paired with Rylee Arnold (0 Mirrorballs), Rapidly growing digital following and podcast listener loyalty keep him safe while his technique develops.'},
-      {rank:10,name:'Tatyana Ali',age:47,proName:'Jan Ravnik',mirrorballs:0,photo:'tatyana-ali-jan-ravnik.jpg',weeks:[{'dance': 'Jive', 'score': 12, 'isLive': false, 'judges': [4, 4, 4]}, {'dance': 'Foxtrot', 'score': 18, 'isLive': false, 'judges': [6, 6, 6]}, {'dance': 'Quickstep', 'score': 21, 'isLive': false, 'judges': [7, 7, 7]}],total:51,powerIndex:46.6,marketProb:1,wow:3,cats:['social'],tags:['Fresh Prince icon', '1% Market', 'Riser (+3)'],case:'Surged +3 points in the latest round (21/30 Quickstep) with a 46.6/100 Power Index. Paired with Jan Ravnik (0 Mirrorballs), The Alfonso Ribeiro reunion and cross-generational warmth generate huge audience affection and voting momentum.'},
-      {rank:11,name:'Ciara Miller',age:30,proName:'Brandon Armstrong',mirrorballs:0,photo:'ciara-miller-brandon-armstrong.jpg',weeks:[{'dance': 'Foxtrot', 'score': 15, 'isLive': false, 'judges': [5, 5, 5]}, {'dance': 'Tango', 'score': 18, 'isLive': false, 'judges': [6, 6, 6]}, {'dance': 'Cha-cha-cha', 'score': 18, 'isLive': false, 'judges': [6, 6, 6]}],total:51,powerIndex:42.8,marketProb:1,wow:0,cats:['social'],tags:['Bravo fandom', '1% Market', 'Steady'],case:'Holding steady with a 17.0/30 scoring average and 1% market win probability. Paired with Brandon Armstrong (0 Mirrorballs), Bravo and Traitors viewers are notoriously reliable voters; steady technical growth can push her deep into the bracket.'},
-      {rank:12,name:'Guillermo Rodriguez',age:55,proName:'Witney Carson',mirrorballs:2,photo:'guillermo-rodriguez-witney-carson.jpg',weeks:[{'dance': 'Cha-cha-cha', 'score': 10, 'isLive': false, 'judges': [4, 3, 3]}, {'dance': 'Paso doble', 'score': 12, 'isLive': false, 'judges': [4, 4, 4]}, {'dance': 'Foxtrot', 'score': 15, 'isLive': false, 'judges': [5, 5, 5]}],total:37,powerIndex:42.0,marketProb:2,wow:3,cats:[],tags:['Fan favorite', '2% Market', 'Riser (+3)'],case:'Surged +3 points in the latest round (15/30 Foxtrot) with a 42.0/100 Power Index. Paired with Witney Carson (2 Mirrorballs), Carries the lowest scoring average, but reigning champion Witney Carson and Jimmy Kimmel viewers protect him from the bottom.'}
+      {rank:1,name:'Ezra Frech',age:21,proName:'Daniella Karagach',mirrorballs:1,socialReach:1.5,photo:'ezra-frech-daniella-karagach.jpg',weeks:[{'dance': 'Tango', 'score': 20, 'isLive': false, 'judges': [7, 6, 7]}, {'dance': 'Cha-cha-cha', 'score': 21, 'isLive': false, 'judges': [7, 7, 7]}, {'dance': 'Foxtrot', 'score': 21, 'isLive': false, 'judges': [7, 7, 7]}],total:62,powerIndex:76.2,marketProb:46,elimRisk:1,wow:0,cats:['anchor', 'athlete', 'social'],tags:['Paralympic champion', '46% Market', '20+ avg'],case:'Ranks #1 on the composite Power Board (76.2/100) with a 20.7/30 scoring average and 46% market win odds. Paired with Daniella Karagach (1 Mirrorball), Elite athletic body awareness combined with a pro renowned for unlocking dynamic, unconventional choreography.'},
+      {rank:2,name:'Harry Shum Jr.',age:44,proName:'Jenna Johnson',mirrorballs:2,socialReach:3.5,photo:'harry-shum-jr-jenna-johnson.jpg',weeks:[{'dance': 'Cha-cha-cha', 'score': 21, 'isLive': false, 'judges': [7, 7, 7]}, {'dance': 'Viennese waltz', 'score': 18, 'isLive': false, 'judges': [6, 6, 6]}, {'dance': 'Jive', 'score': 24, 'isLive': false, 'judges': [8, 8, 8]}],total:63,powerIndex:68.5,marketProb:10,elimRisk:1,wow:6,cats:['anchor', 'dance', 'social'],tags:['Pro dance background', '10% Market', 'Surging (+6)'],case:'Surged +6 points in the latest round (24/30 Jive) with a 68.5/100 Power Index. Paired with Jenna Johnson (2 Mirrorballs), Possesses the highest technical ceiling in the cast; the only obvious challenge is overcoming ringer perception.'},
+      {rank:3,name:'Maura Higgins',age:35,proName:'Mark Ballas',mirrorballs:3,socialReach:6.0,photo:'maura-higgins-mark-ballas.jpg',weeks:[{'dance': 'Foxtrot', 'score': 21, 'isLive': false, 'judges': [7, 7, 7]}, {'dance': 'Cha-cha-cha', 'score': 19, 'isLive': false, 'judges': [6, 6, 7]}, {'dance': 'Quickstep', 'score': 22, 'isLive': false, 'judges': [7, 7, 8]}],total:62,powerIndex:68.3,marketProb:10,elimRisk:2,wow:3,cats:['anchor', 'social'],tags:['No dance experience', '10% Market', 'Riser (+3)'],case:'Surged +3 points in the latest round (22/30 Quickstep) with a 68.3/100 Power Index. Paired with Mark Ballas (3 Mirrorballs), Mark’s three Mirrorballs and their immense reality fandom make the partnership built for a deep finale run.'},
+      {rank:4,name:'Jenna Dewan',age:45,proName:'Val Chmerkovskiy',mirrorballs:3,socialReach:12.0,photo:'jenna-dewan-val-chmerkovskiy.jpg',weeks:[{'dance': 'Tango', 'score': 19, 'isLive': false, 'judges': [6, 6, 7]}, {'dance': 'Jive', 'score': 21, 'isLive': false, 'judges': [7, 7, 7]}, {'dance': 'Samba', 'score': 21, 'isLive': false, 'judges': [7, 7, 7]}],total:61,powerIndex:68.1,marketProb:10,elimRisk:2,wow:0,cats:['anchor', 'dance', 'social'],tags:['Pro dance background', '10% Market', '20+ avg'],case:'Consistent scorer averaging 20.3/30 through 3 completed weeks (68.1/100 Power Index). Paired with Val Chmerkovskiy (3 Mirrorballs), A true professional dancer paired with a three-time champion. Her high scoring floor makes her an elite anchor.'},
+      {rank:5,name:'Amber Glenn',age:26,proName:'Pasha Pashkov',mirrorballs:0,socialReach:3.9,photo:'amber-glenn-pasha-pashkov.jpg',weeks:[{'dance': 'Cha-cha-cha', 'score': 18, 'isLive': false, 'judges': [6, 6, 6]}, {'dance': 'Tango', 'score': 21, 'isLive': false, 'judges': [7, 7, 7]}, {'dance': 'Foxtrot', 'score': 24, 'isLive': false, 'judges': [8, 8, 8]}],total:63,powerIndex:64.4,marketProb:13,elimRisk:1,wow:3,cats:['sleeper', 'athlete', 'social'],tags:['U.S. figure skater', '13% Market', 'Riser (+3)'],case:'Surged +3 points in the latest round (24/30 Foxtrot) with a 64.4/100 Power Index. Paired with Pasha Pashkov (0 Mirrorballs), Figure-skating musicality, rotational speed, and Olympic visibility provide a reliable scoring floor.'},
+      {rank:6,name:'Jackson Olson',age:28,proName:'Emma Slater',mirrorballs:1,socialReach:3.2,photo:'jackson-olson-emma-slater.jpg',weeks:[{'dance': 'Cha-cha-cha', 'score': 15, 'isLive': false, 'judges': [5, 5, 5]}, {'dance': 'Foxtrot', 'score': 18, 'isLive': false, 'judges': [6, 6, 6]}, {'dance': 'Paso doble', 'score': 18, 'isLive': false, 'judges': [6, 6, 6]}],total:51,powerIndex:49.1,marketProb:2,elimRisk:33,wow:0,cats:['sleeper', 'athlete', 'social'],tags:['3M+ social reach', '2% Market', 'Steady'],case:'Holding steady with a 17.0/30 scoring average and 2% market win probability. Paired with Emma Slater (1 Mirrorball), Elite social reach and Banana Ball entertainment value give him an exceptional public voting cushion.'},
+      {rank:7,name:'Tyler Cameron',age:33,proName:'Sharna Burgess',mirrorballs:1,socialReach:3.2,photo:'tyler-cameron-sharna-burgess.jpg',weeks:[{'dance': 'Tango', 'score': 17, 'isLive': false, 'judges': [6, 5, 6]}, {'dance': 'Salsa', 'score': 16, 'isLive': false, 'judges': [6, 5, 5]}, {'dance': 'Jive', 'score': 17, 'isLive': false, 'judges': [5, 6, 6]}],total:50,powerIndex:48.5,marketProb:1,elimRisk:31,wow:1,cats:['sleeper', 'athlete', 'social'],tags:['Bachelor Nation', '1% Market', 'Steady'],case:'Holding steady with a 16.7/30 scoring average and 1% market win probability. Paired with Sharna Burgess (1 Mirrorball), Athletic frame, broad reality fanbase, and a returning champion pro give him higher upside than middle-pack scores suggest.'},
+      {rank:8,name:'Guillermo Rodriguez',age:55,proName:'Witney Carson',mirrorballs:2,socialReach:4.5,photo:'guillermo-rodriguez-witney-carson.jpg',weeks:[{'dance': 'Cha-cha-cha', 'score': 10, 'isLive': false, 'judges': [4, 3, 3]}, {'dance': 'Paso doble', 'score': 12, 'isLive': false, 'judges': [4, 4, 4]}, {'dance': 'Foxtrot', 'score': 15, 'isLive': false, 'judges': [5, 5, 5]}],total:37,powerIndex:48.3,marketProb:3,elimRisk:14,wow:3,cats:['sleeper', 'social'],tags:['Fan favorite', '3% Market', 'Riser (+3)'],case:'Surged +3 points in the latest round (15/30 Foxtrot) with a 48.3/100 Power Index. Paired with Witney Carson (2 Mirrorballs), Carries a modest scoring floor, but reigning champion Witney Carson and Jimmy Kimmel\'s nightly ABC audience provide an impenetrable fan voting shield.'},
+      {rank:9,name:'Julia Stiles',age:45,proName:'Ezra Sosa',mirrorballs:0,socialReach:1.7,photo:'julia-stiles-ezra-sosa.jpg',weeks:[{'dance': 'Quickstep', 'score': 18, 'isLive': false, 'judges': [6, 6, 6]}, {'dance': 'Tango', 'score': 16, 'isLive': false, 'judges': [5, 6, 5]}, {'dance': 'Salsa', 'score': 19, 'isLive': false, 'judges': [6, 7, 6]}],total:53,powerIndex:47.0,marketProb:1,elimRisk:8,wow:3,cats:['dance', 'social'],tags:['Nostalgia icon', '1% Market', 'Riser (+3)'],case:'Surged +3 points in the latest round (19/30 Salsa) with a 47.0/100 Power Index. Paired with Ezra Sosa (0 Mirrorballs), Deep cross-generational nostalgia, screen dance memory, and the season’s cleanest motivational storyline.'},
+      {rank:10,name:'Connor Wood',age:31,proName:'Rylee Arnold',mirrorballs:0,socialReach:1.5,photo:'connor-wood-rylee-arnold.jpg',weeks:[{'dance': 'Cha-cha-cha', 'score': 16, 'isLive': false, 'judges': [6, 5, 5]}, {'dance': 'Tango', 'score': 15, 'isLive': false, 'judges': [5, 5, 5]}, {'dance': 'Foxtrot', 'score': 20, 'isLive': false, 'judges': [7, 6, 7]}],total:51,powerIndex:47.0,marketProb:3,elimRisk:5,wow:5,cats:['social'],tags:['Comedy podcast', '3% Market', 'Surging (+5)'],case:'Surged +5 points in the latest round (20/30 Foxtrot) with a 47.0/100 Power Index. Paired with Rylee Arnold (0 Mirrorballs), Rapidly growing digital following and podcast listener loyalty keep him safe while his technique develops.'},
+      {rank:11,name:'Tatyana Ali',age:47,proName:'Jan Ravnik',mirrorballs:0,socialReach:2.5,photo:'tatyana-ali-jan-ravnik.jpg',weeks:[{'dance': 'Jive', 'score': 12, 'isLive': false, 'judges': [4, 4, 4]}, {'dance': 'Foxtrot', 'score': 18, 'isLive': false, 'judges': [6, 6, 6]}, {'dance': 'Quickstep', 'score': 21, 'isLive': false, 'judges': [7, 7, 7]}],total:51,powerIndex:46.6,marketProb:1,elimRisk:10,wow:3,cats:['social'],tags:['Fresh Prince icon', '1% Market', 'Riser (+3)'],case:'Surged +3 points in the latest round (21/30 Quickstep) with a 46.6/100 Power Index. Paired with Jan Ravnik (0 Mirrorballs), The Alfonso Ribeiro reunion and cross-generational warmth generate huge audience affection and voting momentum.'},
+      {rank:12,name:'Ciara Miller',age:30,proName:'Brandon Armstrong',mirrorballs:0,socialReach:1.0,photo:'ciara-miller-brandon-armstrong.jpg',weeks:[{'dance': 'Foxtrot', 'score': 15, 'isLive': false, 'judges': [5, 5, 5]}, {'dance': 'Tango', 'score': 18, 'isLive': false, 'judges': [6, 6, 6]}, {'dance': 'Cha-cha-cha', 'score': 18, 'isLive': false, 'judges': [6, 6, 6]}],total:51,powerIndex:42.8,marketProb:1,elimRisk:21,wow:0,cats:['social'],tags:['Bravo fandom', '1% Market', 'Steady'],case:'Holding steady with a 17.0/30 scoring average and 1% market win probability. Paired with Brandon Armstrong (0 Mirrorballs), Bravo and Traitors viewers are notoriously reliable voters; steady technical growth can push her deep into the bracket.'}
     ];
     const socialByName = {
       "Maura Higgins": {
@@ -1650,23 +1661,70 @@
       return 0;
     }
 
+    function getWeightedScore(d) {
+      if (!d.weeks || !d.weeks.length) return 15;
+      const scoredWeeks = d.weeks.filter(w => w.score !== null && w.score !== undefined);
+      if (!scoredWeeks.length) return 15;
+      const N = scoredWeeks.length;
+      const totalW = (N * (N + 1)) / 2;
+      return scoredWeeks.reduce((acc, w, i) => acc + ((i + 1) / totalW) * w.score, 0);
+    }
+
+    function getSurvivalInsight(name, riskTier, projRank, cushionStr, avgScore, wow, elimRisk) {
+      const insights = {
+        'Tatyana Ali': "Surging trajectory (+6 W2, +3 W3 to 21/30) and 4.5M cross-generational reach drop her Kalshi weekly elimination risk to only 10% (+0.5% fan cushion), lifting her out of the bottom danger zone.",
+        'Ciara Miller': "Faces a 21% Kalshi weekly elimination risk; plateaued at consecutive 18s with a 0-Mirrorball partner, leaving her with minimal public share (5.0%) and -3.4% cushion in the danger zone.",
+        'Guillermo Rodriguez': "Carries a 14% Kalshi elimination risk due to a modest 13.2 scoring floor, but Jimmy Kimmel's nightly ABC broadcast reach provides a resilient fan voting cushion (+0.8%).",
+        'Tyler Cameron': "Kalshi traders price Tyler at a steep 31% weekly elimination risk; a stagnant 16.7 scoring plateau and -2.6% fan cushion leave him vulnerable in the projected Bottom 2.",
+        'Jackson Olson': "Faces a 33% Kalshi weekly elimination risk; Banana Ball viral reach is vital to offset lower technical marks (17.5 weighted) as Latin technique develops.",
+        'Julia Stiles': "Consistent middle-pack scorer (17.8 weighted, 8% Kalshi elim risk), but a slight negative fan cushion (-1.6%) keeps her on the bubble.",
+        'Connor Wood': "Jumped to 20/30 in Foxtrot (+5 surge) with just 5% Kalshi elimination risk; rapidly building TikTok and podcast loyalty provides a strong safety net (+0.5% cushion).",
+        'Amber Glenn': "Blistering technical ceiling (24/30 Foxtrot) and Olympic visibility give her an elite scoring floor, holding just 1% Kalshi elimination risk.",
+        'Harry Shum Jr.': "Top single-dance score of the season (24/30 Jive) paired with Jenna Johnson yields a near-zero 1% Kalshi elimination risk and +1.7% fan cushion.",
+        'Maura Higgins': "Surged to 22/30 with Mark Ballas; massive Love Island reality fanbase yields just 2% Kalshi elimination risk and an impregnable +2.9% fan cushion.",
+        'Jenna Dewan': "High scoring floor (20.7 weighted) and 3-time champ Val Chmerkovskiy yield 2% Kalshi elimination risk and the highest overall 50/50 combined share (11.3%).",
+        'Ezra Frech': "Paralympic gold medalist holding #1 Power Index (76/100) and 47% Kalshi win odds; carries just 1% weekly elimination risk and is virtually immune to early elimination."
+      };
+      if (insights[name]) return insights[name];
+      if (riskTier === 'danger') {
+        return `Lower scoring trajectory and thin public voting cushion place this couple in the danger zone for the upcoming live elimination.`;
+      } else if (riskTier === 'bubble') {
+        return `Middle-pack scoring leaves this couple vulnerable to sudden leaderboard shifts; viewer voting will be critical.`;
+      }
+      return `Solid judges' baseline combined with reliable fan voting cushion provides a strong safety buffer.`;
+    }
+
     function computeProjections(dancerList){
-      const totalAvgScore = dancerList.reduce((sum, d) => {
-        const avg = d.weeks && d.weeks.length ? (d.total / d.weeks.length) : 15;
-        return sum + avg;
-      }, 0) || 1;
-      const totalMarket = dancerList.reduce((sum, d) => sum + (d.marketProb || 1), 0) || 1;
+      const totalWeightedScore = dancerList.reduce((sum, d) => sum + getWeightedScore(d), 0) || 1;
+      const hasElimMarket = dancerList.some(d => d.elimRisk !== undefined && d.elimRisk !== null);
+      let totalSafety = 1;
+      let totalMarket = 1;
+      if (hasElimMarket) {
+        totalSafety = dancerList.reduce((sum, d) => sum + Math.max(5, 100 - ((d.elimRisk !== null && d.elimRisk !== undefined ? d.elimRisk : 10) * 2.0)), 0) || 1;
+      } else {
+        totalMarket = dancerList.reduce((sum, d) => sum + (d.marketProb || 1), 0) || 1;
+      }
+
       const data = dancerList.map(d => {
         const latestWeek = d.weeks && d.weeks.length ? d.weeks[d.weeks.length - 1] : null;
         const isLive = !!(latestWeek && latestWeek.isLive);
         const tonightScore = isLive ? latestWeek.score : null;
         const latestScore = latestWeek ? latestWeek.score : 15;
         const avgScore = d.weeks && d.weeks.length ? (d.total / d.weeks.length) : 15;
-        const judgesShare = (avgScore / totalAvgScore) * 100;
-        const marketShare = ((d.marketProb || 1) / totalMarket) * 100;
-        const proBoost = (d.mirrorballs || 0) * 2.5;
-        const rawFan = marketShare * 0.65 + proBoost * 0.35 + 1.0;
-        return { d, judgesShare, avgScore, rawFan, latestScore, isLive, tonightScore };
+        const weightedScore = getWeightedScore(d);
+        const judgesShare = (weightedScore / totalWeightedScore) * 100;
+        let marketShare = 8.33;
+        if (hasElimMarket) {
+          const elim = (d.elimRisk !== null && d.elimRisk !== undefined) ? d.elimRisk : 10;
+          const safety = Math.max(5, 100 - (elim * 2.0));
+          marketShare = (safety / totalSafety) * 100;
+        } else {
+          marketShare = ((d.marketProb || 1) / totalMarket) * 100;
+        }
+        const proBoost = (d.mirrorballs || 0) * 1.5;
+        const socialBoost = Math.min((d.socialReach || 1.0) * 1.5, 12.0);
+        const rawFan = (marketShare * 0.45) + (socialBoost * 0.35) + (proBoost * 0.20) + 1.0;
+        return { d, judgesShare, avgScore, weightedScore, rawFan, latestScore, isLive, tonightScore, elimRisk: d.elimRisk };
       });
       const totalFan = data.reduce((sum, item) => sum + item.rawFan, 0) || 1;
       data.forEach(item => {
@@ -1692,11 +1750,15 @@
         }
         const cushion = (item.fanShare - (100 / data.length)).toFixed(1);
         const cushionStr = (cushion >= 0 ? '+' + cushion : cushion) + '%';
+        const insight = getSurvivalInsight(item.d.name, riskTier, index + 1, cushionStr, item.avgScore, item.d.wow, item.elimRisk);
+
         projMap[item.d.name] = {
           name: item.d.name,
           pro: item.d.proName,
           avg: item.avgScore.toFixed(1),
+          weighted: item.weightedScore.toFixed(1),
           odds: item.d.marketProb || 1,
+          elimRisk: item.elimRisk,
           judgesShare: item.judgesShare.toFixed(1) + '%',
           fanShare: item.fanShare.toFixed(1) + '%',
           combined: item.combined.toFixed(1) + '%',
@@ -1704,6 +1766,7 @@
           riskTier,
           riskLabel,
           cushionStr,
+          insight,
           projRank: index + 1,
           powerRank: item.d.rank,
           powerIndex: item.d.powerIndex,
@@ -1771,8 +1834,9 @@
           metricsHtml=`<div class="score power" title="Composite Power Index: 45% Judges' Score & Momentum, 25% Kalshi Market Odds, 15% Pro Pedigree, 15% Audience Voting Reach"><b>${powerIndex}</b><small>Power</small></div><div class="score season" title="Cumulative judges' points out of ${maxTotal}"><b>${d.total}/${maxTotal}</b><small>Season</small></div>`;
         }
 
-        const proj = globalProjMap[d.name] || { survivalPct: 75, riskTier: 'safe', riskLabel: 'Safe', cushionStr: '+0.0%', fanShare: '7.7%' };
-        const survivalHtml = `<div class="survival-meter" aria-label="Tuesday survival outlook: ${proj.riskLabel} (${proj.survivalPct}%)"><div class="survival-head"><span class="survival-label">Live Show Survival Outlook</span><span class="survival-badge ${proj.riskTier}">${proj.riskLabel} (${proj.survivalPct}%)</span></div><div class="survival-bar-track"><div class="survival-bar-fill ${proj.riskTier}" style="width:${proj.survivalPct}%"></div></div><div class="survival-meta"><span>Fan Vote Cushion: <b>${proj.cushionStr}</b></span><span>Implied Public Share: <b>${proj.fanShare}</b></span></div></div>`;
+        const proj = globalProjMap[d.name] || { survivalPct: 75, riskTier: 'safe', riskLabel: 'Safe', cushionStr: '+0.0%', fanShare: '7.7%', insight: '' };
+        const elimBadge = (proj.elimRisk !== undefined && proj.elimRisk !== null) ? `<span>Kalshi Elim Risk: <b style="color:${proj.elimRisk >= 20 ? 'var(--red)' : (proj.elimRisk >= 10 ? 'var(--gold)' : 'var(--green)')}">${proj.elimRisk}%</b></span>` : '';
+        const survivalHtml = `<div class="survival-meter" aria-label="Tuesday survival outlook: ${proj.riskLabel} (${proj.survivalPct}%)"><div class="survival-head"><span class="survival-label">Live Show Survival Outlook</span><span class="survival-badge ${proj.riskTier}">${proj.riskLabel} (${proj.survivalPct}%)</span></div><div class="survival-bar-track"><div class="survival-bar-fill ${proj.riskTier}" style="width:${proj.survivalPct}%"></div></div><div class="survival-meta"><span>Fan Vote Cushion: <b>${proj.cushionStr}</b></span>${elimBadge}<span>Implied Public Share: <b>${proj.fanShare}</b></span></div>${proj.insight ? `<div class="survival-insight ${proj.riskTier}"><span class="insight-pill ${proj.riskTier}">Survival Analysis</span>${proj.insight}</div>` : ''}</div>`;
 
         card.innerHTML=`<div class="rank">${displayRank}</div><img class="couple-photo" src="assets/${d.photo}" alt="${d.name} and professional partner ${d.proName} in their Season 35 cast portrait"><div class="card-body"><div class="card-top"><div><h3 class="name">${d.name}, ${d.age}</h3><p class="partner">with ${d.proName} · ${mirrorballLabel(d.mirrorballs)}</p></div><div class="metrics" aria-label="Lens rank: #${displayRank}">${metricsHtml}</div></div><div class="score-history" aria-label="Weekly judges' scores">${scoreHistory}</div><p class="case">${d.case}</p><div class="tags">${d.tags.map((t,i)=>`<span class="tag ${i===0?'trait':''} ${t.startsWith('Surging')||t.startsWith('Riser')?'rising':''} ${t.startsWith('Dip')?'dipping':''}">${t}</span>`).join('')}</div>${survivalHtml}${socialMarkup(d)}</div>`;
         board.appendChild(card);
@@ -2213,9 +2277,11 @@
             <td>
               <strong>${p.name}</strong> <span style="color:var(--muted);font-size:.76rem">with ${p.pro}</span>
               ${anyLiveTonight ? (p.isLive ? `<div style="font-size:0.68rem;color:var(--green);font-weight:700;margin-top:2px"><span class="live-dot-inline" style="width:6px;height:6px"></span>Danced Tonight: ${p.tonightScore}/30</div>` : `<div style="font-size:0.68rem;color:var(--muted);font-weight:600;margin-top:2px">⏳ Pending Tonight (Baseline)</div>`) : ''}
+              ${p.insight ? `<div class="table-survival-insight">${p.insight}</div>` : ''}
             </td>
             <td><b>${p.avg}</b> <small style="color:var(--muted)">/30</small></td>
             <td><b>${p.judgesShare}</b></td>
+            <td><b style="color:${p.elimRisk >= 20 ? 'var(--red)' : (p.elimRisk >= 10 ? 'var(--gold)' : 'var(--green)')}">${p.elimRisk !== undefined && p.elimRisk !== null ? p.elimRisk + '%' : '—'}</b></td>
             <td><b>${p.fanShare}</b> <small style="color:${p.cushionStr.startsWith('+') ? 'var(--green)' : 'var(--red)'};font-weight:700">(${p.cushionStr})</small></td>
             <td><strong>${p.combined}</strong></td>
             <td><span class="risk-badge ${p.riskTier}">${p.riskLabel} (${p.survivalPct}%)</span></td>
@@ -2251,6 +2317,10 @@
                 <span class="rc-stat-val">${p.avg} <small>/30</small></span>
               </div>
               <div class="rc-stat">
+                <span class="rc-stat-label">Kalshi Elim</span>
+                <span class="rc-stat-val" style="color:${p.elimRisk >= 20 ? 'var(--red)' : (p.elimRisk >= 10 ? 'var(--gold)' : 'var(--green)')}">${p.elimRisk !== undefined && p.elimRisk !== null ? p.elimRisk + '%' : '—'}</span>
+              </div>
+              <div class="rc-stat">
                 <span class="rc-stat-label">Fan Cushion</span>
                 <span class="rc-stat-val" style="color:${p.cushionStr.startsWith('+') ? 'var(--green)' : 'var(--red)'}">${p.cushionStr}</span>
               </div>
@@ -2266,7 +2336,8 @@
               </div>
             </div>
             <div class="rc-expand-detail">
-              <span>💡 <b>50/50 Survival vs. Season Power:</b> Projected #${p.projRank} for tonight’s live elimination under 50% judges’ points (${p.avg}/30 → ${p.judgesShare}) + 50% fan vote (${p.odds}% odds → ${p.fanShare}). Overall Season Power is <b>#${p.powerRank}</b> (${p.powerIndex}/100 Power Index).</span>
+              <span>💡 <b>50/50 Survival vs. Season Power:</b> Projected #${p.projRank} for tonight’s live elimination under 50% judges’ points (${p.avg}/30 → ${p.judgesShare}) + 50% fan vote (${p.elimRisk !== undefined && p.elimRisk !== null ? 'Kalshi weekly elim risk: ' + p.elimRisk + '%' : p.odds + '% win odds'} → ${p.fanShare}). Overall Season Power is <b>#${p.powerRank}</b> (${p.powerIndex}/100 Power Index).</span>
+              ${p.insight ? `<span style="display:block;margin-top:6px;padding-top:6px;border-top:1px dashed var(--line);font-size:0.72rem;color:var(--muted)">🔍 <b>Survival Analysis:</b> ${p.insight}</span>` : ''}
             </div>
           </div>
         `).join('');
