@@ -21,5 +21,12 @@
   },
   "server": {
     "androidScheme": "https"
-  }
+  },
+  "packageClassList": [
+    "HapticsPlugin",
+    "PushNotificationsPlugin",
+    "SplashScreenPlugin",
+    "StatusBarPlugin",
+    "DWTSLiveTrackingPlugin"
+  ]
 }

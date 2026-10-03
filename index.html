@@ -2822,12 +2822,14 @@
 
     async function toggleLiveTracking() {
       try {
-        const isCapacitor = !!(window.Capacitor && window.Capacitor.Plugins && window.Capacitor.Plugins.DWTSLiveTracking);
-        
+        const hasPlugin = !!(window.Capacitor && window.Capacitor.Plugins && window.Capacitor.Plugins.DWTSLiveTracking);
+        if (!hasPlugin) {
+          throw new Error('Native DWTSLiveTracking plugin not detected in Capacitor bridge. Available plugins: ' + Object.keys((window.Capacitor && window.Capacitor.Plugins) || {}).join(', '));
+        }
+
         if (!isLiveTrackingActive) {
-          if (isCapacitor) {
-            await window.Capacitor.Plugins.DWTSLiveTracking.startLiveTracking();
-          }
+          const res = await window.Capacitor.Plugins.DWTSLiveTracking.startLiveTracking();
+          console.log('[LiveTracking] Started:', res);
           isLiveTrackingActive = true;
           if (liveActivityBtn) {
             liveActivityBtn.classList.add('active');
@@ -2835,7 +2837,7 @@
           }
           showLiveToast('🪩 Live Tracking pinned to Lock Screen & Status Bar!');
         } else {
-          if (isCapacitor) {
+          if (window.Capacitor && window.Capacitor.Plugins && window.Capacitor.Plugins.DWTSLiveTracking) {
             await window.Capacitor.Plugins.DWTSLiveTracking.stopLiveTracking();
           }
           isLiveTrackingActive = false;
@@ -2846,13 +2848,10 @@
           showLiveToast('Live tracking dismissed');
         }
       } catch (err) {
-        console.warn('[LiveTracking] Error:', err);
-        showLiveToast('🪩 Live tracking active on your home & lock screen');
-        isLiveTrackingActive = !isLiveTrackingActive;
-        if (liveActivityBtn) {
-          liveActivityBtn.classList.toggle('active', isLiveTrackingActive);
-          liveActivityBtn.innerHTML = isLiveTrackingActive ? '<span>🪩 Tracking Active</span>' : '<span>🪩 Live Tracking</span>';
-        }
+        console.error('[LiveTracking] Error:', err);
+        const errDetail = (err && (err.message || err.errorMessage || JSON.stringify(err))) || String(err);
+        showLiveToast('⚠️ Live Tracking error: ' + errDetail);
+        alert('Live Activity Error:\n' + errDetail);
       }
     }
 
@@ -2938,7 +2937,81 @@
       }
     });
 
-    // 6. Capacitor Native App Bridge (iOS & Android)
+    // 6. Push Notifications Modal & Preferences Setup (Available everywhere)
+    const notifBtn = document.getElementById('notif-settings-btn');
+    const notifModal = document.getElementById('notif-settings-modal');
+    const notifClose = document.getElementById('notif-modal-close');
+    const notifDone = document.getElementById('notif-modal-done');
+
+    // Preference keys
+    const NOTIF_PREFS = {
+      showReminder: 'dwts_notif_show_reminder',
+      votingWindow: 'dwts_notif_voting_window',
+      elimination: 'dwts_notif_elimination',
+      hideSpoilers: 'dwts_notif_hide_spoilers'
+    };
+
+    // Load saved preferences (defaults to enabled for reminders & results)
+    const loadNotifPrefs = () => ({
+      showReminder: localStorage.getItem(NOTIF_PREFS.showReminder) !== 'false',
+      votingWindow: localStorage.getItem(NOTIF_PREFS.votingWindow) !== 'false',
+      elimination: localStorage.getItem(NOTIF_PREFS.elimination) !== 'false',
+      hideSpoilers: localStorage.getItem(NOTIF_PREFS.hideSpoilers) === 'true'
+    });
+
+    const applyPrefsToUI = () => {
+      const p = loadNotifPrefs();
+      const toggleReminder = document.getElementById('pref-show-reminder');
+      const toggleVoting = document.getElementById('pref-voting-window');
+      const toggleElim = document.getElementById('pref-elimination');
+      const toggleSpoilers = document.getElementById('pref-hide-spoilers');
+      if (toggleReminder) toggleReminder.checked = p.showReminder;
+      if (toggleVoting) toggleVoting.checked = p.votingWindow;
+      if (toggleElim) toggleElim.checked = p.elimination;
+      if (toggleSpoilers) toggleSpoilers.checked = p.hideSpoilers;
+
+      const tokenEl = document.getElementById('debug-device-token');
+      if (tokenEl) {
+        const tok = localStorage.getItem('dwts_device_token');
+        tokenEl.textContent = tok ? tok : 'Waiting for registration token from Apple APNs / Firebase...';
+      }
+    };
+
+    if (notifBtn && notifModal) {
+      notifBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        applyPrefsToUI();
+        notifModal.classList.add('show');
+      });
+      if (notifClose) notifClose.addEventListener('click', () => notifModal.classList.remove('show'));
+      if (notifDone) notifDone.addEventListener('click', () => notifModal.classList.remove('show'));
+      notifModal.addEventListener('click', (e) => {
+        if (e.target === notifModal) notifModal.classList.remove('show');
+      });
+    }
+
+    // Wire up toggle changes to localStorage
+    ['pref-show-reminder', 'pref-voting-window', 'pref-elimination', 'pref-hide-spoilers'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) {
+        el.addEventListener('change', () => {
+          if (id === 'pref-show-reminder') localStorage.setItem(NOTIF_PREFS.showReminder, el.checked);
+          if (id === 'pref-voting-window') localStorage.setItem(NOTIF_PREFS.votingWindow, el.checked);
+          if (id === 'pref-elimination') localStorage.setItem(NOTIF_PREFS.elimination, el.checked);
+          if (id === 'pref-hide-spoilers') localStorage.setItem(NOTIF_PREFS.hideSpoilers, el.checked);
+
+          if (el.checked && window.Capacitor && window.Capacitor.Plugins && window.Capacitor.Plugins.PushNotifications) {
+            window.Capacitor.Plugins.PushNotifications.requestPermissions().then(result => {
+              if (result.receive === 'granted') {
+                window.Capacitor.Plugins.PushNotifications.register();
+              }
+            }).catch(() => {});
+          }
+        });
+      }
+    });
+
+    // 7. Capacitor Native App Bridge (iOS & Android)
     if (window.Capacitor && window.Capacitor.isNativePlatform()) {
       console.log('[Native App] Running in Capacitor native shell on', window.Capacitor.getPlatform());
       
@@ -2959,80 +3032,6 @@
           }
         } catch (_) {}
       }
-
-      // Push Notifications setup (iOS & Android)
-      const notifBtn = document.getElementById('notif-settings-btn');
-      const notifModal = document.getElementById('notif-settings-modal');
-      const notifClose = document.getElementById('notif-modal-close');
-      const notifDone = document.getElementById('notif-modal-done');
-
-      // Preference keys
-      const NOTIF_PREFS = {
-        showReminder: 'dwts_notif_show_reminder',
-        votingWindow: 'dwts_notif_voting_window',
-        elimination: 'dwts_notif_elimination',
-        hideSpoilers: 'dwts_notif_hide_spoilers'
-      };
-
-      // Load saved preferences (defaults to enabled for reminders & results)
-      const loadNotifPrefs = () => ({
-        showReminder: localStorage.getItem(NOTIF_PREFS.showReminder) !== 'false',
-        votingWindow: localStorage.getItem(NOTIF_PREFS.votingWindow) !== 'false',
-        elimination: localStorage.getItem(NOTIF_PREFS.elimination) !== 'false',
-        hideSpoilers: localStorage.getItem(NOTIF_PREFS.hideSpoilers) === 'true'
-      });
-
-      const applyPrefsToUI = () => {
-        const p = loadNotifPrefs();
-        const toggleReminder = document.getElementById('pref-show-reminder');
-        const toggleVoting = document.getElementById('pref-voting-window');
-        const toggleElim = document.getElementById('pref-elimination');
-        const toggleSpoilers = document.getElementById('pref-hide-spoilers');
-        if (toggleReminder) toggleReminder.checked = p.showReminder;
-        if (toggleVoting) toggleVoting.checked = p.votingWindow;
-        if (toggleElim) toggleElim.checked = p.elimination;
-        if (toggleSpoilers) toggleSpoilers.checked = p.hideSpoilers;
-
-        const tokenEl = document.getElementById('debug-device-token');
-        if (tokenEl) {
-          const tok = localStorage.getItem('dwts_device_token');
-          tokenEl.textContent = tok ? tok : 'Waiting for registration token from Apple APNs / Firebase...';
-        }
-      };
-
-      if (notifBtn && notifModal) {
-        notifBtn.addEventListener('click', () => {
-          applyPrefsToUI();
-          notifModal.classList.add('show');
-        });
-        if (notifClose) notifClose.addEventListener('click', () => notifModal.classList.remove('show'));
-        if (notifDone) notifDone.addEventListener('click', () => notifModal.classList.remove('show'));
-        notifModal.addEventListener('click', (e) => {
-          if (e.target === notifModal) notifModal.classList.remove('show');
-        });
-      }
-
-      // Wire up toggle changes to localStorage
-      ['pref-show-reminder', 'pref-voting-window', 'pref-elimination', 'pref-hide-spoilers'].forEach(id => {
-        const el = document.getElementById(id);
-        if (el) {
-          el.addEventListener('change', () => {
-            if (id === 'pref-show-reminder') localStorage.setItem(NOTIF_PREFS.showReminder, el.checked);
-            if (id === 'pref-voting-window') localStorage.setItem(NOTIF_PREFS.votingWindow, el.checked);
-            if (id === 'pref-elimination') localStorage.setItem(NOTIF_PREFS.elimination, el.checked);
-            if (id === 'pref-hide-spoilers') localStorage.setItem(NOTIF_PREFS.hideSpoilers, el.checked);
-            
-            // If native Capacitor push is available, request permissions if enabling
-            if (el.checked && window.Capacitor && window.Capacitor.Plugins && window.Capacitor.Plugins.PushNotifications) {
-              window.Capacitor.Plugins.PushNotifications.requestPermissions().then(result => {
-                if (result.receive === 'granted') {
-                  window.Capacitor.Plugins.PushNotifications.register();
-                }
-              }).catch(() => {});
-            }
-          });
-        }
-      });
 
       // Register Capacitor Push Notifications across iOS and Android
       if (window.Capacitor && window.Capacitor.Plugins && window.Capacitor.Plugins.PushNotifications) {
