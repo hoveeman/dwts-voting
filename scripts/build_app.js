@@ -18,6 +18,7 @@ const filesToCopy = [
   'manifest.webmanifest',
   'dancers.json',
   'dancers.txt',
+  'live_state.json',
   'version.json',
   'spotify_tracks.json',
   'spotify_playlists.json',

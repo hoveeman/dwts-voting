@@ -68,7 +68,7 @@ def run_cmd(cmd):
 
 
 def git_has_changes():
-    code, out, _ = run_cmd("git status --porcelain index.html dancers.json dancers.txt spotify_playlists.json spotify_tracks.json assets/playlist_covers/")
+    code, out, _ = run_cmd("git status --porcelain index.html dancers.json dancers.txt live_state.json spotify_playlists.json spotify_tracks.json assets/playlist_covers/")
     return bool(out)
 
 
@@ -81,7 +81,7 @@ def push_updates(scored_count, total_count, leader_name, leader_score):
 
     run_cmd("git config user.name 'github-actions[bot]'")
     run_cmd("git config user.email 'github-actions[bot]@users.noreply.github.com'")
-    run_cmd("git add index.html dancers.json dancers.txt spotify_playlists.json spotify_tracks.json assets/playlist_covers/")
+    run_cmd("git add index.html dancers.json dancers.txt live_state.json spotify_playlists.json spotify_tracks.json assets/playlist_covers/")
 
     if not git_has_changes():
         log("No file changes detected after update.")

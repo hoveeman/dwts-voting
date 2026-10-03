@@ -19,6 +19,7 @@ WORKSPACE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 HTML_FILE = os.path.join(WORKSPACE_DIR, 'index.html')
 DANCERS_JSON = os.path.join(WORKSPACE_DIR, 'dancers.json')
 DANCERS_TXT = os.path.join(WORKSPACE_DIR, 'dancers.txt')
+LIVE_STATE_JSON = os.path.join(WORKSPACE_DIR, 'live_state.json')
 VALIDATE_SCRIPT = os.path.join(WORKSPACE_DIR, 'scripts', 'validate_cheat_sheet.py')
 
 WIKI_URL = 'https://en.wikipedia.org/api/rest_v1/page/html/Dancing_with_the_Stars_(American_TV_series)_season_35'
@@ -618,6 +619,94 @@ def update_dancers_json_and_txt(active_couples):
         for pair in dancers_v1:
             f.write(f"{pair}\n")
     print(f"Updated {DANCERS_TXT}: {len(dancers_v1)} active couples.")
+
+def export_live_state(wiki_data, market_odds=None):
+    """
+    Exports a lightweight live_state.json consumed by iOS Live Activities (ActivityKit)
+    and Android Ongoing Notifications / Live Status Chips.
+    """
+    week_lineups = wiki_data.get('week_lineups', {})
+    if not week_lineups:
+        return
+    current_wk = max(week_lineups.keys())
+    lineup = week_lineups[current_wk]
+    couples = lineup.get('couples', [])
+    scored = [c for c in couples if c.get('score') is not None]
+    
+    ep_themes = wiki_data.get('ep_themes', {})
+    week_theme = ep_themes.get(current_wk + 1, lineup.get('theme', f'Week {current_wk}'))
+
+    # Determine last scored routine
+    last_scored_obj = None
+    if scored:
+        latest = scored[-1]
+        name = latest['name']
+        meta = COUPLE_REGISTRY.get(name, {})
+        judge_scores = latest.get('judge_scores', [])
+        judges_str = ""
+        if judge_scores:
+            meta_list = get_judge_meta_list(len(judge_scores))
+            judges_str = " · ".join([f"{abbr}:{val}" for (abbr, _), val in zip(meta_list, judge_scores)])
+
+        # Calculate rank among scored
+        sorted_scored = sorted(scored, key=lambda c: (-c['score'], c['name']))
+        rank = next((idx + 1 for idx, c in enumerate(sorted_scored) if c['name'] == name), 1)
+
+        last_scored_obj = {
+            "name": name,
+            "short": meta.get("short", name),
+            "pro": meta.get("proName", ""),
+            "dance": latest.get("dance", "Routine"),
+            "song": latest.get("song", ""),
+            "score": latest.get("score", 0),
+            "max_score": 30,
+            "judges": judges_str,
+            "rank": rank,
+            "leader_name": sorted_scored[0]['name'],
+            "leader_score": sorted_scored[0]['score']
+        }
+
+    # Determine couple next up
+    next_up_obj = None
+    if len(scored) < len(couples):
+        next_c = couples[len(scored)]
+        meta_next = COUPLE_REGISTRY.get(next_c['name'], {})
+        next_up_obj = {
+            "name": next_c['name'],
+            "short": meta_next.get("short", next_c['name']),
+            "pro": meta_next.get("proName", ""),
+            "dance": next_c.get("dance", "Routine"),
+            "song": next_c.get("song", "")
+        }
+
+    # Check for eliminations this week
+    eliminated_this_week = []
+    for c in couples:
+        if 'eliminated' in str(c.get('result', '')).lower():
+            eliminated_this_week.append(c['name'])
+    for name, info in wiki_data.get('eliminated_info', {}).items():
+        if info.get('week') == current_wk and name not in eliminated_this_week:
+            eliminated_this_week.append(name)
+
+    is_live = (len(scored) > 0 and len(scored) < len(couples)) or (len(scored) == len(couples) and len(couples) > 0 and not bool(eliminated_this_week))
+
+    state = {
+        "broadcast_active": is_live,
+        "week_number": current_wk,
+        "week_theme": week_theme,
+        "danced_count": len(scored),
+        "total_couples": len(couples),
+        "voting_closes_at": "9:50 PM ET",
+        "last_scored": last_scored_obj,
+        "next_up": next_up_obj,
+        "eliminated": eliminated_this_week,
+        "updated_at": datetime.now(timezone.utc).isoformat()
+    }
+
+    with open(LIVE_STATE_JSON, 'w', encoding='utf-8') as f:
+        json.dump(state, f, indent=2)
+        f.write('\n')
+    print(f"Updated {LIVE_STATE_JSON}: Week {current_wk} ({len(scored)}/{len(couples)} scored).")
 
 def compute_power_index(avg_score, wow_delta, market_prob, mirrorballs, social_reach_num, is_athlete, is_dancer):
     """
@@ -1453,6 +1542,9 @@ def update_index_html(wiki_data, market_odds=None):
     # 9. Sync dancers.json and dancers.txt in Power Index order for the iOS Shortcut
     active_couples_ranked = [d['name'] for d in active_dancers_data]
     update_dancers_json_and_txt(active_couples_ranked)
+
+    # 10. Sync live_state.json for iOS Live Activities and Android Ongoing Notifications
+    export_live_state(wiki_data, market_odds)
 
 def main():
     print("=== DWTS Season 35 Automated Updater ===")

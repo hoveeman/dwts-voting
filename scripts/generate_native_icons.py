@@ -12,6 +12,7 @@ from PIL import Image, ImageDraw, ImageFilter
 ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SRC_ICON = os.path.join(ROOT_DIR, 'assets', 'icon-512-ballroom.png')
 NAVY_BG = (16, 43, 85) # #102b55
+DARK_BG = (17, 20, 22) # #111416 dark ballroom theme background
 
 def extract_transparent_foreground(src_path):
     src = Image.open(src_path).convert('RGBA')
@@ -50,6 +51,8 @@ def extract_transparent_foreground(src_path):
 def main():
     print('[Icons] Generating native app icons and splash assets...')
     fg = extract_transparent_foreground(SRC_ICON)
+    alpha = fg.split()[-1]
+    tight_art = fg.crop(alpha.getbbox())
 
     # 1. iOS AppIcon (1024x1024 opaque)
     ios_icon_path = os.path.join(ROOT_DIR, 'ios', 'App', 'App', 'Assets.xcassets', 'AppIcon.appiconset', 'AppIcon-512@2x.png')
@@ -58,7 +61,26 @@ def main():
         ios_im.save(ios_icon_path, 'PNG')
         print(' ✔ Generated iOS 1024x1024 AppIcon')
 
-    # 2. Android Mipmaps
+    # 2. iOS Splash Screen (2732x2732 dark #111416 ballroom background with centered mirrorball)
+    # Visible width on a 9:19.5 iPhone screen with scaleAspectFill from 2732h is ~1260px.
+    # Sizing mirrorball artwork width to 380px (~30.1% screen width) perfectly matches Android's 29.4% ratio.
+    ios_splash_dir = os.path.join(ROOT_DIR, 'ios', 'App', 'App', 'Assets.xcassets', 'Splash.imageset')
+    if os.path.exists(ios_splash_dir):
+        splash_art_w = 380
+        aspect = tight_art.height / tight_art.width
+        splash_art_h = int(splash_art_w * aspect)
+        ios_art_scaled = tight_art.resize((splash_art_w, splash_art_h), Image.Resampling.LANCZOS)
+
+        ios_splash = Image.new('RGB', (2732, 2732), DARK_BG)
+        paste_x = (2732 - splash_art_w) // 2
+        paste_y = (2732 - splash_art_h) // 2
+        ios_splash.paste(ios_art_scaled, (paste_x, paste_y), ios_art_scaled)
+
+        for splash_fname in ['splash-2732x2732.png', 'splash-2732x2732-1.png', 'splash-2732x2732-2.png']:
+            ios_splash.save(os.path.join(ios_splash_dir, splash_fname), 'PNG')
+        print(' ✔ Generated iOS dark mirrorball splash images (2732x2732 @1x, @2x, @3x)')
+
+    # 3. Android Mipmaps
     android_res = os.path.join(ROOT_DIR, 'android', 'app', 'src', 'main', 'res')
     densities = [
         ('mipmap-mdpi', 48, 108),
@@ -96,7 +118,7 @@ def main():
 
         print(f' ✔ Generated Android {folder} (legacy: {size}x{size}, adaptive fg: {fg_size}x{fg_size})')
 
-    # 3. Android 12+ Splash Screen Icon
+    # 4. Android 12+ Splash Screen Icon
     # Sized to 260x260 inside 432x432 canvas so the entire mirrorball, all 5 stars,
     # stand, and DWTS 35 badge fit 100% inside Android 12's 160dp splash circle without any clipping
     drawable_dir = os.path.join(android_res, 'drawable')
@@ -108,7 +130,33 @@ def main():
     splash_canvas.save(splash_icon_path, 'PNG')
     print(' ✔ Generated Android 12+ Splash Icon (@drawable/splash_icon.png)')
 
-    # 4. PWA Maskable Icons (for web manifest)
+    # 5. Android Legacy Splash Screens (Portrait & Landscape on #111416)
+    aspect = tight_art.height / tight_art.width
+    android_splashes = [
+        ('drawable-port-mdpi', 320, 480, 93),
+        ('drawable-port-hdpi', 480, 800, 139),
+        ('drawable-port-xhdpi', 720, 1280, 211),
+        ('drawable-port-xxhdpi', 960, 1600, 281),
+        ('drawable-port-xxxhdpi', 1280, 1920, 376),
+        ('drawable-land-mdpi', 480, 320, 93),
+        ('drawable-land-hdpi', 800, 480, 139),
+        ('drawable-land-xhdpi', 1280, 720, 211),
+        ('drawable-land-xxhdpi', 1600, 960, 281),
+        ('drawable-land-xxxhdpi', 1920, 1280, 376),
+        ('drawable', 480, 320, 93),
+    ]
+    for folder, cw, ch, aw in android_splashes:
+        target_dir = os.path.join(android_res, folder)
+        if not os.path.exists(target_dir):
+            continue
+        ah = int(aw * aspect)
+        art_res = tight_art.resize((aw, ah), Image.Resampling.LANCZOS)
+        sp = Image.new('RGB', (cw, ch), DARK_BG)
+        sp.paste(art_res, ((cw - aw) // 2, (ch - ah) // 2), art_res)
+        sp.save(os.path.join(target_dir, 'splash.png'), 'PNG')
+    print(' ✔ Generated Android legacy portrait & landscape splash screens')
+
+    # 6. PWA Maskable Icons (for web manifest)
     for pwa_size, pwa_file in [(512, 'icon-maskable-512-ballroom.png'), (192, 'icon-maskable-192-ballroom.png')]:
         pwa_path = os.path.join(ROOT_DIR, 'assets', pwa_file)
         pwa_canvas = Image.new('RGB', (pwa_size, pwa_size), NAVY_BG)
