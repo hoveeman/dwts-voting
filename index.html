@@ -1804,20 +1804,20 @@
       const splitY = 255;
 
       const unclutteredPositions = {
-        "Ezra Frech":          { cx: 410, cy: 55,  lx: 410, ly: 78,  anchor: "middle" },
-        "Jenna Dewan":         { cx: 435, cy: 125, lx: 435, ly: 148, anchor: "middle" },
-        "Amber Glenn":         { cx: 345, cy: 125, lx: 345, ly: 148, anchor: "middle" },
-        "Maura Higgins":       { cx: 435, cy: 195, lx: 435, ly: 218, anchor: "middle" },
-        "Harry Shum Jr.":      { cx: 345, cy: 195, lx: 345, ly: 218, anchor: "middle" },
+        "Ezra Frech":          { cx: 410, cy: 55,  lx: 410, ly: 80,  anchor: "middle" },
+        "Jenna Dewan":         { cx: 435, cy: 125, lx: 435, ly: 150, anchor: "middle" },
+        "Amber Glenn":         { cx: 345, cy: 125, lx: 345, ly: 150, anchor: "middle" },
+        "Maura Higgins":       { cx: 435, cy: 195, lx: 435, ly: 220, anchor: "middle" },
+        "Harry Shum Jr.":      { cx: 345, cy: 195, lx: 345, ly: 220, anchor: "middle" },
         
-        "Jackson Olson":       { cx: 360, cy: 315, lx: 360, ly: 338, anchor: "middle" },
-        "Connor Wood":         { cx: 210, cy: 315, lx: 210, ly: 338, anchor: "middle" },
-        "Guillermo Rodriguez": { cx: 85,  cy: 370, lx: 85,  ly: 393, anchor: "middle" },
-        "Julia Stiles":        { cx: 360, cy: 390, lx: 360, ly: 413, anchor: "middle" },
-        "Tyler Cameron":       { cx: 220, cy: 390, lx: 220, ly: 413, anchor: "middle" },
-        "Ciara Miller":        { cx: 350, cy: 450, lx: 350, ly: 472, anchor: "middle" },
-        "Taylor Hanson":       { cx: 230, cy: 450, lx: 230, ly: 472, anchor: "middle" },
-        "Tatyana Ali":         { cx: 130, cy: 450, lx: 130, ly: 472, anchor: "middle" }
+        "Jackson Olson":       { cx: 360, cy: 315, lx: 360, ly: 340, anchor: "middle" },
+        "Connor Wood":         { cx: 210, cy: 315, lx: 210, ly: 340, anchor: "middle" },
+        "Guillermo Rodriguez": { cx: 85,  cy: 370, lx: 85,  ly: 395, anchor: "middle" },
+        "Julia Stiles":        { cx: 360, cy: 390, lx: 360, ly: 415, anchor: "middle" },
+        "Tyler Cameron":       { cx: 220, cy: 390, lx: 220, ly: 415, anchor: "middle" },
+        "Ciara Miller":        { cx: 350, cy: 450, lx: 350, ly: 474, anchor: "middle" },
+        "Taylor Hanson":       { cx: 230, cy: 450, lx: 230, ly: 474, anchor: "middle" },
+        "Tatyana Ali":         { cx: 130, cy: 450, lx: 130, ly: 474, anchor: "middle" }
       };
 
       let svg = `<svg viewBox="0 0 ${width} ${height}" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Judges vs. Public Quadrant Matrix">`;
@@ -1861,8 +1861,8 @@
         svg += `<circle cx="${pos.cx}" cy="${pos.cy}" r="11" fill="${color}" stroke="var(--paper)" stroke-width="2.5" class="q-node-circle" id="q-circle-${idx}" style="transition:all .2s ease" />`;
         // Rank text inside circle
         svg += `<text x="${pos.cx}" y="${pos.cy + 4}" text-anchor="middle" fill="#fff" font-size="10" font-weight="800" pointer-events="none">${d.rank}</text>`;
-        // Crisp, non-overlapping label with subtle text shadow
-        svg += `<text x="${pos.lx}" y="${pos.ly}" text-anchor="${pos.anchor}" fill="var(--ink)" font-size="10.5" font-weight="700" class="q-node-label" id="q-label-${idx}" pointer-events="none" style="text-shadow: 0 1px 3px rgba(255,255,255,0.95), 0 -1px 3px rgba(255,255,255,0.95);transition:all .2s ease">${shortName} (${odds}%)</text>`;
+        // Crisp, non-overlapping label with SVG paint-order stroke halo for dark/light contrast
+        svg += `<text x="${pos.lx}" y="${pos.ly}" text-anchor="${pos.anchor}" fill="var(--ink)" font-size="12" font-weight="700" class="q-node-label" id="q-label-${idx}" pointer-events="none" style="paint-order:stroke;stroke:var(--paper);stroke-width:4px;stroke-linejoin:round;transition:all .2s ease">${shortName} (${odds}%)</text>`;
         svg += `</g>`;
       });
       svg += `</svg>`;
