@@ -6,7 +6,7 @@
  *  - Offline fallback when network is unavailable
  */
 
-const CACHE_VERSION = 'dwts-s35-v1.0.4';
+const CACHE_VERSION = 'dwts-s35-v1.0.5';
 const STATIC_CACHE = `dwts-static-${CACHE_VERSION}`;
 const IMAGE_CACHE = `dwts-images-${CACHE_VERSION}`;
 
