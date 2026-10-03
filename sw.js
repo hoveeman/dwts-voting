@@ -6,7 +6,7 @@
  *  - Offline fallback when network is unavailable
  */
 
-const CACHE_VERSION = 'dwts-s35-v1.0.1';
+const CACHE_VERSION = 'dwts-s35-v1.0.3';
 const STATIC_CACHE = `dwts-static-${CACHE_VERSION}`;
 const IMAGE_CACHE = `dwts-images-${CACHE_VERSION}`;
 
@@ -21,10 +21,15 @@ const PRECACHE_ASSETS = [
   '/spotify_playlists.json',
   '/assets/favicon.svg',
   '/assets/icon-192.png',
+  '/assets/icon-192-v3.png',
   '/assets/icon-512.png',
+  '/assets/icon-512-v3.png',
   '/assets/icon-maskable-192.png',
+  '/assets/icon-maskable-192-v3.png',
   '/assets/icon-maskable-512.png',
+  '/assets/icon-maskable-512-v3.png',
   '/assets/apple-touch-icon.png',
+  '/assets/apple-touch-icon-v3.png',
   '/assets/dwts-hosts.jpg'
 ];
 

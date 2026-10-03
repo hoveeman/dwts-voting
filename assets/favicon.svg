@@ -22,8 +22,8 @@
     </radialGradient>
   </defs>
 
-  <!-- Background rounded canvas -->
-  <rect x="16" y="16" width="480" height="480" rx="108" fill="url(#bgGlow)" stroke="url(#goldBorder)" stroke-width="8" />
+  <!-- Full-bleed background canvas -->
+  <rect width="512" height="512" fill="url(#bgGlow)" />
 
   <!-- Ball Glow Ambient -->
   <circle cx="256" cy="220" r="148" fill="#e8b550" opacity="0.12" filter="blur(16px)" />
