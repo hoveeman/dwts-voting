@@ -862,6 +862,13 @@ def update_index_html(wiki_data, market_odds=None):
     )
     content = re.sub(r'<div class="quick-meta">.*?</div>', quick_meta_new, content, flags=re.DOTALL)
 
+    # Automatically keep the trajectory chart "All N" filter count in sync with active couples
+    content = re.sub(
+        r'<button class="chart-filter([^"]*)" data-traj="all">All \d+</button>',
+        rf'<button class="chart-filter\1" data-traj="all">All {len(active_couples)}</button>',
+        content
+    )
+
     # Guardrail 1: Round-Completion Gate for Leaderboard & Composite Power Index
     # A week is only considered "completed" if all currently active couples have a valid score recorded.
     # During the Tuesday 8-10 PM ET broadcast, early dancers will have Week N scores recorded on Wikipedia
